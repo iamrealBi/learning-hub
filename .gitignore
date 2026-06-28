@@ -1,0 +1,28 @@
+# Private/personal content
+_personal/
+tools/
+projects/
+
+# IDE & Editor
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# MkDocs build output
+site/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Gemini/Antigravity
+.gemini/
+.agents/

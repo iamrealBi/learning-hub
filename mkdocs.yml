@@ -1,0 +1,288 @@
+site_name: "📚 Learning Hub — Lộ Trình Fullstack .NET & AI"
+site_url: "https://iamrealbi.github.io/learning-hub/"
+site_description: "Tài liệu học tập Fullstack .NET Developer & AI Coder — từ Zero đến Senior"
+site_author: "iamrealBi"
+
+repo_url: "https://github.com/iamrealBi/learning-hub"
+repo_name: "iamrealBi/learning-hub"
+
+theme:
+  name: material
+  language: vi
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Chuyển sang chế độ sáng
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Chuyển sang chế độ tối
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+    logo: material/book-open-variant
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/iamrealBi
+  generator: false
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+plugins:
+  - search:
+      lang:
+        - vi
+        - en
+  - minify:
+      minify_html: true
+
+nav:
+  - "🏠 Trang Chủ": index.md
+
+  - "🎯 Curriculum":
+    - curriculum/index.md
+    - "C# Fundamentals":
+      - "00 — Roadmap": curriculum/csharp/00-roadmap.md
+      - "01 — Fundamentals": curriculum/csharp/01-fundamentals.md
+      - "02 — OOP": curriculum/csharp/02-oop.md
+      - "03 — Exceptions": curriculum/csharp/03-exceptions.md
+      - "04 — Generics": curriculum/csharp/04-generics.md
+      - "05 — LINQ": curriculum/csharp/05-linq.md
+      - "06 — .NET Internals": curriculum/csharp/06-dotnet-internals.md
+      - "07 — Advanced Types": curriculum/csharp/07-advanced-types.md
+      - "08 — Collections": curriculum/csharp/08-collections.md
+      - "09 — Projects & Strings": curriculum/csharp/09-projects-strings.md
+      - "10 — Numerics & Events": curriculum/csharp/10-numerics-events.md
+      - "11 — Unit Testing": curriculum/csharp/11-unit-testing.md
+      - "12 — Clean Code": curriculum/csharp/12-clean-code.md
+      - "13 — Async": curriculum/csharp/13-async.md
+      - "14 — Evolution": curriculum/csharp/14-evolution.md
+      - "15 — Capstone": curriculum/csharp/15-capstone-integration.md
+      - "📝 Theory Deep Dive": curriculum/csharp/97-csharp-theory-deep-dive.md
+      - "✅ Answer Key": curriculum/csharp/99-answer-key-csharp.md
+    - "Database & PostgreSQL":
+      - "00 — Roadmap": curriculum/database/00-db-roadmap.md
+      - "01 — Relational Concepts": curriculum/database/01-relational-concepts.md
+      - "02 — SQL Fundamentals": curriculum/database/02-sql-fundamentals.md
+      - "03 — Database Design": curriculum/database/03-database-design.md
+      - "04 — Joins & Subqueries": curriculum/database/04-joins-subqueries.md
+      - "05 — Advanced PostgreSQL": curriculum/database/05-advanced-postgresql.md
+      - "06 — Capstone": curriculum/database/06-db-capstone.md
+      - "📝 Theory Deep Dive": curriculum/database/97-db-theory-deep-dive.md
+      - "✅ Answer Key": curriculum/database/99-answer-key-db.md
+    - "Interview Prep":
+      - "Thuật Ngữ Bổ Sung": curriculum/interview/Bo-Sung-Thuat-Ngu.md
+      - "Phỏng Vấn ASP.NET Core": curriculum/interview/Phong-Van-ASP-NET-Core.md
+      - "Q&A Chi Tiết": curriculum/interview/interview-qa-detailed.md
+      - "Tổng Hợp Câu Hỏi": curriculum/interview/interview-questions-master.md
+
+  - "📖 Masterbooks":
+    - masterbooks/index.md
+    - "C# Tutorial":
+      - "Part 01 — Introduction & .NET": masterbooks/csharp-tutorial/Part_01_Introduction_and_DotNet_Ecosystem.md
+      - "Part 02 — Variables & Scope": masterbooks/csharp-tutorial/Part_02_Variables_Constants_and_Scope.md
+      - "Part 03 — Type Conversion & Operators": masterbooks/csharp-tutorial/Part_03_Type_Conversion_and_Operators.md
+      - "Part 04 — Classes & Structs": masterbooks/csharp-tutorial/Part_04_Classes_and_Structs.md
+      - "Part 05 — Arrays, Strings & Enums": masterbooks/csharp-tutorial/Part_05_Arrays_Strings_and_Enums.md
+      - "Part 06 — Reference & Value Types": masterbooks/csharp-tutorial/Part_06_Reference_and_Value_Types.md
+      - "Part 07 — Conditional Statements": masterbooks/csharp-tutorial/Part_07_Conditional_Statements.md
+      - "Part 08 — Iteration & Random": masterbooks/csharp-tutorial/Part_08_Iteration_and_Random_Class.md
+      - "Part 09 — Arrays & Lists": masterbooks/csharp-tutorial/Part_09_Arrays_and_Lists.md
+      - "Part 10 — DateTime & TimeSpan": masterbooks/csharp-tutorial/Part_10_DateTime_and_TimeSpan.md
+      - "Part 11 — Strings & Procedural": masterbooks/csharp-tutorial/Part_11_Strings_and_Procedural_Programming.md
+      - "Part 12 — File & Directory": masterbooks/csharp-tutorial/Part_12_File_and_Directory_Operations.md
+      - "Part 13 — Debugging": masterbooks/csharp-tutorial/Part_13_Debugging_and_Defensive_Programming.md
+      - "Part 14 — Conclusion": masterbooks/csharp-tutorial/Part_14_Course_Conclusion.md
+    - "ASP.NET Core Web API":
+      - "Part 01 — Giới thiệu": masterbooks/aspnet-core-web-api/Part_01_Gioi_thieu_va_Chuan_bi_moi_truong.md
+      - "Part 02 — Cấu trúc cơ bản": masterbooks/aspnet-core-web-api/Part_02_Cau_truc_co_ban_ASP_NET_Core_Web_API.md
+      - "Part 03 — EF Core": masterbooks/aspnet-core-web-api/Part_03_Tich_hop_CSDL_Entity_Framework_Core.md
+      - "Part 04 — API Regions (Đọc)": masterbooks/aspnet-core-web-api/Part_04_Xay_dung_API_Regions_Doc_du_lieu.md
+      - "Part 05 — API Regions (Ghi & DTOs)": masterbooks/aspnet-core-web-api/Part_05_Xay_dung_API_Regions_Ghi_du_lieu_va_DTOs.md
+      - "Part 06 — Repository & AutoMapper": masterbooks/aspnet-core-web-api/Part_06_Nang_cao_cau_truc_API_Repository_AutoMapper.md
+      - "Part 07 — API Walks": masterbooks/aspnet-core-web-api/Part_07_Xay_dung_API_Walks_va_Du_lieu_mau.md
+      - "Part 08 — Model Validations": masterbooks/aspnet-core-web-api/Part_08_Xac_thuc_du_lieu_dau_vao_Model_Validations.md
+      - "Part 09 — Filtering & Paging": masterbooks/aspnet-core-web-api/Part_09_Loc_Sap_xep_va_Phan_trang_du_lieu.md
+      - "Part 10 — Auth Part 1": masterbooks/aspnet-core-web-api/Part_10_Authentication_Authorization_Part_1.md
+      - "Part 11 — Auth Part 2": masterbooks/aspnet-core-web-api/Part_11_Authentication_Authorization_Part_2.md
+      - "Part 12 — Upload hình ảnh": masterbooks/aspnet-core-web-api/Part_12_Xu_ly_tai_len_hinh_anh.md
+      - "Part 13 — Logging & Exceptions": masterbooks/aspnet-core-web-api/Part_13_Ghi_nhat_ky_va_Xu_ly_ngoai_le.md
+      - "Part 14 — API Versioning": masterbooks/aspnet-core-web-api/Part_14_Phien_ban_hoa_API_Versioning.md
+      - "Part 15 — MVC Client": masterbooks/aspnet-core-web-api/Part_15_Tieu_thu_Web_API_tu_ung_dung_MVC.md
+      - "Part 16 — Deploy Azure": masterbooks/aspnet-core-web-api/Part_16_Trien_khai_Web_API_len_Azure.md
+      - "Part 17 — Dự án: Git Init": masterbooks/aspnet-core-web-api/Part_17_Du_an_thuc_hanh_Khoi_tao_Git.md
+      - "Part 18 — Dự án: Domain & EF": masterbooks/aspnet-core-web-api/Part_18_Du_an_thuc_hanh_Domain_EF_Core.md
+      - "Part 19 — Dự án: Migrations": masterbooks/aspnet-core-web-api/Part_19_Du_an_thuc_hanh_Migrations_Seeding_Git.md
+      - "Part 20 — Dự án: Read Regions": masterbooks/aspnet-core-web-api/Part_20_Du_an_thuc_hanh_API_Regions_Doc_Repository.md
+      - "Part 21 — Dự án: DTOs & Async": masterbooks/aspnet-core-web-api/Part_21_Du_an_thuc_hanh_API_Regions_DTOs_AutoMapper_Async.md
+      - "Part 22 — Dự án: Read ID & Create": masterbooks/aspnet-core-web-api/Part_22_Du_an_thuc_hanh_API_Regions_Doc_ID_Them_moi.md
+      - "Part 23 — Dự án: Update & Delete": masterbooks/aspnet-core-web-api/Part_23_Du_an_thuc_hanh_API_Regions_Cap_nhat_Xoa.md
+      - "Part 24 — Dự án: Walks Init": masterbooks/aspnet-core-web-api/Part_24_Du_an_thuc_hanh_API_Walks_Khoi_tao_Doc.md
+      - "Part 25 — Dự án: Walks CRUD": masterbooks/aspnet-core-web-api/Part_25_Du_an_thuc_hanh_API_Walks_Doc_ID_Them_moi.md
+      - "Part 26 — Dự án: Walks Update": masterbooks/aspnet-core-web-api/Part_26_Du_an_thuc_hanh_API_Walks_Cap_nhat_Xoa_Git.md
+      - "Part 27 — Dự án: WalkDifficulty": masterbooks/aspnet-core-web-api/Part_27_Du_an_thuc_hanh_API_WalkDifficulty.md
+      - "Part 28 — Dự án: Validations": masterbooks/aspnet-core-web-api/Part_28_Du_an_thuc_hanh_Model_Validations.md
+      - "Part 29 — Dự án: Fluent Validations": masterbooks/aspnet-core-web-api/Part_29_Du_an_thuc_hanh_Fluent_Validations.md
+      - "Part 30 — Dự án: Authentication": masterbooks/aspnet-core-web-api/Part_30_Du_an_thuc_hanh_Authentication.md
+    - "SQL & PostgreSQL":
+      - "Part 01 — Introduction & Basic SQL": masterbooks/sql-and-postgresql/Part_01_Introduction_and_Basic_SQL_Commands.md
+      - "Part 02 — String Functions & Filtering": masterbooks/sql-and-postgresql/Part_02_Calculations_String_Functions_and_Basic_Filtering.md
+      - "Part 03 — Advanced Filtering": masterbooks/sql-and-postgresql/Part_03_Advanced_Filtering_and_Calculations.md
+      - "Part 04 — DML (Update, Delete)": masterbooks/sql-and-postgresql/Part_04_Updating_and_Deleting_Data_DML.md
+      - "Part 05 — DB Design & Foreign Keys": masterbooks/sql-and-postgresql/Part_05_Database_Design_and_Foreign_Keys.md
+      - "Part 06 — Advanced FK Constraints": masterbooks/sql-and-postgresql/Part_06_Advanced_Foreign_Key_Constraints.md
+      - "Part 07 — Intro to Joins": masterbooks/sql-and-postgresql/Part_07_Introduction_to_Joins_and_Syntax.md
+      - "Part 08 — Join Types": masterbooks/sql-and-postgresql/Part_08_Different_Join_Types_and_Behavior.md
+      - "Part 09 — Advanced Joins": masterbooks/sql-and-postgresql/Part_09_Advanced_Join_Practice_and_Three_Way_Joins.md
+      - "Part 10 — GROUP BY": masterbooks/sql-and-postgresql/Part_10_Aggregating_and_Grouping_with_GROUP_BY.md
+      - "Part 11 — HAVING": masterbooks/sql-and-postgresql/Part_11_Filtering_Groups_with_HAVING.md
+      - "Part 12 — GROUP BY + JOIN Review": masterbooks/sql-and-postgresql/Part_12_Review_GROUP_BY_JOIN_and_Data_Analysis.md
+      - "Part 13 — OFFSET & LIMIT": masterbooks/sql-and-postgresql/Part_13_Sorting_Offset_and_Limit.md
+      - "Part 14 — Set Operators": masterbooks/sql-and-postgresql/Part_14_Set_Operators_Union_Intersect_Except.md
+      - "Part 15 — Intro to Subqueries": masterbooks/sql-and-postgresql/Part_15_Introduction_to_Subqueries_and_Subqueries_in_SELECT.md
+      - "Part 16 — Subqueries in FROM": masterbooks/sql-and-postgresql/Part_16_Subqueries_in_FROM_Clause.md
+      - "Part 17 — Subqueries in JOIN/WHERE": masterbooks/sql-and-postgresql/Part_17_Subqueries_in_JOIN_and_WHERE_Clauses.md
+      - "Part 18 — Advanced WHERE": masterbooks/sql-and-postgresql/Part_18_Advanced_WHERE_Operators.md
+      - "Part 19 — Correlated Subqueries": masterbooks/sql-and-postgresql/Part_19_Correlated_Subqueries_and_SELECT_Without_FROM.md
+      - "Part 20 — DISTINCT, MIN/MAX, CASE": masterbooks/sql-and-postgresql/Part_20_Distinct_Min_Max_and_Case_Statement.md
+      - "Part 21 — PostgreSQL Setup": masterbooks/sql-and-postgresql/Part_21_PostgreSQL_and_pgAdmin_Installation.md
+      - "Part 22 — PostgreSQL Data Types": masterbooks/sql-and-postgresql/Part_22_PostgreSQL_Data_Types.md
+      - "Part 23 — Constraints & Defaults": masterbooks/sql-and-postgresql/Part_23_Introduction_to_Constraints_and_Default_Values.md
+      - "Part 24 — UNIQUE & CHECK": masterbooks/sql-and-postgresql/Part_24_Unique_and_Check_Constraints.md
+      - "Part 25 — Schema Design": masterbooks/sql-and-postgresql/Part_25_Database_Schema_Design_and_Tools.md
+    - "Claude Code":
+      - "Part 01 — Giới thiệu & Thiết lập": masterbooks/claude-code/Part_01_Gioi_Thieu_Va_Thiet_Lap.md
+      - "Part 02 — Sử dụng cơ bản": masterbooks/claude-code/Part_02_Su_Dung_Co_Ban_Va_Cau_Hinh_Claude_Code.md
+      - "Part 03 — Sandbox & Quyền": masterbooks/claude-code/Part_03_Quan_Ly_Quyen_Sandbox_Va_Kiem_Soat_Phien_Ban.md
+      - "Part 04 — Prompt & Ngữ cảnh": masterbooks/claude-code/Part_04_Gioi_Thieu_Prompt_Va_Ngu_Canh.md
+      - "Part 05 — Khởi tạo dự án": masterbooks/claude-code/Part_05_Khoi_Tao_Du_An_Va_Cong_Cu_Tich_Hop.md
+      - "Part 06 — Agents & Subagents": masterbooks/claude-code/Part_06_Hieu_Va_Su_Dung_Agents_Va_Subagents.md
+      - "Part 07 — Agent Skills": masterbooks/claude-code/Part_07_Ky_Nang_Agent_Va_Tuy_Bien_Lenh.md
+      - "Part 08 — Lệnh & Hooks nâng cao": masterbooks/claude-code/Part_08_Tuong_Tac_Nang_Cao_Lenh_Tuy_Chinh_Va_Hooks.md
+      - "Part 09 — Plugin & Phản hồi": masterbooks/claude-code/Part_09_Mo_Rong_Chuc_Nang_Plugin_Va_Phan_Hoi.md
+      - "Part 10 — Web & Desktop": masterbooks/claude-code/Part_10_Su_Dung_Claude_Code_Tren_Web_Va_Desktop.md
+      - "Part 11 — Điều khiển từ xa": masterbooks/claude-code/Part_11_Dieu_Khien_Tu_Xa_Va_Tuong_Tac_Di_Dong.md
+      - "Part 12 — Lịch & Tổng kết": masterbooks/claude-code/Part_12_Len_Lich_Tac_Vu_Va_Tong_Ket.md
+
+  - "🏗️ ASP.NET Guides":
+    - aspnet-guides/index.md
+    - "Ultimate Guide":
+      - "Module 01 — Nền tảng ASP.NET Core": aspnet-guides/ultimate-guide/Module-01-Nen-Tang-ASP-NET-Core.md
+      - "Module 02 — HTTP & Middleware": aspnet-guides/ultimate-guide/Module-02-HTTP-Middleware.md
+      - "Module 03 — Routing & Model Binding": aspnet-guides/ultimate-guide/Module-03-Routing-Model-Binding.md
+      - "Module 04 — Web API & REST": aspnet-guides/ultimate-guide/Module-04-Web-API-REST.md
+      - "Module 05 — Entity Framework Core": aspnet-guides/ultimate-guide/Module-05-Entity-Framework-Core.md
+      - "Module 06 — Auth": aspnet-guides/ultimate-guide/Module-06-Authentication-Authorization.md
+      - "Module 07 — Minimal API & Aspire": aspnet-guides/ultimate-guide/Module-07-Minimal-API-Aspire.md
+      - "Module 08 — Testing": aspnet-guides/ultimate-guide/Module-08-Testing.md
+      - "Module 09 — Docker & Deploy": aspnet-guides/ultimate-guide/Module-09-Docker-Deployment.md
+
+  - "🤖 AI Coder Course":
+    - ai-coder-course/index.md
+    - "Lộ Trình Chi Tiết":
+      - ai-coder-course/lo-trinh-chi-tiet/index.md
+      - "Tháng 1 — Nền Tảng": ai-coder-course/lo-trinh-chi-tiet/thang-1/index.md
+      - "Tháng 2 — AI Agent Basics": ai-coder-course/lo-trinh-chi-tiet/thang-2/index.md
+      - "Tháng 3 — Frameworks": ai-coder-course/lo-trinh-chi-tiet/thang-3/index.md
+      - "Tháng 4 — Production": ai-coder-course/lo-trinh-chi-tiet/thang-4/index.md
+      - "Tháng 5 — Advanced": ai-coder-course/lo-trinh-chi-tiet/thang-5/index.md
+      - "Tháng 6 — Portfolio & Job": ai-coder-course/lo-trinh-chi-tiet/thang-6/index.md
+    - "Tuần 1 — Vibe Coding":
+      - "01 — Vibe Coding là gì?": ai-coder-course/tuan-1/01-Vibe-Coding-La-Gi.md
+      - "02 — Nền tảng LLM": ai-coder-course/tuan-1/02-Nen-Tang-LLM.md
+      - "03 — Context Engineering": ai-coder-course/tuan-1/03-Context-Engineering.md
+      - "04 — Cursor AI IDE": ai-coder-course/tuan-1/04-Cursor-AI-IDE.md
+      - "05 — GitHub Copilot": ai-coder-course/tuan-1/05-GitHub-Copilot.md
+      - "06 — OpenAI Codex": ai-coder-course/tuan-1/06-OpenAI-Codex.md
+      - "07 — Google Antigravity": ai-coder-course/tuan-1/07-Google-Antigravity.md
+      - "08 — Dự án Game 3D": ai-coder-course/tuan-1/08-Du-An-Game-3D.md
+      - "09 — Dự án Website AI Twin": ai-coder-course/tuan-1/09-Du-An-Website-AI-Twin.md
+    - "Tuần 2 — Agentic Engineering":
+      - "01 — CLI Coding Agents": ai-coder-course/tuan-2/01-CLI-Coding-Agents.md
+      - "02 — Claude Code": ai-coder-course/tuan-2/02-Claude-Code.md
+      - "03 — OpenCode & Amp": ai-coder-course/tuan-2/03-OpenCode-va-Amp.md
+      - "04 — MCP Protocol": ai-coder-course/tuan-2/04-MCP-Protocol.md
+      - "05 — Plugins, Hooks, Skills": ai-coder-course/tuan-2/05-Plugins-Hooks-Skills.md
+      - "06 — Ralph Loop & GSD": ai-coder-course/tuan-2/06-Ralph-Loop-GSD.md
+      - "07 — Jira & GitHub Automation": ai-coder-course/tuan-2/07-Jira-GitHub-Automation.md
+      - "08 — Dự án Kanban": ai-coder-course/tuan-2/08-Du-An-Kanban.md
+      - "09 — Dự án Legal Assistant": ai-coder-course/tuan-2/09-Du-An-Legal-Assistant.md
+    - "Tuần 3 — Multi-Agent":
+      - "01 — Agent Orchestration": ai-coder-course/tuan-3/01-Agent-Orchestration.md
+      - "02 — Subagents & Swarms": ai-coder-course/tuan-3/02-Subagents-Swarms.md
+      - "03 — Claude Agent SDK": ai-coder-course/tuan-3/03-Claude-Agent-SDK.md
+      - "04 — Frontier Tech": ai-coder-course/tuan-3/04-Frontier-Tech.md
+      - "05 — Dự án Trading Workstation": ai-coder-course/tuan-3/05-Du-An-Trading-Workstation.md
+    - "SEAP Deliverables":
+      - "CLAUDE.md": ai-coder-course/seap/CLAUDE.md
+      - "AGENTS.md": ai-coder-course/seap/AGENTS.md
+      - "Edge-case Tests": ai-coder-course/seap/edge-case-tests-report.md
+      - "Code Quality Guardrails": ai-coder-course/seap/code-quality-guardrails.md
+      - "Demo Script": ai-coder-course/seap/demo-script.md
