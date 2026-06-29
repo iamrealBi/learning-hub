@@ -24,19 +24,19 @@ Kiểu giá trị là các kiểu dữ liệu mà biến của chúng **trực t
 *   **Các kiểu liệt kê (`enum`):** Ví dụ: `enum Days { Mon, Tue, Wed }`.
 *   **Các kiểu cấu trúc (`struct`) tùy chỉnh:** Ví dụ: `struct Point { public int X; public int Y; }`.
 
+    ```mermaid
+    flowchart LR
+        subgraph VT["📋 Value Type: Gán = Sao chép"]
+            direction TB
+            a1["int a = 10"] --> a2["int b = a"]
+            a2 --> a3["a = 10 | b = 10\n(2 bản sao độc lập)"]
+            a3 --> a4["b = 20"]
+            a4 --> a5["a = 10 | b = 20\n(thay đổi b KHÔNG ảnh hưởng a)"]
+        end
+        style VT fill:#e8f5e9,color:#000
+    ```
+    *Minh họa: Với Value Type, mỗi biến giữ bản sao riêng. Thay đổi `b` không ảnh hưởng `a`.*
 
-```mermaid
-flowchart LR
-    subgraph VT["📋 Value Type: Gán = Sao chép"]
-        direction TB
-        a1["int a = 10"] --> a2["int b = a"]
-        a2 --> a3["a = 10 | b = 10\n(2 bản sao độc lập)"]
-        a3 --> a4["b = 20"]
-        a4 --> a5["a = 10 | b = 20\n(thay đổi b KHÔNG ảnh hưởng a)"]
-    end
-    style VT fill:#e8f5e9,color:#000
-```
-*Minh họa: Với Value Type, mỗi biến giữ bản sao riêng. Thay đổi `b` không ảnh hưởng `a`.*
 
 ### 1.2. Kiểu tham chiếu (Reference Types)
 
@@ -58,18 +58,19 @@ Kiểu tham chiếu là các kiểu dữ liệu mà biến của chúng **không
 *   **Các kiểu `interface` và `delegate`**.
 *   **`object`:** Kiểu cơ sở cho tất cả các kiểu trong C#.
 
-```mermaid
-flowchart LR
-    subgraph RT["🔗 Reference Type: Gán = Sao chép tham chiếu"]
-        direction TB
-        b1["Person p1 = new Person()\np1.Name = 'An'"]
-        b1 --> b2["Person p2 = p1\n(cả 2 trỏ cùng object)"]
-        b2 --> b3["p2.Name = 'Bình'"]
-        b3 --> b4["p1.Name = 'Bình' ⚠️\n(thay đổi p2 ẢNH HƯỞNG p1!)"]
-    end
-    style RT fill:#fff3e0,color:#000
-```
-*Minh họa: Với Reference Type, cả 2 biến trỏ đến cùng 1 object. Thay đổi qua `p2` cũng thay đổi `p1`.*
+    ```mermaid
+    flowchart LR
+        subgraph RT["🔗 Reference Type: Gán = Sao chép tham chiếu"]
+            direction TB
+            b1["Person p1 = new Person()\np1.Name = 'An'"]
+            b1 --> b2["Person p2 = p1\n(cả 2 trỏ cùng object)"]
+            b2 --> b3["p2.Name = 'Bình'"]
+            b3 --> b4["p1.Name = 'Bình' ⚠️\n(thay đổi p2 ẢNH HƯỞNG p1!)"]
+        end
+        style RT fill:#fff3e0,color:#000
+    ```
+    *Minh họa: Với Reference Type, cả 2 biến trỏ đến cùng 1 object. Thay đổi qua `p2` cũng thay đổi `p1`.*
+
 
 
 > [!NOTE]

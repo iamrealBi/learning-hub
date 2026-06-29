@@ -102,7 +102,6 @@ Giả sử bạn yêu cầu `Claude Code` lập kế hoạch triển khai cơ s�
 
 Khả năng lập kế hoạch chi tiết và chính xác này là nhờ vào việc cung cấp ngữ cảnh rõ ràng và các công cụ tìm kiếm tài liệu chuyên biệt như `Context7 MCP`, giúp `Claude Code` tiếp cận thông tin đáng tin cậy một cách hiệu quả.
 
-
 ```mermaid
 flowchart TB
     MAIN["🤖 Main Agent\n(Điều phối chính)"]
@@ -120,6 +119,7 @@ flowchart TB
     style RESULT fill:#c8e6c9,color:#000
 ```
 *Main Agent chia task cho các Subagent chạy song song, sau đó tổng hợp kết quả. Mỗi Subagent có context riêng.*
+
 
 ## 2. Khám Phá Kiến Trúc Subagent Trong Claude Code
 

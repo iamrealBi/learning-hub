@@ -87,7 +87,6 @@ INSERT INTO comments (content, user_id, photo_id) VALUES
 > [!NOTE]
 > Các khóa ngoại (Foreign Key) là nền tảng của các phép JOIN. Chúng không chỉ định nghĩa mối quan hệ giữa các bảng mà còn đảm bảo tính toàn vẹn tham chiếu (referential integrity). Khi bạn thực hiện JOIN, cơ sở dữ liệu sử dụng thông tin từ khóa ngoại để xác định cách các hàng từ các bảng khác nhau được liên kết một cách logic. Mệnh đề `ON DELETE CASCADE` đảm bảo rằng nếu một người dùng hoặc ảnh bị xóa, tất cả các bình luận liên quan cũng sẽ bị xóa tự động, giữ cho dữ liệu luôn nhất quán.
 
-
 ```mermaid
 flowchart TB
     subgraph IJ["🔵 INNER JOIN"]
@@ -112,6 +111,7 @@ flowchart TB
     style FJ fill:#fce4ec,color:#000
 ```
 *Tóm tắt 4 loại JOIN. INNER = giao, LEFT = ưu tiên trái, RIGHT = ưu tiên phải, FULL = tất cả.*
+
 
 ## 2. Tổng Quan về JOIN và Aggregations: Hai Kỹ Thuật Đắc Lực
 

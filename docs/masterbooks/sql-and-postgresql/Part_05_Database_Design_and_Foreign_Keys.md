@@ -19,7 +19,6 @@ Một ứng dụng thực tế, dù lớn hay nhỏ, thường phải quản lý
 
 Để giải quyết triệt để những vấn đề này, chúng ta cần thiết kế cơ sở dữ liệu với nhiều bảng, mỗi bảng tập trung vào một loại thực thể dữ liệu cụ thể (ví dụ: `users` cho người dùng, `photos` cho ảnh, `comments` cho bình luận). Sau đó, chúng ta sẽ thiết lập các mối quan hệ logic giữa các bảng này để liên kết dữ liệu một cách hiệu quả và đảm bảo tính toàn vẹn. Cách tiếp cận này giúp tối ưu hóa lưu trữ, tăng cường tính nhất quán dữ liệu và đơn giản hóa việc quản lý cũng như mở rộng ứng dụng trong tương lai.
 
-
 ```mermaid
 erDiagram
     CUSTOMERS ||--o{ ORDERS : "đặt hàng"
@@ -50,6 +49,7 @@ erDiagram
     }
 ```
 *ER Diagram: Mối quan hệ 1-nhiều giữa Customers → Orders → Order_Items ← Products. FK (Foreign Key) là cầu nối giữa các bảng.*
+
 
 ## 2. Quy Trình Thiết Kế Cơ Sở Dữ Liệu Hiệu Quả
 

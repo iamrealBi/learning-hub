@@ -64,7 +64,6 @@ Hiểu rõ sự khác biệt giữa `401` và `403` là rất quan trọng để
 
 ---
 
-
 ```mermaid
 sequenceDiagram
     participant C as 🌐 Client
@@ -87,6 +86,7 @@ sequenceDiagram
     RES-->>C: 🚫 403 Forbidden
 ```
 *Luồng JWT Authentication: Client đăng nhập → nhận Token → gửi Token trong mỗi request → Server verify.*
+
 
 ## 2. JSON Web Token (JWT): Tiêu Chuẩn Xác Thực Phi Trạng Thái
 

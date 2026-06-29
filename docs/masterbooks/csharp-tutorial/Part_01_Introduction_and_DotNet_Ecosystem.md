@@ -68,23 +68,24 @@ Microsoft đã học hỏi từ mô hình của Java và áp dụng một giải
 3.  **Thực thi:** Mã máy đã dịch sau đó được CPU thực thi.
 4.  **Lưu trữ và tái sử dụng:** Mã máy đã được JIT biên dịch sẽ được lưu trữ trong bộ nhớ đệm. Nếu cùng một phần mã IL được gọi lại, CLR sẽ sử dụng phiên bản mã máy đã dịch sẵn thay vì biên dịch lại, giúp tối ưu hóa hiệu suất theo thời gian.
 
-```mermaid
-flowchart LR
-    subgraph "🔵 Thời điểm Biên dịch"
-        A["📄 Mã nguồn C#\n(.cs)"] -->|"csc.exe\n(C# Compiler)"| B["📦 Mã IL\n(.dll / .exe)"]
-    end
-    subgraph "🟢 Thời điểm Chạy (Runtime)"
-        B -->|"CLR tải"| C["⚙️ JIT Compiler"]
-        C -->|"Biên dịch lần đầu"| D["💻 Mã máy gốc\n(Native Code)"]
-        D -->|"Lưu cache"| E["🚀 CPU thực thi"]
-    end
-    style A fill:#4fc3f7,color:#000
-    style B fill:#fff176,color:#000
-    style C fill:#81c784,color:#000
-    style D fill:#ff8a65,color:#000
-    style E fill:#ce93d8,color:#000
-```
-*Minh họa: Quy trình từ mã nguồn C# → IL → CLR (JIT) → Mã máy. Mã IL được tạo ra lúc biên dịch, sau đó CLR dịch sang mã máy khi chạy.*
+    ```mermaid
+    flowchart LR
+        subgraph "🔵 Thời điểm Biên dịch"
+            A["📄 Mã nguồn C#\n(.cs)"] -->|"csc.exe\n(C# Compiler)"| B["📦 Mã IL\n(.dll / .exe)"]
+        end
+        subgraph "🟢 Thời điểm Chạy (Runtime)"
+            B -->|"CLR tải"| C["⚙️ JIT Compiler"]
+            C -->|"Biên dịch lần đầu"| D["💻 Mã máy gốc\n(Native Code)"]
+            D -->|"Lưu cache"| E["🚀 CPU thực thi"]
+        end
+        style A fill:#4fc3f7,color:#000
+        style B fill:#fff176,color:#000
+        style C fill:#81c784,color:#000
+        style D fill:#ff8a65,color:#000
+        style E fill:#ce93d8,color:#000
+    ```
+    *Minh họa: Quy trình từ mã nguồn C# → IL → CLR (JIT) → Mã máy. Mã IL được tạo ra lúc biên dịch, sau đó CLR dịch sang mã máy khi chạy.*
+
 
 ### 1.3.3 Các dịch vụ cốt lõi của CLR và Quản lý bộ nhớ
 
@@ -100,27 +101,28 @@ Kiến trúc này mang lại nhiều lợi ích quan trọng, và CLR cung cấp
         *   **Kiểu tham chiếu (Reference Types)** (ví dụ: `class`, `string`, `array`) được lưu trữ trên **Heap**. Khi bạn tạo một đối tượng kiểu tham chiếu, một vùng nhớ trên Heap được cấp phát để lưu trữ dữ liệu của đối tượng, và một **tham chiếu (reference)** đến vùng nhớ đó sẽ được lưu trên Stack. GC của CLR chịu trách nhiệm quản lý bộ nhớ trên Heap.
         *   Chúng ta sẽ đi sâu hơn vào sự khác biệt giữa Value Type và Reference Type trong chương về kiểu dữ liệu. Hiện tại, hãy nhớ rằng CLR giúp bạn không phải lo lắng về việc giải phóng bộ nhớ cho các đối tượng trên Heap.
 
-```mermaid
-flowchart LR
-    subgraph STACK["📚 Stack (Nhanh, tự động giải phóng)"]
-        direction TB
-        v1["int age = 25\n💾 Giá trị: 25"]
-        v2["bool isActive = true\n💾 Giá trị: true"]
-        v3["ref myCar ──────→\n📍 Địa chỉ: 0x7F3A"]
-    end
-    subgraph HEAP["🗄️ Heap (GC quản lý)"]
-        direction TB
-        obj1["🚗 Car Object\nColor: Red\nModel: Tesla\nYear: 2024"]
-    end
-    v3 -.->|"tham chiếu"| obj1
-    style STACK fill:#e8f5e9,color:#000
-    style HEAP fill:#fff3e0,color:#000
-    style v1 fill:#c8e6c9,color:#000
-    style v2 fill:#c8e6c9,color:#000
-    style v3 fill:#b3e5fc,color:#000
-    style obj1 fill:#ffe0b2,color:#000
-```
-*Minh họa: Value Types (`int`, `bool`) lưu trực tiếp trên Stack. Reference Types (`Car`) lưu trên Heap, Stack chỉ giữ tham chiếu.*
+            ```mermaid
+            flowchart LR
+                subgraph STACK["📚 Stack (Nhanh, tự động giải phóng)"]
+                    direction TB
+                    v1["int age = 25\n💾 Giá trị: 25"]
+                    v2["bool isActive = true\n💾 Giá trị: true"]
+                    v3["ref myCar ──────→\n📍 Địa chỉ: 0x7F3A"]
+                end
+                subgraph HEAP["🗄️ Heap (GC quản lý)"]
+                    direction TB
+                    obj1["🚗 Car Object\nColor: Red\nModel: Tesla\nYear: 2024"]
+                end
+                v3 -.->|"tham chiếu"| obj1
+                style STACK fill:#e8f5e9,color:#000
+                style HEAP fill:#fff3e0,color:#000
+                style v1 fill:#c8e6c9,color:#000
+                style v2 fill:#c8e6c9,color:#000
+                style v3 fill:#b3e5fc,color:#000
+                style obj1 fill:#ffe0b2,color:#000
+            ```
+            *Minh họa: Value Types (`int`, `bool`) lưu trực tiếp trên Stack. Reference Types (`Car`) lưu trên Heap, Stack chỉ giữ tham chiếu.*
+
 *   **Xử lý ngoại lệ (Exception Handling):** CLR cung cấp một cơ chế chuẩn và mạnh mẽ để phát hiện và xử lý các lỗi hoặc sự kiện bất thường (exception) xảy ra trong quá trình chạy ứng dụng, giúp chương trình ổn định hơn.
 *   **An toàn kiểu (Type Safety):** CLR đảm bảo rằng các hoạt động trên dữ liệu được thực hiện một cách an toàn về kiểu, ngăn chặn các lỗi tiềm ẩn do thao tác sai kiểu dữ liệu.
 *   **Đa ngôn ngữ (Language Interoperability):** Vì tất cả các ngôn ngữ .NET đều được biên dịch thành IL và tuân thủ CLI, chúng có thể tương tác với nhau một cách dễ dàng. Một thư viện viết bằng C# có thể được sử dụng trong một ứng dụng viết bằng F# hoặc VB.NET.
@@ -213,31 +215,32 @@ Khi các ứng dụng phát triển và có nhiều không gian tên, chúng ta 
 *   **Tệp thực thi (.exe):** Một ứng dụng độc lập có thể chạy được.
 *   **Thư viện liên kết động (.dll - Dynamic Link Library):** Một thư viện chứa các lớp và chức năng có thể được sử dụng bởi các ứng dụng hoặc tập hợp khác.
 
-```mermaid
-block-beta
-    columns 3
-    block:assembly["📦 Assembly (.dll / .exe)"]:3
+    ```mermaid
+    block-beta
         columns 3
-        block:ns1["Namespace: MyApp.Models"]:2
-            class1["📋 Class: User"]
-            class2["📋 Class: Product"]
+        block:assembly["📦 Assembly (.dll / .exe)"]:3
+            columns 3
+            block:ns1["Namespace: MyApp.Models"]:2
+                class1["📋 Class: User"]
+                class2["📋 Class: Product"]
+            end
+            block:ns2["Namespace: MyApp.Services"]:1
+                class3["📋 Class: OrderService"]
+            end
         end
-        block:ns2["Namespace: MyApp.Services"]:1
-            class3["📋 Class: OrderService"]
-        end
-    end
-    metadata["📝 Metadata"]:1
-    ilcode["⚙️ IL Code"]:1
-    resources["🖼️ Resources"]:1
+        metadata["📝 Metadata"]:1
+        ilcode["⚙️ IL Code"]:1
+        resources["🖼️ Resources"]:1
+    
+        style assembly fill:#e3f2fd,color:#000
+        style ns1 fill:#fff3e0,color:#000
+        style ns2 fill:#fff3e0,color:#000
+        style metadata fill:#f3e5f5,color:#000
+        style ilcode fill:#e8f5e9,color:#000
+        style resources fill:#fce4ec,color:#000
+    ```
+    *Minh họa: Cấu trúc phân cấp — Assembly chứa các Namespace, mỗi Namespace chứa các Class.*
 
-    style assembly fill:#e3f2fd,color:#000
-    style ns1 fill:#fff3e0,color:#000
-    style ns2 fill:#fff3e0,color:#000
-    style metadata fill:#f3e5f5,color:#000
-    style ilcode fill:#e8f5e9,color:#000
-    style resources fill:#fce4ec,color:#000
-```
-*Minh họa: Cấu trúc phân cấp — Assembly chứa các Namespace, mỗi Namespace chứa các Class.*
 
 Một tập hợp có thể chứa một hoặc nhiều không gian tên. Khi bạn biên dịch một dự án C#, trình biên dịch sẽ tạo ra một hoặc nhiều tập hợp tùy thuộc vào cách bạn tổ chức dự án của mình. Mỗi tập hợp chứa mã IL của bạn và **siêu dữ liệu (metadata)** mô tả các kiểu dữ liệu, tài nguyên và thông tin phiên bản bên trong nó. Metadata này là cực kỳ quan trọng, cho phép CLR kiểm tra an toàn kiểu và thực hiện các dịch vụ khác.
 

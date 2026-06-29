@@ -66,7 +66,6 @@ Khi PostgreSQL gặp một câu lệnh SQL chứa Subquery, nó sẽ thực hi�
 
 Subquery là một công cụ cực kỳ linh hoạt và có thể được sử dụng ở nhiều vị trí khác nhau trong một câu lệnh SQL, bao gồm các mệnh đề `SELECT`, `FROM`, `WHERE`, `JOIN` và `HAVING`. Tuy nhiên, để sử dụng chúng một cách hiệu quả, bạn cần hiểu rõ về "hình dạng" hoặc "cấu trúc" của dữ liệu mà chúng trả về.
 
-
 ```mermaid
 flowchart TB
     subgraph MAIN["📋 Main Query (Truy vấn chính)"]
@@ -87,6 +86,7 @@ flowchart TB
     style R fill:#e8f5e9,color:#000
 ```
 *Subquery chạy TRƯỚC, trả kết quả cho Main Query sử dụng. Subquery có thể đặt trong SELECT, FROM, WHERE, hoặc JOIN.*
+
 
 ## 2. Các Dạng Subquery theo Cấu trúc Dữ liệu Trả về
 

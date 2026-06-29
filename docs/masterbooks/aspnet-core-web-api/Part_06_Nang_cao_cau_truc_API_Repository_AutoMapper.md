@@ -238,7 +238,6 @@ Với Antigravity IDE, việc chuyển đổi mã đồng bộ sang bất đồn
 
 Điều này cho phép bạn duy trì "vibe" của mình, tập trung vào logic nghiệp vụ thay vì các chi tiết kỹ thuật lặp lại của việc refactor.
 
-
 ```mermaid
 flowchart TB
     subgraph NO_REPO["❌ Không dùng Repository"]
@@ -257,6 +256,7 @@ flowchart TB
     style WITH_REPO fill:#e8f5e9,color:#000
 ```
 *Repository Pattern tách biệt logic truy xuất dữ liệu khỏi Controller. Controller chỉ biết Interface, dễ test và thay đổi.*
+
 
 ## 2. Trừu tượng hóa lớp truy cập dữ liệu với Repository Pattern
 

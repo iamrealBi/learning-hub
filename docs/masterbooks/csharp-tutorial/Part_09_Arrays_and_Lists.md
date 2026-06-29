@@ -4,7 +4,6 @@ Trong thế giới lập trình, việc tổ chức và quản lý một tập h
 
 Phần này sẽ giới thiệu cho bạn hai trong số các cấu trúc dữ liệu quan trọng nhất trong C# để giải quyết vấn đề này: **Mảng (Arrays)** và **Danh sách (Lists - `List<T>`)**. Chúng ta sẽ đi sâu vào cách khai báo, khởi tạo, truy cập và thao tác với chúng, đồng thời khám phá cơ chế cấp phát bộ nhớ ngầm (under the hood), những điểm khác biệt cốt lõi và trường hợp sử dụng phù hợp cho từng loại. Việc nắm vững mảng và danh sách là nền tảng vững chắc để bạn xây dựng các ứng dụng C# hiệu quả, mạnh mẽ và dễ bảo trì. Đặc biệt, chúng ta sẽ lồng ghép tư duy **Vibe Coding** và cách bạn có thể tận dụng **Antigravity IDE** - hệ thống Agentic AI siêu việt - để nâng cao năng suất và hiểu biết trong quá trình làm việc với các cấu trúc này.
 
-
 ```mermaid
 flowchart LR
     subgraph ARR["📊 Array (Mảng)"]
@@ -24,6 +23,7 @@ flowchart LR
     style LST fill:#f3e5f5,color:#000
 ```
 *So sánh: Array có kích thước cố định nhưng nhanh. List linh hoạt nhưng tốn bộ nhớ hơn khi mở rộng.*
+
 
 ## 1. Giới thiệu về Bộ sưu tập dữ liệu (Data Collections)
 

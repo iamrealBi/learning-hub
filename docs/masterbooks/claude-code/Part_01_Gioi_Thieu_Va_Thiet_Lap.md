@@ -61,7 +61,6 @@ Bạn có thể đưa ra một "vibe" rất cao cấp (ví dụ: "Tạo một t�
 
 Bằng cách này, Antigravity IDE cho phép bạn duy trì tư duy "Vibe Coding" ở tầng giao tiếp với AI, trong khi hệ thống tự động thực hiện "Agentic Engineering" ở tầng thực thi. Điều này giúp bạn đạt được kết quả nhanh chóng với chất lượng cao, vì bạn đang giao tiếp ở mức độ trừu tượng cao nhất, và Antigravity đảm bảo các chi tiết kỹ thuật được xử lý một cách có hệ thống và chính xác, có thể tận dụng các công cụ như Claude Code để tối ưu hóa việc tạo mã.
 
-
 ```mermaid
 flowchart TB
     subgraph USER["👤 Developer"]
@@ -98,6 +97,7 @@ flowchart TB
     style FS fill:#fff3e0,color:#000
 ```
 *Kiến trúc Claude Code: Developer tương tác qua CLI → Context Engine đọc codebase + rules → gọi AI Model → thực thi tools (đọc/ghi/chạy code).*
+
 
 ## 2. Mục Tiêu Khóa Học và Lộ Trình Học Tập Chuyên Sâu
 

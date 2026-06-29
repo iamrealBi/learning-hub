@@ -26,6 +26,7 @@ flowchart LR
 ```
 *Thứ tự thực hiện: FROM → WHERE (lọc dòng) → GROUP BY (nhóm) → Aggregate Functions → HAVING (lọc nhóm) → SELECT → ORDER BY.*
 
+
 ## II. Tổng Hợp Dữ Liệu (Aggregation): Nền Tảng của Phân Tích
 
 Tổng hợp dữ liệu là quá trình thu thập một tập hợp lớn các giá trị (thường từ một cột cụ thể) và chuyển đổi chúng thành một giá trị duy nhất mang tính tóm tắt. Mục tiêu là cung cấp một cái nhìn tổng thể về dữ liệu, thay vì hiển thị chi tiết từng bản ghi riêng lẻ. Các hàm tổng hợp (Aggregate Functions) là công cụ chính để thực hiện quá trình này.
