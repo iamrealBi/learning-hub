@@ -7,6 +7,7 @@ Trong Phần này, chúng ta sẽ đào sâu vào nghệ thuật và khoa học 
 Cho đến nay, chúng ta đã làm việc với các ví dụ nhỏ, đơn giản để minh họa các khái niệm cơ bản về PostgreSQL. Tuy nhiên, khi chuyển từ môi trường học tập sang xây dựng các ứng dụng thực tế, quy mô và độ phức tạp của dữ liệu tăng lên theo cấp số nhân. Các ứng dụng hiện đại, như Instagram, Facebook, hoặc một hệ thống thương mại điện tử, không chỉ đơn thuần là tập hợp các bảng riêng lẻ mà là một mạng lưới phức tạp của nhiều thực thể (bảng) với hàng trăm mối quan hệ tương tác.
 
 Để hỗ trợ đầy đủ các chức năng phong phú của một ứng dụng như Instagram, chúng ta cần xem xét kỹ lưỡng:
+
 *   **Phân Tách Thực Thể (Entity Decomposition):** Làm thế nào để phân chia dữ liệu một cách hợp lý thành các thực thể độc lập nhưng có liên quan, mỗi thực thể được biểu diễn bởi một bảng riêng biệt? Ví dụ: người dùng, bài đăng, bình luận, lượt thích, người theo dõi, tin nhắn.
 *   **Mối Quan Hệ Giữa Các Thực Thể (Entity Relationships):** Cách các thực thể này tương tác với nhau. Một người dùng có thể có nhiều bài đăng, một bài đăng có thể có nhiều bình luận, và một người dùng có thể theo dõi nhiều người dùng khác. Việc hiểu rõ các mối quan hệ (Một-Nhiều, Nhiều-Nhiều, Một-Một) là chìa khóa để duy trì tính toàn vẹn dữ liệu.
 *   **Thuộc Tính và Kiểu Dữ Liệu (Attributes and Data Types):** Mỗi thực thể cần những thuộc tính nào (cột), và kiểu dữ liệu phù hợp nhất cho từng thuộc tính để đảm bảo lưu trữ hiệu quả, chính xác và tối ưu hóa truy vấn.
@@ -100,6 +101,7 @@ Với tư cách là một chuyên gia lập trình cấp Senior, chúng ta nhậ
 Trong một môi trường phát triển tiên tiến như **Antigravity IDE**, bạn có thể hình dung việc viết các khối DSL như trên và ngay lập tức thấy sơ đồ ERD được cập nhật theo thời gian thực nhờ các AI Agent ngầm. Antigravity IDE, với khả năng tự động chạy script, gọi subagent trình duyệt để render sơ đồ (ví dụ: tích hợp với `dbdiagram.io` hoặc các thư viện vẽ ERD), và đọc/ghi file cấu hình, trở thành một "bảng vẽ" động và thông minh cho thiết kế schema.
 
 Các AI Agent trong Antigravity có thể:
+
 *   **Phân tích "ý định" của bạn:** Khi bạn định nghĩa các bảng và mối quan hệ, AI có thể phân tích ngữ cảnh và đề xuất các ràng buộc (constraints) còn thiếu, các chỉ mục (indexes) tiềm năng để tối ưu hóa truy vấn, hoặc thậm chí cảnh báo về các vấn đề thiết kế (ví dụ: chu trình khóa ngoại, các bảng có thể được hợp nhất).
 *   **Tạo mã DDL tự động:** Từ DSL hoặc sơ đồ trực quan, Antigravity có thể tự động tạo mã DDL chuẩn PostgreSQL để tạo cơ sở dữ liệu thực tế, giảm thiểu lỗi chính tả và đảm bảo tuân thủ cú pháp.
 *   **Quản lý phiên bản Schema:** Tự động theo dõi các thay đổi trong file cấu hình schema, đề xuất các lệnh `ALTER TABLE` để di chuyển (migrate) cơ sở dữ liệu hiện có sang phiên bản schema mới, một tính năng cực kỳ quan trọng trong vòng đời phát triển phần mềm.
@@ -115,6 +117,7 @@ Việc sử dụng công cụ nào hoàn toàn phụ thuộc vào sở thích c�
 Để minh họa việc thiết kế schema phức tạp trong thực tế, chúng ta sẽ xây dựng lại cơ sở dữ liệu cho một ứng dụng giống Instagram. Instagram là một ví dụ tuyệt vời vì nó tích hợp nhiều tính năng phổ biến có trong hầu hết các ứng dụng web hiện đại, cung cấp một khuôn mẫu thiết kế có thể áp dụng cho nhiều dự án khác trong tương lai.
 
 **Các tính năng điển hình của Instagram mà chúng ta sẽ xem xét để thiết kế schema:**
+
 *   **Người dùng (Users):** Quản lý tài khoản, hồ sơ.
 *   **Bài đăng/Ảnh (Posts):** Lưu trữ hình ảnh/video và thông tin liên quan.
 *   **Lượt thích (Likes):** Ghi nhận tương tác thích bài đăng.
@@ -128,6 +131,7 @@ Việc sử dụng công cụ nào hoàn toàn phụ thuộc vào sở thích c�
 Lần này, chúng ta sẽ đi sâu vào chi tiết hơn nhiều so với các lần trước, xem xét nhiều bảng, cột và mối quan hệ hơn để hỗ trợ các tính năng này. Quá trình này sẽ giúp chúng ta hiểu rõ hơn về các cạm bẫy tiềm ẩn và các quyết định thiết kế quan trọng, cũng như cách tư duy để mở rộng schema trong tương lai.
 
 Kế hoạch của chúng ta bao gồm các bước sau:
+
 1.  **Phân tích yêu cầu và thực thể:** Xem xét các tính năng của ứng dụng Instagram để xác định các thực thể chính, các thuộc tính của chúng và các mối quan hệ ban đầu.
 2.  **Thiết kế schema logic:** Phác thảo các bảng, cột, kiểu dữ liệu và mối quan hệ cơ bản (sử dụng ERD).
 3.  **Tạo cơ sở dữ liệu vật lý (DDL):** Viết mã SQL chuẩn PostgreSQL để tạo schema trên hệ quản trị cơ sở dữ liệu.
@@ -197,6 +201,7 @@ Bảng `likes` sẽ ghi nhận mỗi khi một người dùng thích một bài 
 ### 4.5. Mối Quan Hệ và Tính Toàn Vẹn Tham Chiếu
 
 Chúng ta đã thiết lập các mối quan hệ sau, tất cả đều là mối quan hệ Một-Nhiều (One-to-Many) hoặc Nhiều-Nhiều (Many-to-Many) được giải quyết thông qua bảng liên kết:
+
 *   `users` và `posts`: Một người dùng có thể tạo nhiều bài đăng (`posts.user_id` tham chiếu `users.id`).
 *   `users` và `comments`: Một người dùng có thể tạo nhiều bình luận (`comments.user_id` tham chiếu `users.id`).
 *   `posts` và `comments`: Một bài đăng có thể có nhiều bình luận (`comments.post_id` tham chiếu `posts.id`).

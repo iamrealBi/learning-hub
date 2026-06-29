@@ -9,6 +9,7 @@ Phần này cung cấp nền tảng vững chắc về cơ sở dữ liệu quan
 Ở cốt lõi, một **cơ sở dữ liệu** là một hệ thống có tổ chức được thiết kế để lưu trữ, quản lý và truy xuất một lượng lớn thông tin một cách hiệu quả và đáng tin cậy. Thay vì lưu trữ dữ liệu trong các tệp phẳng hoặc bảng tính rời rạc, cơ sở dữ liệu cung cấp một cấu trúc chặt chẽ, các quy tắc nhất quán và cơ chế mạnh mẽ để đảm bảo tính toàn vẹn và khả năng truy cập của dữ liệu.
 
 Các hệ thống cơ sở dữ liệu hiện đại không chỉ đơn thuần là nơi chứa dữ liệu; chúng là các kiến trúc phức tạp bao gồm:
+
 *   **Dữ liệu (Data)**: Thông tin thực tế được lưu trữ.
 *   **Lược đồ (Schema)**: Cấu trúc logic định nghĩa cách dữ liệu được tổ chức (tên bảng, tên cột, kiểu dữ liệu, mối quan hệ).
 *   **Hệ quản trị cơ sở dữ liệu (DBMS - Database Management System)**: Phần mềm cho phép người dùng và ứng dụng tương tác với cơ sở dữ liệu (tạo, đọc, cập nhật, xóa dữ liệu; quản lý quyền truy cập; đảm bảo an toàn và nhất quán).
@@ -16,6 +17,7 @@ Các hệ thống cơ sở dữ liệu hiện đại không chỉ đơn thuần 
 ### 1.2. PostgreSQL: Hệ Quản Trị Cơ Sở Dữ Liệu Quan Hệ (RDBMS) Mạnh Mẽ
 
 **PostgreSQL** là một trong những hệ quản trị cơ sở dữ liệu quan hệ (RDBMS) mã nguồn mở tiên tiến và mạnh mẽ nhất hiện nay. Nó được biết đến với:
+
 *   **Độ tin cậy và tính bền vững (Reliability & Robustness)**: Được phát triển qua hơn 35 năm, PostgreSQL có một lịch sử dài về sự ổn định và khả năng phục hồi dữ liệu.
 *   **Tính năng phong phú (Feature-rich)**: Hỗ trợ nhiều tính năng nâng cao không chỉ của SQL tiêu chuẩn mà còn các tính năng độc quyền như kiểu dữ liệu JSONB, các hàm cửa sổ (window functions), CTEs (Common Table Expressions), và các chỉ mục đa dạng.
 *   **Tuân thủ tiêu chuẩn SQL (SQL Compliance)**: PostgreSQL tuân thủ chặt chẽ các tiêu chuẩn SQL, giúp các câu lệnh viết cho PostgreSQL có tính di động cao và dễ học đối với những người đã quen với SQL.
@@ -26,6 +28,7 @@ PostgreSQL là lựa chọn hàng đầu cho nhiều ứng dụng từ các dự
 ### 1.3. Mô Hình Tương Tác: Client-Server và Ngôn Ngữ SQL
 
 Để làm việc với cơ sở dữ liệu PostgreSQL, chúng ta sử dụng một mô hình **client-server**.
+
 *   **Máy chủ (Server)**: Là quá trình (process) chạy PostgreSQL, quản lý các tệp dữ liệu, thực hiện các truy vấn, và xử lý các yêu cầu từ máy khách.
 *   **Máy khách (Client)**: Là bất kỳ ứng dụng hoặc công cụ nào kết nối với máy chủ PostgreSQL để gửi các yêu cầu và nhận kết quả. Các máy khách phổ biến bao gồm:
     *   **Công cụ dòng lệnh**: Như `psql` (công cụ mặc định của PostgreSQL).
@@ -34,6 +37,7 @@ PostgreSQL là lựa chọn hàng đầu cho nhiều ứng dụng từ các dự
     *   **Công cụ AI**: Như Antigravity IDE mà chúng ta sẽ thảo luận.
 
 Khi máy khách kết nối với cơ sở dữ liệu, nó sẽ gửi các câu lệnh được viết bằng **SQL (Structured Query Language)**. SQL là ngôn ngữ tiêu chuẩn và phổ biến nhất để giao tiếp với cơ sở dữ liệu quan hệ. Nó được chia thành nhiều loại, nhưng trong phần này, chúng ta sẽ tập trung vào:
+
 *   **DDL (Data Definition Language)**: Các lệnh để định nghĩa hoặc quản lý cấu trúc cơ sở dữ liệu (ví dụ: `CREATE TABLE`, `ALTER TABLE`, `DROP TABLE`).
 *   **DML (Data Manipulation Language)**: Các lệnh để thao tác dữ liệu bên trong các bảng (ví dụ: `INSERT`, `SELECT`, `UPDATE`, `DELETE`).
 
@@ -43,6 +47,7 @@ Khi máy khách kết nối với cơ sở dữ liệu, nó sẽ gửi các câu
 ### 1.4. Cơ Chế Hoạt Động Ngầm (Under the Hood) của SQL
 
 Khi bạn gửi một câu lệnh SQL từ máy khách đến máy chủ PostgreSQL, một loạt các bước sẽ diễn ra:
+
 1.  **Phân tích cú pháp (Parsing)**: Máy chủ kiểm tra cú pháp của câu lệnh SQL để đảm bảo nó hợp lệ.
 2.  **Kiểm tra ngữ nghĩa (Semantic Analysis)**: Kiểm tra xem các bảng, cột, và hàm được tham chiếu có tồn tại và người dùng có quyền truy cập hay không.
 3.  **Tối ưu hóa truy vấn (Query Optimization)**: Đây là một bước quan trọng. Bộ tối ưu hóa truy vấn (query optimizer) phân tích câu lệnh và tạo ra một "kế hoạch thực thi" (execution plan) hiệu quả nhất để lấy dữ liệu. Ví dụ, nó sẽ quyết định có nên sử dụng chỉ mục (index) hay không, hoặc thứ tự các bảng nên được nối (join) với nhau.
@@ -152,6 +157,7 @@ Việc chọn đúng kiểu dữ liệu cho mỗi cột là rất quan trọng �
 **pgsql.com** là một ứng dụng web cung cấp một môi trường cơ sở dữ liệu PostgreSQL ảo miễn phí, cho phép bạn chạy các câu lệnh SQL trực tiếp từ trình duyệt mà không cần cài đặt.
 
 **Giao diện pgsql.com:**
+
 *   **Trình soạn thảo mã (Code Editor)** (góc trên bên trái): Nơi bạn nhập các câu lệnh SQL.
 *   **Kết quả truy vấn (Query Results)** (góc dưới bên trái): Hiển thị kết quả sau khi thực thi SQL.
 *   **Lịch sử truy vấn (Query History)** (phía bên phải): Ghi lại các câu lệnh bạn đã chạy.
@@ -191,6 +197,7 @@ Antigravity IDE là một hệ thống Agentic AI tiên tiến mà bạn đang s
     *   Antigravity sẽ giúp bạn hiểu nguyên nhân gốc rễ và cung cấp giải pháp.
 
 **Tóm lại, Antigravity IDE cho phép bạn: **
+
 *   **Tập trung vào "cái gì" thay vì "làm thế nào"**: Bạn mô tả mục tiêu, Antigravity lo phần cú pháp và chi tiết kỹ thuật.
 *   **Tăng tốc độ phát triển**: Giảm thời gian viết và gỡ lỗi SQL.
 *   **Nâng cao chất lượng mã**: AI có thể đề xuất các phương pháp hay nhất và phát hiện lỗi tiềm ẩn.
@@ -268,6 +275,7 @@ CREATE TABLE cities (
 ```
 
 **Giải thích bổ sung:**
+
 *   `id BIGSERIAL PRIMARY KEY`: Cột `id` sẽ là khóa chính, tự động tăng giá trị và đảm bảo mỗi hàng có một mã định danh duy nhất. `BIGSERIAL` là lựa chọn tốt hơn `SERIAL` cho các bảng có tiềm năng chứa rất nhiều bản ghi.
 *   `name VARCHAR(100) NOT NULL UNIQUE`: Yêu cầu tên thành phố không được trống và không có hai thành phố nào có cùng tên (trong ngữ cảnh này, chúng ta giả định tên thành phố là duy nhất trên toàn cầu, hoặc ít nhất là trong phạm vi ứng dụng của chúng ta).
 *   `population BIGINT CHECK (population >= 0)`: Sử dụng `BIGINT` cho dân số lớn và thêm ràng buộc `CHECK` để đảm bảo dân số luôn là số không âm.

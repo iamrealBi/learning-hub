@@ -23,6 +23,7 @@
 
 ```
 Vấn đề cốt lõi:
+
 - Dữ liệu quá lớn → không fit vào memory
 - Cần truy xuất NHANH trong terabytes dữ liệu
 - Cần nhiều người truy cập đồng thời
@@ -93,6 +94,7 @@ Thời kỳ 1960s-1970s:
 
 ```
 Disk Drive vs Tape:
+
 - Random access: nhảy đến BẤT KỲ vị trí trong milliseconds
 - Seek time + rotational delay thay vì minutes
 - SSD còn nhanh hơn: không cần seek/rotation
@@ -106,12 +108,14 @@ Disk Drive vs Tape:
 
 ```
 Vấn đề thập niên 70s:
+
 - IBM có database riêng
 - Burroughs có database riêng
 - Mỗi vendor có cách khác nhau
 - Đổi vendor = viết lại code!
 
 Giải pháp: NIST (National Institute of Standards and Technology)
+
 - Không ÉP cách xây database
 - CHỈ YÊU CẦU chuẩn giao tiếp chung
 - → SQL = Structured Query Language ra đời
@@ -160,6 +164,7 @@ Attribute              =    Column (Cột)
 
 → Đừng sợ khi đọc tài liệu thấy thuật ngữ lạ!
 → Spreadsheet analogy: 
+
   - Tabs dưới cùng = Tables
   - Hàng đầu tiên  = Schema (metadata)
   - Các hàng còn lại = Data rows
@@ -182,6 +187,7 @@ Attribute              =    Column (Cột)
 └──────────────────┘                    │  - Optimization  │
                                         │  - Disk I/O      │
 Các loại Client:                        └──────────────────┘
+
 1. psql (command line) ⭐ recommend
 2. DBeaver (desktop app)
 3. pgAdmin (web-based — hạn chế với shared server)

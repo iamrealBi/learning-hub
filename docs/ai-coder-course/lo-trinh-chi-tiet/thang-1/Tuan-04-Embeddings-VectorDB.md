@@ -20,29 +20,35 @@
 ### 🔴 Khóa chính — FREE (Tốt hơn Udemy cho topic này):
 
 **1. [DeepLearning.AI: LangChain — Chat with Your Data](https://www.deeplearning.ai/short-courses/langchain-chat-with-your-data/)** 🥇
+
 - Giảng viên: **Harrison Chase** (CEO LangChain — creator dạy trực tiếp!)
 - ⭐⭐⭐⭐⭐ | FREE | ~2 giờ | Hands-on Jupyter notebooks
 - Covers: Document loaders, text splitting, vector stores, retrieval, Q&A
 - **Tại sao tốt hơn Udemy**: Creator trực tiếp dạy, luôn cập nhật chuẩn mới nhất
 
 **2. [DeepLearning.AI: Vector Databases — Embeddings to Applications](https://www.deeplearning.ai/short-courses/vector-databases-embeddings-applications/)** 🥇
+
 - Giảng viên: **Sebastian Witalec** (Weaviate team)
 - ⭐⭐⭐⭐⭐ | FREE | ~1.5 giờ | Hands-on
 - Covers: Embeddings, similarity search, ANN algorithms, vector DB internals
 
 **3. [DeepLearning.AI: Building Agentic RAG with LlamaIndex](https://www.deeplearning.ai/short-courses/building-agentic-rag-with-llamaindex/)** 🥇
+
 - ⭐⭐⭐⭐⭐ | FREE | ~1.5 giờ
 - Covers: Agentic RAG patterns, multi-document agents, router queries
 
 **4. [ChromaDB Official Getting Started](https://docs.trychroma.com/getting-started)** 🥇
+
 - FREE | Official docs | Luôn đúng phiên bản mới nhất
 
 ### 🟡 Bổ trợ — Coursera (có chứng chỉ):
 **[Coursera: RAG for GenAI Applications](https://www.coursera.org/learn/rag-for-gen-ai)** (IBM)
+
 - Structured, có graded assignments + certificate
 
 ### 🟢 Tham khảo thêm — Udemy Business (nếu muốn xem video dài hơn):
 **[GenAI Architectures with LLM, RAG, Vector DB](https://ibmcsr.udemy.com/course/generative-ai-architectures/)** — Mehmet Ozkaya | 7.5h
+
 - ⚠️ Overview level, không sâu bằng DeepLearning.AI
 - Dùng khi muốn xem thêm ví dụ hoặc prefer video dài hơn
 

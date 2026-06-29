@@ -142,6 +142,7 @@ Override = đúng 99%. Hiding = anti-pattern, tránh dùng.
 <details><summary>💡 Đáp án</summary>
 
 DI = truyền dependency từ **bên ngoài** vào (thay vì `new` bên trong).
+
 1. **Constructor injection** (phổ biến nhất): `public TodoController(IRepository repo)`
 2. **Property injection**: `public ILogger Logger { get; set; }`
 3. **Method injection**: `public void Process(IValidator validator)`
@@ -270,6 +271,7 @@ Lợi ích: compose queries, lazy evaluation. Rủi ro: query chạy nhiều l�
 <details><summary>💡 Đáp án</summary>
 
 GC tự động thu hồi objects trên Heap không còn ai reference. 3 generations:
+
 - **Gen 0**: objects mới (collect thường xuyên, nhanh)
 - **Gen 1**: objects sống qua Gen 0 (buffer)
 - **Gen 2**: objects sống lâu (collect hiếm, chậm)
@@ -396,6 +398,7 @@ Trade-off: **nhanh reads, chậm writes** (vì phải cập nhật index).
 <details><summary>💡 Đáp án</summary>
 
 Transaction = nhóm operations thực hiện **all-or-nothing**.
+
 - **A — Atomicity**: tất cả hoặc không gì cả
 - **C — Consistency**: DB luôn trong trạng thái hợp lệ
 - **I — Isolation**: transactions không ảnh hưởng lẫn nhau

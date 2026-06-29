@@ -129,6 +129,7 @@ Nội dung của `CLAUDE.MD` cần được cân nhắc kỹ lưỡng để cung
 
 Ứng dụng này tuân thủ kiến trúc mô tả trong `@spec.md`.
 **Hãy tham khảo `@spec.md` khi:**
+
 *   Thiết kế hoặc sửa đổi các thành phần kiến trúc cấp cao.
 *   Xác định cấu trúc dữ liệu hoặc schema cơ sở dữ liệu.
 *   Cần hiểu rõ về luồng dữ liệu hoặc các module chính.
@@ -200,6 +201,7 @@ Plan Mode là một tính năng mạnh mẽ của Claude Code, giúp biến các
 
 **Cơ chế "dưới vỏ bọc" của Plan Mode:**
 Khi bạn nhập một prompt vào Plan Mode, Claude Code không trực tiếp tạo mã. Thay vào đó, nó sử dụng một chuỗi prompt nội bộ để:
+
 1.  **Phân tích prompt của bạn:** Hiểu ý định cốt lõi.
 2.  **Lập kế hoạch phân rã tác vụ:** Chia nhỏ nhiệm vụ lớn thành các bước nhỏ hơn, có thể quản lý được.
 3.  **Thu thập thông tin bối cảnh:** Xác định những file nào cần đọc, những thư viện nào cần tham khảo.
@@ -207,6 +209,7 @@ Khi bạn nhập một prompt vào Plan Mode, Claude Code không trực tiếp t
 
 **So sánh với Antigravity IDE:**
 Plan Mode của Claude Code là một bước tiến quan trọng so với các AI coding cơ bản. Tuy nhiên, Antigravity IDE đưa Plan Mode lên một tầm cao mới. Antigravity không chỉ "đề xuất" một kế hoạch; nó *tự động thực thi* một quy trình lập kế hoạch phức tạp bao gồm:
+
 *   **Tạo subagent chuyên biệt:** Cho từng phần của kế hoạch (ví dụ: một subagent để tìm tài liệu, một subagent để viết test, một subagent để refactor).
 *   **Chạy script ngầm:** Tự động chạy các lệnh như `git status`, `ls -l`, `grep` để thu thập thông tin mà không cần sự can thiệp của người dùng.
 *   **Phản hồi vòng lặp nội bộ:** Các subagent có thể tự điều chỉnh kế hoạch dựa trên kết quả của các script hoặc tương tác với các hệ thống khác (ví dụ: gọi API).
@@ -277,6 +280,7 @@ Các tác vụ như triển khai xác thực an toàn, tích hợp với API bê
 2.  **Cung cấp liên kết (Claude Code có khả năng truy cập web):** Claude Code có khả năng truy cập các trang web. Bạn có thể cung cấp các URL đến tài liệu chính thức và yêu cầu nó truy cập để tìm thông tin.
     ```
     "Vui lòng truy cập các trang tài liệu chính thức sau để triển khai xác thực bằng BetterAuth và tương tác với SQLite trong Bun:
+
     - Tài liệu BetterAuth: `https://docs.betterauth.com/`
     - Tài liệu Bun SQLite: `https://bun.sh/docs/api/sqlite`
     Hãy đọc kỹ và áp dụng các hướng dẫn từ các nguồn này."
@@ -302,6 +306,7 @@ Trong một số trường hợp nâng cao, Claude Code cũng có thể tương 
 
 **Liên hệ với Antigravity IDE:**
 Khái niệm MCP server rất gần với cách Antigravity IDE hoạt động. Antigravity có thể coi là một hệ thống Agentic AI tích hợp sẵn một "MCP server" nội bộ, cho phép các agent của nó:
+
 *   **Chạy script ngầm:** Thực hiện các lệnh hệ thống, công cụ CLI.
 *   **Đọc/ghi file:** Tương tác trực tiếp với codebase.
 *   **Gọi subagent trình duyệt:** Truy cập và tương tác với web.

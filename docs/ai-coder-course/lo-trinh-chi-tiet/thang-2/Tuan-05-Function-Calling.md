@@ -20,23 +20,28 @@
 ### 🔴 Khóa chính — FREE (Tốt nhất cho topic này):
 
 **1. [DeepLearning.AI: Functions, Tools and Agents with LangChain](https://www.deeplearning.ai/short-courses/functions-tools-agents-langchain/)** 🥇
+
 - ⭐⭐⭐⭐⭐ | FREE | ~2 giờ | Andrew Ng + Harrison Chase
 - Tại sao #1: Dạy bởi LangChain creator, chuẩn pattern mới nhất
 
 **2. [Anthropic Docs: Tool Use Guide](https://docs.anthropic.com/en/docs/build-with-claude/tool-use)** 🥇
+
 - ⭐⭐⭐⭐⭐ | FREE | Official reference
 - Claude tool_use spec chính xác nhất, có code examples
 
 **3. [OpenAI: Function Calling Guide](https://platform.openai.com/docs/guides/function-calling)** 🥇
+
 - ⭐⭐⭐⭐⭐ | FREE | Official reference
 
 ### 🟡 Bổ trợ — Coursera (lấy chứng chỉ):
 **[AI Agent Developer Specialization (Vanderbilt)](https://www.coursera.org/specializations/ai-agent-developer)**
+
 - Khóa 1: "AI Agents and Agentic AI with Python" — relevant cho tuần này
 - Có certificate LinkedIn-ready
 
 ### 🟢 Tham khảo — Udemy Business (xem thêm project examples):
 **[AI Engineer Agentic Track (Ed Donner)](https://ibmcsr.udemy.com/course/ai-engineer-agentic-track/)**
+
 - ⭐ 4.7 | 17h — Sections về tool calling, agent architecture
 - Dùng xem thêm SAU KHI nắm vững từ free sources
 

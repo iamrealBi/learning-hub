@@ -100,6 +100,7 @@ Tất cả các kiến thức này sẽ được minh họa thông qua việc x�
 Claude Code chủ yếu là một công cụ dòng lệnh và không có giao diện người dùng đồ họa (GUI) độc lập. Bạn sẽ tương tác với nó thông qua terminal, nơi bạn nhập các lệnh và nhận phản hồi văn bản từ AI.
 
 Tuy nhiên, để tối ưu hóa trải nghiệm, Claude Code có thể hoạt động tích hợp với một số trình soạn thảo mã (ví dụ: thông qua các tiện ích mở rộng hoặc chế độ tích hợp terminal). Điều này mang lại trải nghiệm gần giống GUI cho một số chức năng nhất định, cho phép bạn:
+
 *   Gọi Claude Code trực tiếp từ IDE.
 *   Chèn mã do AI tạo ra vào trình soạn thảo hiện tại.
 *   Sử dụng ngữ cảnh từ các tệp đang mở trong IDE để cung cấp cho AI.

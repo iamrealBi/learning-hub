@@ -751,6 +751,7 @@ Hệ thống Antigravity IDE mà bạn đang sử dụng là một ví dụ đi�
 ### 6.1. Hiểu "Vibe" của dữ liệu: Lớp hay Cấu trúc?
 
 Khi bạn phác thảo một ý tưởng cho Antigravity, nó sẽ cố gắng hiểu "ý định" của bạn.
+
 *   Nếu bạn mô tả một thực thể phức tạp, có vòng đời dài, có thể cần kế thừa hoặc thay đổi trạng thái thường xuyên (ví dụ: `Customer`, `Order`, `Product`), Antigravity sẽ "vibe" rằng đây nên là một **lớp**. Nó sẽ tự động tạo ra một `class` với các thuộc tính và phương thức phù hợp.
 *   Nếu bạn mô tả một tập hợp dữ liệu nhỏ, đơn giản, đại diện cho một giá trị, và bạn muốn hành vi sao chép giá trị (ví dụ: `Point`, `Size`, `Temperature`), Antigravity có thể gợi ý hoặc tự động tạo ra một **cấu trúc**. Nó hiểu rằng việc này có thể cải thiện hiệu suất và rõ ràng về ngữ nghĩa.
 
@@ -759,6 +760,7 @@ Bằng cách hiểu sự khác biệt giữa lớp và cấu trúc, bạn có th
 ### 6.2. Tổ chức mã nguồn và Namespaces với Antigravity
 
 Antigravity IDE được thiết kế để duy trì một codebase có tổ chức.
+
 *   Khi bạn tạo một lớp mới, Antigravity sẽ tự động đặt nó vào một tệp riêng và gợi ý một `namespace` phù hợp dựa trên cấu trúc dự án hiện có.
 *   Nếu bạn di chuyển một lớp hoặc đổi tên namespace, Antigravity sẽ tự động cập nhật các câu lệnh `using` và các tham chiếu khác trong toàn bộ dự án, đảm bảo tính nhất quán.
 *   Bạn có thể hướng dẫn Antigravity tạo các module hoặc thư viện mới, và nó sẽ tạo cấu trúc namespace tương ứng, giúp bạn quản lý các dự án lớn một cách hiệu quả.
@@ -772,6 +774,7 @@ Antigravity IDE được thiết kế để duy trì một codebase có tổ ch�
 ### 6.4. Tối ưu hóa bộ nhớ và hiệu suất (Dành cho Antigravity)
 
 Mặc dù Antigravity xử lý nhiều chi tiết cấp thấp, nhưng việc bạn hiểu về Stack, Heap và Garbage Collection giúp bạn:
+
 *   **Đánh giá gợi ý của Antigravity:** Khi Antigravity đưa ra một lựa chọn thiết kế có thể ảnh hưởng đến hiệu suất (ví dụ: đề xuất sử dụng `struct` thay vì `class`), bạn có thể hiểu được căn nguyên của gợi ý đó.
 *   **Cung cấp ngữ cảnh tốt hơn:** Nếu bạn đang làm việc trên một phần mã nguồn cực kỳ nhạy cảm về hiệu suất, bạn có thể giải thích rõ ràng hơn cho Antigravity về các ràng buộc bộ nhớ, cho phép nó tạo ra mã tối ưu hơn (ví dụ: tránh cấp phát đối tượng không cần thiết trên Heap).
 

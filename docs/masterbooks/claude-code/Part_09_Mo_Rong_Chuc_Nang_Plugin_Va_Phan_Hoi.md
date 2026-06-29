@@ -14,6 +14,7 @@ Plugin trong **Claude Code** là các gói chức năng được thiết kế đ
 
 **Tại sao Plugin lại cần thiết cho AI Agent?**
 Các mô hình ngôn ngữ lớn (LLM) như Claude 3 có khả năng suy luận và tạo mã ấn tượng, nhưng chúng bị giới hạn bởi:
+
 *   **Kiến thức tĩnh:** Dữ liệu huấn luyện của chúng là tĩnh và không được cập nhật theo thời gian thực.
 *   **Thiếu khả năng tương tác:** Chúng không thể tự mình thực thi mã, truy cập internet, hoặc tương tác với giao diện người dùng thực.
 *   **Thiếu công cụ chuyên dụng:** Để thực hiện các tác vụ kỹ thuật cụ thể (ví dụ: kiểm tra cú pháp TypeScript, chạy trình duyệt), cần có các công cụ chuyên biệt.
@@ -74,12 +75,14 @@ Việc sử dụng plugin không chỉ giúp bạn tiết kiệm thời gian mà
 Trong phát triển phần mềm truyền thống, phản hồi từ kiểm thử, đánh giá mã, hoặc phản hồi của người dùng là kim chỉ nam để cải thiện. Đối với AI Agent, phản hồi còn quan trọng hơn gấp bội, vì nó là yếu tố then chốt cho khả năng tự học hỏi và tự chủ. Một tác nhân AI không có cách nào để biết liệu mã nó tạo ra có hoạt động hay không, hoặc liệu giao diện người dùng nó thiết kế có đúng như mong đợi, sẽ không thể học hỏi và cải thiện.
 
 Vòng lặp phản hồi cho phép **Claude Code** thực hiện chu trình "Sense-Think-Act-Reflect" một cách hiệu quả:
+
 *   **Sense (Cảm nhận):** Thu thập thông tin từ môi trường (ví dụ: kết quả kiểm thử, trạng thái trình duyệt).
 *   **Think (Suy nghĩ):** Phân tích thông tin, xác định vấn đề, lập kế hoạch hành động.
 *   **Act (Hành động):** Thực hiện thay đổi (ví dụ: sửa mã, cấu hình).
 *   **Reflect (Phản tư):** Đánh giá kết quả của hành động, cập nhật hiểu biết và lặp lại chu trình.
 
 Cụ thể, vòng lặp phản hồi giúp **Claude Code**:
+
 *   **Tự động phát hiện lỗi:** Thay vì dựa vào con người để tìm lỗi, AI có thể tự chạy các kiểm thử hoặc tương tác với môi trường để tìm ra vấn đề một cách tự động.
 *   **Tự sửa lỗi:** Một khi vấn đề được phát hiện, AI có thể cố gắng tìm ra giải pháp, áp dụng chúng vào mã nguồn hoặc cấu hình.
 *   **Tự xác minh sửa lỗi:** Sau khi sửa chữa, AI có thể chạy lại các kiểm thử hoặc tương tác lại với môi trường để đảm bảo rằng vấn đề đã được khắc phục hoàn toàn.
@@ -114,12 +117,14 @@ Khi bạn yêu cầu **Claude Code** kiểm thử ứng dụng web của mình b
 #### Ưu và Nhược điểm của Truy cập Trình duyệt
 
 **Ưu điểm:**
+
 *   **Phản hồi trực quan và chân thực:** Cho phép **Claude Code** kiểm thử trực tiếp giao diện người dùng và trải nghiệm người dùng thực, điều mà kiểm thử back-end không thể làm được.
 *   **Tự động hóa kiểm thử E2E:** Giúp tự động hóa các kịch bản kiểm thử phức tạp, mô phỏng toàn bộ luồng người dùng từ đầu đến cuối, tiết kiệm thời gian và công sức thủ công.
 *   **Phát hiện lỗi UI/UX:** Có khả năng phát hiện các vấn đề liên quan đến hiển thị, tương tác người dùng, lỗi bố cục mà các loại kiểm thử khác có thể bỏ qua.
 *   **Vibe Coding:** Với quyền truy cập trình duyệt, **Claude Code** có thể nhanh chóng tạo ra một "vibe" (cảm hứng) cho giao diện người dùng, cho phép bạn xem xét và điều chỉnh nhanh chóng mà không cần tự mình viết toàn bộ mã UI.
 
 **Nhược điểm:**
+
 *   **Tiêu tốn token cao:** Các mô tả công cụ, lệnh gọi công cụ Playwright, và đặc biệt là việc phân tích hình ảnh (snapshot) hoặc nội dung DOM đều tiêu tốn một lượng token đáng kể. Điều này có thể làm tăng chi phí sử dụng **Claude Code**.
 *   **Yêu cầu cấp quyền ban đầu:** Quá trình cấp quyền cho Playwright có thể hơi phức tạp lúc ban đầu và cần sự can thiệp của người dùng.
 *   **Có thể chậm:** Việc tương tác với trình duyệt thực (dù là headless) có thể chậm hơn so với việc chạy kiểm thử tự động trong môi trường không có giao diện người dùng.
@@ -271,6 +276,7 @@ Vòng lặp Rolf (Rolf Loop) là một khái niệm nâng cao trong việc sử 
 ### 3.1. Giới Thiệu Vòng Lặp Rolf: Từ Tự Động Hóa đến Tự Chủ Hoàn Toàn
 
 Ý tưởng cốt lõi của Vòng lặp Rolf là tạo ra một môi trường mà trong đó **Claude Code** được gọi lặp đi lặp lại, mỗi lần để giải quyết một phần của một vấn đề lớn hơn. Trong mỗi lần lặp, **Claude Code** sẽ tự mình:
+
 1.  **Chọn một nhiệm vụ:** Từ một danh sách các nhiệm vụ đã được định nghĩa.
 2.  **Thực hiện nhiệm vụ đó:** Bằng cách tạo mã, cấu hình, hoặc tương tác với hệ thống.
 3.  **Tự xác minh công việc:** Sử dụng các kiểm thử tự động và quyền truy cập trình duyệt (thông qua plugin Playwright) để đảm bảo rằng nhiệm vụ đã được hoàn thành đúng cách.
@@ -334,6 +340,7 @@ while [ $CURRENT_ITERATION -lt $MAX_ITERATIONS ]; do
     If 'tasks.json' exists, find the first task where 'completed' is false.
     Implement the 'description' and 'steps' of this task.
     After implementing, verify your changes by:
+
     1. Running all automated tests (e.g., 'npm test' or 'vitest').
     2. Visiting the application website using the Playwright plugin to test the changes in the browser. The application server runs on port 3001.
 

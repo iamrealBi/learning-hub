@@ -63,6 +63,7 @@ names.Add("Nghĩa");
 ### 1.2 T là gì?
 
 `T` là **Type Parameter** — một placeholder cho kiểu dữ liệu thực tế:
+
 - `T` → Convention, viết tắt của "Type"
 - `TKey, TValue` → Cho dictionary/map
 - `TResult` → Cho kiểu trả về

@@ -5,6 +5,7 @@ Chào mừng bạn đến với Chương 20 của khóa học chuyên sâu về 
 Những công cụ này là nền tảng cho việc truy vấn và phân tích dữ liệu hiệu quả, cho phép bạn không chỉ lọc và tóm tắt thông tin mà còn chủ động định hình kết quả truy vấn dựa trên các quy tắc kinh doanh cụ thể. Chúng ta sẽ tập trung hoàn toàn vào cú pháp chuẩn và các tính năng đặc thù của PostgreSQL, đảm bảo bạn có thể áp dụng chúng một cách chính xác trong môi trường cơ sở dữ liệu của mình.
 
 Mục tiêu của chương này là trang bị cho bạn khả năng:
+
 *   Trích xuất các giá trị hoặc tập hợp giá trị duy nhất từ các cột.
 *   Xác định giá trị lớn nhất hoặc nhỏ nhất từ một danh sách các biểu thức.
 *   Thực thi logic điều kiện `IF-THEN-ELSE` trực tiếp trong các truy vấn SQL để tạo ra các kết quả động.
@@ -224,6 +225,7 @@ Chỉ có một `NULL` được hiển thị, mặc dù có thể có nhiều s�
     *   **Cú pháp**: Là một mệnh đề riêng biệt sau `FROM` và `WHERE`.
 
 **Khi nào nên dùng cái nào?**
+
 *   Sử dụng `DISTINCT` khi bạn chỉ cần một danh sách các giá trị duy nhất mà không cần thực hiện bất kỳ phép tính tổng hợp nào trên các nhóm đó.
 *   Sử dụng `GROUP BY` khi bạn muốn nhóm các hàng có giá trị chung và sau đó tính toán một giá trị tổng hợp cho mỗi nhóm (ví dụ: tổng doanh số cho mỗi phòng ban, số lượng nhân viên trong mỗi phòng ban).
 
@@ -306,6 +308,7 @@ ORDER BY name, manufacturer, price DESC;
 ```
 
 **Giải thích:**
+
 1.  Truy vấn lọc các sản phẩm có `name = 'Toy Car'`.
 2.  `ORDER BY name, manufacturer, price DESC` sắp xếp các kết quả. Trong trường hợp này, nó sẽ nhóm các sản phẩm có cùng `name` và `manufacturer`, sau đó sắp xếp chúng theo `price` giảm dần.
 3.  `DISTINCT ON (name, manufacturer)` đảm bảo rằng chỉ có một hàng duy nhất cho mỗi cặp `(name, manufacturer)` được trả về. Do `ORDER BY price DESC`, hàng có giá cao nhất sẽ được chọn.
@@ -536,6 +539,7 @@ Các điều kiện `WHEN` được đánh giá theo thứ tự xuất hiện. N
 **Ví dụ Thực Tế: Phân loại Giá Sản Phẩm**
 
 Chúng ta hãy phân loại giá sản phẩm thành "Cao cấp", "Trung bình", hoặc "Phổ thông" dựa trên giá của chúng:
+
 *   Nếu giá lớn hơn 500 đô la, là "Cao cấp".
 *   Nếu giá lớn hơn 100 đô la (nhưng không lớn hơn 500), là "Trung bình".
 *   Nếu không thì là "Phổ thông".
@@ -572,6 +576,7 @@ FROM
 ```
 
 **Giải thích:**
+
 *   `Luxury Yacht` có giá 1000.00, lớn hơn 500, nên `price_category` là 'Cao cấp'.
 *   `Industrial Saw` có giá 450.00. Điều kiện `price > 500` là `FALSE`. Điều kiện `price > 100` là `TRUE`, nên `price_category` là 'Trung bình'.
 *   Các sản phẩm khác có giá nhỏ hơn hoặc bằng 100, nên không đáp ứng hai điều kiện `WHEN` đầu tiên, và rơi vào `ELSE` là 'Phổ thông'.
@@ -679,6 +684,7 @@ FROM
 ```
 
 **Giải thích:**
+
 *   `COUNT(expression)` chỉ đếm các giá trị không `NULL`. Bằng cách đặt `ELSE NULL`, chúng ta đảm bảo rằng chỉ những hàng đáp ứng điều kiện mới được đếm.
 *   Cách tiếp cận này cho phép tạo các báo cáo tổng hợp phức tạp chỉ với một truy vấn duy nhất.
 

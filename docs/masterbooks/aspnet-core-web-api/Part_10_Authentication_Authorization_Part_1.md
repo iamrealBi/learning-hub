@@ -23,6 +23,7 @@ Trước khi đi sâu vào kỹ thuật, điều quan trọng là phải có m�
 **Xác thực** là quá trình xác minh danh tính của một người dùng, một hệ thống hoặc một ứng dụng khách (client). Mục tiêu chính là trả lời câu hỏi: "Bạn có thực sự là người bạn tuyên bố không?".
 
 Thông thường, quá trình này liên quan đến việc người dùng cung cấp một số thông tin chứng minh danh tính, chẳng hạn như:
+
 *   **Tên người dùng và mật khẩu:** Phổ biến nhất.
 *   **Chứng chỉ số (Digital Certificates):** Dùng cho xác thực máy chủ hoặc ứng dụng.
 *   **Mã OTP (One-Time Password):** Thường kết hợp với các phương thức khác (xác thực đa yếu tố).
@@ -38,6 +39,7 @@ Nếu một API không có xác thực, bất kỳ ai biết URL của các đi�
 **Ủy quyền** là quá trình xác định xem một người dùng (đã được xác thực thành công) có được phép thực hiện một hành động cụ thể hoặc truy cập một tài nguyên cụ thể hay không. Mục tiêu chính là trả lời câu hỏi: "Bạn có quyền thực hiện hành động này không?".
 
 Ủy quyền thường dựa trên các yếu tố như:
+
 *   **Vai trò (Roles):** Ví dụ: "Quản trị viên", "Người đọc", "Người viết".
 *   **Chính sách (Policies):** Các quy tắc phức tạp hơn dựa trên nhiều yêu cầu (claims) hoặc điều kiện.
 *   **Yêu cầu (Claims):** Các mảnh thông tin về người dùng, ví dụ: "tuổi trên 18", "thuộc phòng ban Marketing".
@@ -52,6 +54,7 @@ Ngay cả khi người dùng đã được xác thực, không phải tất cả
 Xác thực và ủy quyền hoạt động song song để tạo nên một hệ thống bảo mật hoàn chỉnh. Xác thực là bước đầu tiên để biết "ai" đang truy cập, còn ủy quyền là bước thứ hai để biết "người đó được phép làm gì". Không có một trong hai, API của bạn sẽ không an toàn.
 
 Khi một yêu cầu đến API, quy trình kiểm tra diễn ra như sau:
+
 1.  **Xác thực:** API kiểm tra xem yêu cầu có đính kèm thông tin xác thực hợp lệ hay không (ví dụ: một JWT).
     *   Nếu không có thông tin xác thực hoặc thông tin không hợp lệ: API trả về mã trạng thái **`401 Unauthorized`**. Điều này có nghĩa là "Tôi không biết bạn là ai, hãy cung cấp thông tin xác thực hợp lệ."
 2.  **Ủy quyền:** Nếu người dùng đã được xác thực, API sẽ kiểm tra xem người dùng đó có quyền thực hiện hành động được yêu cầu trên tài nguyên đó hay không.
@@ -111,6 +114,7 @@ Hãy phân tích từng phần:
     *   Được tạo bằng cách lấy Base64Url mã hóa của Header và Payload, kết hợp với một khóa bí mật (secret key) và thuật toán mã hóa đã chỉ định trong Header.
     *   Ví dụ, với thuật toán HS256, chữ ký được tạo như sau:
         `HMACSHA256( Base64UrlEncode(header) + "." + Base64UrlEncode(payload), secret_key)`
+
     *   Chữ ký này là phần quan trọng nhất, đảm bảo tính toàn vẹn của token. Nếu bất kỳ phần nào của Header hoặc Payload bị thay đổi sau khi token được tạo, chữ ký sẽ không hợp lệ khi server xác minh, và token sẽ bị từ chối. Điều này giúp ngăn chặn việc giả mạo token.
 
 ### 2.2. Luồng Xác Thực JWT Toàn Diện
@@ -135,11 +139,13 @@ Luồng xác thực JWT cung cấp một cơ chế hiệu quả và phi trạng 
     *   Nếu xác minh thành công và được ủy quyền, API sẽ trả về dữ liệu hoặc thực hiện hành động. Nếu token không hợp lệ, thiếu, hoặc người dùng không được ủy quyền, API sẽ từ chối yêu cầu (thường là lỗi `401 Unauthorized` hoặc `403 Forbidden`).
 
 **Ưu điểm của JWT:**
+
 *   **Phi trạng thái (Stateless):** Server không cần lưu trữ thông tin phiên của người dùng. Mỗi yêu cầu chứa tất cả thông tin cần thiết để xác thực và ủy quyền, giúp API dễ dàng mở rộng theo chiều ngang (horizontal scaling).
 *   **Hiệu quả:** Kích thước nhỏ gọn, dễ dàng truyền tải qua HTTP header.
 *   **Tính di động:** Có thể được sử dụng trên nhiều nền tảng và dịch vụ.
 
 **Nhược điểm của JWT:**
+
 *   **Không có khả năng thu hồi ngay lập tức:** Một khi JWT đã được phát hành, nó vẫn hợp lệ cho đến khi hết hạn. Nếu bạn muốn thu hồi một token ngay lập tức (ví dụ: khi người dùng thay đổi mật khẩu hoặc bị cấm), bạn cần triển khai một cơ chế danh sách đen (blacklist) hoặc sử dụng refresh token.
 *   **Kích thước:** Mặc dù nhỏ gọn, nhưng nếu chứa quá nhiều claims, kích thước của JWT có thể tăng lên và ảnh hưởng đến hiệu suất.
 *   **Bảo mật Payload:** Như đã đề cập, thông tin trong Payload không được mã hóa, chỉ được ký.
@@ -153,6 +159,7 @@ Luồng xác thực JWT cung cấp một cơ chế hiệu quả và phi trạng 
 ### 3.1. Giới Thiệu ASP.NET Core Identity
 
 ASP.NET Core Identity cung cấp một API toàn diện để quản lý thông tin người dùng, bao gồm:
+
 *   **Lưu trữ người dùng và vai trò:** Sử dụng Entity Framework Core để lưu trữ dữ liệu vào cơ sở dữ liệu.
 *   **Quản lý mật khẩu:** Hashing mật khẩu an toàn, đổi mật khẩu.
 *   **Xác nhận tài khoản:** Email, số điện thoại.

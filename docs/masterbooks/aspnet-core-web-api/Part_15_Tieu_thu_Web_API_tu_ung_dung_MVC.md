@@ -7,6 +7,7 @@ Trong kỷ nguyên phát triển phần mềm hiện đại, việc xây dựng 
 Chương này sẽ hướng dẫn bạn cách xây dựng một ứng dụng web ASP.NET Core MVC có khả năng tiêu thụ một RESTful Web API. Chúng ta sẽ sử dụng API đã được xây dựng trong các phần trước của khóa học (sử dụng ASP.NET Core, C# và Entity Framework Core) làm nguồn dữ liệu. Mục tiêu là giúp bạn hiểu rõ từ cơ bản đến nâng cao về cách một ứng dụng frontend (MVC) tương tác với một backend API để thực hiện các thao tác CRUD (Create, Read, Update, Delete) trên các tài nguyên.
 
 Chúng ta sẽ đi sâu vào các khía cạnh kỹ thuật quan trọng, bao gồm:
+
 *   **Nền tảng Web API và RESTful**: Hiểu các nguyên tắc cơ bản của REST và cách HTTP Verbs được sử dụng.
 *   **Thiết lập môi trường**: Tạo và cấu hình ứng dụng ASP.NET Core MVC làm client.
 *   **Cơ chế giao tiếp hiệu quả**: Sử dụng `HttpClient` và `IHttpClientFactory` một cách đúng đắn, cùng với việc xây dựng một lớp dịch vụ (Service Layer) để trừu tượng hóa các cuộc gọi API.
@@ -119,6 +120,7 @@ Việc khởi tạo một `HttpClient` mới cho mỗi yêu cầu HTTP (`new Htt
 `IHttpClientFactory` được giới thiệu trong .NET Core 2.1 để giải quyết triệt để các vấn đề trên. Nó hoạt động như một factory để tạo và quản lý các thể hiện `HttpClient`, đồng thời quản lý vòng đời của các `HttpMessageHandler` cơ bản (thành phần chịu trách nhiệm cho việc gửi yêu cầu thực tế) bằng cách pooling chúng.
 
 **Lợi ích của `IHttpClientFactory`**:
+
 *   **Quản lý vòng đời hiệu quả**: Tái sử dụng `HttpMessageHandler` để giảm socket exhaustion và cải thiện hiệu suất.
 *   **DNS Refresh**: Các handler được quản lý bởi factory có thời gian sống (lifetime) nhất định, đảm bảo DNS được giải quyết lại định kỳ, tránh các vấn đề DNS cũ.
 *   **Cấu hình tập trung**: Cho phép cấu hình các `HttpClient` khác nhau cho các mục đích khác nhau (ví dụ: đặt `BaseAddress`, `Timeout`, hoặc thêm các `DelegatingHandler` cho logging, caching, retry policies).

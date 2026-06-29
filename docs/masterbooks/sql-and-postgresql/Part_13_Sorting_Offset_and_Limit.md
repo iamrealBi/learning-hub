@@ -11,6 +11,7 @@ Khi bạn thực hiện một truy vấn `SELECT` mà không chỉ định thứ
 ### 1.1. Khái niệm và Mục đích
 
 **Sắp xếp** là quá trình tổ chức lại tập kết quả của một truy vấn theo một trình tự cụ thể (tăng dần hoặc giảm dần) dựa trên giá trị của một hoặc nhiều cột. Điều này cực kỳ quan trọng vì nó giúp:
+
 *   **Tăng khả năng đọc:** Dữ liệu có cấu trúc giúp người dùng dễ dàng hiểu và phân tích.
 *   **Tìm kiếm hiệu quả:** Dễ dàng xác định các giá trị lớn nhất, nhỏ nhất, hoặc các mục cụ thể trong danh sách đã sắp xếp.
 *   **Chuẩn bị cho các thao tác khác:** `ORDER BY` thường là bước tiền xử lý cần thiết trước khi áp dụng `LIMIT` hoặc `OFFSET` để lấy các bản ghi cụ thể.
@@ -149,6 +150,7 @@ ORDER BY price ASC, weight ASC;
 ```
 
 Trong truy vấn này:
+
 1.  Tất cả sản phẩm sẽ được sắp xếp theo `price` tăng dần.
 2.  Nếu hai hoặc nhiều sản phẩm có cùng `price`, chúng sẽ được sắp xếp tiếp theo `weight` tăng dần.
 
@@ -163,6 +165,7 @@ ORDER BY price ASC, weight DESC;
 ```
 
 Trong ví dụ này:
+
 1.  Sản phẩm được sắp xếp theo `price` tăng dần.
 2.  Đối với các sản phẩm có cùng `price`, chúng sẽ được sắp xếp theo `weight` giảm dần (tức là sản phẩm có trọng lượng nặng hơn sẽ xuất hiện trước).
 
@@ -187,6 +190,7 @@ ORDER BY (price * weight) DESC;
 ### 1.5. Hiệu năng của ORDER BY và Vai trò của Index
 
 `ORDER BY` có thể là một trong những mệnh đề tốn kém nhất về hiệu năng, đặc biệt với các tập dữ liệu lớn.
+
 *   **Khi không có Index:** PostgreSQL phải đọc toàn bộ bảng (hoặc tập kết quả sau `WHERE`), sau đó thực hiện một thuật toán sắp xếp (ví dụ: quicksort) trong bộ nhớ hoặc trên đĩa. Điều này có thể rất chậm nếu dữ liệu không nằm vừa trong bộ nhớ.
 *   **Khi có Index:** Nếu có một chỉ mục (index) trên cột hoặc các cột được sử dụng trong `ORDER BY` (và thứ tự của index khớp với yêu cầu sắp xếp), PostgreSQL có thể sử dụng chỉ mục đó để đọc dữ liệu đã được sắp xếp sẵn, giúp tăng tốc đáng kể.
 
@@ -198,6 +202,7 @@ CREATE INDEX idx_products_price ON products (price);
 ```
 
 **Lưu ý:**
+
 *   Chỉ mục giúp tăng tốc độ đọc, nhưng làm chậm tốc độ ghi (INSERT, UPDATE, DELETE) vì chỉ mục cũng cần được cập nhật.
 *   Việc chọn cột để tạo chỉ mục cần dựa trên phân tích các truy vấn thường xuyên.
 *   Với `ORDER BY` đa cột, một chỉ mục đa cột (ví dụ: `CREATE INDEX idx_products_price_weight ON products (price ASC, weight DESC);`) có thể mang lại lợi ích lớn nhất nếu thứ tự cột trong index khớp với thứ tự trong `ORDER BY`.
@@ -312,6 +317,7 @@ OFFSET 3;          -- Bỏ qua 3 bản ghi đầu tiên
 ```
 
 Truy vấn này sẽ:
+
 1.  Sắp xếp tất cả sản phẩm theo giá tăng dần.
 2.  Bỏ qua 3 sản phẩm đầu tiên (rẻ nhất).
 3.  Lấy 2 sản phẩm tiếp theo từ danh sách đã lọc.
@@ -522,6 +528,7 @@ Cho bảng `phones` với các cột `phone_id`, `phone_name`, `price`. Hãy vi�
 ### Phân Tích và Giải Pháp
 
 Để giải quyết bài toán này, chúng ta cần thực hiện các bước sau:
+
 1.  **Chọn cột `phone_name`** từ bảng `phones`.
 2.  **Sắp xếp** các điện thoại theo `price` giảm dần (`DESC`) để đưa những chiếc đắt nhất lên đầu.
 3.  **Bỏ qua** chiếc điện thoại đắt nhất (chiếc đầu tiên) bằng `OFFSET 1`.

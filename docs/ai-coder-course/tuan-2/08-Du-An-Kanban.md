@@ -23,6 +23,7 @@ Tạo ứng dụng Kanban board với tính năng AI chat — cho phép quản l
 ## 4. Workflow Agentic
 ```
 Dùng Claude Code CLI:
+
 1. /plan → Thiết kế kiến trúc
 2. Implement backend API
 3. Implement frontend UI  

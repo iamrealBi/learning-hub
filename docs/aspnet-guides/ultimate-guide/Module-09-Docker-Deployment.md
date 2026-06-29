@@ -124,16 +124,19 @@ services:
       POSTGRES_PASSWORD_FILE: /run/secrets/db_password
       POSTGRES_DB: banking
     volumes:
+
       - pg-data:/var/lib/postgresql/data  # Ổ cứng rời — dữ liệu không mất
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]   # Kiểm tra kho đã mở chưa
     secrets:
+
       - db_password
 
   # Phòng 2 & 3: BẾP (API — 2 bản sao)
   api:
     build: ./src/MyApp.Api
     environment:
+
       - ASPNETCORE_URLS=http://+:8080
     depends_on:
       postgres:
@@ -141,14 +144,17 @@ services:
     deploy:
       replicas: 2                   # Mở 2 bếp song song!
     secrets:
+
       - db_password
 
   # Phòng 4: LỄ TÂN (Nginx)
   nginx:
     image: nginx:alpine
     ports:
+
       - "80:80"  # Cổng duy nhất ra ngoài
     volumes:
+
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
 
 volumes:
@@ -218,10 +224,12 @@ http {
 ```yaml
 # ❌ CHẾT — mật khẩu viết công khai
 environment:
+
   - DB_PASSWORD=MySecretPassword123
 
 # ✅ AN TOÀN — bỏ trong két sắt
 secrets:
+
   - db_password
 ```
 

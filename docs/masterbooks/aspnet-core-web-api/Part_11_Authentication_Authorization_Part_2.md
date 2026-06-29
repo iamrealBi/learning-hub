@@ -5,6 +5,7 @@
 Chào mừng bạn đến với Phần 11 của khóa học, nơi chúng ta sẽ tiếp tục hành trình xây dựng các tính năng bảo mật mạnh mẽ cho RESTful Web API của mình bằng ASP.NET Core. Trong chương trước, chúng ta đã đặt nền móng cho hệ thống nhận dạng (Identity System) của ứng dụng. Chương này sẽ tập trung vào việc triển khai các cơ chế xác thực và ủy quyền thiết yếu, đảm bảo rằng chỉ những người dùng hợp lệ mới có thể truy cập các tài nguyên API được bảo vệ, và họ chỉ có thể thực hiện những hành động được phép.
 
 Mục tiêu chính của chương này là trang bị cho bạn kiến thức và kỹ năng để:
+
 *   **Quản lý Danh tính Người dùng:** Tạo các endpoint API cho phép người dùng đăng ký tài khoản mới và đăng nhập an toàn.
 *   **Xác thực Phi trạng thái với JWT:** Phát hành và sử dụng JSON Web Token (JWT) để xác thực người dùng sau khi đăng nhập thành công, đồng thời hiểu rõ cơ chế hoạt động "dưới mui xe" của JWT.
 *   **Tách biệt Trách nhiệm:** Áp dụng Repository Pattern và Dependency Injection để tổ chức mã nguồn một cách hiệu quả, đặc biệt trong việc tạo và quản lý JWT.
@@ -671,6 +672,7 @@ namespace NZWalks.API.Controllers
     *   Dán JWT bạn nhận được sau khi đăng nhập vào trường `Token`.
 
     **Các trường hợp kiểm thử:**
+
     *   **Không có token hoặc token không hợp lệ:** Gửi yêu cầu đến `GET /api/Area` mà không có header `Authorization` hoặc với một token bị sửa đổi.
         *   **Phản hồi dự kiến:** `401 Unauthorized`.
     *   **Token hợp lệ nhưng người dùng không có vai trò cần thiết:** Gửi yêu cầu đến `POST /api/Area` (yêu cầu vai trò "Writer") bằng JWT của người dùng "Reader".
@@ -808,10 +810,12 @@ app.Run();
 ### 6.3. Sử dụng Ủy quyền trong Swagger UI
 
 Sau khi cấu hình, khi bạn chạy ứng dụng và truy cập Swagger UI (thường là `https://localhost:port/swagger`), bạn sẽ thấy:
+
 1.  Một nút "Authorize" (hoặc biểu tượng ổ khóa) ở góc trên bên phải của giao diện Swagger.
 2.  Biểu tượng ổ khóa nhỏ bên cạnh mỗi endpoint được bảo vệ bởi `[Authorize]`.
 
 **Các bước để kiểm thử với Swagger UI:**
+
 1.  **Đăng nhập và lấy JWT:**
     *   Sử dụng endpoint `/api/Auth/Login` trong Swagger UI để đăng nhập với một người dùng (ví dụ: `writer@example.com`, mật khẩu `Writer@123`).
     *   Sao chép chuỗi JWT từ phản hồi.

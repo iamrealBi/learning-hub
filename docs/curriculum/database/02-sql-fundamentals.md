@@ -20,6 +20,7 @@
 
 ```
 SQL = Structured Query Language
+
 - Ngôn ngữ TIÊU CHUẨN để giao tiếp với RDBMS
 - Ra đời 1970s (IBM), chuẩn ISO/ANSI
 - Declarative: nói CẦN GÌ, không nói LÀM THẾ NÀO

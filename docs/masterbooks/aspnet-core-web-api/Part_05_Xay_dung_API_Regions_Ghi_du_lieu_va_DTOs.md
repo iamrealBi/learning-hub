@@ -37,6 +37,7 @@ DTO, hay Đối tượng Truyền Dữ liệu, là các đối tượng đơn gi
 > Hãy hình dung DTO như một "hợp đồng" (contract) công khai giữa API của bạn và ứng dụng khách. Nó định nghĩa chính xác những dữ liệu nào được gửi đi hoặc nhận vào qua mạng, không nhất thiết phải trùng khớp hoàn toàn với cấu trúc dữ liệu nội bộ (Domain Model) của bạn. DTO là cách bạn kiểm soát "bộ mặt" của API.
 
 **Mục đích chính của DTOs:**
+
 *   **Truyền dữ liệu qua mạng:** Gửi dữ liệu từ API tới ứng dụng khách (client) hoặc ngược lại một cách tối ưu và an toàn.
 *   **Truyền dữ liệu giữa các lớp ứng dụng:** Ví dụ, từ lớp dịch vụ đến lớp trình bày hoặc ngược lại, giữ cho các lớp này không phụ thuộc trực tiếp vào mô hình miền.
 
@@ -75,6 +76,7 @@ Mặc dù DTOs có thể trông giống hệt mô hình miền, nhưng chúng ph
 Khi làm việc với Antigravity IDE, việc thiết kế DTOs trở nên trực quan hơn. Bạn có thể bắt đầu bằng cách mô tả yêu cầu nghiệp vụ hoặc giao diện API mong muốn bằng ngôn ngữ tự nhiên.
 
 **Ví dụ:**
+
 *   **Prompt cho Antigravity:** "Tôi cần một DTO để hiển thị thông tin vùng. Nó nên có Id, Code, Name và RegionImageUrl."
     *   *Antigravity sẽ:* Tạo `RegionDto.cs` với các thuộc tính tương ứng.
 *   **Prompt cho Antigravity:** "Thiết kế DTO để tạo vùng mới. Client chỉ được phép cung cấp Code, Name và RegionImageUrl. Id sẽ được tạo tự động bởi server."
@@ -327,6 +329,7 @@ namespace MyApi.DTOs
 Khi bạn cần tạo một API `POST`, Antigravity có thể là một trợ thủ đắc lực.
 
 **Ví dụ:**
+
 *   **Prompt:** "Antigravity, tôi muốn tạo một endpoint `POST /api/regions` để thêm một vùng mới. Dữ liệu đầu vào sẽ là `AddRegionRequestDto` (Code, Name, RegionImageUrl). Endpoint này phải tạo một `Guid` mới cho Id, lưu vào cơ sở dữ liệu và trả về `201 Created` cùng với DTO của vùng đã tạo."
 *   *Antigravity sẽ:*
     1.  Đề xuất hoặc tạo `AddRegionRequestDto` (nếu chưa có), bao gồm các Data Annotations để validation.
@@ -440,6 +443,7 @@ namespace MyApi.DTOs
 Để tạo hoặc chỉnh sửa một API `PUT`, bạn có thể tận dụng Antigravity để đẩy nhanh quá trình.
 
 **Ví dụ:**
+
 *   **Prompt:** "Antigravity, tôi cần một endpoint `PUT /api/regions/{id}` để cập nhật thông tin vùng. ID sẽ đến từ URL, và dữ liệu cập nhật (Code, Name, RegionImageUrl) sẽ đến từ `UpdateRegionRequestDto`. Endpoint này phải tìm vùng theo ID, cập nhật các thuộc tính và trả về `200 OK` với DTO của vùng đã cập nhật. Đừng quên xử lý trường hợp vùng không tồn tại."
 *   *Antigravity sẽ:*
     1.  Đề xuất hoặc tạo `UpdateRegionRequestDto` (nếu chưa có), bao gồm validation.
@@ -519,6 +523,7 @@ Antigravity giúp bạn đảm bảo rằng tất cả các trường hợp Edge
 Antigravity có thể giúp bạn tạo các endpoint `DELETE` một cách nhanh chóng và chính xác.
 
 **Ví dụ:**
+
 *   **Prompt:** "Antigravity, tạo cho tôi một endpoint `DELETE /api/regions/{id}` để xóa một vùng theo ID. Nếu vùng không tồn tại, trả về `404 Not Found`. Nếu xóa thành công, trả về `200 OK` với DTO của vùng đã xóa."
 *   *Antigravity sẽ:*
     1.  Tạo phương thức `DeleteRegion` trong `RegionsController` với `[HttpDelete]` và `[FromRoute]`.
@@ -551,12 +556,14 @@ Mặc dù việc sử dụng `DbContext` trực tiếp trong Controller là mộ
 Repository Pattern tạo ra một lớp trừu tượng (abstraction layer) giữa tầng nghiệp vụ (Controller/Service) và tầng truy cập dữ liệu (EF Core `DbContext`). Thay vì controller gọi trực tiếp `_dbContext.Regions.AddAsync()`, nó sẽ gọi `_regionRepository.AddAsync()`.
 
 **Lợi ích:**
+
 *   **Khả năng kiểm thử (Testability):** Controller trở nên độc lập với `DbContext`. Bạn có thể dễ dàng tạo các mock `IRegionRepository` cho các bài kiểm thử đơn vị mà không cần database thực.
 *   **Tách biệt Mối quan tâm (SoC):** Controller chỉ quan tâm đến logic API, không quan tâm đến chi tiết triển khai truy cập dữ liệu. Logic truy cập dữ liệu được đóng gói trong Repository.
 *   **Khả năng tái sử dụng (Reusability):** Logic truy cập dữ liệu có thể được tái sử dụng qua nhiều Controller hoặc Service.
 *   **Linh hoạt trong thay đổi công nghệ:** Nếu bạn quyết định thay đổi công nghệ cơ sở dữ liệu hoặc ORM (ví dụ: từ EF Core sang Dapper), bạn chỉ cần thay đổi việc triển khai Repository mà không ảnh hưởng đến Controller.
 
 **Cách tích hợp (Tổng quan):**
+
 1.  **Định nghĩa Interface Repository:**
     ```csharp
     // Repositories/IRegionRepository.cs
@@ -622,6 +629,7 @@ Repository Pattern tạo ra một lớp trừu tượng (abstraction layer) gi�
 
 **Tư duy Vibe Coding tổng thể với Antigravity IDE:**
 Antigravity không chỉ là một công cụ sinh mã. Nó là một đối tác AI giúp bạn *thiết kế* và *lý giải* các quyết định kiến trúc.
+
 *   **Thiết kế kiến trúc:** Bạn có thể hỏi Antigravity: "Tôi nên áp dụng Repository Pattern cho tài nguyên Vùng không? Giải thích ưu và nhược điểm."
 *   **Sinh mã Repository:** Sau khi quyết định, bạn có thể yêu cầu: "Antigravity, tạo cho tôi `IRegionRepository` và triển khai `RegionRepository` với các phương thức CRUD cơ bản sử dụng `ApplicationDbContext`."
 *   **Refactor Controller:** "Bây giờ, hãy refactor `RegionsController` để sử dụng `IRegionRepository` đã tạo."

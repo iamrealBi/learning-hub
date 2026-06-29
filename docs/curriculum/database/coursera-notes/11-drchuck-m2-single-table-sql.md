@@ -201,6 +201,7 @@ SELECT COUNT(*) FROM users WHERE email = 'csev@umich.edu';
 VARCHAR(100) KHÔNG có nghĩa 100 bytes!
 
 Character Set:
+
 - ASCII/Latin: 1 byte per ký tự (127 ký tự)
 - UTF-8: 1-4 bytes per ký tự
   - Tiếng Việt: 2-3 bytes mỗi ký tự

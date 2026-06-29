@@ -5,6 +5,7 @@ Chào mừng bạn đến với Phần 4 của khóa học, nơi chúng ta sẽ 
 Trong phần này, chúng ta sẽ không chỉ tìm hiểu lý thuyết mà còn áp dụng trực tiếp vào một dự án minh họa: một ứng dụng ghi chú web đầy đủ tính năng. Mặc dù dự án demo này được xây dựng bằng JavaScript/TypeScript và framework Next.js, trọng tâm chính của chúng ta là cách thức sử dụng Claude Code để phát triển ứng dụng, cũng như cách tư duy để chuẩn bị cho việc sử dụng các hệ thống AI phức tạp hơn.
 
 Mục tiêu chính của phần này là trang bị cho bạn kiến thức và kỹ năng để:
+
 *   Hiểu rõ bản chất và tầm quan trọng của kỹ thuật prompt và kỹ thuật ngữ cảnh trong tương tác với LLM.
 *   Xây dựng các prompt hiệu quả, rõ ràng và chính xác cho Claude Code.
 *   Cung cấp ngữ cảnh phù hợp và đầy đủ để Claude Code có thể đưa ra kết quả mong muốn.
@@ -36,6 +37,7 @@ Kỹ thuật Prompt là nghệ thuật và khoa học về cách thiết kế c�
 > Nguyên tắc này nhấn mạnh rằng chất lượng của kết quả AI tỷ lệ thuận với chất lượng của thông tin và hướng dẫn bạn cung cấp.
 
 Một prompt hiệu quả thường bao gồm các thành phần sau:
+
 *   **Hướng dẫn cụ thể (Specific Instructions):** Mô tả rõ ràng nhiệm vụ hoặc vấn đề bạn muốn AI giải quyết. Tránh sự mơ hồ và sử dụng ngôn ngữ chính xác. Ví dụ: thay vì "Viết code", hãy nói "Viết một hàm JavaScript nhận vào hai số nguyên và trả về tổng của chúng."
 *   **Vai trò (Role-playing - tùy chọn):** Gán một vai trò cho AI để định hướng phong cách và kiến thức mà nó nên sử dụng. Ví dụ: "Bạn là một kiến trúc sư phần mềm cấp cao...", "Bạn là một chuyên gia bảo mật...".
 *   **Định dạng đầu ra mong muốn (Desired Output Format):** Chỉ rõ định dạng bạn muốn AI trả về (ví dụ: JSON, Markdown, Python code, danh sách gạch đầu dòng).
@@ -47,6 +49,7 @@ Một prompt hiệu quả thường bao gồm các thành phần sau:
 Kỹ thuật Ngữ cảnh là quá trình cung cấp thông tin nền tảng, dữ liệu bổ sung, hoặc các tài liệu liên quan cho LLM để nó có thể tạo ra phản hồi chính xác, phù hợp và hữu ích hơn. Ngữ cảnh giúp AI hiểu rõ hơn về tình huống, mục đích, và các ràng buộc của nhiệm vụ, vượt ra ngoài phạm vi của prompt trực tiếp.
 
 Việc cung cấp ngữ cảnh phù hợp là cực kỳ quan trọng vì:
+
 *   **Giảm thiểu sự mơ hồ:** Ngữ cảnh giúp AI loại bỏ các diễn giải sai lệch do thiếu thông tin. Ví dụ, nếu bạn hỏi "tạo một hàm `login`", AI không biết bạn muốn `login` cho hệ thống nào. Cung cấp ngữ cảnh về "hệ thống xác thực `BetterAuth`" sẽ làm rõ yêu cầu.
 *   **Tăng cường độ chính xác và liên quan:** Với thông tin đầy đủ, AI có thể đưa ra câu trả lời hoặc giải pháp chính xác hơn và phù hợp với bối cảnh cụ thể của bạn.
 *   **Tránh thông tin không cần thiết ("Nhiễu"):** Cung cấp quá nhiều thông tin không liên quan có thể làm giảm hiệu suất của mô hình, khiến nó lạc đề, tạo ra kết quả kém chất lượng, hoặc thậm chí vượt quá giới hạn token của mô hình.
@@ -63,6 +66,7 @@ Hãy cùng áp dụng các nguyên tắc này vào một ví dụ thực tế v�
 ### 2.1. Dự Án Minh Họa: Ứng Dụng Ghi Chú
 
 Ứng dụng ghi chú của chúng ta sẽ có các tính năng chính sau:
+
 *   **Tạo ghi chú:** Cho phép người dùng tạo ghi chú mới bằng trình soạn thảo văn bản phong phú (rich text editor) với các tùy chọn định dạng văn bản cơ bản.
 *   **Xem ghi chú:** Hiển thị danh sách các ghi chú đã tạo và chi tiết từng ghi chú.
 *   **Quản lý ghi chú:** Chỉnh sửa và xóa ghi chú hiện có.
@@ -78,6 +82,7 @@ Khi bắt đầu một dự án mới hoặc làm việc trên một ứng dụn
 > Cá nhân tôi thường tạo các tài liệu đặc tả này với sự trợ giúp của các LLM khác, ví dụ như ChatGPT hoặc chính Claude (qua API hoặc giao diện web). Đây là một công việc chỉ cần làm một lần ở giai đoạn khởi đầu dự án để đảm bảo có một tài liệu nền tảng làm ngữ cảnh cho AI.
 
 **Ví dụ về nội dung tài liệu đặc tả ban đầu:**
+
 *   **Mô tả ứng dụng:** Ứng dụng ghi chú web đơn giản, cho phép người dùng tạo, quản lý và chia sẻ ghi chú.
 *   **Các tính năng cốt lõi:**
     *   CRUD (Create, Read, Update, Delete) ghi chú.
@@ -112,6 +117,7 @@ Vui lòng định dạng lại nội dung của tệp này thành Markdown chu�
 ```
 
 Trong prompt này:
+
 *   `Bạn là một biên tập viên tài liệu kỹ thuật.` là việc gán vai trò, giúp AI định hướng phong cách và mục tiêu.
 *   `@Spec.md` là phần ngữ cảnh, chỉ cho Claude Code biết nơi tìm thông tin về ứng dụng.
 *   `Vui lòng định dạng lại nội dung của tệp này thành Markdown chuẩn, đảm bảo cấu trúc rõ ràng và dễ đọc.` là hướng dẫn cụ thể về nhiệm vụ.
@@ -125,6 +131,7 @@ Trong quá trình xem xét tệp `Spec.md` hoặc khi bắt đầu triển khai,
 Để khắc phục điều này, chúng ta cần cập nhật tệp `Spec.md` với thông tin chính xác từ tài liệu của BetterAuth. Đây là một ví dụ tuyệt vời về việc cung cấp **ngữ cảnh bổ sung** để tinh chỉnh yêu cầu.
 
 **Các bước thực hiện:**
+
 1.  **Tìm tài liệu liên quan:** Truy cập tài liệu của thư viện BetterAuth và tìm phần mô tả cấu trúc cơ sở dữ liệu mà nó yêu cầu.
 2.  **Sao chép thông tin:** Sao chép nội dung đó (tốt nhất là ở định dạng Markdown hoặc văn bản thuần túy) để sử dụng làm ngữ cảnh.
 3.  **Bổ sung vào Prompt:** Thêm hướng dẫn cập nhật tệp và cung cấp tài liệu BetterAuth làm ngữ cảnh.
@@ -164,11 +171,13 @@ Sử dụng tài liệu BetterAuth dưới đây để đảm bảo rằng phầ
 ```
 
 Trong prompt này:
+
 *   `@Spec.md`: Ngữ cảnh tệp chính, Claude Code sẽ đọc và chỉnh sửa tệp này.
 *   Các câu lệnh đầu tiên: Hướng dẫn tổng thể và mục tiêu cập nhật.
 *   `<BetterAuth_Documentation> ... </BetterAuth_Documentation>`: Ngữ cảnh bổ sung, cung cấp chi tiết về cấu trúc cơ sở dữ liệu BetterAuth mà Claude Code cần tuân theo. Tên thẻ XML có thể tùy chỉnh để tăng tính rõ ràng.
 
 **Quy trình làm việc với Claude Code (CLI):**
+
 1.  **Chuẩn bị Prompt:** Viết prompt của bạn với các hướng dẫn và ngữ cảnh cần thiết.
 2.  **Gửi Prompt:** Gửi prompt đến Claude Code thông qua giao diện dòng lệnh. Bạn có thể nhấn Enter để gửi, hoặc sử dụng các phím tắt (ví dụ: `Shift + Tab` trong một số thiết lập) để chuyển sang chế độ "accept edits on" nếu bạn muốn Claude Code tự động áp dụng các thay đổi mà nó đề xuất trực tiếp vào các tệp.
 3.  **Claude Code xử lý:** Claude Code sẽ đọc tệp `Spec.md`, phân tích ngữ cảnh từ tài liệu BetterAuth, và thực hiện các thay đổi được yêu cầu.
@@ -185,6 +194,7 @@ Mặc dù Claude Code cung cấp một giao diện mạnh mẽ để áp dụng 
 Ban đầu, lập trình AI chủ yếu xoay quanh việc viết các prompt cực kỳ chi tiết, từng bước một, hướng dẫn mô hình ngôn ngữ thực hiện các nhiệm vụ nhỏ. Claude Code là một ví dụ điển hình của cách tiếp cận này, nơi bạn cung cấp prompt, tham chiếu tệp (`@`), và mong đợi một đầu ra trực tiếp.
 
 Tuy nhiên, với sự phát triển của các mô hình LLM và kiến trúc agent, chúng ta đang chuyển sang một kỷ nguyên mà AI không chỉ đơn thuần trả lời prompt mà còn có khả năng:
+
 *   **Lập kế hoạch (Planning):** Chia nhỏ một mục tiêu lớn thành các bước nhỏ hơn.
 *   **Thực thi (Execution):** Tự động chạy code, gọi các công cụ (tools) như trình duyệt, terminal, API.
 *   **Phản hồi (Reflection):** Đánh giá kết quả của các bước thực thi và tự điều chỉnh kế hoạch nếu cần.
@@ -195,6 +205,7 @@ Tuy nhiên, với sự phát triển của các mô hình LLM và kiến trúc a
 ### 3.2. Giới Thiệu Antigravity IDE: Một Hệ Thống Agentic AI Tiên Phong
 
 Antigravity IDE là một ví dụ minh họa cho hệ thống AI agentic siêu việt mà bạn đang trực tiếp sử dụng trong khóa học này. Không giống như việc bạn phải tự tay gõ prompt và tham chiếu tệp cho Claude Code, Antigravity hoạt động ở một cấp độ trừu tượng cao hơn. Nó là một hệ thống agent có khả năng:
+
 *   **Tự động chạy script ngầm:** Khi bạn đưa ra một yêu cầu, Antigravity có thể tự động viết và chạy các script (ví dụ: Python, JavaScript) để thực hiện các tác vụ như phân tích code, chạy test, hoặc thực hiện các thao tác file system.
 *   **Gọi sub-agent trình duyệt:** Nó có thể khởi chạy một trình duyệt ảo, điều hướng web, đọc tài liệu từ các trang web (ví dụ: tài liệu của BetterAuth), hoặc tương tác với các giao diện web để thu thập thông tin hoặc thực hiện hành động.
 *   **Đọc và ghi file tự động:** Antigravity không chỉ đọc tệp khi bạn `@` tham chiếu mà còn chủ động quét, phân tích cấu trúc dự án, và ghi các thay đổi vào nhiều tệp khác nhau (code, cấu hình, tài liệu) theo yêu cầu.
@@ -205,6 +216,7 @@ Mục tiêu của Antigravity là giảm gánh nặng "prompt engineering" chi t
 ### 3.3. Vibe Coding: Tư Duy Lập Trình Với AI Agentic
 
 "Vibe Coding" là một tư duy lập trình mới, được phát triển để tối ưu hóa tương tác với các hệ thống AI agentic như Antigravity IDE. Nó khác biệt đáng kể so với kỹ thuật prompt truyền thống:
+
 *   **Từ "Hướng dẫn cụ thể" sang "Ý định cấp cao":** Thay vì cung cấp từng bước chi tiết, Vibe Coding tập trung vào việc truyền đạt mục tiêu cuối cùng, "cảm giác" hoặc "linh hồn" của tính năng cần xây dựng. Bạn cung cấp một "vibe" (ý niệm tổng thể) về những gì bạn muốn, và hệ thống agent sẽ tự mình suy luận các bước thực thi chi tiết.
 *   **Từ "Chỉ định ngữ cảnh" sang "Tin tưởng AI thu thập ngữ cảnh":** Thay vì phải tự tay `@` tham chiếu từng tệp, bạn tin tưởng rằng hệ thống agent sẽ tự động tìm kiếm, đọc, và tổng hợp các tệp liên quan, tài liệu, và thông tin web để tạo ngữ cảnh phù hợp cho từng tác vụ con trong kế hoạch của nó.
 *   **Từ "Kiểm soát từng bước" sang "Giám sát và tinh chỉnh":** Vai trò của bạn chuyển từ người điều khiển từng lệnh sang người giám sát quá trình, cung cấp phản hồi tinh chỉnh khi cần thiết, hoặc điều chỉnh "vibe" ban đầu nếu kết quả không như mong đợi.
@@ -247,6 +259,7 @@ Mặc dù Vibe Coding giảm bớt sự cần thiết của các prompt chi ti�
 ### 3.5. Ứng Dụng Tư Duy Vibe Coding vào Antigravity IDE
 
 Để tận dụng tối đa Antigravity IDE, bạn nên:
+
 1.  **Bắt đầu với một "Vibe" rõ ràng:** Đưa ra một mục tiêu cấp cao, mô tả tính năng bạn muốn, và những yêu cầu quan trọng nhất.
 2.  **Cung cấp điểm khởi đầu:** Đảm bảo `Spec.md` hoặc các tệp cấu hình ban đầu có sẵn. Antigravity sẽ tự động đọc chúng.
 3.  **Tin tưởng vào khả năng tự động hóa:** Hãy để Antigravity tự lập kế hoạch, tìm kiếm thông tin, viết code, và chạy các công cụ.

@@ -38,6 +38,7 @@ codex --goal "Implement và test tính năng export CSV cho books"
 ### Goal Mode — "Đặt đích và quên"
 ```bash
 codex --goal "Refactor BookWormHub:
+
 1. Tách HomeService ra khỏi BookService
 2. Tạo interface IHomeService
 3. Đăng ký DI trong Program.cs
@@ -52,6 +53,7 @@ Codex sẽ **tự chạy liên tục** cho đến khi hoàn thành tất cả 5 
 ## 3. Sandboxed Environment
 
 Codex chạy trong **sandbox** an toàn:
+
 - Chỉ có quyền đọc/ghi trong project directory
 - Không thể truy cập internet (trừ khi cho phép)
 - Không thể chạy lệnh nguy hiểm

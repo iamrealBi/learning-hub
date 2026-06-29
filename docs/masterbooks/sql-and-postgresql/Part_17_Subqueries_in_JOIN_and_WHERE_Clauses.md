@@ -5,6 +5,7 @@ Trong lĩnh vực quản lý cơ sở dữ liệu, việc truy vấn dữ liệu
 ## Subquery là gì? (Kiến thức nền tảng)
 
 Subquery, hay truy vấn con, là một câu lệnh `SELECT` được lồng bên trong một câu lệnh SQL khác. Truy vấn con thường được sử dụng để:
+
 *   Lọc dữ liệu dựa trên kết quả của một truy vấn khác.
 *   Cung cấp một tập hợp các giá trị để so sánh.
 *   Tạo ra một bảng tạm thời (derived table) để tham gia (join) với các bảng khác.
@@ -85,6 +86,7 @@ ON
 ```
 
 **Giải thích:**
+
 1.  Subquery `(SELECT user_id FROM orders WHERE product_id = 3)` được thực thi trước, trả về một tập hợp các `user_id` liên quan đến sản phẩm có ID là 3.
 2.  Tập hợp này được coi là một bảng tạm thời với bí danh `o_filtered`.
 3.  Truy vấn chính sau đó nối bảng `users` (`u`) với bảng tạm `o_filtered` dựa trên điều kiện `u.id = o_filtered.user_id`.
@@ -109,6 +111,7 @@ ON
 > Cú pháp này thường dễ đọc và dễ hiểu hơn cho các trường hợp lọc đơn giản.
 
 Subquery trong `JOIN` (dưới dạng derived table) trở nên thực sự hữu ích khi bạn cần:
+
 *   **Tiền xử lý hoặc tổng hợp dữ liệu trước khi nối**: Ví dụ, bạn cần tính tổng doanh thu cho mỗi khách hàng và sau đó nối kết quả này với bảng khách hàng để lấy thông tin chi tiết.
 *   **Lọc dữ liệu phức tạp trước khi nối**: Khi điều kiện lọc quá phức tạp hoặc yêu cầu các hàm cửa sổ, việc lọc trong subquery có thể làm cho truy vấn chính gọn gàng hơn.
 *   **Tăng tính module hóa**: Chia nhỏ một truy vấn lớn thành các phần nhỏ hơn, dễ quản lý hơn.
@@ -171,6 +174,7 @@ WHERE
 ```
 
 **Giải thích:**
+
 1.  Subquery `(SELECT id FROM products WHERE (price / weight) > 50)` được thực thi trước, trả về một danh sách các `product_id`.
 2.  Truy vấn chính sau đó lọc bảng `orders`, chỉ giữ lại những hàng mà `product_id` của đơn hàng nằm trong danh sách các `product_id` được trả về bởi subquery.
 
@@ -205,6 +209,7 @@ WHERE
 ```
 
 **Giải thích:**
+
 1.  Subquery `(SELECT AVG(price) FROM products)` được thực thi trước, tính toán giá trị trung bình của tất cả các sản phẩm.
 2.  Giá trị trung bình này được trả về cho truy vấn chính.
 3.  Truy vấn chính sau đó lọc bảng `products`, chỉ giữ lại những hàng mà `price` của sản phẩm lớn hơn giá trị trung bình đó.
@@ -242,6 +247,7 @@ WHERE
 ```
 
 **Giải thích:**
+
 1.  Subquery `(SELECT price FROM phones WHERE name = 'S5620 Monte')` được thực thi để lấy giá của điện thoại "S5620 Monte".
 2.  Giá trị này được sử dụng trong mệnh đề `WHERE` của truy vấn chính.
 3.  Truy vấn chính sau đó chọn `name` và `price` từ bảng `phones` cho những điện thoại có giá cao hơn giá trị đã tìm được.

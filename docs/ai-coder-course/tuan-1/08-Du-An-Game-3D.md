@@ -22,6 +22,7 @@ Trong khóa học gốc, học viên xây dựng một **game 3D** hoàn chỉnh
 ```
 Prompt ban đầu:
 "Tạo một game 3D chạy trên browser bằng Three.js:
+
 - Nhân vật chính: khối lập phương có thể di chuyển bằng WASD
 - Môi trường: mặt phẳng với cỏ xanh, bầu trời gradient
 - Chướng ngại vật: các cột trụ ngẫu nhiên phải né tránh
@@ -47,6 +48,7 @@ Cursor Agent tạo:
 
 ```
 "Thêm hiệu ứng:
+
 - Camera follow player mượt mà (lerp)
 - Particle explosion khi nhặt sao
 - Âm thanh coin pickup (Web Audio API)
@@ -149,6 +151,7 @@ new Game();
 ## 5. Thử Thách Cho Bạn
 
 Mở Cursor hoặc Antigravity và thử tạo:
+
 1. **Game Snake** 2D với scoreboard
 2. **Game Memory Card** với animation flip
 3. **Game Platformer** đơn giản với Three.js

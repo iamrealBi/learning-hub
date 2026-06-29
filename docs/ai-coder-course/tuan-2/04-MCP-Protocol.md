@@ -57,16 +57,19 @@ integrations
 MCP Server: "bookwormhub-db"
 
 Tools:
+
   - query_books(search, genre) → List<Book>
   - get_review_stats(book_id) → ReviewStats
   - add_book(title, author, isbn) → ServiceResult
 
 Resources:
+
   - /schema → Database schema (tables, columns)
   - /books/{id} → Chi tiết sách
   - /stats → Thống kê tổng quan
 
 Prompts:
+
   - code-review: Template cho review code C#
   - test-generate: Template cho tạo unit tests
 ```
@@ -182,6 +185,7 @@ def get_schema() -> str:
     """Database schema của BookWormHub"""
     return """
     Tables:
+
     - Books (Id, Title, Author, ISBN13, Genre, Description, PublishedYear)
     - Reviews (Id, Rating, Comment, Status, CreatedAt, UpdatedAt, UserId, BookId)
     - BannedWords (Id, Word, CreatedAt)

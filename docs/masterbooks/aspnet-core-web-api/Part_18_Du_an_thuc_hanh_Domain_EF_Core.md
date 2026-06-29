@@ -3,6 +3,7 @@
 Chào mừng bạn đến với Phần 18 của khóa học, nơi chúng ta sẽ bắt tay vào xây dựng dự án thực tế "NZ Walks" – một RESTful Web API mạnh mẽ sử dụng ASP.NET Core và Entity Framework Core. Chương này là nền tảng, tập trung vào việc định nghĩa miền ứng dụng, chuyển đổi chúng thành các mô hình dữ liệu, và thiết lập Entity Framework Core để tương tác với cơ sở dữ liệu. Đặc biệt, chúng ta sẽ đi sâu vào Dependency Injection (DI) – một triết lý thiết kế cốt lõi trong ASP.NET Core, để hiểu cách nó giúp chúng ta quản lý các phụ thuộc như `DbContext` một cách hiệu quả.
 
 Chúng ta sẽ khám phá các chủ đề sau:
+
 *   Hiểu và định nghĩa miền ứng dụng theo hướng Domain-Driven Design (DDD).
 *   Chuyển đổi các thực thể miền thành các lớp C# (Domain Models).
 *   Tích hợp Entity Framework Core: Cài đặt các gói NuGet cần thiết.
@@ -181,6 +182,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Tools
 `DbContext` là một lớp trung tâm trong Entity Framework Core, đóng vai trò là "phiên làm việc" hoặc "đơn vị công việc" (Unit of Work) với cơ sở dữ liệu. Nó không chỉ là một cầu nối mà còn là một **Identity Map** (ánh xạ định danh), đảm bảo rằng mỗi thực thể được tải từ cơ sở dữ liệu chỉ có một thể hiện duy nhất trong bộ nhớ trong một phiên làm việc.
 
 `DbContext` được sử dụng để:
+
 *   **Truy vấn dữ liệu:** Chuyển đổi các truy vấn LINQ thành SQL và thực thi chúng trên cơ sở dữ liệu.
 *   **Theo dõi thay đổi:** Theo dõi trạng thái của các thực thể (Added, Modified, Deleted, Unchanged) để biết những gì cần lưu vào cơ sở dữ liệu.
 *   **Lưu thay đổi:** Ghi các thay đổi đã theo dõi vào cơ sở dữ liệu thông qua phương thức `SaveChanges()`.
@@ -251,6 +253,7 @@ Mở tệp `appsettings.json` trong thư mục gốc của dự án và thêm m�
 ```
 
 Giải thích chi tiết chuỗi kết nối:
+
 *   `"NZWalksConnectionString"`: Đây là tên định danh mà chúng ta sẽ sử dụng để tham chiếu chuỗi kết nối này trong mã C#. Hãy chọn một tên rõ ràng và dễ hiểu.
 *   `Server=(localdb)\\mssqllocaldb`: Chỉ định máy chủ cơ sở dữ liệu. `(localdb)\\mssqllocaldb` là một phiên bản cục bộ của SQL Server Express, thường được cài đặt cùng với Visual Studio, rất tiện lợi cho việc phát triển. Bạn có thể thay đổi nó thành tên máy chủ SQL Server của bạn (ví dụ: `DESKTOP-ABC\SQLEXPRESS`).
 *   `Database=NZWalksDb`: Tên của cơ sở dữ liệu mà chúng ta muốn kết nối. Nếu cơ sở dữ liệu này chưa tồn tại, EF Core sẽ tạo nó khi chúng ta chạy các Migrations sau này.
@@ -310,6 +313,7 @@ public class MyDatabaseLogger
 }
 ```
 Vấn đề:
+
 *   `MyService` phụ thuộc chặt chẽ vào `MyDatabaseLogger`. Nếu bạn muốn thay đổi cơ chế ghi nhật ký (ví dụ: ghi vào file thay vì DB), bạn phải sửa đổi `MyService`.
 *   Kiểm thử `MyService` rất khó khăn vì bạn không thể dễ dàng thay thế `MyDatabaseLogger` bằng một đối tượng giả (mock) trong kiểm thử đơn vị.
 
@@ -445,6 +449,7 @@ app.Run();
 ```
 
 Giải thích đoạn mã:
+
 *   `builder.Services.AddDbContext<NZWalksDbContext>(...)`: Đây là phương thức mở rộng được cung cấp bởi gói `Microsoft.EntityFrameworkCore.SqlServer` để đăng ký `DbContext` vào Service Container. Mặc định, `DbContext` được đăng ký với vòng đời **Scoped**. Điều này có nghĩa là một thể hiện mới của `NZWalksDbContext` sẽ được tạo cho mỗi yêu cầu HTTP và được sử dụng trong suốt quá trình xử lý yêu cầu đó. Khi yêu cầu hoàn tất, thể hiện `DbContext` sẽ được hủy bỏ. Đây là hành vi mong muốn để đảm bảo tính nhất quán dữ liệu và quản lý tài nguyên hiệu quả trong các ứng dụng web.
 *   `options => { ... }`: Chúng ta truyền một lambda expression để cấu hình các tùy chọn cho `NZWalksDbContext`.
 *   `options.UseSqlServer(...)`: Phương thức này chỉ định rằng `NZWalksDbContext` sẽ sử dụng SQL Server làm nhà cung cấp cơ sở dữ liệu.

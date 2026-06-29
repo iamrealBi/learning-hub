@@ -122,6 +122,7 @@ Trong môi trường .NET (và nhiều ngôn ngữ khác), bộ nhớ chương t
 #### 2.4. Tầm quan trọng của việc hiểu rõ
 
 Hiểu rõ sự khác biệt giữa Value Type và Reference Type là **cực kỳ quan trọng** vì:
+
 *   **Tránh lỗi logic:** Ngăn ngừa các lỗi khó phát hiện khi một thay đổi tưởng chừng vô hại lại ảnh hưởng đến một phần khác của chương trình.
 *   **Tối ưu hiệu suất:** Biết khi nào dữ liệu được sao chép (Value Type) và khi nào chỉ địa chỉ được sao chép (Reference Type) giúp bạn thiết kế cấu trúc dữ liệu và thuật toán hiệu quả hơn.
 *   **Quản lý bộ nhớ:** Hiểu cách Garbage Collector hoạt động với Heap giúp bạn viết mã sạch hơn, tránh rò rỉ bộ nhớ và tối ưu hóa việc sử dụng tài nguyên.
@@ -287,6 +288,7 @@ Khóa học này đã trang bị cho bạn nền tảng vững chắc, nhưng h�
 
 *   **1.3. Khám phá các tính năng C# nâng cao:**
     C# là một ngôn ngữ rất mạnh mẽ với nhiều tính năng tiên tiến. Sau khi nắm vững cơ bản, bạn có thể tìm hiểu thêm về:
+
     *   **Generic Types:** Cho phép bạn viết các lớp, phương thức và giao diện hoạt động với nhiều kiểu dữ liệu khác nhau mà vẫn đảm bảo an toàn kiểu tại thời điểm biên dịch (compile-time safety). Điều này giúp tái sử dụng mã hiệu quả và linh hoạt hơn.
         ```csharp
         // Ví dụ về Generic Class
@@ -387,6 +389,7 @@ Khóa học này đã trang bị cho bạn nền tảng vững chắc, nhưng h�
         // app2.Run();
         ```
         Trong ví dụ này, lớp `Application` không cần biết nó đang ghi log ra console hay ra file. Nó chỉ cần một đối tượng có khả năng `ILogger`. Điều này cho phép chúng ta dễ dàng thay đổi cơ chế ghi log (ví dụ: chuyển từ ghi console sang ghi vào file, hoặc gửi log lên dịch vụ đám mây) mà không cần sửa đổi lớp `Application`, thể hiện nguyên tắc **Dependency Inversion** của SOLID.
+
     *   **Delegates và Events:** Cơ chế mạnh mẽ để xây dựng các ứng dụng phản ứng với sự kiện, cho phép giao tiếp giữa các thành phần mà không cần chúng phải biết chi tiết về nhau.
     *   **LINQ (Language Integrated Query):** Một công cụ mạnh mẽ để truy vấn dữ liệu từ nhiều nguồn khác nhau (mảng, danh sách, cơ sở dữ liệu, XML) một cách thống nhất, biểu cảm và dễ đọc.
     *   **Asynchronous Programming (async/await):** Kỹ thuật cần thiết để viết các ứng dụng phản hồi nhanh, đặc biệt trong các tác vụ I/O (ví dụ: gọi API, đọc/ghi file) hoặc tính toán nặng, giúp chương trình không bị "đóng băng".

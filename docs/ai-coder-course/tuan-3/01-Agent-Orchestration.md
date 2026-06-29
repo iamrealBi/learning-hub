@@ -10,6 +10,7 @@
 ```
 Single Agent:                      Multi-Agent:
 ━━━━━━━━━━━━                      ━━━━━━━━━━━━
+
 - 1 context window                - N context windows
 - Xử lý tuần tự                  - Xử lý song song
 - Context bloat                   - Context isolated
@@ -57,6 +58,7 @@ Thời gian: ██████████ 10 phút
 ```
 
 **Đặc điểm:**
+
 - Orchestrator phân chia task
 - Subagents **không nói chuyện với nhau**
 - Report kết quả lên orchestrator
@@ -80,6 +82,7 @@ Thời gian: ██████████ 10 phút
 ```
 
 **Đặc điểm:**
+
 - Teammates **có thể giao tiếp** với nhau
 - Shared task list (source of truth)
 - Lead define scope, teammates execute

@@ -79,6 +79,7 @@ Khi `Context7 MCP server` đã được cài đặt, `Claude Code` có thể s�
 
 **Chế độ hoạt động của Claude Code và MCP:**
 `Claude Code` có nhiều chế độ hoạt động để bạn tương tác:
+
 *   **Plan Mode:** `Claude Code` sẽ tạo ra một kế hoạch chi tiết trước khi thực hiện công việc. Trong chế độ này, `Claude Code` có thể lập kế hoạch sử dụng các `MCP Servers` để thu thập thông tin cần thiết trước khi bắt tay vào thực hiện các bước tiếp theo. Đây là chế độ lý tưởng khi bạn muốn `Claude Code` suy nghĩ và tổ chức công việc một cách có hệ thống.
 *   **Edit Mode:** `Claude Code` sẽ trực tiếp chỉnh sửa mã nguồn hoặc tệp tin. Các `MCP Servers` có thể được sử dụng để tra cứu cú pháp, API hoặc các mẫu thiết kế trong quá trình chỉnh sửa.
 *   **Reply Mode:** `Claude Code` chỉ đơn thuần trả lời câu hỏi hoặc phân tích mà không thực hiện chỉnh sửa hay lập kế hoạch. Ngay cả trong chế độ này, `MCP Servers` vẫn hữu ích để `Claude Code` tra cứu thông tin và đưa ra câu trả lời chính xác và đầy đủ hơn.
@@ -133,6 +134,7 @@ Trong Antigravity IDE, quản lý ngữ cảnh là trọng tâm của thiết k�
 **Ví dụ: Explore Agent**
 
 Một trong những subagent phổ biến và hữu ích nhất là `explore agent`. Agent này được tối ưu hóa để đọc, phân tích và hiểu cấu trúc các tệp và thư mục trong dự án của bạn. Khi bạn yêu cầu `Claude Code` phân tích một codebase, nó có thể ủy quyền việc khám phá cấu trúc dự án cho `explore agent`.
+
 *   **Ví dụ hoạt động:** Nếu bạn yêu cầu "Hãy xem xét cấu trúc dự án này và đề xuất một nơi tốt để thêm một API endpoint mới cho người dùng," `Claude Code` sẽ khởi tạo `explore agent`. `explore agent` sau đó sẽ duyệt qua các thư mục `src/api`, `src/routes` hoặc tương tự, phân tích các tệp hiện có để hiểu các mẫu thiết kế và quy ước, và sau đó báo cáo lại cho tác nhân chính một cái nhìn tổng quan gọn gàng cùng với đề xuất vị trí tối ưu.
 
 **Cách nhận biết Subagent đang hoạt động:**
@@ -152,6 +154,7 @@ Mặc dù các subagent tích hợp sẵn rất hữu ích, nhưng đôi khi b�
 Xem xét ví dụ về việc tra cứu tài liệu: nếu tác nhân chính phải tự mình đọc từng bài viết tài liệu, điều này không chỉ tốn thời gian mà còn "làm ô nhiễm" cửa sổ ngữ cảnh với lượng lớn văn bản không cần thiết cho quyết định cấp cao. Một subagent chuyên biệt để khám phá tài liệu có thể giải quyết vấn đề này.
 
 **Ví dụ khác:**
+
 *   Một subagent chuyên về kiểm tra mã (Linting Agent) có thể được tạo ra để tự động chạy các công cụ linting và phân tích báo cáo, sau đó tóm tắt các vấn đề quan trọng cho tác nhân chính.
 *   Một subagent chuyên về kiểm thử (Testing Agent) có thể được giao nhiệm vụ viết các bài kiểm thử đơn vị hoặc kiểm thử tích hợp dựa trên các yêu cầu, sau đó báo cáo kết quả.
 *   Một subagent chuyên về tối ưu hóa hiệu suất (Performance Agent) có thể phân tích mã, đề xuất các cải tiến về thuật toán hoặc cấu trúc dữ liệu, và thậm chí chạy các benchmark đơn giản.
@@ -177,6 +180,7 @@ Nội dung của tệp Markdown sẽ định nghĩa hành vi của subagent thô
 name: DocsExplorer
 description: This agent is optimized for looking up official documentation for third-party libraries, frameworks, and tools. It works in parallel to efficiently gather information, prioritizing Context7 MCP and falling back to web search. It summarizes key findings concisely to avoid context pollution for the main agent.
 tools:
+
   - web-search
   - mcp-search
 model: claude-3-sonnet-20240229 # Hoặc claude-3-haiku-20240307, claude-3-opus-20240229
@@ -267,6 +271,7 @@ Việc tạo ra một subagent tùy chỉnh là bước đầu tiên. Bước ti
 
 **Liên hệ với Antigravity IDE:**
 Trong Antigravity IDE, khái niệm "Vibe Coding" được đẩy lên một tầm cao mới. Antigravity có thể sử dụng một tệp cấu hình dự án (ví dụ: `.antigravity/config.yaml` hoặc một thư mục các file Markdown hướng dẫn) để định nghĩa:
+
 *   Các subagent đặc biệt cho dự án (ví dụ: một subagent để tương tác với API nội bộ của công ty).
 *   Các quy tắc mã hóa cụ thể (coding standards).
 *   Các công cụ ưu tiên (ví dụ: luôn dùng Prettier để format code).

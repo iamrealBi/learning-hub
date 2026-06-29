@@ -140,6 +140,7 @@ Sau khi hoàn tất các bước trên, cơ sở dữ liệu của bạn sẽ c�
 ### 2.1. Tổng quan về API RESTful và vai trò của ASP.NET Core
 
 **REST (Representational State Transfer)** là một tập hợp các nguyên tắc kiến trúc để thiết kế các dịch vụ web. Một API được coi là RESTful khi nó tuân thủ các nguyên tắc sau:
+
 *   **Client-Server:** Tách biệt các mối quan tâm giữa giao diện người dùng (client) và lưu trữ dữ liệu (server).
 *   **Stateless (Không trạng thái):** Mỗi yêu cầu từ client đến server phải chứa tất cả thông tin cần thiết để server hiểu yêu cầu đó. Server không lưu trữ bất kỳ trạng thái nào của client giữa các yêu cầu.
 *   **Cacheable (Có thể lưu vào bộ nhớ đệm):** Phản hồi từ server có thể được đánh dấu là có thể lưu vào bộ nhớ đệm hoặc không, giúp cải thiện hiệu suất.
@@ -151,6 +152,7 @@ Sau khi hoàn tất các bước trên, cơ sở dữ liệu của bạn sẽ c�
     *   **Hypermedia as the Engine of Application State (HATEOAS):** Client tương tác với API hoàn toàn thông qua các siêu liên kết được cung cấp trong phản hồi. (Mặc dù HATEOAS là một phần của REST, nhiều API thực tế thường chỉ tuân thủ các nguyên tắc trước đó và được gọi là "REST-like" hoặc "HTTP APIs").
 
 **ASP.NET Core** là một framework mạnh mẽ và linh hoạt để xây dựng các API RESTful. Nó cung cấp:
+
 *   **Controllers:** Các lớp chịu trách nhiệm xử lý các yêu cầu HTTP đến các tài nguyên cụ thể.
 *   **Action Methods:** Các phương thức trong Controller được ánh xạ tới các yêu cầu HTTP cụ thể (GET, POST, PUT, DELETE).
 *   **HTTP Verbs:** Sử dụng các động từ HTTP chuẩn để chỉ định loại thao tác (Ví dụ: `GET` để truy xuất, `POST` để tạo, `PUT` để cập nhật, `DELETE` để xóa).
@@ -181,6 +183,7 @@ Sau khi hoàn tất các bước trên, cơ sở dữ liệu của bạn sẽ c�
 
 *   **Vòng đời Dịch vụ (Service Lifetimes) - Under the Hood:**
     Khi đăng ký dịch vụ, bạn cần chỉ định vòng đời của chúng. ASP.NET Core cung cấp ba vòng đời chính:
+
     *   `AddScoped`: Một thể hiện (instance) của dịch vụ được tạo **một lần cho mỗi yêu cầu HTTP**. Nếu một yêu cầu HTTP cần dịch vụ này nhiều lần, nó sẽ nhận cùng một thể hiện. Thích hợp cho các dịch vụ liên quan đến trạng thái của yêu cầu, như `DbContext` hoặc Repository.
     *   `AddTransient`: Một thể hiện mới của dịch vụ được tạo **mỗi khi nó được yêu cầu**. Thích hợp cho các dịch vụ nhẹ, không trạng thái hoặc các dịch vụ cần được tạo mới mỗi lần sử dụng.
     *   `AddSingleton`: Một thể hiện duy nhất của dịch vụ được tạo **lần đầu tiên nó được yêu cầu** và được tái sử dụng trong suốt vòng đời của ứng dụng. Thích hợp cho các dịch vụ không trạng thái hoặc các dịch vụ tốn kém để khởi tạo.

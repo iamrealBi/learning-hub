@@ -13,6 +13,7 @@ Trước khi viết bất kỳ dòng mã nào liên quan đến cơ sở dữ li
 **Domain-Driven Design (DDD)** là một phương pháp phát triển phần mềm tập trung vào việc tạo ra một mô hình miền giàu tính biểu cảm, phản ánh chính xác các khái niệm và hành vi của nghiệp vụ. Mục tiêu là làm cho mã nguồn dễ hiểu, dễ bảo trì và mở rộng hơn bằng cách giữ cho kiến trúc phần mềm luôn căn chỉnh với yêu cầu nghiệp vụ.
 
 Trong bối cảnh của một hệ thống Agentic AI như **Antigravity IDE**, tư duy DDD trở nên cực kỳ mạnh mẽ khi kết hợp với **Vibe Coding**. Thay vì phải mô tả chi tiết từng thuộc tính hay mối quan hệ, bạn có thể truyền tải "vibe" – tức là ý định và ngữ cảnh tổng thể của miền – cho Antigravity. Ví dụ, bạn có thể nói: "Tôi đang xây dựng một API quản lý các tuyến đường đi bộ ở New Zealand. Các tuyến đường này có tên, mô tả, chiều dài, và liên quan đến độ khó, khu vực." Antigravity với khả năng tự chạy script, gọi subagent trình duyệt để nghiên cứu, đọc ghi file và lập kế hoạch tự động, có thể:
+
 1.  **Phân tích ngữ cảnh:** Dựa vào mô tả, Antigravity sẽ suy luận các thực thể tiềm năng (`Walk`, `Region`, `Difficulty`).
 2.  **Đề xuất thuộc tính:** Dựa trên ngữ cảnh "quản lý tuyến đường đi bộ", nó có thể đề xuất các thuộc tính như `Name`, `Description`, `LengthInKm`, `ImageUrl` cho `Walk`.
 3.  **Xác định mối quan hệ:** Tự động nhận diện mối quan hệ One-to-Many giữa `Walk` và `Region`/`Difficulty`.
@@ -27,6 +28,7 @@ Trong bối cảnh của một hệ thống Agentic AI như **Antigravity IDE**,
 #### 1.2.1. Thực thể `Walk` (Tuyến đường đi bộ)
 
 Đại diện cho một tuyến đường cụ thể.
+
 *   **ID (Guid):** Mã định danh duy nhất. Sử dụng `Guid` giúp tránh xung đột ID khi làm việc với các hệ thống phân tán hoặc khi hợp nhất dữ liệu từ nhiều nguồn.
 *   **Name (string):** Tên hiển thị (ví dụ: "Đường mòn núi Ngauruhoe").
 *   **Description (string):** Mô tả chi tiết.
@@ -38,6 +40,7 @@ Trong bối cảnh của một hệ thống Agentic AI như **Antigravity IDE**,
 #### 1.2.2. Thực thể `Region` (Khu vực)
 
 Đại diện cho một khu vực địa lý.
+
 *   **ID (Guid):** Mã định danh duy nhất.
 *   **Code (string):** Mã ngắn gọn (ví dụ: "AKL").
 *   **Name (string):** Tên đầy đủ (ví dụ: "Auckland").
@@ -46,12 +49,14 @@ Trong bối cảnh của một hệ thống Agentic AI như **Antigravity IDE**,
 #### 1.2.3. Thực thể `Difficulty` (Độ khó)
 
 Định nghĩa các cấp độ khó.
+
 *   **ID (Guid):** Mã định danh duy nhất.
 *   **Name (string):** Tên cấp độ (ví dụ: "Dễ", "Trung bình", "Khó").
 
 ### 1.3. Thiết lập Mối quan hệ giữa các Thực thể
 
 Các mối quan hệ này là nền tảng để EF Core hiểu cách liên kết các bảng trong cơ sở dữ liệu:
+
 *   **`Walk` và `Difficulty` (One-to-Many):** Một `Difficulty` có thể liên kết với nhiều `Walk`, nhưng mỗi `Walk` chỉ có một `Difficulty` duy nhất.
 *   **`Walk` và `Region` (One-to-Many):** Một `Region` có thể chứa nhiều `Walk`, nhưng mỗi `Walk` chỉ thuộc về một `Region` duy nhất.
 
@@ -165,6 +170,7 @@ Entity Framework Core là Object-Relational Mapper (ORM) mã nguồn mở và đ
 **Object-Relational Mapper (ORM):** Một ORM tự động ánh xạ các đối tượng trong ngôn ngữ lập trình của bạn (ví dụ: các lớp C# `Walk`, `Region`) tới các bảng, cột và hàng trong cơ sở dữ liệu quan hệ. Điều này loại bỏ nhu cầu viết các câu lệnh SQL trực tiếp cho các thao tác CRUD cơ bản, giảm thiểu lỗi và tăng tốc độ phát triển.
 
 **EF Core đơn giản hóa tương tác cơ sở dữ liệu bằng cách:**
+
 *   **Ánh xạ tự động:** Chuyển đổi giữa đối tượng C# và dữ liệu cơ sở dữ liệu.
 *   **Truy vấn LINQ:** Cho phép bạn viết các truy vấn dữ liệu bằng LINQ (Language Integrated Query), một cú pháp quen thuộc và an toàn kiểu, sau đó EF Core dịch chúng thành SQL tối ưu.
 *   **Quản lý lược đồ (Migrations):** Cung cấp một cách có kiểm soát để thay đổi cấu trúc cơ sở dữ liệu theo thời gian, đồng bộ với các thay đổi trong mô hình miền của bạn.
@@ -196,6 +202,7 @@ Entity Framework Core là Object-Relational Mapper (ORM) mã nguồn mở và đ
 Lớp `DbContext` là thành phần trung tâm của EF Core, đóng vai trò là cầu nối giữa các mô hình miền của bạn và cơ sở dữ liệu.
 
 **Cơ chế hoạt động của `DbContext`:**
+
 *   **Đơn vị làm việc (Unit of Work):** Mỗi thể hiện của `DbContext` đại diện cho một "phiên làm việc" với cơ sở dữ liệu. Trong phiên này, nó theo dõi tất cả các đối tượng mà bạn tải, thêm, sửa hoặc xóa.
 *   **Theo dõi thay đổi (Change Tracker):** Đây là một trong những tính năng mạnh mẽ nhất của EF Core. `DbContext` theo dõi trạng thái của mỗi thực thể (`Added`, `Modified`, `Deleted`, `Unchanged`). Khi bạn gọi `SaveChanges()`, nó sẽ tạo ra các câu lệnh SQL tương ứng để áp dụng các thay đổi này vào cơ sở dữ liệu.
 *   **Cung cấp API truy vấn:** Thông qua các thuộc tính `DbSet`, nó cho phép bạn viết các truy vấn LINQ để truy xuất dữ liệu.
@@ -287,6 +294,7 @@ Mở tệp `appsettings.json` trong dự án của bạn và thêm phần `Conne
 ```
 
 **Giải thích các thành phần của chuỗi kết nối:**
+
 *   **`Server=localhost\\SQLEXPRESS`**: Địa chỉ máy chủ SQL Server.
     *   `localhost`: Chỉ ra rằng máy chủ nằm trên cùng máy tính.
     *   `\\SQLEXPRESS`: Tên của instance SQL Server Express (nếu bạn dùng phiên bản mặc định). Bạn cần thay thế bằng tên instance SQL Server thực tế của mình (ví dụ: `.` hoặc `(localdb)\\mssqllocaldb` cho LocalDB, hoặc tên máy chủ/IP nếu dùng SQL Server đầy đủ).
@@ -296,6 +304,7 @@ Mở tệp `appsettings.json` trong dự án của bạn và thêm phần `Conne
 
 **Bảo mật Chuỗi Kết nối trong Môi trường Sản phẩm:**
 Việc lưu trữ chuỗi kết nối trực tiếp trong `appsettings.json` là chấp nhận được cho môi trường phát triển. Tuy nhiên, trong môi trường sản phẩm (production), đây không phải là phương pháp bảo mật tốt nhất. Các phương pháp bảo mật hơn bao gồm:
+
 *   **Biến môi trường (Environment Variables):** Được hệ điều hành quản lý và không lưu trữ trong mã nguồn.
 *   **Azure Key Vault / AWS Secrets Manager:** Dịch vụ quản lý bí mật đám mây.
 *   **ASP.NET Core Secret Manager:** Công cụ cục bộ cho phát triển, không được đưa vào production.
@@ -313,6 +322,7 @@ Dependency Injection (DI) là một trong những mẫu thiết kế quan trọn
 **Inversion of Control (IoC):** DI là một hình thức của IoC. IoC có nghĩa là "đảo ngược quyền điều khiển". Thay vì mã của bạn chủ động điều khiển quá trình tạo và quản lý các phụ thuộc, một vùng chứa IoC (IoC container) sẽ đảm nhiệm vai trò này.
 
 **Lợi ích của DI:**
+
 *   **Giảm ghép nối (Loose Coupling):** Các lớp không cần biết cách tạo ra các phụ thuộc của chúng, chỉ cần biết cách sử dụng chúng.
 *   **Dễ kiểm thử (Testability):** Dễ dàng thay thế các phụ thuộc thực tế bằng các đối tượng giả lập (mocks) hoặc đối tượng giả (stubs) trong các bài kiểm thử đơn vị.
 *   **Dễ bảo trì và mở rộng:** Dễ dàng thay đổi triển khai của một phụ thuộc mà không ảnh hưởng đến các lớp sử dụng nó.
@@ -365,6 +375,7 @@ app.Run();
 
 **Cơ chế hoạt động của `AddDbContext` và vòng đời Scoped:**
 Khi bạn gọi `builder.Services.AddDbContext<TDbContext>(...)`, EF Core sẽ đăng ký `TDbContext` vào DI container với vòng đời **Scoped** theo mặc định.
+
 *   **Scoped:** Có nghĩa là một thể hiện mới của `DbContext` sẽ được tạo ra cho *mỗi yêu cầu HTTP* và sẽ được hủy khi yêu cầu đó kết thúc. Đây là vòng đời được khuyến nghị cho `DbContext` trong các ứng dụng web vì nó:
     *   **Ngăn chặn rò rỉ bộ nhớ:** `DbContext` thường chứa bộ nhớ đệm (cache) và theo dõi các thực thể. Nếu nó là Singleton, bộ nhớ này sẽ không bao giờ được giải phóng và có thể gây rò rỉ.
     *   **Tránh các vấn đề đồng bộ hóa:** Mỗi yêu cầu HTTP hoạt động với một thể hiện `DbContext` riêng biệt, ngăn chặn các vấn đề về dữ liệu bị ghi đè hoặc xung đột do nhiều luồng cùng truy cập một `DbContext` duy nhất.
@@ -407,6 +418,7 @@ Add-Migration "InitialMigration" -Project NZWalks.API -StartupProject NZWalks.AP
 *   **`-StartupProject NZWalks.API`**: Chỉ định dự án khởi động (nơi chứa `Program.cs` và cấu hình DI) để EF Core biết cách xây dựng dịch vụ và lấy chuỗi kết nối. Trong trường hợp này, cả hai là cùng một dự án.
 
 Sau khi chạy lệnh này, EF Core sẽ:
+
 *   Tạo một thư mục `Migrations` trong dự án `NZWalks.API`.
 *   Trong thư mục `Migrations`, tạo hai tệp:
     *   Một tệp C# (ví dụ: `20231027100000_InitialMigration.cs`): Chứa mã C# với hai phương thức:
@@ -425,6 +437,7 @@ Update-Database -Project NZWalks.API -StartupProject NZWalks.API
 *   **`Update-Database`**: Lệnh này sẽ áp dụng tất cả các migration đang chờ xử lý vào cơ sở dữ liệu được chỉ định trong chuỗi kết nối của bạn.
 
 Sau khi chạy lệnh này:
+
 *   EF Core sẽ kết nối với SQL Server bằng chuỗi kết nối `NZWalksConnection` từ `appsettings.json`.
 *   Nếu cơ sở dữ liệu `NZWalksDb` chưa tồn tại, nó sẽ được tạo.
 *   Các bảng `Difficulties`, `Regions`, `Walks` sẽ được tạo cùng với các cột, khóa chính và khóa ngoại đã định nghĩa trong `InitialMigration.cs`.
@@ -434,6 +447,7 @@ Sau khi chạy lệnh này:
 
 **Antigravity IDE và Migrations:**
 Antigravity IDE có khả năng tự động thực hiện toàn bộ quy trình migration. Bạn có thể nói: "Tạo và áp dụng migration ban đầu cho cơ sở dữ liệu NZWalks." Antigravity sẽ:
+
 1.  Chạy `Add-Migration "InitialMigration"`.
 2.  Hiển thị tệp migration được tạo ra, cho phép bạn xem xét các thay đổi SQL tiềm năng.
 3.  Khi bạn xác nhận, nó sẽ chạy `Update-Database`.

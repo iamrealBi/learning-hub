@@ -19,6 +19,7 @@ Tổng hợp dữ liệu là quá trình thu thập một tập hợp lớn các
 ### 2.1. Bản Chất của Tổng Hợp Dữ Liệu
 
 Hãy hình dung bạn có một bảng chứa hàng ngàn giao dịch. Thay vì duyệt qua từng giao dịch, bạn muốn trả lời các câu hỏi như:
+
 *   Tổng số tiền đã giao dịch là bao nhiêu?
 *   Giao dịch lớn nhất và nhỏ nhất có giá trị bao nhiêu?
 *   Giá trị trung bình của một giao dịch là bao nhiêu?
@@ -145,6 +146,7 @@ Nhóm dữ liệu là kỹ thuật cho phép chúng ta chia một tập hợp l�
 ### 3.1. Khái Niệm Nhóm và Mục Đích
 
 Thay vì chỉ biết tổng số bình luận, bạn có thể muốn biết "mỗi người dùng đã viết bao nhiêu bình luận" hoặc "mỗi bức ảnh nhận được bao nhiêu bình luận". Để trả lời những câu hỏi này, chúng ta cần:
+
 1.  Xác định các "thực thể" mà chúng ta muốn phân tích (ví dụ: mỗi `user_id`, mỗi `photo_id`).
 2.  Gom tất cả các bản ghi liên quan đến thực thể đó vào một nhóm.
 3.  Áp dụng hàm tổng hợp (ví dụ: `COUNT(*)`) cho từng nhóm riêng biệt.
@@ -187,6 +189,7 @@ Bảng comments (sau khi FROM và WHERE, nếu có):
 ```
 
 Khi bạn thực hiện `SELECT user_id FROM comments GROUP BY user_id;`, cơ sở dữ liệu sẽ:
+
 1.  Tìm các giá trị `user_id` duy nhất: `1, 3, 2, 5`.
 2.  Tạo các nhóm (buckets) cho mỗi `user_id`:
     *   **Nhóm user_id = 1:** (id=1, user_id=1, photo_id=101), (id=3, user_id=1, photo_id=101), (id=6, user_id=1, photo_id=104)
@@ -241,6 +244,7 @@ Nếu bạn muốn làm việc với cột `content` trong ngữ cảnh nhóm, b
 ### 4.1. Cơ Chế Kết Hợp và Dòng Chảy Dữ Liệu
 
 Hãy nhớ lại hình dung về các nhóm tạm thời (buckets) được tạo bởi `GROUP BY`. Khi bạn thêm một hàm tổng hợp vào mệnh đề `SELECT` cùng với `GROUP BY`, cơ sở dữ liệu sẽ:
+
 1.  Tạo các nhóm như đã mô tả ở Mục 3.2.
 2.  Đối với **mỗi nhóm**, cơ sở dữ liệu sẽ lấy tất cả các hàng thuộc nhóm đó.
 3.  Áp dụng hàm tổng hợp cho các giá trị của cột được chỉ định **trong phạm vi nhóm đó**.
@@ -251,6 +255,7 @@ Hãy nhớ lại hình dung về các nhóm tạm thời (buckets) được tạ
 **Bài toán:** "Tìm xem mỗi người dùng đã tạo bao nhiêu bình luận."
 
 **Phân tích:**
+
 *   Chúng ta cần biết `user_id` (cột để nhóm).
 *   Chúng ta cần đếm số lượng bình luận cho mỗi `user_id` (hàm tổng hợp `COUNT(*)`).
 
@@ -269,6 +274,7 @@ ORDER BY
 ```
 
 **Giải thích:**
+
 1.  `FROM comments`: Chọn dữ liệu từ bảng `comments`.
 2.  `GROUP BY user_id`: Gộp các hàng lại với nhau dựa trên giá trị `user_id`. Mỗi `user_id` duy nhất sẽ tạo thành một nhóm.
 3.  `SELECT user_id, COUNT(*) AS total_comments`:
@@ -294,6 +300,7 @@ ORDER BY
 **Bài toán:** "Mỗi bức ảnh nhận được bao nhiêu bình luận và bình luận cuối cùng là gì?"
 
 **Phân tích:**
+
 *   Chúng ta cần biết `photo_id` (cột để nhóm).
 *   Chúng ta cần đếm số lượng bình luận cho mỗi `photo_id` (hàm tổng hợp `COUNT(*)`).
 *   Chúng ta cần tìm bình luận cuối cùng (hàm tổng hợp `MAX(content)` hoặc `MAX(created_at)` để tìm bình luận mới nhất, rồi dùng `STRING_AGG` để gom). Để đơn giản, ta sẽ lấy `MAX(content)` như một ví dụ.
@@ -334,6 +341,7 @@ ORDER BY
 **Yêu cầu:** Viết một truy vấn SQL in ra ID của tác giả, tổng số sách mà họ đã viết, và năm xuất bản sớm nhất của một cuốn sách của họ.
 
 **Gợi ý:**
+
 *   Bạn có bảng `authors` (chỉ để tham khảo, không cần join nếu `author_id` có trong `books`) và `books`.
 *   Giả định bảng `books` có cột `author_id` và `publication_year`.
 
@@ -374,6 +382,7 @@ ORDER BY
 ```
 
 **Giải thích:**
+
 1.  `FROM books`: Truy vấn từ bảng `books`.
 2.  `GROUP BY author_id`: Gộp các bản ghi sách lại theo `author_id`. Mỗi `author_id` duy nhất sẽ tạo thành một nhóm.
 3.  `SELECT author_id, COUNT(*) AS number_of_books, MIN(publication_year) AS earliest_publication_year`:
@@ -414,6 +423,7 @@ Trong SQL, có hai mệnh đề chính để lọc dữ liệu: `WHERE` và `HAV
 7.  **`ORDER BY`**: Sắp xếp tập kết quả cuối cùng.
 
 **Tóm tắt:**
+
 *   **`WHERE`**: Lọc **hàng riêng lẻ**. Thực thi **trước** `GROUP BY`. Không dùng hàm tổng hợp.
 *   **`HAVING`**: Lọc **nhóm**. Thực thi **sau** `GROUP BY` và tính toán tổng hợp. Có thể dùng hàm tổng hợp.
 
@@ -422,6 +432,7 @@ Trong SQL, có hai mệnh đề chính để lọc dữ liệu: `WHERE` và `HAV
 **Bài toán:** "Tìm các người dùng đã tạo nhiều hơn 2 bình luận và ID ảnh của họ là 101."
 
 Để giải quyết bài toán này, chúng ta cần hai loại lọc:
+
 1.  Lọc các bình luận liên quan đến `photo_id = 101` **trước khi nhóm** (sử dụng `WHERE`).
 2.  Lọc các nhóm người dùng mà tổng số bình luận của họ **lớn hơn 2** (sử dụng `HAVING`).
 
@@ -442,6 +453,7 @@ ORDER BY
 ```
 
 **Giải thích:**
+
 1.  `WHERE photo_id = 101`: Đầu tiên, truy vấn chỉ xem xét các bình luận có `photo_id` là `101`.
     *   Các hàng được giữ lại: (id=1, user_id=1, photo_id=101), (id=3, user_id=1, photo_id=101), (id=8, user_id=2, photo_id=101)
 2.  `GROUP BY user_id`: Sau đó, các hàng còn lại được nhóm theo `user_id`.
@@ -470,6 +482,7 @@ Trong kỷ nguyên của AI Coding, việc hiểu sâu sắc các khái niệm c
 ### 6.1. Vibe Coding: Dự Đoán và Kiểm Soát Dữ Liệu
 
 "Vibe Coding" là khả năng xây dựng một mô hình tinh thần về cách mã (trong trường hợp này là SQL) sẽ tương tác và biến đổi dữ liệu. Đối với `GROUP BY` và các hàm tổng hợp, điều này có nghĩa là:
+
 *   **Hình dung các nhóm (buckets):** Khi bạn viết `GROUP BY user_id`, bạn ngay lập tức hình dung dữ liệu được chia thành các "thùng" riêng biệt cho mỗi `user_id`.
 *   **Dự đoán kết quả tổng hợp:** Bạn biết rằng `COUNT(*)` sẽ đếm số hàng trong *từng thùng*, không phải toàn bộ bảng.
 *   **Hiểu quy tắc `SELECT`:** Bạn không bao giờ cố gắng `SELECT` một cột không tổng hợp mà không có trong `GROUP BY` vì bạn hiểu rằng mỗi hàng kết quả đại diện cho một nhóm, không phải một bản ghi chi tiết.
@@ -480,6 +493,7 @@ Khả năng này giúp bạn nhanh chóng phát hiện lỗi logic, tối ưu h�
 ### 6.2. Antigravity IDE: Tối Ưu Hóa Quy Trình Với Agentic AI
 
 Antigravity IDE, với khả năng tự chạy script ngầm, gọi subagent trình duyệt, đọc/ghi file và lập kế hoạch tự động, là một công cụ mạnh mẽ. Khi một tác vụ yêu cầu phân tích dữ liệu bằng SQL (như tạo báo cáo, tìm kiếm xu hướng), Antigravity có thể:
+
 *   Tự động phân tích yêu cầu của bạn.
 *   Lập kế hoạch các bước cần thiết, bao gồm việc tạo truy vấn SQL.
 *   Thực thi truy vấn đó trên cơ sở dữ liệu (có thể thông qua một subagent kết nối CSDL).

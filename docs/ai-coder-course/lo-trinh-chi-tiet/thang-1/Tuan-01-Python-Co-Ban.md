@@ -20,6 +20,7 @@
 
 ### 🔴 Khóa chính — Udemy Business:
 **[The Complete Python Bootcamp From Zero to Hero in Python](https://ibmcsr.udemy.com/course/complete-python-bootcamp/)**  
+
 - Giảng viên: Jose Portilla (Pierian Training)
 - ⭐ 4.6 | 561.720 xếp hạng | 22.5 giờ | 170 bài giảng
 - **Tuần này học**: Sections 1-9 (khoảng 10 giờ video)
@@ -35,6 +36,7 @@
 
 ### 🟢 Bổ trợ (nếu cần thêm):
 **Coursera**: [Python for Everybody — Specialization](https://www.coursera.org/specializations/python) (University of Michigan)
+
 - Khóa 1: "Programming for Everybody" — nếu chưa bao giờ code
 
 ### 🆓 Free:
@@ -180,6 +182,7 @@ def write_log(message, filepath="app.log"):
 **Yêu cầu Todo App:**
 ```
 Features:
+
   1. Add task (title, priority: low/medium/high)
   2. List tasks (filter by status, priority)
   3. Complete task (mark as done)

@@ -481,6 +481,7 @@ Sau khi hoàn tất việc triển khai và kiểm thử các tính năng quan t
 **Git** là một hệ thống kiểm soát phiên bản phân tán (Distributed Version Control System - DVCS) được sử dụng rộng rãi nhất hiện nay. Nó là xương sống cho việc quản lý mã nguồn, đặc biệt trong môi trường làm việc nhóm.
 
 **Lợi ích chính của Git**:
+
 *   **Lịch sử thay đổi minh bạch**: Ghi lại mọi thay đổi, ai đã thay đổi, khi nào và tại sao. Bạn có thể xem lại toàn bộ lịch sử phát triển của dự án.
 *   **Phục hồi dễ dàng**: Dễ dàng quay lại các phiên bản trước của mã nguồn, phục hồi các tệp bị xóa hoặc sửa đổi sai.
 *   **Hợp tác hiệu quả**: Cho phép nhiều nhà phát triển làm việc trên cùng một dự án mà không xung đột, thông qua cơ chế phân nhánh (branching) và hợp nhất (merging).
@@ -497,6 +498,7 @@ Sau khi hoàn tất việc triển khai và kiểm thử các tính năng quan t
     git add .
     ```
     Lệnh này thêm tất cả các tệp đã thay đổi hoặc mới tạo vào staging area. Nếu bạn chỉ muốn thêm một số tệp cụ thể, bạn có thể chỉ định đường dẫn của chúng (ví dụ: `git add Repositories/WalkRepository.cs`).
+
 2.  **Tạo Commit**:
     Thực hiện commit với một thông điệp rõ ràng, mô tả những gì đã được thay đổi trong phiên làm việc này. Thông điệp commit là một phần quan trọng của lịch sử dự án.
     ```bash

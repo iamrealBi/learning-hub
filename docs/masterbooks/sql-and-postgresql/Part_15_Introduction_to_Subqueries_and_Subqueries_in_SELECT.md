@@ -153,6 +153,7 @@ FROM
 ```
 
 **Giải thích:**
+
 *   Subquery `(SELECT MAX(price) FROM products)` sẽ được thực thi một lần duy nhất và trả về một giá trị số duy nhất (ví dụ: `989.99`).
 *   Giá trị này sau đó được thêm vào dưới dạng một cột mới (`max_overall_price`) cho mỗi hàng trong tập kết quả của truy vấn chính.
 *   Vì Subquery này luôn trả về một giá trị duy nhất, nó hoàn toàn hợp lệ trong mệnh đề `SELECT`.
@@ -176,6 +177,7 @@ FROM
 ```
 
 **Giải thích:**
+
 *   Truy vấn chính là `SELECT p1.name, p1.price FROM products p1`.
 *   Subquery `(SELECT AVG(p2.price) FROM products p2 WHERE p2.department = p1.department)` là một Correlated Subquery vì nó tham chiếu đến `p1.department` từ truy vấn bên ngoài.
 *   Đối với mỗi hàng sản phẩm `p1` trong truy vấn chính, Subquery sẽ được thực thi lại. Nó sẽ tính giá trung bình của tất cả các sản phẩm `p2` có cùng `department` với sản phẩm `p1` hiện tại.
@@ -283,6 +285,7 @@ FROM
 ```
 
 **Giải thích:**
+
 *   Subquery `(SELECT AVG(price) FROM products)` tính toán giá trị trung bình của tất cả các sản phẩm. Đây là một Scalar Subquery không tương quan, được thực thi một lần.
 *   Kết quả này được sử dụng hai lần: một lần để hiển thị trong cột `global_average_price`, và một lần để tính toán `price_difference_from_avg`.
 
@@ -331,6 +334,7 @@ FROM
 ```
 
 **Giải thích chi tiết:**
+
 *   `SELECT name, price`: Chọn các cột `name` và `price` từ bảng `phones`.
 *   `(SELECT MAX(price) FROM phones)`: Đây là Subquery. Nó được thực thi một lần duy nhất để tìm giá trị tối đa trong cột `price` của bảng `phones`. Kết quả là một giá trị đơn (scalar value), ví dụ `999.00`.
 *   `price::NUMERIC`: Toán tử `::` là một cú pháp tắt (shorthand) của PostgreSQL để ép kiểu dữ liệu. Nó chuyển đổi giá trị `price` của từng hàng hiện tại thành kiểu `NUMERIC`. Việc này là cần thiết vì nếu `price` là `INTEGER` (hoặc `NUMERIC` với scale 0) và `MAX(price)` cũng là `INTEGER` (hoặc `NUMERIC` với scale 0), phép chia có thể dẫn đến kết quả số nguyên bị cắt cụt. Ép kiểu thành `NUMERIC` đảm bảo kết quả là số thập phân chính xác. Một cách khác là `CAST(price AS NUMERIC)`.

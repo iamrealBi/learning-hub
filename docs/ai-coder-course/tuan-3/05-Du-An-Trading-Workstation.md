@@ -6,6 +6,7 @@
 
 ## 1. Mục Tiêu
 Xây dựng **Trading Workstation** hoàn chỉnh sử dụng multi-agent workflow:
+
 - Dashboard real-time với biểu đồ
 - Virtual trading (giao dịch ảo)
 - AI assistant cho chiến lược
@@ -53,6 +54,7 @@ Xây dựng **Trading Workstation** hoàn chỉnh sử dụng multi-agent workfl
 ### Phase 1: Planning (Human + AI)
 ```bash
 claude "/plan Design a trading workstation:
+
 - React frontend with real-time charts
 - Node.js/Express backend  
 - WebSocket for live data
@@ -103,6 +105,7 @@ Vibe Coder → Vibe Engineer → Agentic Engineer
 ## 5. Kết Nối Với SEAP & BookWormHub
 
 Kỹ thuật từ Capstone có thể áp dụng cho BookWormHub:
+
 1. **Multi-agent** cho tính năng phức tạp
 2. **Real-time dashboard** cho admin panel
 3. **AI assistant** cho book recommendations

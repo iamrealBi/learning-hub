@@ -40,6 +40,7 @@ Trong môi trường phát triển hiện đại với các công cụ Agentic A
 
 *   **Phân tích yêu cầu và giao diện người dùng (UI/UX) với Antigravity:**
     Hãy tưởng tượng bạn đang sử dụng Antigravity IDE và có các bản mockup giao diện người dùng (UI) hoặc mô tả tính năng của ứng dụng chia sẻ ảnh. Thay vì tự mình phân tích thủ công, bạn có thể "vibe" ý tưởng của mình bằng cách đưa các yêu cầu này trực tiếp cho Antigravity.
+
     *   **Hướng dẫn Antigravity:** Bạn có thể prompt Antigravity bằng các mô tả ngôn ngữ tự nhiên như:
         *   "Phân tích bản mockup này và liệt kê tất cả các loại dữ liệu chính mà ứng dụng cần quản lý."
         *   "Dựa trên các tính năng 'đăng ảnh', 'bình luận', 'thích', hãy đề xuất các thực thể CSDL cơ bản."
@@ -47,16 +48,19 @@ Trong môi trường phát triển hiện đại với các công cụ Agentic A
 
 *   **Khám phá mẫu thiết kế và kiến trúc đã được kiểm chứng:**
     Nhiều ứng dụng web có các tính năng chung như xác thực người dùng, hệ thống thích, bình luận, v.v. Đối với những tính năng này, bạn không cần phải "phát minh lại bánh xe".
+
     *   **Hướng dẫn Antigravity:** Thay vì tự tìm kiếm "SQL schema for like system" trên Google, bạn có thể trực tiếp yêu cầu Antigravity đề xuất các lược đồ CSDL đã được kiểm chứng cho các tính năng phổ biến.
     *   **Cơ chế ngầm của Antigravity:** Antigravity có thể truy cập kiến thức rộng lớn của nó, và nếu cần, thực hiện "nghiên cứu" bằng cách gọi các subagent trình duyệt để tìm kiếm các mẫu thiết kế CSDL phổ biến và tổng hợp thông tin, đưa ra các gợi ý có cấu trúc, kèm theo giải thích ưu nhược điểm. Điều này giúp bạn nhanh chóng có được một nền tảng vững chắc cho thiết kế của mình.
 
 *   **Lập kế hoạch và tạo schema tự động:**
     Với khả năng lập kế hoạch và chạy script ngầm, Antigravity có thể giúp bạn nhanh chóng phác thảo và tạo ra các câu lệnh `CREATE TABLE` ban đầu.
+
     *   **Hướng dẫn Antigravity:** Bạn có thể "vibe" ý tưởng của mình về các bảng và mối quan hệ (ví dụ: "Tôi muốn bảng `users` có `username` và `email`, bảng `photos` có `url` và thuộc về một user"), sau đó để Antigravity tự động chuyển hóa chúng thành mã SQL PostgreSQL chuẩn, kèm theo các ràng buộc khóa chính, khóa ngoại cần thiết.
     *   **Cơ chế ngầm của Antigravity:** Antigravity sẽ lập kế hoạch các bước tạo bảng, tự động viết các câu lệnh `CREATE TABLE` với `SERIAL PRIMARY KEY` và `REFERENCES` cùng các ràng buộc `NOT NULL`, thậm chí cả các hành động `ON DELETE`/`ON UPDATE` mà chúng ta sẽ tìm hiểu sau. Nó có thể chạy các script này trong môi trường sandbox hoặc kết nối trực tiếp với CSDL phát triển của bạn.
 
 *   **Phản hồi tức thì và tinh chỉnh (Iterative Refinement):**
     Quá trình thiết kế CSDL là lặp đi lặp lại. Sau khi Antigravity tạo schema, bạn có thể yêu cầu nó chạy các lệnh `INSERT` mẫu và `SELECT` để kiểm tra tính đúng đắn của thiết kế và các mối quan hệ.
+
     *   **Hướng dẫn Antigravity:** "Chèn dữ liệu mẫu vào các bảng đã tạo và thực hiện một số truy vấn để kiểm tra xem các mối quan hệ có hoạt động như mong đợi không." "Nếu tôi xóa một người dùng, điều gì sẽ xảy ra với các ảnh của họ?"
     *   **Cơ chế ngầm của Antigravity:** Antigravity có thể tự động tạo và chạy các câu lệnh DML (Data Manipulation Language) để kiểm tra. Nếu có vấn đề về tính toàn vẹn dữ liệu (ví dụ: khóa ngoại không hoạt động đúng) hoặc hiệu suất (truy vấn chậm), Antigravity có thể giúp bạn chẩn đoán và đề xuất các chỉnh sửa, biến quá trình tinh chỉnh thành một vòng lặp phản hồi nhanh chóng và hiệu quả.
 
@@ -68,6 +72,7 @@ Hãy cùng phân tích một ứng dụng chia sẻ ảnh quen thuộc như Inst
 
 **Trang Hồ sơ Người dùng:**
 Khi xem trang hồ sơ của một người dùng (ví dụ: tài khoản Instagram chính thức), chúng ta có thể thấy:
+
 *   **Tên người dùng (Username):** `instagram`
 *   **Tiểu sử (Bio):** Một đoạn văn bản mô tả về người dùng.
 *   **Tính năng theo dõi (Follow/Followers):** Người dùng có thể theo dõi người khác và bị người khác theo dõi. Điều này gợi ý một mối quan hệ giữa các `Người dùng` với nhau.
@@ -75,6 +80,7 @@ Khi xem trang hồ sơ của một người dùng (ví dụ: tài khoản Instag
 
 **Trang Bài đăng/Ảnh Đơn lẻ:**
 Khi xem một bài đăng ảnh cụ thể, chúng ta có thể thấy:
+
 *   **Bình luận (Comments):** Có một danh sách các bình luận dưới ảnh. Các bình luận này được đăng bởi những `Người dùng` cụ thể và dành riêng cho bức `Ảnh` này. Điều này gợi ý mối quan hệ `Bình luận THUỘC VỀ Người dùng` và `Bình luận THUỘC VỀ Ảnh`.
 *   **Lượt thích (Likes):** Người dùng có thể "thích" một bức ảnh. Điều này gợi ý một tài nguyên `Lượt thích` và mối quan hệ `Người dùng THÍCH Ảnh`.
 
@@ -86,6 +92,7 @@ Từ phân tích trên, chúng ta có thể xác định bốn thực thể chí
 4.  **Lượt thích (Likes):** Lưu trữ thông tin về những lượt thích của người dùng cho ảnh.
 
 Và các mối quan hệ sơ bộ giữa chúng:
+
 *   Một `Người dùng` có thể tạo và sở hữu nhiều `Ảnh`.
 *   Một `Người dùng` có thể tạo và sở hữu nhiều `Bình luận`.
 *   Một `Người dùng` có thể tạo và sở hữu nhiều `Lượt thích`.
@@ -112,6 +119,7 @@ Trong thiết kế cơ sở dữ liệu quan hệ, các bảng được liên k�
     *   **Dấu hiệu nhận biết:** Khi bạn có thể diễn đạt mối quan hệ bằng cụm từ "thuộc về một" hoặc "được tạo bởi một". (Ví dụ: "Nhiều ảnh *thuộc về một* người dùng.")
 
 **Ví dụ khác:**
+
 *   **Ảnh và Bình luận:**
     *   Một `Ảnh` *có nhiều* `Bình luận` (Một-Nhiều).
     *   Nhiều `Bình luận` *thuộc về một* `Ảnh` (Nhiều-Một).
@@ -130,6 +138,7 @@ Trong thiết kế cơ sở dữ liệu quan hệ, các bảng được liên k�
 Mối quan hệ Một-Một (One-to-One) xảy ra khi một bản ghi trong bảng A chỉ liên kết với duy nhất một bản ghi trong bảng B, và ngược lại, một bản ghi trong bảng B cũng chỉ liên kết với duy nhất một bản ghi trong bảng A. Đây là loại mối quan hệ ít phổ biến hơn nhưng có những trường hợp sử dụng cụ thể.
 
 **Ví dụ:**
+
 *   **Thuyền trưởng và Thuyền:** Mỗi `Thuyền` có một `Thuyền trưởng` và mỗi `Thuyền trưởng` chỉ chỉ huy một `Thuyền` tại một thời điểm.
 *   **Công ty và CEO:** Một `Công ty` có một `CEO` và một `CEO` chỉ là CEO của một `Công ty` duy nhất tại một thời điểm.
 *   **Quốc gia và Thủ đô:** Một `Quốc gia` có một `Thủ đô` và một `Thủ đô` chỉ là thủ đô của một `Quốc gia`.
@@ -146,6 +155,7 @@ Mối quan hệ Một-Một (One-to-One) xảy ra khi một bản ghi trong bả
 Mối quan hệ Nhiều-Nhiều (Many-to-Many) là mối quan hệ phức tạp nhất trong ba loại. Nó xảy ra khi một bản ghi trong bảng A có thể liên kết với **nhiều** bản ghi trong bảng B, và ngược lại, một bản ghi trong bảng B cũng có thể liên kết với **nhiều** bản ghi trong bảng A.
 
 **Ví dụ:**
+
 *   **Học sinh và Lớp học:** Một `Học sinh` có thể học `nhiều Lớp học`, và một `Lớp học` có thể có `nhiều Học sinh`.
 *   **Nhiệm vụ và Kỹ sư:** Một `Nhiệm vụ` có thể được giao cho `nhiều Kỹ sư`, và một `Kỹ sư` có thể làm `nhiều Nhiệm vụ`.
 *   **Phim và Diễn viên:** Một `Phim` có thể có `nhiều Diễn viên` đóng, và một `Diễn viên` có thể đóng trong `nhiều Phim`.
@@ -165,6 +175,7 @@ Mối quan hệ Nhiều-Nhiều (Many-to-Many) là mối quan hệ phức tạp 
 Khóa Chính (Primary Key) là một cột hoặc tập hợp các cột trong một bảng được sử dụng để định danh duy nhất mỗi hàng (bản ghi) trong bảng đó. Nó đóng vai trò là "địa chỉ" duy nhất cho mỗi bản ghi.
 
 **Đặc điểm cốt lõi của Khóa Chính:**
+
 *   **Duy nhất (Unique):** Mỗi giá trị trong cột khóa chính phải là duy nhất trong toàn bộ bảng. Không có hai hàng nào có thể có cùng một giá trị khóa chính.
 *   **Không rỗng (Not Null):** Giá trị của khóa chính không được phép rỗng (NULL). Một bản ghi phải luôn có một định danh.
 *   **Không thay đổi (Immutable - Lý tưởng):** Giá trị của khóa chính lý tưởng là không thay đổi trong suốt vòng đời của bản ghi. Việc thay đổi khóa chính có thể gây ra sự không nhất quán dữ liệu ở các bảng khác có tham chiếu đến nó và làm giảm hiệu suất.
@@ -177,6 +188,7 @@ Nếu chúng ta truy vấn "người dùng có ID là 1", chúng ta sẽ luôn n
 
 **Cơ chế tự động tạo Khóa Chính trong PostgreSQL (`SERIAL` và `BIGSERIAL`):**
 PostgreSQL cung cấp kiểu dữ liệu `SERIAL` (hoặc `BIGSERIAL` cho các bảng lớn hơn có thể vượt quá giới hạn 2 tỷ bản ghi của `INTEGER`) để tự động tạo các giá trị số nguyên tăng dần cho khóa chính. Khi bạn khai báo một cột là `SERIAL PRIMARY KEY`:
+
 1.  PostgreSQL sẽ tự động tạo một chuỗi số (sequence) ẩn và gán giá trị tiếp theo từ chuỗi đó mỗi khi một hàng mới được chèn vào mà không chỉ định giá trị cho cột `id`.
 2.  Nó đảm bảo tính duy nhất và không rỗng của cột đó.
 3.  Nó tạo ra một chỉ mục (index) trên cột đó một cách tự động, giúp tăng tốc độ truy vấn khi tìm kiếm bằng khóa chính, điều này rất quan trọng cho hiệu suất cơ sở dữ liệu.
@@ -189,16 +201,19 @@ PostgreSQL cung cấp kiểu dữ liệu `SERIAL` (hoặc `BIGSERIAL` cho các b
 Khóa Ngoại (Foreign Key) là một cột hoặc tập hợp các cột trong một bảng (gọi là bảng con hoặc bảng tham chiếu), thiết lập một liên kết giữa dữ liệu trong bảng đó với dữ liệu trong một bảng khác (gọi là bảng cha hoặc bảng được tham chiếu). Khóa ngoại tham chiếu đến khóa chính (hoặc một khóa duy nhất khác) của bảng cha.
 
 **Mục đích cốt lõi của Khóa Ngoại:**
+
 *   **Thiết lập mối quan hệ:** Là cơ chế để liên kết các bản ghi giữa hai hoặc nhiều bảng, biến các bảng độc lập thành một hệ thống dữ liệu có tổ chức.
 *   **Đảm bảo tính toàn vẹn tham chiếu (Referential Integrity):** Khóa ngoại đảm bảo rằng các giá trị trong cột khóa ngoại phải khớp với một giá trị tồn tại trong cột khóa chính của bảng được tham chiếu. Điều này ngăn chặn việc tạo ra các liên kết đến dữ liệu không tồn tại (còn gọi là "dữ liệu mồ côi" - orphan data), duy trì sự nhất quán và tin cậy của cơ sở dữ liệu.
 
 **Quy tắc xác định vị trí Khóa Ngoại:**
+
 *   Trong mối quan hệ Một-Nhiều (hoặc Nhiều-Một), cột khóa ngoại luôn được đặt ở **phía "Nhiều"** của mối quan hệ.
     *   *Ví dụ:* Một `Người dùng` có `Nhiều Ảnh`. Bảng `photos` (phía "Nhiều") sẽ có khóa ngoại `user_id` trỏ đến `users.id` (phía "Một").
     *   *Ví dụ:* Một `Ảnh` có `Nhiều Bình luận`. Bảng `comments` (phía "Nhiều") sẽ có khóa ngoại `photo_id` trỏ đến `photos.id` (phía "Một").
     *   *Ví dụ:* Một `Người dùng` có `Nhiều Bình luận`. Bảng `comments` (phía "Nhiều") sẽ có khóa ngoại `user_id` trỏ đến `users.id` (phía "Một").
 
 **Đặc điểm của Khóa Ngoại:**
+
 *   **Không nhất thiết phải duy nhất:** Một giá trị khóa ngoại có thể xuất hiện nhiều lần trong cột khóa ngoại (ví dụ: nhiều ảnh có thể có cùng `user_id` vì chúng thuộc về cùng một người dùng).
 *   **Có thể chứa giá trị NULL:** Tùy thuộc vào thiết kế, một khóa ngoại có thể được phép rỗng nếu mối quan hệ là tùy chọn (ví dụ: một bài viết có thể không có tác giả). Tuy nhiên, trong nhiều trường hợp, chúng ta sẽ muốn nó là `NOT NULL` để đảm bảo mỗi bản ghi "phía nhiều" luôn có một bản ghi "phía một" tương ứng.
 *   **Có thể thay đổi:** Giá trị của khóa ngoại có thể thay đổi nếu mối quan hệ thay đổi (ví dụ: chuyển quyền sở hữu một bức ảnh từ người dùng này sang người dùng khác).
@@ -206,6 +221,7 @@ Khóa Ngoại (Foreign Key) là một cột hoặc tập hợp các cột trong 
 
 **Quy ước đặt tên cho Khóa Ngoại:**
 Thông thường, khóa ngoại được đặt tên theo quy ước `[tên_bảng_tham_chiếu]_id`.
+
 *   *Ví dụ:* Trong bảng `photos`, khóa ngoại trỏ đến bảng `users` sẽ được gọi là `user_id`.
 *   *Ví dụ:* Trong bảng `comments`, khóa ngoại trỏ đến bảng `photos` sẽ được gọi là `photo_id`.
 
@@ -272,6 +288,7 @@ CREATE TABLE users (
 ```
 
 **Giải thích:**
+
 *   `id SERIAL PRIMARY KEY`: Cột `id` sẽ là khóa chính, sử dụng kiểu `SERIAL` của PostgreSQL để tự động tạo ID tăng dần. Đây là một khóa thay thế (surrogate key) lý tưởng.
 *   `username VARCHAR(50) NOT NULL UNIQUE`: `username` là tên hiển thị, không được phép rỗng và phải là duy nhất giữa các người dùng.
 *   `email VARCHAR(100) UNIQUE`: `email` cũng phải duy nhất, nhưng ở đây chúng ta cho phép nó rỗng (không có `NOT NULL`).
@@ -325,6 +342,7 @@ CREATE TABLE photos (
 ```
 
 **Giải thích:**
+
 *   `id SERIAL PRIMARY KEY`: Tương tự như bảng `users`, `id` là khóa chính tự động tăng của bảng `photos`.
 *   `url VARCHAR(200) NOT NULL`: Cột lưu trữ URL của ảnh. `NOT NULL` đảm bảo mỗi ảnh phải có URL.
 *   `caption VARCHAR(255)`: Chú thích cho ảnh, không bắt buộc.
@@ -380,6 +398,7 @@ CREATE TABLE comments (
 ```
 
 **Giải thích:**
+
 *   `user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE`: Liên kết bình luận với người dùng đã tạo ra nó. `NOT NULL` đảm bảo mỗi bình luận đều có một tác giả. `ON DELETE CASCADE` đảm bảo rằng nếu một người dùng bị xóa, tất cả các bình luận của họ cũng sẽ bị xóa.
 *   `photo_id INTEGER NOT NULL REFERENCES photos(id) ON DELETE CASCADE`: Liên kết bình luận với bức ảnh mà nó thuộc về. `NOT NULL` đảm bảo mỗi bình luận đều thuộc về một ảnh. `ON DELETE CASCADE` đảm bảo rằng nếu một bức ảnh bị xóa, tất cả các bình luận liên quan đến bức ảnh đó cũng sẽ bị xóa.
 
@@ -431,6 +450,7 @@ CREATE TABLE likes (
 ```
 
 **Giải thích:**
+
 *   `user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE`: Khóa ngoại trỏ đến bảng `users`.
 *   `photo_id INTEGER NOT NULL REFERENCES photos(id) ON DELETE CASCADE`: Khóa ngoại trỏ đến bảng `photos`.
 *   `PRIMARY KEY (user_id, photo_id)`: Đây là điểm mấu chốt. Chúng ta định nghĩa một khóa chính bao gồm cả `user_id` và `photo_id`. Điều này có nghĩa là sự kết hợp của `user_id` và `photo_id` phải là duy nhất. Ví dụ, người dùng có `id=1` chỉ có thể thích ảnh có `id=2` một lần duy nhất. Nếu họ cố gắng thích lại, cơ sở dữ liệu sẽ báo lỗi vi phạm khóa chính.

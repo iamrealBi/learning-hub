@@ -43,6 +43,7 @@ Có nhiều chiến lược để triển khai phiên bản hóa API, mỗi phư
 **Cơ chế:** Server đọc số phiên bản từ một đoạn của URL và định tuyến yêu cầu đến phiên bản API tương ứng.
 
 **Ví dụ:**
+
 *   `GET /api/v1/countries`
 *   `GET /api/v2/countries`
 
@@ -62,6 +63,7 @@ Số phiên bản được truyền dưới dạng tham số trong chuỗi truy 
 **Cơ chế:** Server kiểm tra các tham số truy vấn trong URL để tìm khóa chứa thông tin phiên bản.
 
 **Ví dụ:**
+
 *   `GET /api/countries?api-version=1.0`
 *   `GET /api/countries?api-version=2.0`
 
@@ -81,6 +83,7 @@ Số phiên bản được truyền trong một tiêu đề HTTP tùy chỉnh.
 **Cơ chế:** Server đọc một tiêu đề HTTP cụ thể (ví dụ: `X-API-Version`) từ yêu cầu và định tuyến đến phiên bản API tương ứng.
 
 **Ví dụ:**
+
 *   `GET /api/countries`
     *   `Headers: X-API-Version: 1.0`
 *   `GET /api/countries`
@@ -102,6 +105,7 @@ Sử dụng tiêu đề HTTP `Accept` để chỉ định phiên bản API mong 
 **Cơ chế:** Client gửi một tiêu đề `Accept` với một kiểu media tùy chỉnh bao gồm thông tin phiên bản (ví dụ: `application/vnd.myapi.v1+json`). Server phân tích tiêu đề này để trả về phản hồi phù hợp.
 
 **Ví dụ:**
+
 *   `GET /api/countries`
     *   `Headers: Accept: application/vnd.myapi.v1+json`
 *   `GET /api/countries`
@@ -381,6 +385,7 @@ Giả sử chúng ta muốn thay đổi thuộc tính `Name` thành `CountryName
     ```
 
 Bây giờ, khi bạn chạy ứng dụng, bạn sẽ có hai endpoint hoạt động độc lập:
+
 *   `GET /api/v1/country`: Trả về danh sách quốc gia với `Id` và `Name`.
 *   `GET /api/v2/country`: Trả về danh sách quốc gia với `Id` và `CountryName`.
 

@@ -24,6 +24,7 @@
 > "Vấn đề lớn nhất khi dùng AI là nó không hiểu dự án của mình. Giải pháp là Context Engineering — tạo file hướng dẫn cho AI."
 
 **Bước demo:**
+
 1. Mở BookWormHub project
 2. Show file CLAUDE.md đã tạo
 3. Giải thích từng section: architecture, rules, commands
@@ -42,6 +43,7 @@
 > "Mình đã dùng AI để scan 38 tests hiện có và phát hiện 18+ edge cases thiếu. Để mình demo một cái."
 
 **Bước demo:**
+
 1. Mở `BookServiceTests.cs` — show tests hiện có
 2. Highlight: "Không có test cho combined search + genre filter"
 3. Mở terminal, chạy:
@@ -63,6 +65,7 @@
 ### Mục tiêu: Demo pre-commit review tự động
 
 **Bước demo:**
+
 1. Tạo một file mới cố ý vi phạm rules:
    ```csharp
    // Bad: Business logic trong Controller

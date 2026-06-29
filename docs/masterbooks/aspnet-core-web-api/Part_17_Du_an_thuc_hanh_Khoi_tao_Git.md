@@ -239,6 +239,7 @@ ASP.NET Core được xây dựng dựa trên nguyên tắc Dependency Injection
 > *   **Tái sử dụng mã:** Các dịch vụ có thể được tái sử dụng ở nhiều nơi khác nhau mà không cần viết lại logic khởi tạo.
 
 Trong `Program.cs`, khu vực `builder.Services` là nơi bạn đăng ký tất cả các dịch vụ mà ứng dụng của bạn sẽ sử dụng vào bộ chứa DI.
+
 *   `builder.Services.AddControllers();`: Đăng ký các dịch vụ cần thiết để các Controller hoạt động, bao gồm cả việc đăng ký các Controller vào bộ chứa DI.
 *   `builder.Services.AddSwaggerGen();`: Cấu hình dịch vụ để tạo tài liệu API cho Swagger.
 
@@ -493,6 +494,7 @@ Sau khi hiểu về cấu trúc và nguyên lý, giờ là lúc chạy ứng d�
 Khi ứng dụng chạy, trình duyệt sẽ tự động mở và điều hướng đến trang Swagger UI (nếu bạn đã bật "Enable OpenAPI support" khi tạo dự án).
 
 Swagger UI là một công cụ mạnh mẽ để:
+
 *   **Tài liệu hóa API:** Hiển thị tất cả các điểm cuối (endpoints) của API, các động từ HTTP được hỗ trợ, tham số đầu vào, cấu trúc dữ liệu yêu cầu/phản hồi, và các mã trạng thái phản hồi có thể có.
 *   **Kiểm thử API:** Cho phép bạn gửi các yêu cầu HTTP trực tiếp từ trình duyệt và xem phản hồi một cách trực quan.
 

@@ -9,6 +9,7 @@ Chương này đi sâu vào cấu trúc cơ bản của một dự án ASP.NET C
 ASP.NET Core Web API là một framework mã nguồn mở, đa nền tảng và hiệu suất cao của Microsoft, được thiết kế để xây dựng các dịch vụ HTTP. Các dịch vụ này, thường được gọi là Web API, đóng vai trò là cầu nối cung cấp dữ liệu và chức năng cho nhiều loại ứng dụng khách (client) khác nhau, bao gồm ứng dụng web (Single Page Applications như React, Angular, Vue), ứng dụng di động (iOS, Android), ứng dụng desktop, và thậm chí là các hệ thống backend khác.
 
 **Đặc điểm nổi bật của ASP.NET Core Web API:**
+
 *   **Hiệu suất cao:** Được tối ưu hóa cho tốc độ và khả năng mở rộng.
 *   **Đa nền tảng:** Có thể chạy trên Windows, macOS và Linux.
 *   **Mã nguồn mở:** Cộng đồng lớn và sự phát triển liên tục.
@@ -45,6 +46,7 @@ REST không phải là một giao thức mà là một phong cách kiến trúc 
 #### Tầm quan trọng của REST trong bối cảnh AI Coding (Antigravity IDE)
 
 Trong kỷ nguyên AI Coding, việc thiết kế API theo chuẩn RESTful không chỉ giúp con người mà còn hỗ trợ mạnh mẽ cho các hệ thống như Antigravity IDE.
+
 *   **Dễ hiểu và Phân tích cho AI:** Các nguyên tắc rõ ràng của REST (URI cho tài nguyên, HTTP Verbs cho hành động, trạng thái không lưu trữ) cung cấp một cấu trúc ngữ nghĩa mà Antigravity có thể dễ dàng phân tích và hiểu. Thay vì phải "suy luận" ý định của một endpoint, AI có thể dựa vào các quy ước đã biết.
 *   **Tự động tạo mã và kiểm thử:** Khi một API tuân thủ REST, Antigravity có thể tự động tạo ra các đoạn mã client để gọi API đó, hoặc thậm chí sinh ra các kịch bản kiểm thử (test cases) một cách chính xác hơn. Ví dụ, khi thấy `GET /api/products/{id}`, Antigravity biết rằng đây là thao tác đọc một sản phẩm cụ thể.
 *   **Tương tác linh hoạt:** Giao diện thống nhất giúp Antigravity dễ dàng thích nghi với các API khác nhau mà không cần học một giao diện mới mỗi lần. Nó có thể dự đoán cách một tài nguyên sẽ được thao tác.
@@ -165,6 +167,7 @@ Trong `Program.cs`, có hai phần chính:
 Phần `builder.Services` là nơi bạn đăng ký các dịch vụ (services) vào container Dependency Injection (DI) của ứng dụng.
 
 **Dependency Injection (DI): Tại sao và Làm thế nào?**
+
 *   **Tại sao cần DI?** DI là một kỹ thuật thiết kế phần mềm giúp giảm sự ghép nối (loose coupling) giữa các thành phần trong ứng dụng. Thay vì một đối tượng tự tạo ra hoặc tìm kiếm các đối tượng mà nó cần (gọi là "phụ thuộc"), các đối tượng đó sẽ được "tiêm" (inject) vào nó từ bên ngoài thông qua constructor, property hoặc method.
     *   **Lợi ích:**
         *   **Dễ kiểm thử (Testability):** Có thể dễ dàng thay thế các phụ thuộc thực tế bằng các đối tượng giả (mock) hoặc giả lập (stub) trong các bài kiểm thử đơn vị (unit tests).
@@ -196,6 +199,7 @@ Khi đăng ký một dịch vụ, bạn phải chỉ định lifetime (vòng đ�
 
 **DI và Antigravity IDE:**
 Việc sử dụng Dependency Injection một cách nhất quán mang lại lợi ích lớn cho các hệ thống AI Coding như Antigravity IDE.
+
 *   **Phân tích mã nguồn rõ ràng:** Antigravity có thể dễ dàng phân tích biểu đồ phụ thuộc (dependency graph) của ứng dụng, hiểu rõ các mối quan hệ giữa các thành phần.
 *   **Tự động tạo Mock/Stub:** Khi cần tạo các bài kiểm thử đơn vị, Antigravity có thể tự động sinh ra các đối tượng mock hoặc stub cho các phụ thuộc, vì nó biết cách các dịch vụ được "tiêm" vào.
 *   **Đề xuất tái cấu trúc (Refactoring):** Nếu Antigravity phát hiện các phụ thuộc không hợp lý hoặc các vi phạm nguyên tắc SOLID, nó có thể đề xuất các cải tiến về kiến trúc.
@@ -206,6 +210,7 @@ Việc sử dụng Dependency Injection một cách nhất quán mang lại lợ
 Phần `app` là nơi bạn định nghĩa chuỗi các Middleware sẽ xử lý mỗi yêu cầu HTTP đến.
 
 **Middleware: Cơ chế Chuỗi Trách nhiệm**
+
 *   **Cơ chế ngầm (Under the hood):** Middleware là một phần mềm được tích hợp vào pipeline của ứng dụng để xử lý các yêu cầu và phản hồi HTTP. Mỗi Middleware có thể thực hiện một tác vụ cụ thể (ví dụ: ghi log, xác thực, xử lý lỗi, nén dữ liệu) trước khi chuyển yêu cầu cho Middleware tiếp theo trong chuỗi, hoặc nó có thể tạo phản hồi và kết thúc chuỗi.
 *   **Thứ tự quan trọng:** Middleware được thực thi theo thứ tự mà chúng được thêm vào trong `Program.cs`. Thứ tự này rất quan trọng vì mỗi Middleware có thể ảnh hưởng đến cách yêu cầu được xử lý bởi các Middleware sau đó. Ví dụ, `UseAuthentication()` phải đứng trước `UseAuthorization()`.
 
@@ -227,6 +232,7 @@ Phần `app` là nơi bạn định nghĩa chuỗi các Middleware sẽ xử lý
 
 **Tầm quan trọng của Pipeline đối với khả năng kiểm soát của AI:**
 Một pipeline Middleware được cấu trúc rõ ràng giúp Antigravity IDE hiểu được luồng xử lý của một yêu cầu. Điều này cho phép AI:
+
 *   **Đề xuất chèn Middleware:** Nếu bạn quên một Middleware quan trọng (ví dụ: xác thực), Antigravity có thể gợi ý thêm nó vào đúng vị trí.
 *   **Phân tích hiệu suất:** AI có thể phân tích các Middleware để xác định các điểm nghẽn hiệu suất tiềm năng.
 *   **Kiểm tra bảo mật:** Bằng cách hiểu thứ tự của các Middleware bảo mật, Antigravity có thể giúp xác định các lỗ hổng (ví dụ: ủy quyền được thực hiện trước xác thực).
@@ -234,6 +240,7 @@ Một pipeline Middleware được cấu trúc rõ ràng giúp Antigravity IDE h
 #### 2.3.4. Thư mục `Controllers`
 
 Đây là thư mục trung tâm nơi bạn sẽ tạo các Controller cho API của mình.
+
 *   Mỗi Controller là một lớp C# kế thừa từ `ControllerBase` (hoặc `Controller` nếu bạn xây dựng cả API và View).
 *   Mỗi Controller chứa một hoặc nhiều phương thức hành động (Action Methods) được thiết kế để xử lý các yêu cầu HTTP đến các tài nguyên cụ thể.
 *   Các Controller chịu trách nhiệm nhận yêu cầu, gọi logic nghiệp vụ (thường thông qua các dịch vụ đã được inject), và trả về phản hồi HTTP.
@@ -287,6 +294,7 @@ HTTP Verbs (hoặc HTTP Methods) là xương sống ngữ nghĩa của các API 
 ### 2.4.2. Ví dụ Thực tế và Quy ước RESTful
 
 Việc sử dụng đúng HTTP Verbs là một phần quan trọng của việc tuân thủ quy ước RESTful.
+
 *   **Tài nguyên:** `Album`
 *   `GET /albums`: Lấy tất cả album.
 *   `GET /albums/5`: Lấy album có ID là 5.
@@ -298,6 +306,7 @@ Việc sử dụng đúng HTTP Verbs là một phần quan trọng của việc 
 ### 2.4.3. Tư duy Vibe Coding với HTTP Verbs: Thiết kế API trực quan cho cả người và AI
 
 Trong Vibe Coding, chúng ta không chỉ viết code mà còn "cảm nhận" được ý nghĩa của nó. Với HTTP Verbs, điều này có nghĩa là:
+
 *   **Sự rõ ràng ngay lập tức:** Khi Antigravity IDE hoặc một developer khác nhìn vào một endpoint như `DELETE /api/users/{id}`, họ ngay lập tức "cảm nhận" được ý định là xóa một người dùng. Không cần đọc tài liệu dài dòng.
 *   **Giảm thiểu lỗi:** Việc sử dụng đúng Verb giúp tránh hiểu lầm và giảm thiểu lỗi trong quá trình tích hợp. Nếu bạn dùng `POST` để xóa, đó là một "bad vibe" vì nó đi ngược lại quy ước.
 *   **Dễ dàng tự động hóa:** Đối với Antigravity, sự nhất quán trong việc sử dụng Verbs cho phép nó dễ dàng suy luận các hành động và tự động tạo ra các yêu cầu client hoặc kiểm thử chính xác. AI có thể "đọc vị" được API nhanh chóng hơn.
@@ -489,6 +498,7 @@ namespace NZWalks.API.Controllers
 ```
 
 **Giải thích bổ sung về `IActionResult` và Mã trạng thái HTTP:**
+
 *   **`IActionResult`:** Là một interface trong ASP.NET Core MVC/API, đại diện cho kết quả của một Action Method. Nó cho phép Controller trả về nhiều loại phản hồi khác nhau (JSON, XML, file, mã trạng thái HTTP).
 *   **Các phương thức trợ giúp phổ biến của `ControllerBase`:**
     *   `Ok(object value)`: Trả về `HTTP 200 OK` với dữ liệu trong body.

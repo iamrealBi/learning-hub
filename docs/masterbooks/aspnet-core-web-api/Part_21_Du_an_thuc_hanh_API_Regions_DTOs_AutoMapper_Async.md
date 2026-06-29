@@ -3,6 +3,7 @@
 Trong hành trình xây dựng RESTful Web API với ASP.NET Core và Entity Framework Core, việc tạo ra một API không chỉ hoạt động mà còn tuân thủ các nguyên tắc thiết kế tốt là yếu tố then chốt. Phần này sẽ đưa dự án API Vùng (Regions) của chúng ta lên một tầm cao mới bằng cách giới thiệu ba kỹ thuật cốt lõi: **Data Transfer Objects (DTOs)**, thư viện **AutoMapper**, và **Lập trình Bất đồng bộ (Async/Await)**.
 
 Mục tiêu chính là nâng cấp API hiện có để đảm bảo tính tách biệt, khả năng bảo trì và hiệu suất vượt trội. Chúng ta sẽ khám phá cách:
+
 *   **DTOs** giúp định hình dữ liệu giao tiếp với client, bảo vệ mô hình miền và tạo ra một "hợp đồng" API ổn định.
 *   **AutoMapper** tự động hóa quá trình ánh xạ đối tượng, loại bỏ đáng kể code lặp lại (boilerplate) và tăng tốc độ phát triển.
 *   **Async/Await** tối ưu hóa hiệu suất và khả năng mở rộng của ứng dụng bằng cách cho phép các thao tác I/O (như truy vấn cơ sở dữ liệu) diễn ra bất đồng bộ, giải phóng tài nguyên hệ thống.
@@ -541,6 +542,7 @@ Sau khi Repository đã bất đồng bộ, chúng ta cần cập nhật Control
 Sau khi hoàn thành các cải tiến quan trọng này cho API của chúng ta, việc lưu các thay đổi vào hệ thống kiểm soát phiên bản Git là bước không thể thiếu. Việc commit thường xuyên giúp bạn theo dõi tiến độ, dễ dàng quay lại các phiên bản trước khi cần, và cộng tác hiệu quả hơn với nhóm phát triển.
 
 Để lưu các thay đổi:
+
 1.  **Mở cửa sổ Git Changes** trong Visual Studio hoặc sử dụng dòng lệnh Git trong terminal.
 2.  **Đánh dấu tất cả các tệp đã thay đổi** (Stage Changes) bao gồm các tệp DTO (`RegionDto.cs`), Profile (`RegionProfile.cs`), Repository (`IRegionRepository.cs`, `SQLRegionRepository.cs`), và Controller (`RegionsController.cs`), cùng với tệp cấu hình (`Program.cs`).
 3.  **Viết một thông điệp commit rõ ràng và súc tích** tóm tắt các thay đổi đã thực hiện. Một thông điệp commit tốt nên bắt đầu bằng một động từ thể hiện hành động, ví dụ: "feat: Implement DTOs, AutoMapper, and Async/Await for Regions API".

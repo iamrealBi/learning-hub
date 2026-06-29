@@ -9,6 +9,7 @@ Chúng ta không chỉ dừng lại ở cú pháp khai báo mà còn đi sâu v�
 ## Mục tiêu của Chương này
 
 Sau khi hoàn thành chương này, bạn sẽ có khả năng:
+
 *   Định nghĩa và sử dụng biến cùng hằng số một cách thành thạo trong C#.
 *   Áp dụng các quy tắc và quy ước đặt tên chuẩn của C# để tạo mã nguồn rõ ràng.
 *   Phân biệt sâu sắc giữa Kiểu giá trị (Value Type) và Kiểu tham chiếu (Reference Type), bao gồm cơ chế cấp phát bộ nhớ trên Stack và Heap.
@@ -72,6 +73,7 @@ Một **hằng số** là một giá trị mà chúng ta biết tại thời đi
 **Tại sao chúng ta sử dụng hằng số?**
 
 Việc sử dụng hằng số mang lại nhiều lợi ích quan trọng:
+
 *   **An toàn dữ liệu:** Đảm bảo rằng các giá trị quan trọng không bị thay đổi một cách vô ý trong quá trình thực thi chương trình.
 *   **Tính rõ ràng:** Thay vì sử dụng các "số ma thuật" (magic numbers) trực tiếp trong mã (ví dụ: `if (loai == 3)`), việc sử dụng hằng số có tên mô tả (`if (loai == LOAI_SAN_PHAM_DAC_BIET)`) giúp mã dễ đọc và dễ hiểu hơn.
 *   **Dễ bảo trì:** Nếu một giá trị cố định cần thay đổi (ví dụ: thuế suất), bạn chỉ cần thay đổi nó ở một vị trí duy nhất (định nghĩa hằng số), thay vì phải tìm kiếm và sửa đổi ở nhiều nơi trong mã.
@@ -108,6 +110,7 @@ Console.WriteLine($"Số ngày trong tuần: {SO_NGAY_TRONG_TUAN}");
 **Định danh (Identifier)** là tên bạn đặt cho biến, hằng số, phương thức, lớp, v.v. Có một số quy tắc bạn phải tuân thủ và các quy ước tốt nhất để mã của bạn dễ đọc hơn.
 
 **Quy tắc bắt buộc:**
+
 *   Định danh phải bắt đầu bằng một chữ cái (a-z, A-Z), dấu gạch dưới (`_`), hoặc ký tự `@`. Nó không thể bắt đầu bằng một số (ví dụ: `1stName` là sai, `firstName` là đúng).
 *   Định danh không thể chứa khoảng trắng (ví dụ: `first Name` là sai, `firstName` là đúng).
 *   Định danh không thể là một từ khóa dành riêng của C# (ví dụ: `class`, `int`, `void`, `public`).

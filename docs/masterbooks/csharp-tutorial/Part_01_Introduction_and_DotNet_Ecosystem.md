@@ -5,6 +5,7 @@
 Chào mừng bạn đến với khóa học lập trình C#. Trong chương đầu tiên này, chúng ta sẽ cùng nhau đặt những viên gạch nền tảng, tạo dựng một bức tranh tổng quan về ngôn ngữ C# và nền tảng .NET – hai khái niệm cốt lõi sẽ đồng hành cùng bạn trong suốt quá trình học. Mục tiêu của phần này là không chỉ giới thiệu các khái niệm mà còn giúp bạn hình thành tư duy lập trình hiện đại, tận dụng tối đa các công cụ phát triển tiên tiến.
 
 Sau khi hoàn thành chương này, bạn sẽ có khả năng:
+
 *   Phân biệt rõ ràng vai trò của C# (ngôn ngữ lập trình) và .NET (nền tảng phát triển).
 *   Hiểu sâu sắc cơ chế hoạt động của Common Language Runtime (CLR) và vai trò của nó trong việc quản lý bộ nhớ và thực thi mã.
 *   Nắm vững kiến trúc cơ bản của một ứng dụng .NET thông qua các khái niệm về Lớp (Class), Không gian tên (Namespace) và Tập hợp (Assembly).
@@ -22,6 +23,7 @@ C# và .NET thường được nhắc đến cùng nhau, dẫn đến sự nhầ
 C# (phát âm là "C-sharp") là một ngôn ngữ lập trình hướng đối tượng (Object-Oriented Programming - OOP), được phát triển bởi Microsoft như một phần của sáng kiến .NET. Nó được thiết kế để kết hợp những ưu điểm của C++ (hiệu năng, kiểm soát cấp thấp) và Java (đơn giản, an toàn, quản lý bộ nhớ tự động).
 
 **Đặc điểm nổi bật của C#:**
+
 *   **Hướng đối tượng:** Mọi thứ trong C# đều xoay quanh các đối tượng, giúp tổ chức mã nguồn một cách logic và dễ tái sử dụng.
 *   **An toàn kiểu (Type-Safe):** Ngôn ngữ này kiểm tra chặt chẽ các kiểu dữ liệu, ngăn chặn nhiều lỗi phổ biến trong quá trình biên dịch và thực thi.
 *   **Quản lý bộ nhớ tự động:** Nhờ có bộ thu gom rác (Garbage Collector), nhà phát triển không cần bận tâm về việc cấp phát và giải phóng bộ nhớ thủ công, giảm thiểu lỗi rò rỉ bộ nhớ.
@@ -39,6 +41,7 @@ Ban đầu, .NET được biết đến với tên gọi **.NET Framework**, ch�
 > .NET không chỉ dành riêng cho C#. Nhiều ngôn ngữ lập trình khác cũng có thể nhắm mục tiêu và sử dụng nền tảng .NET để xây dựng ứng dụng, bao gồm F# (ngôn ngữ lập trình hàm) và VB.NET (Visual Basic .NET). Điều này là nhờ vào một tiêu chuẩn chung gọi là **Common Language Infrastructure (CLI)**, mà .NET tuân thủ. CLI định nghĩa các quy tắc để biên dịch mã nguồn thành mã trung gian và cách CLR thực thi chúng, cho phép các ngôn ngữ khác nhau hoạt động liền mạch với nhau.
 
 Nền tảng .NET bao gồm hai thành phần chính:
+
 1.  **Common Language Runtime (CLR):** Môi trường thời gian chạy chịu trách nhiệm quản lý việc thực thi các chương trình .NET.
 2.  **Thư viện lớp cơ sở (Base Class Library - BCL):** Một tập hợp lớn các thư viện mã nguồn có sẵn, cung cấp các chức năng phong phú cho việc phát triển ứng dụng, từ thao tác với chuỗi, tệp, mạng, đến làm việc với cơ sở dữ liệu và giao diện người dùng.
 
@@ -59,6 +62,7 @@ Microsoft đã học hỏi từ mô hình của Java và áp dụng một giải
 ### 1.3.2 Biên dịch Just-In-Time (JIT) và quá trình thực thi
 
 Đây là lúc CLR và trình biên dịch **Just-In-Time (JIT)** phát huy tác dụng. Khi một ứng dụng .NET được chạy:
+
 1.  **Tải mã IL:** CLR tải các tập hợp (.exe hoặc .dll) chứa mã IL của ứng dụng vào bộ nhớ.
 2.  **Biên dịch JIT:** Khi một phần của mã IL cần được thực thi lần đầu tiên, trình biên dịch JIT của CLR sẽ dịch phần mã IL đó thành mã máy gốc (native code) tương ứng với kiến trúc CPU và hệ điều hành hiện tại.
 3.  **Thực thi:** Mã máy đã dịch sau đó được CPU thực thi.
@@ -93,6 +97,7 @@ Một ứng dụng .NET được xây dựng từ các khối cơ bản và đư
 Lớp là khối xây dựng cơ bản nhất và là nền tảng của lập trình hướng đối tượng (OOP) trong C#. Một lớp không phải là một đối tượng thực tế, mà là một **bản thiết kế (blueprint)** hoặc khuôn mẫu để tạo ra các đối tượng. Nó định nghĩa cấu trúc và hành vi chung mà các đối tượng thuộc lớp đó sẽ có.
 
 Một lớp định nghĩa hai thành phần chính:
+
 *   **Dữ liệu (Data) hay Thuộc tính (Properties):** Các biến lưu trữ trạng thái của đối tượng. Ví dụ, một lớp `Car` (ô tô) có thể có các thuộc tính như `Color` (màu sắc), `Model` (kiểu xe), `Year` (năm sản xuất).
 *   **Hành vi (Behavior) hay Phương thức (Methods):** Các hàm thực hiện các hành động hoặc thao tác trên dữ liệu của đối tượng. Ví dụ, lớp `Car` có thể có các phương thức như `Start()` (khởi động), `Accelerate()` (tăng tốc), `Brake()` (phanh).
 
@@ -130,6 +135,7 @@ Khi số lượng lớp trong một ứng dụng tăng lên, việc quản lý v
 **Không gian tên là một vùng chứa logic để tổ chức các lớp, cấu trúc, giao diện và các kiểu khác có liên quan với nhau.** Mục đích chính của không gian tên là tránh xung đột tên giữa các kiểu dữ liệu khác nhau, đặc biệt khi bạn sử dụng các thư viện từ bên thứ ba.
 
 Ví dụ, trong thư viện lớp cơ sở của .NET, chúng ta có các không gian tên như:
+
 *   `System`: Chứa các kiểu dữ liệu cơ bản và chức năng cốt lõi (ví dụ: `Console`, `String`).
 *   `System.Data`: Chứa các lớp để làm việc với cơ sở dữ liệu.
 *   `System.IO`: Chứa các lớp để làm việc với tệp và luồng dữ liệu.
@@ -166,6 +172,7 @@ Bằng cách sử dụng không gian tên, bạn có thể có hai lớp có cù
 ### 1.4.3 Tập hợp (Assembly) – Đơn vị triển khai và quản lý phiên bản
 
 Khi các ứng dụng phát triển và có nhiều không gian tên, chúng ta cần một cách khác để đóng gói và phân phối mã. **Tập hợp (Assembly) là một đơn vị triển khai vật lý và quản lý phiên bản trong .NET.** Về mặt vật lý, một tập hợp là một tệp trên đĩa, có thể là:
+
 *   **Tệp thực thi (.exe):** Một ứng dụng độc lập có thể chạy được.
 *   **Thư viện liên kết động (.dll - Dynamic Link Library):** Một thư viện chứa các lớp và chức năng có thể được sử dụng bởi các ứng dụng hoặc tập hợp khác.
 
@@ -183,6 +190,7 @@ Một tập hợp có thể chứa một hoặc nhiều không gian tên. Khi b�
 Visual Studio là một IDE toàn diện, cung cấp mọi thứ bạn cần để phát triển ứng dụng .NET: trình chỉnh sửa mã thông minh, trình biên dịch, trình gỡ lỗi, công cụ thiết kế giao diện, v.v.
 
 **Các bước tạo dự án "Hello World":**
+
 1.  **Mở Visual Studio:** Khởi động Visual Studio.
 2.  **Tạo dự án mới:** Chọn `File` -> `New` -> `Project...` hoặc `Create a new project` từ màn hình khởi động.
 3.  **Chọn loại dự án:** Trong hộp thoại "Create a new project", tìm kiếm và chọn `Console Application` (đảm bảo chọn phiên bản C#).
@@ -202,6 +210,7 @@ Visual Studio là một IDE toàn diện, cung cấp mọi thứ bạn cần đ�
 Sau khi tạo dự án, bạn sẽ thấy Solution Explorer (thường ở bên phải) và tệp `Program.cs` mở sẵn trong trình chỉnh sửa mã.
 
 **Cấu trúc dự án cơ bản trong Solution Explorer:**
+
 *   **Solution 'HelloWorld'**: Đại diện cho toàn bộ giải pháp phát triển của bạn.
 *   **Project 'HelloWorld'**: Chứa mã nguồn, tài nguyên và các cấu hình cho ứng dụng của bạn.
     *   **Dependencies / References**: Danh sách các tập hợp (.dll) mà dự án của bạn đang tham chiếu để sử dụng các chức năng của .NET Runtime hoặc các thư viện khác.
@@ -270,6 +279,7 @@ Trong quá trình học và phát triển, bạn sẽ được làm việc trự
 *   **Khám phá API:** Nếu bạn muốn tìm hiểu cách làm việc với tệp, bạn có thể hỏi: "Antigravity, cho tôi ví dụ về cách đọc nội dung từ một tệp văn bản trong C#." Antigravity sẽ cung cấp mã mẫu và giải thích.
 
 **Cách áp dụng Vibe Coding với Antigravity cho "Hello World":**
+
 1.  **Thiết lập môi trường (nếu cần):** Yêu cầu Antigravity đảm bảo Visual Studio và .NET SDK đã được cài đặt đúng cách trên hệ thống của bạn.
 2.  **Tạo dự án:** "Antigravity, hãy tạo một dự án C# Console Application mới tên là `HelloWorld`."
 3.  **Xem xét mã nguồn:** Sau khi dự án được tạo, mở tệp `Program.cs`. Nếu bạn chưa hiểu rõ, hãy hỏi Antigravity: "Antigravity, hãy giải thích từng dòng code trong tệp `Program.cs` này."

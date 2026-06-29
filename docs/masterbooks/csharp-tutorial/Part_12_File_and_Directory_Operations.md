@@ -7,6 +7,7 @@ Trong thế giới lập trình hiện đại, khả năng tương tác với h�
 Phần này sẽ trang bị cho bạn kiến thức và kỹ năng cần thiết để thực hiện các thao tác cơ bản và nâng cao với tệp và thư mục một cách hiệu quả trong C#. Chúng ta sẽ đi sâu vào không gian tên `System.IO` mạnh mẽ, khám phá sự khác biệt quan trọng về kiến trúc và hiệu suất giữa các lớp cung cấp phương thức tĩnh và các lớp cung cấp phương thức cá thể, cũng như cách xử lý đường dẫn tệp một cách thông minh và an toàn.
 
 Mục tiêu của phần này là giúp bạn:
+
 *   Hiểu và sử dụng không gian tên `System.IO` để tương tác với hệ thống tệp.
 *   Nắm vững kiến trúc và cách sử dụng các lớp `File`, `FileInfo`, `Directory`, `DirectoryInfo` và `Path`.
 *   Phân biệt sâu sắc cơ chế hoạt động, ưu nhược điểm của phương thức tĩnh và phương thức cá thể, đặc biệt về hiệu suất và quản lý tài nguyên.
@@ -45,18 +46,22 @@ Cả hai lớp `File` và `FileInfo` đều cung cấp các phương thức đ�
 #### 1.1.2. So sánh hiệu suất và ứng dụng thực tế
 
 **1. Ưu điểm của `File` (phương thức tĩnh):**
+
 *   **Tiện lợi cho thao tác đơn lẻ:** Nếu bạn chỉ cần thực hiện một hoặc hai thao tác trên một tệp (ví dụ: kiểm tra tồn tại rồi đọc nội dung một lần), việc gọi trực tiếp `File.Exists()` hoặc `File.ReadAllText()` sẽ nhanh chóng và dễ dàng hơn vì bạn không cần phải tạo và quản lý một đối tượng `FileInfo`.
 *   **Không tạo đối tượng:** Tránh được chi phí nhỏ của việc cấp phát đối tượng trên heap.
 
 **2. Nhược điểm của `File` (phương thức tĩnh):**
+
 *   **Hiệu suất kém hơn khi thực hiện nhiều thao tác:** Mỗi khi bạn gọi một phương thức tĩnh của `File`, hệ điều hành sẽ thực hiện đầy đủ các bước phân tích đường dẫn và kiểm tra bảo mật/quyền truy cập. Nếu bạn thực hiện hàng chục hoặc hàng trăm thao tác trên cùng một tệp, những kiểm tra lặp đi lặp lại này có thể tạo ra chi phí đáng kể, ảnh hưởng đến hiệu suất của ứng dụng.
 
 **3. Ưu điểm của `FileInfo` (phương thức cá thể):**
+
 *   **Hiệu quả cho nhiều thao tác:** Khi bạn tạo một đối tượng `FileInfo`, các kiểm tra bảo mật ban đầu và việc thu thập thông tin về tệp chỉ được thực hiện **một lần** trong quá trình khởi tạo đối tượng (hoặc khi truy cập thuộc tính lần đầu). Sau đó, tất cả các phương thức cá thể được gọi trên đối tượng `FileInfo` đó sẽ hoạt động hiệu quả hơn vì chúng đã có ngữ cảnh và quyền truy cập đã được xác thực, giảm thiểu các cuộc gọi lặp lại đến hệ điều hành.
 *   **Cung cấp thuộc tính:** `FileInfo` cung cấp các thuộc tính (ví dụ: `Length`, `CreationTime`, `LastWriteTime`, `IsReadOnly`) giúp bạn dễ dàng truy cập thông tin về tệp mà không cần gọi các phương thức riêng biệt.
 *   **Khả năng cập nhật trạng thái:** Nếu tệp trên đĩa thay đổi sau khi đối tượng `FileInfo` được tạo, bạn có thể gọi phương thức `Refresh()` để cập nhật các thuộc tính của đối tượng với trạng thái hiện tại của tệp.
 
 **4. Nhược điểm của `FileInfo` (phương thức cá thể):**
+
 *   **Phải tạo đối tượng:** Đối với các thao tác đơn giản, việc tạo một đối tượng `FileInfo` trên heap có thể là một chi phí nhỏ không cần thiết.
 
 > [!TIP]

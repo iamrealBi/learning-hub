@@ -3,6 +3,7 @@
 Trong kỷ nguyên của Trí tuệ Nhân tạo (AI), khả năng tương tác và điều khiển các tác vụ lập trình không còn bị giới hạn bởi vị trí địa lý hay thiết bị cố định. Đối với các lập trình viên và kỹ sư, việc có thể giao tiếp với AI trợ lý của mình từ xa, đặc biệt qua các thiết bị di động, là một yếu tố then chốt giúp tối ưu hóa năng suất và linh hoạt. Phần này sẽ đi sâu vào ba phương pháp chính mà Claude Code – công cụ CLI AI của Anthropic – cung cấp để đạt được sự tương tác linh hoạt này: **Dispatch** (Điều phối tác vụ), **Remote Control** (Điều khiển từ xa), và **Channels** (Kênh truyền thông). Chúng ta sẽ khám phá cơ chế hoạt động, quy trình thiết lập, các trường hợp ứng dụng lý tưởng và những lưu ý quan trọng để tận dụng tối đa sức mạnh của Claude Code, đồng thời liên hệ chặt chẽ với cách tiếp cận "Vibe Coding" và hệ thống Antigravity IDE siêu việt.
 
 Mục tiêu của phần này là trang bị cho bạn kiến thức để:
+
 *   Hiểu rõ cơ chế và mục đích của tính năng Dispatch để gửi tác vụ từ ứng dụng di động đến phiên Claude Code trên máy tính.
 *   Sử dụng tính năng Remote Control để khởi tạo hoặc tiếp tục các phiên làm việc Claude Code CLI trên máy tính từ xa, gắn liền với một dự án cụ thể.
 *   Cấu hình và tương tác với Claude Code thông qua các kênh truyền thông phổ biến như Telegram, mở rộng khả năng tích hợp.
@@ -21,6 +22,7 @@ Vibe Coding là một triết lý lập trình tập trung vào việc giao ti�
 ### 1.3. Liên Hệ với Antigravity IDE: Tương Tác Trực Tiếp và Gián Tiếp
 
 Antigravity IDE là một hệ thống AI agentic siêu việt mà học viên đang trực tiếp sử dụng. Nó không chỉ là một công cụ, mà là một *agent* có khả năng:
+
 *   **Tự chạy script ngầm:** Thực thi các lệnh và chương trình mà không cần sự can thiệp trực tiếp của người dùng.
 *   **Gọi subagent trình duyệt:** Tương tác với web để thu thập thông tin, kiểm tra giao diện người dùng, v.v.
 *   **Đọc/ghi file:** Quản lý mã nguồn và dữ liệu dự án một cách tự động.
@@ -39,6 +41,7 @@ Tính năng Dispatch là phương pháp cơ bản nhất để bạn có thể g
 **Cơ chế hoạt động:** Dispatch hoạt động bằng cách thiết lập một kênh giao tiếp an toàn giữa ứng dụng Claude Code trên thiết bị di động và ứng dụng Claude Code desktop trên máy tính. Khi bạn gửi một "tác vụ" (thực chất là một prompt hoặc chỉ dẫn) từ điện thoại, ứng dụng di động sẽ mã hóa và gửi yêu cầu này qua internet đến máy tính cục bộ của bạn. Ứng dụng desktop lắng nghe trên một cổng cụ thể (hoặc thông qua một dịch vụ trung gian được Anthropic quản lý) để nhận các yêu cầu này. Khi nhận được, Claude Code desktop sẽ xử lý prompt như thể bạn đã gõ trực tiếp vào giao diện của nó.
 
 **Mục đích chiến lược:**
+
 *   **Khởi động nhanh tác vụ mới:** Bạn có thể khởi động một tác vụ phức tạp, một quá trình biên dịch dài, hoặc một phân tích dữ liệu ngay cả khi đang di chuyển.
 *   **Tận dụng tài nguyên cục bộ:** Sử dụng sức mạnh xử lý, dung lượng lưu trữ, và quyền truy cập file của máy tính để bàn mà không cần phải có mặt vật lý. Điều này đặc biệt hữu ích cho các tác vụ cần truy cập vào môi trường phát triển cục bộ, cơ sở dữ liệu nội bộ, hoặc các API không công khai.
 *   **Tiếp tục luồng công việc:** Mặc dù không thể tiếp tục một phiên làm việc đang diễn ra, Dispatch cho phép bạn gửi các yêu cầu bổ sung để điều chỉnh hoặc mở rộng một tác vụ đã khởi động trước đó.
@@ -95,11 +98,13 @@ Antigravity, với khả năng tự lập kế hoạch và gọi subagent trình
 ### 2.5. Đánh Giá Ưu và Nhược Điểm
 
 **Ưu điểm:**
+
 *   **Khởi động tác vụ dễ dàng:** Nhanh chóng bắt đầu các tác vụ mới từ xa chỉ với một prompt đơn giản.
 *   **Tận dụng tài nguyên cục bộ:** Sử dụng tối đa sức mạnh xử lý và quyền truy cập file của máy tính mà không cần có mặt vật lý.
 *   **Theo dõi tiến độ di động:** Nhận cập nhật trạng thái và kết quả trên ứng dụng Claude Code di động.
 
 **Nhược điểm:**
+
 *   **Không gắn liền với dự án cụ thể:** Yêu cầu người dùng phải chỉ định đường dẫn dự án trong mỗi tác vụ, gây bất tiện và dễ sai sót.
 *   **Chỉ khởi tạo tác vụ mới:** Không thể tiếp tục các phiên làm việc hoặc cuộc trò chuyện đang diễn ra.
 *   **Yêu cầu môi trường hoạt động liên tục:** Ứng dụng Claude Code desktop phải đang chạy và máy tính không được ngủ.
@@ -111,6 +116,7 @@ Trong khi Dispatch hữu ích để khởi tạo các tác vụ mới, Claude Co
 ### 3.1. Phân Biệt Remote Control và Dispatch
 
 Điểm khác biệt cốt lõi giữa Remote Control và Dispatch nằm ở **ngữ cảnh** và **tính liên tục** của phiên làm việc:
+
 *   **Gắn liền với dự án:** Remote Control được khởi tạo *trong ngữ cảnh của một dự án cụ thể*. Điều này có nghĩa là Claude Code sẽ tự động biết nó cần làm việc trong thư mục nào, bạn không cần phải chỉ định đường dẫn dự án trong mỗi tác vụ. Điều này giảm thiểu lỗi và tăng hiệu quả.
 *   **Tiếp tục phiên làm việc:** Remote Control cho phép bạn tiếp tục một cuộc trò chuyện hoặc phiên làm việc Claude Code CLI đang diễn ra. Nếu bạn đang làm việc trên một tác vụ và cần rời khỏi máy tính, bạn có thể chuyển phiên đó sang thiết bị di động và tiếp tục cuộc trò chuyện từ nơi bạn đã dừng lại.
 *   **Khởi tạo từ máy chủ:** Thay vì khởi tạo tác vụ từ thiết bị di động (như Dispatch), Remote Control được khởi tạo từ chính máy tính cục bộ (thông qua CLI), sau đó các thiết bị di động kết nối đến phiên đó.
@@ -139,6 +145,7 @@ Trong khi Dispatch hữu ích để khởi tạo các tác vụ mới, Claude Co
 #### 3.3.2. Lựa Chọn Chế Độ Làm Việc: `same dir` và `git worktree`
 
 Khi khởi động, Claude Code sẽ hỏi bạn muốn làm việc trong chế độ nào, cung cấp các tùy chọn quan trọng để quản lý ngữ cảnh dự án:
+
 *   `same dir`: Claude Code sẽ làm việc trực tiếp trong thư mục hiện tại của dự án. Đây là lựa chọn mặc định và thường được khuyến nghị cho hầu hết các trường hợp, vì nó cho phép Claude Code tương tác trực tiếp với mã nguồn và tài nguyên của dự án.
 *   `git worktree`: Tính năng này cho phép Claude Code tạo một bản sao dự án tạm thời (git worktree) từ kho lưu trữ Git của bạn. Một git worktree là một thư mục làm việc riêng biệt, được liên kết với cùng một kho Git, cho phép nhiều agent hoặc nhiều phiên làm việc song song trên cùng một tập tin mà không ảnh hưởng trực tiếp đến nhánh chính hoặc các thay đổi đang diễn ra.
 
@@ -186,12 +193,14 @@ Remote Control là một cầu nối trực tiếp đến một Antigravity agen
 ### 3.6. Đánh Giá Ưu và Nhược Điểm
 
 **Ưu điểm:**
+
 *   **Gắn liền với dự án:** Claude Code tự động biết ngữ cảnh làm việc, loại bỏ nhu cầu chỉ định đường dẫn.
 *   **Tiếp tục phiên làm việc:** Cho phép bạn tiếp tục các cuộc trò chuyện và phiên làm việc đang diễn ra, duy trì ngữ cảnh.
 *   **Tận dụng toàn bộ quyền truy cập và cấu hình:** Claude Code hoạt động như thể bạn đang ngồi trước máy tính, truy cập đầy đủ vào dự án.
 *   **Lý tưởng cho tính di động:** Hoàn hảo cho việc tiếp tục công việc khi di chuyển hoặc chuyển đổi giữa các thiết bị.
 
 **Nhược điểm:**
+
 *   **Yêu cầu khởi tạo từ CLI trên máy tính:** Cần phải có mặt vật lý hoặc truy cập từ xa ban đầu vào máy tính để khởi động phiên.
 *   **Phiên Claude Code CLI phải luôn hoạt động:** Máy tính và phiên CLI phải được bật liên tục.
 *   **Máy tính không được ngủ hoặc tắt:** Giống như Dispatch, đây là một giới hạn cố hữu của việc dựa vào tài nguyên cục bộ.
@@ -205,6 +214,7 @@ Trong trường hợp bạn muốn tích hợp Claude Code vào quy trình làm 
 **Khái niệm:** Channels biến Claude Code thành một "bot" hoặc "trợ lý" có thể tương tác qua các nền tảng nhắn tin mà bạn đã sử dụng hàng ngày. Thay vì thông qua giao diện chuyên dụng của Claude Code, bạn có thể gửi yêu cầu và nhận phản hồi trực tiếp từ một ứng dụng chat quen thuộc.
 
 **Lợi ích:**
+
 *   **Linh hoạt tối đa:** Tương tác với Claude Code từ bất kỳ thiết bị nào có ứng dụng chat, mà không cần cài đặt thêm ứng dụng Claude Code chuyên dụng.
 *   **Mở rộng phạm vi ứng dụng:** Không chỉ giới hạn ở lập trình, Claude Code có thể thực hiện bất kỳ tác vụ nào trên máy tính của bạn thông qua kênh chat (ví dụ: "Tìm file PDF có từ khóa 'hợp đồng' trong thư mục tải xuống và gửi cho tôi", "Chạy script `backup.sh`").
 *   **Tích hợp vào quy trình làm việc:** Dễ dàng tích hợp Claude Code vào các quy trình nhóm, nơi giao tiếp qua chat là tiêu chuẩn.
@@ -214,6 +224,7 @@ Claude Code hỗ trợ xây dựng các kênh tùy chỉnh thông qua plugin, nh
 ### 4.2. Kiến Trúc Plugin và Tích Hợp Kênh
 
 **Deeper Dive: Kiến trúc Plugin của Claude Code:** Claude Code được thiết kế với một kiến trúc plugin mở rộng, cho phép người dùng hoặc nhà phát triển thêm các chức năng mới. Đối với Channels, plugin Telegram (hoặc các plugin kênh khác) hoạt động như một bộ điều hợp (adapter). Nó:
+
 1.  **Lắng nghe sự kiện:** Theo dõi các tin nhắn đến từ kênh Telegram (thường thông qua API của Telegram, sử dụng Webhooks hoặc Long Polling).
 2.  **Chuyển đổi:** Chuyển đổi tin nhắn từ định dạng của Telegram thành một prompt mà Claude Code có thể hiểu.
 3.  **Gửi đến Claude Code:** Chuyển prompt này đến phiên Claude Code CLI đang chạy.
@@ -246,6 +257,7 @@ Việc cấu hình kênh Telegram bao gồm nhiều bước, từ cài đặt pl
     /reload plugins
     ```
     Hoặc bạn có thể thoát phiên và khởi động lại để plugin được kích hoạt hoàn toàn.
+
 5.  **Kiểm tra plugin đã cài đặt:** Gõ `/plugin` và điều hướng đến mục `INSTALLED` để xác nhận plugin Telegram đã được liệt kê.
 
 #### 4.3.2. Tạo Telegram Bot với BotFather
@@ -329,12 +341,14 @@ Channels không chỉ là một cách để điều khiển Claude Code; nó là
 ### 4.6. Đánh Giá Ưu và Nhược Điểm
 
 **Ưu điểm:**
+
 *   **Linh hoạt tối đa:** Tương tác với Claude Code thông qua các ứng dụng chat quen thuộc mà không cần ứng dụng chuyên dụng.
 *   **Mở rộng phạm vi ứng dụng:** Claude Code có thể thực hiện bất kỳ tác vụ nào trên máy tính thông qua kênh chat, không chỉ giới hạn ở lập trình.
 *   **Tùy chỉnh kênh:** Khả năng xây dựng và tích hợp với các kênh giao tiếp khác ngoài các kênh được hỗ trợ chính thức.
 *   **Giao tiếp tự nhiên:** Sử dụng ngôn ngữ tự nhiên trong môi trường chat quen thuộc.
 
 **Nhược điểm:**
+
 *   **Quy trình thiết lập ban đầu phức tạp:** So với Dispatch và Remote Control, việc cấu hình Channels yêu cầu nhiều bước hơn (cài đặt plugin, tạo bot, cấu hình token, ghép nối).
 *   **Yêu cầu phiên Claude Code CLI phải luôn chạy:** Máy tính và phiên CLI phải hoạt động liên tục.
 *   **Máy tính không được ngủ hoặc tắt:** Giới hạn tương tự như các phương pháp khác.
@@ -362,6 +376,7 @@ Phần này đã giới thiệu ba phương pháp mạnh mẽ để tương tác
 Cả ba phương pháp đều yêu cầu máy tính cục bộ của bạn phải được bật, không chuyển sang chế độ ngủ, và phiên Claude Code tương ứng phải hoạt động để duy trì kết nối và thực thi tác vụ. Đây là điểm khác biệt cơ bản so với các dịch vụ điện toán đám mây (Cloud Computing) hay chức năng không máy chủ (Serverless Functions), nơi tài nguyên được quản lý bởi nhà cung cấp dịch vụ. Claude Code hoàn toàn dựa vào môi trường cục bộ của bạn.
 
 Việc lựa chọn phương pháp phù hợp phụ thuộc vào nhu cầu cụ thể của bạn:
+
 *   Sử dụng **Dispatch** khi bạn cần khởi động nhanh một tác vụ mới, đơn giản, không yêu cầu ngữ cảnh dự án sâu từ ứng dụng di động.
 *   Sử dụng **Remote Control** khi bạn muốn tiếp tục một phiên làm việc đang diễn ra hoặc khởi tạo một tác vụ phức tạp trong ngữ cảnh của một dự án cụ thể, với khả năng tương tác hai chiều liên tục.
 *   Sử dụng **Channels** khi bạn muốn tích hợp Claude Code vào quy trình làm việc hiện có thông qua các ứng dụng chat quen thuộc, mang lại sự linh hoạt tối đa và khả năng tương tác tự nhiên với AI agent của mình.

@@ -3,6 +3,7 @@
 Trong kỷ nguyên số, dữ liệu là tài sản vô giá và là nền tảng cho mọi ứng dụng hiện đại. Việc đảm bảo dữ liệu luôn chính xác, nhất quán và đáng tin cậy không chỉ là yêu cầu kỹ thuật mà còn là yếu tố sống còn đối với bất kỳ hệ thống nào. Chương này sẽ đưa bạn đi sâu vào các cơ chế xác thực và bảo vệ dữ liệu mạnh mẽ mà PostgreSQL cung cấp, đặc biệt tập trung vào cách triển khai các ràng buộc (constraints) và giá trị mặc định (default values). Chúng ta sẽ tìm hiểu lý do tại sao những cơ chế này lại quan trọng, cách áp dụng chúng để ngăn chặn dữ liệu không hợp lệ, và cách tự động cung cấp các giá trị mặc định khi thông tin không được cung cấp.
 
 Mục tiêu của chương này là trang bị cho bạn kiến thức và kỹ năng để:
+
 *   Phân biệt và đánh giá tầm quan trọng của việc xác thực dữ liệu ở cấp độ ứng dụng và cấp độ cơ sở dữ liệu.
 *   Thực hành tạo và quản lý cơ sở dữ liệu, bảng trong môi trường PgAdmin.
 *   Áp dụng ràng buộc `NOT NULL` để đảm bảo các cột thiết yếu luôn chứa giá trị.
@@ -21,9 +22,11 @@ Xác thực dữ liệu là quá trình kiểm tra và đảm bảo rằng dữ 
 Xác thực ở cấp độ ứng dụng (ví dụ: máy chủ web, ứng dụng di động, giao diện người dùng) là tuyến phòng thủ đầu tiên và dễ tiếp cận nhất. Khi người dùng nhập dữ liệu qua một giao diện, ứng dụng sẽ kiểm tra tính hợp lệ của dữ liệu *trước khi* gửi nó đến cơ sở dữ liệu.
 
 **Ví dụ thực tế:** Một biểu mẫu đăng ký người dùng trên website yêu cầu địa chỉ email.
+
 *   **Xác thực ứng dụng:** Ngay khi người dùng nhập email và nhấp "Đăng ký", ứng dụng JavaScript trên trình duyệt (hoặc máy chủ web) sẽ kiểm tra xem chuỗi nhập vào có định dạng email hợp lệ hay không (chứa `@`, có tên miền, v.v.). Nếu không, một thông báo lỗi sẽ hiển thị ngay lập tức: "Địa chỉ email không hợp lệ."
 
 **Ưu điểm:**
+
 *   **Phản hồi tức thì:** Cải thiện trải nghiệm người dùng bằng cách cung cấp thông báo lỗi ngay lập tức.
 *   **Giảm tải cho cơ sở dữ liệu:** Chỉ dữ liệu hợp lệ mới được gửi đến cơ sở dữ liệu, giảm thiểu các lỗi truy vấn và xử lý không cần thiết.
 *   **Linh hoạt:** Dễ dàng triển khai các quy tắc xác thực phức tạp liên quan đến logic nghiệp vụ cụ thể của ứng dụng.
@@ -38,6 +41,7 @@ Xác thực ở cấp độ cơ sở dữ liệu là "tuyến phòng thủ cuố
 **Ví dụ:** Nếu một người dùng quản trị kết nối trực tiếp với PostgreSQL bằng PgAdmin và cố gắng thêm một sản phẩm với giá `-35` hoặc không có trọng lượng, cơ sở dữ liệu sẽ chấp nhận dữ liệu đó *nếu không có ràng buộc nào được định nghĩa*. Tuy nhiên, nếu có ràng buộc, cơ sở dữ liệu sẽ từ chối thao tác này.
 
 **Ưu điểm:**
+
 *   **Tính toàn vẹn dữ liệu tối cao:** Đảm bảo dữ liệu luôn đúng và nhất quán, bất kể nguồn gốc.
 *   **Độc lập với ứng dụng:** Các quy tắc nghiệp vụ cốt lõi được nhúng vào cấu trúc cơ sở dữ liệu, không phụ thuộc vào logic của một ứng dụng cụ thể.
 *   **Bảo vệ chống lại lỗi ứng dụng:** Ngay cả khi xác thực ở cấp ứng dụng bị bỏ qua hoặc gặp lỗi, cơ sở dữ liệu vẫn sẽ bảo vệ tính toàn vẹn của dữ liệu.
@@ -100,12 +104,14 @@ CREATE TABLE products (
         2.  Cột `id` **không được phép có giá trị `NULL`**.
         3.  PostgreSQL tự động tạo một chỉ mục (index) trên cột này để tối ưu hóa việc tìm kiếm và truy xuất dữ liệu.
         Ràng buộc `PRIMARY KEY` là nền tảng cho việc xác định duy nhất mỗi bản ghi trong bảng.
+
 *   `name VARCHAR(40)`: Kiểu dữ liệu chuỗi có độ dài tối đa là 40 ký tự. Hiện tại, cột này có thể chứa `NULL` và chuỗi rỗng.
 *   `department VARCHAR(40)`: Tương tự như `name`, có thể chứa `NULL` và chuỗi rỗng.
 *   `price INTEGER`: Kiểu dữ liệu số nguyên. Hiện tại, cột này có thể chứa `NULL` và bất kỳ giá trị số nguyên nào, kể cả số âm.
 *   `weight INTEGER`: Tương tự như `price`, có thể chứa `NULL` và bất kỳ giá trị số nguyên nào.
 
 Để xem cấu trúc bảng vừa tạo trong PgAdmin:
+
 1.  Trong cây điều hướng, mở rộng `validation_db` -> `Schemas` -> `public` -> `Tables`.
 2.  Bạn sẽ thấy bảng `products`. Nhấp chuột phải vào `products` và chọn **Properties...** để xem chi tiết cấu trúc bảng, bao gồm các cột, kiểu dữ liệu và ràng buộc.
 3.  Hoặc nhấp chuột phải vào `products` và chọn **View/Edit Data** > **All Rows** để xem dữ liệu (hiện tại chưa có).
@@ -148,6 +154,7 @@ Kết quả sẽ hiển thị như sau:
 | 4  | Mũ lưỡi trai  | Phụ kiện   | 15    | NULL   |
 
 Như bạn thấy, bảng `products` đã chấp nhận:
+
 *   Giá trị `NULL` cho cột `price` (sản phẩm "Quần jean").
 *   Giá trị `NULL` cho cột `weight` (sản phẩm "Mũ lưỡi trai").
 *   Giá trị âm (`-10`) cho cột `price` (sản phẩm "Giày thể thao").
@@ -164,6 +171,7 @@ Trong SQL, `NULL` không phải là `0`, cũng không phải là chuỗi rỗng 
 
 **Vấn đề với giá trị `NULL`:**
 Trong ví dụ trên, sản phẩm "Quần jean" có `price` là `NULL`. Điều này có thể dẫn đến nhiều vấn đề:
+
 *   **Lỗi logic ứng dụng:** Nếu ứng dụng mong đợi một giá trị số để thực hiện tính toán (ví dụ: tổng doanh thu) và không xử lý `NULL` đúng cách, nó có thể gây ra lỗi runtime hoặc trả về kết quả không chính xác.
 *   **Dữ liệu không nhất quán:** `NULL` có thể được hiểu khác nhau tùy thuộc vào ngữ cảnh (ví dụ: `0`, không có giá trị, hoặc một lỗi), dẫn đến sự không nhất quán trong cách dữ liệu được diễn giải và sử dụng.
 *   **Khó khăn trong phân tích và báo cáo:** Các hàm tổng hợp (như `SUM`, `AVG`) thường bỏ qua giá trị `NULL`. Điều này có thể dẫn đến kết quả báo cáo không chính xác nếu bạn mong đợi `NULL` được tính là `0` hoặc một giá trị khác.
@@ -269,6 +277,7 @@ Bạn sẽ nhận được một lỗi từ PostgreSQL, tương tự như: `ERRO
 ### 3.5. Khi Nào Nên Sử Dụng `NOT NULL`?
 
 Hầu hết các cột trong bảng của bạn nên có ràng buộc `NOT NULL`, trừ khi có một lý do nghiệp vụ rất cụ thể để cho phép giá trị `NULL`.
+
 *   **Luôn `NOT NULL`:** Các cột định danh (`id`), tên (`name`), các trường bắt buộc cho logic nghiệp vụ (ví dụ: `department`, `price`, `quantity`), các trường thời gian tạo/cập nhật (`created_at`, `updated_at`).
 *   **Có thể `NULL`:** Các cột tùy chọn hoặc thông tin có thể chưa được biết. Ví dụ: `weight` (như trong ví dụ, nếu trọng lượng có thể chưa được biết tại thời điểm nhập liệu), `description` (nếu mô tả là tùy chọn), `end_date` (nếu một sự kiện có thể không có ngày kết thúc xác định).
 
@@ -284,6 +293,7 @@ Mặc dù ràng buộc `NOT NULL` đảm bảo rằng một cột luôn có giá
 Trong ví dụ về sản phẩm "Quần jean", chúng ta đã thay thế `NULL` bằng `0` để áp dụng ràng buộc `NOT NULL`. Tuy nhiên, `0` có thể không phải là giá trị mong muốn nếu giá thực sự chưa được xác định. Nếu chúng ta chèn một sản phẩm mới mà không biết giá, việc bắt buộc phải cung cấp một giá trị (do `NOT NULL`) có thể gây khó khăn cho người dùng hoặc ứng dụng.
 
 Giá trị mặc định giải quyết vấn đề này bằng cách:
+
 *   **Tự động điền dữ liệu:** Giảm công sức nhập liệu thủ công và đảm bảo rằng các cột luôn có giá trị hợp lệ, ngay cả khi không được chỉ định rõ ràng.
 *   **Duy trì tính nhất quán:** Cung cấp một giá trị chuẩn cho các trường hợp không có dữ liệu cụ thể, giúp duy trì sự đồng nhất trong cơ sở dữ liệu.
 *   **Phối hợp với `NOT NULL`:** Một cột có thể vừa có `NOT NULL` vừa có `DEFAULT`. Nếu không có giá trị nào được cung cấp, `DEFAULT` sẽ được sử dụng, từ đó thỏa mãn ràng buộc `NOT NULL`.

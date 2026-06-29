@@ -13,6 +13,7 @@
 ```
 Prompt Engineering (Cũ)          Context Engineering (Mới)
 ━━━━━━━━━━━━━━━━━━━━             ━━━━━━━━━━━━━━━━━━━━━━━
+
 - Viết 1 prompt tốt             - Thiết kế hệ thống context
 - Tập trung 1 lần hỏi           - Tự động hóa quy trình
 - Thủ công, lặp lại             - File cấu hình bền vững
@@ -242,17 +243,20 @@ Root/
 [MỤC TIÊU]: Thêm tính năng phân trang cho danh sách sách
 
 [NGỮ CẢNH]: 
+
 - Hiện tại GetBookListAsync() trả về TẤT CẢ sách
 - BookIndexViewModel chứa List<Book> Books
 - Trang index hiển thị toàn bộ sách, chưa có phân trang
 
 [RÀNG BUỘC]:
+
 - Tuân thủ Service Layer Pattern hiện có
 - Dùng ServiceResult pattern
 - Mỗi trang hiển thị 10 sách
 - Giữ nguyên tính năng search và filter genre
 
 [TIÊU CHÍ HOÀN THÀNH]:
+
 - BookService có phân trang hoạt động
 - ViewModel có PageNumber, TotalPages
 - View có nút Previous/Next
@@ -266,6 +270,7 @@ Trước khi code, hãy yêu cầu AI **lên kế hoạch** trước:
 
 ```
 Trước khi viết code, hãy:
+
 1. Liệt kê các file cần sửa/tạo mới
 2. Mô tả approach bạn sẽ dùng
 3. Xác nhận có vi phạm bất kỳ rule nào trong AGENTS.md không

@@ -80,6 +80,7 @@ Repository Pattern là một mẫu thiết kế nền tảng trong các ứng d�
 Hãy hình dung lớp nghiệp vụ của bạn cần lấy danh sách các hành trình. Nếu nó trực tiếp gọi `_dbContext.Walks.ToList()`, nó sẽ bị ràng buộc chặt chẽ với Entity Framework Core và `NZWalksDbContext`. Điều gì xảy ra nếu bạn muốn chuyển sang một cơ sở dữ liệu NoSQL, hoặc một dịch vụ lưu trữ đám mây khác? Bạn sẽ phải thay đổi logic ở mọi nơi truy cập dữ liệu.
 
 Repository Pattern giải quyết vấn đề này bằng cách:
+
 *   **Trừu tượng hóa Data Access Layer (DAL):** Lớp nghiệp vụ không cần biết dữ liệu được lưu trữ ở đâu hay lấy ra như thế nào (SQL, NoSQL, API bên ngoài). Nó chỉ tương tác với một giao diện `IWalkRepository`.
 *   **Tăng khả năng kiểm thử (Testability):** Bạn có thể dễ dàng tạo các phiên bản giả (mock) của `IWalkRepository` để kiểm thử logic nghiệp vụ mà không cần một cơ sở dữ liệu thực sự. Điều này đặc biệt quan trọng cho Unit Tests.
 *   **Dễ bảo trì và mở rộng (Maintainability & Extensibility):** Khi có thay đổi về công nghệ lưu trữ dữ liệu, bạn chỉ cần thay đổi lớp triển khai Repository (`WalkRepository`), không ảnh hưởng đến Controller hay các lớp nghiệp vụ khác.
@@ -299,6 +300,7 @@ Sau khi định nghĩa DTOs, chúng ta cần một cách để chuyển đổi d
 #### 2.1. AutoMapper: Tự động hóa ánh xạ đối tượng
 
 **AutoMapper** là một thư viện phổ biến giúp đơn giản hóa việc ánh xạ giữa các đối tượng có cấu trúc tương tự nhưng khác kiểu.
+
 *   **Lợi ích:**
     *   **Giảm Boilerplate Code:** Không cần viết hàng tá dòng mã để sao chép từng thuộc tính.
     *   **Dễ bảo trì:** Khi Domain Model hoặc DTO thay đổi, bạn chỉ cần cập nhật cấu hình ánh xạ thay vì sửa nhiều dòng code sao chép rải rác.

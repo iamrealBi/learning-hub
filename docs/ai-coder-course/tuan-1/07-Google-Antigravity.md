@@ -70,6 +70,7 @@ Thay vì chỉ sinh code, agents trong Antigravity tạo ra **Artifacts** để 
 ## 4. Model Flexibility
 
 Antigravity hỗ trợ nhiều model:
+
 - **Google Gemini 3/3.5** (mặc định)
 - **Anthropic Claude 4.6** 
 - **GPT-OSS-120B**

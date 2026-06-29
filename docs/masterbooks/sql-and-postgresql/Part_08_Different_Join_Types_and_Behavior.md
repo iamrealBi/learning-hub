@@ -489,6 +489,7 @@ NATURAL JOIN
 
 **Cảnh báo về `NATURAL JOIN`:**
 `NATURAL JOIN` thường bị coi là một anti-pattern trong SQL.
+
 *   **Thiếu rõ ràng:** Nó ẩn đi các điều kiện nối, làm cho truy vấn khó đọc và khó hiểu hơn.
 *   **Dễ gây lỗi:** Nếu bạn thêm một cột mới vào một trong hai bảng mà tình cờ có cùng tên với một cột ở bảng kia, `NATURAL JOIN` có thể vô tình bao gồm cột đó vào điều kiện nối, dẫn đến kết quả sai hoặc không mong muốn mà không có cảnh báo.
 

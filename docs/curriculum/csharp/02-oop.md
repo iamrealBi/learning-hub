@@ -37,11 +37,13 @@ OOP rất tốt cho bài toán nghiệp vụ có trạng thái và hành vi rõ.
 Nhưng với bài toán thuần transform dữ liệu đơn giản, over-design OOP sẽ làm code nặng.
 
 **Khi nên dùng OOP mạnh tay:**
+
 - Bài toán có nhiều rule nghiệp vụ, nhiều trạng thái.
 - Cần mở rộng behavior theo loại (payment methods, plugins, policies).
 - Cần test unit theo từng business behavior.
 
 **Khi nên giữ đơn giản:**
+
 - Logic tuyến tính, ít trạng thái, ít biến thể.
 - Script xử lý dữ liệu ngắn.
 - Không có nhu cầu mở rộng hierarchy/polymorphism.
@@ -114,6 +116,7 @@ Dog buddy = new Dog { Name = "Buddy", Age = 3, Breed = "Poodle" };
 - **Polymorphism**: code gọi qua base/interface nhưng runtime chọn đúng implementation.
 
 Ví dụ thực tế:
+
 - Thanh toán online: `IPaymentProcessor` là abstraction.
 - `Order.Submit()` tự kiểm tra trạng thái trước khi chuyển sang submitted là encapsulation.
 - `Shape` -> `Circle/Rectangle` là inheritance.
@@ -1028,11 +1031,13 @@ string name = Season.Spring.ToString(); // "Spring"
 **Kỹ năng**: Interfaces, DI, JSON, Template Method Pattern, File I/O
 
 Xây dựng ứng dụng tạo công thức nấu ăn:
+
 1. Hiển thị danh sách nguyên liệu
 2. Người dùng chọn nguyên liệu
 3. Lưu/đọc công thức từ file (TXT hoặc JSON)
 
 **Design Patterns áp dụng**:
+
 - **Template Method**: class base định nghĩa khung đọc/ghi file, class con triển khai chi tiết
 - **DIP**: dùng interface cho file reader/writer
 
@@ -1276,6 +1281,7 @@ Khi gọi: mediaFile.Play()
    │ VideoFile   │ VideoFile.Play()     │
    │ StreamingF. │ StreamingFile.Play() │
    └─────────────┴──────────────────────┘
+
 3. Gọi implementation tương ứng
 
 ⚡ Overhead: ~ 1 nanosecond (không đáng kể)

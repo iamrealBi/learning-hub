@@ -87,6 +87,7 @@
 ```
 Tạo cho tôi một trang landing page cho ứng dụng quản lý tài chính cá nhân.
 Cần có:
+
 - Header với logo và menu navigation
 - Hero section với tiêu đề hấp dẫn và nút CTA
 - Section giới thiệu 3 tính năng chính với icon

@@ -15,6 +15,7 @@ Tính năng `dispatch` của `Claude Code` về cơ bản là khả năng "gửi
 
 **Cơ chế hoạt động ngầm (Under the Hood):**
 Khi bạn yêu cầu `Claude Code` thực hiện một tác vụ, nó sẽ:
+
 1.  **Phân tích yêu cầu:** Hiểu rõ mục tiêu của bạn.
 2.  **Lập kế hoạch:** Chia nhỏ tác vụ thành các bước thực thi cụ thể.
 3.  **Tạo lệnh/script:** Biên dịch các bước kế hoạch thành các lệnh shell, script Python, hoặc các tập lệnh có thể thực thi được trên hệ thống.
@@ -39,12 +40,14 @@ Tính năng `remote control` cho phép bạn tương tác và điều khiển m�
 
 **Cơ chế hoạt động ngầm:**
 Để `Claude Code` có thể được điều khiển từ xa, cần có một cơ chế giao tiếp an toàn và ổn định:
+
 1.  **Triển khai trên máy chủ từ xa:** Cài đặt `Claude Code` CLI trên một máy chủ từ xa (ví dụ: Ubuntu VPS).
 2.  **Chế độ lắng nghe/API:** `Claude Code` CLI trên máy chủ từ xa cần được cấu hình để chạy ở chế độ "daemon" hoặc "server," lắng nghe các lệnh đến thông qua một cổng mạng hoặc một API nội bộ. Điều này có thể được thực hiện bằng cách chạy `Claude Code` với một tham số cụ thể (`--remote-listen` hoặc tương tự) hoặc thông qua một lớp giao diện API nhẹ.
 3.  **Xác thực và Bảo mật:** Các kết nối từ xa cần được bảo mật bằng mã thông báo API (API tokens), khóa SSH, hoặc các cơ chế xác thực khác để ngăn chặn truy cập trái phép.
 4.  **Gửi lệnh từ xa:** Từ ứng dụng di động hoặc một máy tính khác, bạn gửi lệnh đến địa chỉ IP/hostname của máy chủ từ xa. `Claude Code` trên máy chủ sẽ nhận lệnh, thực thi tác vụ trong môi trường của nó, và gửi lại kết quả.
 
 **Quy trình cơ bản:**
+
 1.  **Chuẩn bị máy chủ từ xa:** Thuê một VPS (ví dụ: DigitalOcean, AWS EC2, Google Cloud Compute Engine) và cài đặt hệ điều hành (thường là Linux). Đảm bảo mở cổng cần thiết trên firewall nếu `Claude Code` lắng nghe trên một cổng cụ thể.
 2.  **Cài đặt `Claude Code` CLI trên VPS:** Thực hiện theo hướng dẫn cài đặt `Claude Code` CLI trên môi trường Linux của VPS.
 3.  **Khởi động `Claude Code` ở chế độ điều khiển từ xa:**
@@ -54,6 +57,7 @@ Tính năng `remote control` cho phép bạn tương tác và điều khiển m�
     claude-code --remote-agent-mode --api-key <YOUR_ANTHROPIC_API_KEY> &
     ```
     Lệnh này sẽ chạy `Claude Code` như một tiến trình nền, sẵn sàng nhận lệnh.
+
 4.  **Cấu hình ứng dụng điều khiển:** Trên máy tính cục bộ hoặc ứng dụng di động, cấu hình để nó biết địa chỉ IP của VPS và mã thông báo xác thực để gửi lệnh.
 5.  **Gửi lệnh và nhận kết quả:** Từ thiết bị điều khiển, bạn có thể gửi prompt hoặc yêu cầu tác vụ. `Claude Code` trên VPS sẽ thực hiện tác vụ (ví dụ: phân tích mã trong kho lưu trữ trên VPS, chạy thử nghiệm, tạo báo cáo) và gửi kết quả trở lại thiết bị điều khiển.
 
@@ -74,6 +78,7 @@ Một trong những tính năng mạnh mẽ nhất của `Claude Code` để t�
 > Trong ứng dụng Desktop của `Claude Code`, tính năng này được gọi là "Routines" và thường liên quan đến việc thực thi cục bộ. Trong giao diện CLI, bạn có thể truy cập nó thông qua lệnh `/schedule`, chủ yếu để cấu hình các tác vụ từ xa.
 
 **Mục đích chính của việc lên lịch tác vụ:**
+
 *   **Tự động hóa các tác vụ bảo trì mã nguồn:** Ví dụ, phân tích chất lượng mã định kỳ, tạo báo cáo tóm tắt các thay đổi trong kho mã nguồn hàng tuần, kiểm tra lỗi chính tả trong tài liệu dự án.
 *   **Giám sát dự án và thông báo:** Theo dõi các thay đổi trong kho mã nguồn (commit mới, pull request), tổng hợp chúng và gửi thông báo hoặc báo cáo định kỳ.
 *   **Tạo nội dung tự động:** Ví dụ, tổng hợp tin tức liên quan đến dự án, tạo các bản nháp tài liệu kỹ thuật dựa trên các thay đổi mã nguồn.
@@ -85,11 +90,13 @@ Một trong những tính năng mạnh mẽ nhất của `Claude Code` để t�
 
 **Cơ chế hoạt động ngầm (Under the Hood):**
 Đối với các `routines` cục bộ, `Claude Code` Desktop thường tích hợp với các hệ thống lên lịch tác vụ của hệ điều hành:
+
 *   **Windows:** Sử dụng Task Scheduler.
 *   **macOS/Linux:** Sử dụng `cron` hoặc `systemd timers`.
 `Claude Code` sẽ tạo ra một tác vụ hệ thống để chạy một lệnh CLI của `Claude Code` tại thời điểm đã định, chuyển prompt và ngữ cảnh đã cấu hình.
 
 **Các bước cấu hình cơ bản:**
+
 1.  **Mở giao diện Routines:** Trong ứng dụng Desktop, tìm mục "Routines" hoặc "Scheduled Tasks".
 2.  **Tạo Routine mới:** Chọn "Create new routine". Bạn sẽ được hỏi liệu đây là tác vụ `local` (chạy trên máy tính của bạn) hay `remote` (chạy trên một máy chủ từ xa mà bạn đã cấu hình).
 3.  **Xác định lịch trình:** Đặt lịch cho tác vụ. Bạn có thể chọn các tùy chọn như "mỗi ngày lúc 9 giờ sáng", "mỗi ngày làm việc", "mỗi tuần vào thứ Hai lúc 8 giờ tối", hoặc cấu hình lịch trình tùy chỉnh phức tạp hơn.
@@ -108,18 +115,21 @@ Giao diện dòng lệnh (CLI) của `Claude Code` cũng hỗ trợ lên lịch 
 
 **Cơ chế hoạt động ngầm (Under the Hood) cho tác vụ từ xa qua CLI:**
 Khi bạn lên lịch một tác vụ từ xa qua CLI, `Claude Code` không tự chạy tác vụ đó trong một "đám mây" của nó. Thay vào đó, nó sẽ:
+
 1.  **Lưu cấu hình:** Lưu trữ cấu hình của tác vụ (prompt, lịch trình, URL GitHub) vào một nơi mà `Claude Code` có thể truy cập (ví dụ: cấu hình cục bộ hoặc một dịch vụ đồng bộ hóa).
 2.  **Orchestration:** Tại thời điểm đã lên lịch, `Claude Code` (hoặc một dịch vụ liên quan) sẽ gửi lệnh đến *phiên bản `Claude Code` CLI đang chạy ở chế độ remote agent* trên máy chủ từ xa mà bạn đã cấu hình.
 3.  **Thực thi trên máy chủ từ xa:** Phiên bản `Claude Code` trên máy chủ từ xa sẽ nhận lệnh, clone/pull kho lưu trữ GitHub, thực thi tác vụ (ví dụ: phân tích mã, chạy script), và gửi kết quả trở lại.
 
 **Sử dụng lệnh `/schedule`:**
 Khi bạn gõ `/schedule` vào `Claude Code` CLI, nó sẽ đưa bạn vào một chế độ tương tác, nơi bạn có thể chọn:
+
 *   **1. View defined triggers:** Liệt kê các `routine` hoặc tác vụ đã lên lịch hiện có.
 *   **2. Run a trigger now:** Thực thi một `routine` đã tồn tại ngay lập tức, hữu ích cho việc kiểm thử.
 *   **3. Update a trigger:** Thay đổi cấu hình của một `routine` hiện có.
 *   **4. Create new trigger:** Tạo một `routine` mới.
 
 **Quy trình tạo tác vụ từ xa (Remote Task) qua CLI:**
+
 1.  **Chọn "Create new trigger":** `Claude Code` sẽ hỏi bạn muốn làm gì.
 2.  **Nhập Prompt:** Bạn có thể chọn từ các gợi ý hoặc tự nhập mô tả tác vụ của mình.
     *   **Ví dụ:** "summarize key changes in the last week into a summary MD file"
@@ -191,6 +201,7 @@ Khóa học này đã trang bị cho bạn những kiến thức và kỹ năng 
 ### 3.1. Các Phương Pháp Tương Tác Hiệu Quả với AI
 
 Trong suốt khóa học, chúng ta đã khám phá các phương pháp khác nhau để tương tác với `Claude Code` và các hệ thống AI Agentic:
+
 *   **Chế độ lặp (Loop Mode):** Tương tự như một vòng lặp REPL (Read-Eval-Print Loop) mở rộng, nơi `Claude Code` liên tục thực hiện các tác vụ và bạn có thể can thiệp, cung cấp phản hồi khi cần. Phương pháp này phù hợp cho việc phát triển nhanh, thử nghiệm lặp đi lặp lại, và các tác vụ có tính thăm dò.
 *   **Chế độ lập kế hoạch (Plan Mode) và "Human-in-the-Loop":** Bạn giữ vai trò chủ động, đưa ra các mục tiêu và kế hoạch tổng thể, và `Claude Code` (hoặc Antigravity IDE) sẽ phân rã thành các bước chi tiết, thực hiện từng bước dưới sự giám sát và phê duyệt của bạn. Đây là phương pháp lý tưởng cho các dự án phức tạp, nơi sự chính xác, kiểm soát của con người và khả năng điều chỉnh chiến lược là tối quan trọng.
 *   **Vibe Coding:** Đây là triết lý xuyên suốt khóa học, khuyến khích bạn tập trung vào "ý định" và "kết quả mong muốn" (the vibe), thay vì sa lầy vào chi tiết triển khai. Với `Claude Code` và đặc biệt là Antigravity IDE, bạn "truyền tải vibe" của mình thông qua các prompt cấp cao, và AI sẽ tự động lập kế hoạch, thực thi các script ngầm, gọi sub-agent trình duyệt, đọc/ghi file để biến ý định đó thành hiện thực.
@@ -205,6 +216,7 @@ Thế giới phát triển phần mềm đang thay đổi nhanh chóng, với AI
 > `Claude Code` và Antigravity IDE trao quyền cho bạn, kỹ sư phần mềm, để định hướng toàn bộ quá trình phát triển. Bạn là người kiến tạo, là kiến trúc sư ý tưởng, quyết định phần mềm nào được viết, theo cách nào, và AI là công cụ để biến tầm nhìn đó thành hiện thực với tốc độ và hiệu quả chưa từng có.
 
 Khóa học này đã trang bị cho bạn những kỹ năng và tư duy cần thiết để:
+
 *   **Thích nghi với sự chuyển đổi:** Hiểu rõ cách AI sẽ định hình lại vai trò của kỹ sư phần mềm, từ việc viết code từng dòng sang việc "chỉ huy" và "kiểm soát" các agent AI.
 *   **Sử dụng công cụ AI hiệu quả:** Làm chủ các công cụ như `Claude Code` và áp dụng tư duy Vibe Coding vào các hệ thống Agentic như Antigravity IDE để tối ưu hóa quy trình làm việc của mình.
 *   **Tăng cường năng suất:** Tự động hóa các tác vụ lặp lại, giảm thiểu công việc nhàm chán, và tập trung vào việc giải quyết các vấn đề thiết kế, kiến trúc và trải nghiệm người dùng phức tạp hơn.

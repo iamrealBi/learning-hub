@@ -38,6 +38,7 @@ Bạn có thể tương tác với Claude Code Web theo hai cách chính, cho ph
 #### a. Từ Giao Diện Web Trực Tiếp
 
 Sau khi thiết lập môi trường, bạn có thể sử dụng giao diện web để khởi tạo tác vụ một cách trực quan:
+
 *   Chọn kho lưu trữ (repository) và nhánh (branch) bạn muốn làm việc.
 *   Chọn môi trường Claude Code Web đã tạo.
 *   Mô tả tác vụ của bạn bằng ngôn ngữ tự nhiên (ví dụ: "change the main color from blue to an elegant purple").
@@ -58,6 +59,7 @@ Sau khi thiết lập môi trường, bạn có thể sử dụng giao diện we
         change the main color from blue to an elegant purple &
         ```
         Điều này rất phù hợp với Vibe Coding, nơi bạn có thể khởi động một tác vụ và tiếp tục tập trung vào việc khác mà không bị gián đoạn.
+
     *   **Sử dụng cờ `--remote` (hoặc `-r`):** Đây là cách rõ ràng hơn để chỉ định tác vụ chạy từ xa. Ví dụ:
         ```bash
         claude --remote "Change the main color from blue to an elegant purple across all components."
@@ -71,6 +73,7 @@ Sau khi thiết lập môi trường, bạn có thể sử dụng giao diện we
 Khi một tác vụ được gửi đến Claude Code Web, bạn sẽ nhận được một liên kết đến phiên làm việc từ xa. Tại đó, bạn có thể theo dõi tiến độ, xem các bước mà Claude Code đang thực hiện và nhận thông báo.
 
 Quá trình làm việc của Claude Code Web bao gồm các bước tự động hóa sau:
+
 1.  **Checkout Repository:** Claude Code sẽ sao chép kho lưu trữ và nhánh đã chọn vào môi trường tạm thời của nó.
 2.  **Thực hiện thay đổi:** AI sẽ phân tích code và thực hiện các thay đổi cần thiết dựa trên prompt của bạn.
 3.  **Chạy kiểm thử (nếu có):** Nếu dự án có các bài kiểm thử (unit tests, integration tests), Claude Code có thể chạy chúng trong môi trường từ xa để đảm bảo các thay đổi không gây ra lỗi và duy trì chất lượng code.
@@ -186,6 +189,7 @@ Chế độ này hiển thị danh sách các tác vụ mà Claude Code đang c�
 #### c. Preview Mode (Chế độ Xem Trước)
 
 Đây là một tính năng cực kỳ hữu ích cho các nhà phát triển web và là cốt lõi của Vibe Coding khi làm việc với UI:
+
 *   **Thiết lập:** Lần đầu tiên sử dụng trong một dự án, bạn cần cho Claude Code biết cách khởi động máy chủ phát triển (dev server) của ứng dụng. Ứng dụng sẽ tự động chạy một tác vụ để cố gắng tìm hiểu lệnh khởi động (ví dụ: `npm run dev`, `yarn start`). Thông tin này sẽ được lưu vào một file `launch.json` trong thư mục `.claude` của dự án. Sau khi thiết lập, Claude Code có thể tự động khởi động dev server cho bạn.
 *   **Xem trước trực tiếp:** Bạn sẽ thấy một bản xem trước trực tiếp của ứng dụng web của mình ngay trong ứng dụng Claude Code Desktop. Điều này tạo ra một vòng lặp phản hồi cực kỳ nhanh, cho phép bạn đánh giá ngay lập tức các thay đổi về UI/UX.
 *   **Tính năng tương tác:**
@@ -210,6 +214,7 @@ Một terminal tích hợp cho phép bạn chạy bất kỳ lệnh terminal nà
 #### f. Diff Viewer (Trình xem Thay đổi)
 
 Công cụ này cung cấp một cái nhìn tổng quan toàn diện về tất cả các file đã được Claude Code chỉnh sửa và những thay đổi cụ thể trong từng file.
+
 *   **Xem xét thay đổi:** Đây là nơi lý tưởng để bạn xem xét mọi thay đổi mà Claude Code đã thực hiện.
 *   **Thêm bình luận trực tiếp vào code:** Một tính năng mạnh mẽ là bạn có thể di chuột qua các dòng code trong trình xem diff và thêm bình luận trực tiếp vào đó. Bình luận này sau đó sẽ được tự động thêm vào cửa sổ chat làm ngữ cảnh, cho phép bạn chỉ ra chính xác vị trí mà bạn muốn Claude Code sửa đổi hoặc xem xét lại.
 
@@ -271,6 +276,7 @@ Chương này đã cung cấp một cái nhìn toàn diện về cách sử dụ
 *   Các tùy chọn cấu hình và khả năng mở rộng thông qua Skills, Connectors, và Plugins cho phép bạn tùy chỉnh Claude Code để phù hợp với mọi quy trình làm việc agentic.
 
 Khi kết hợp với **Antigravity IDE** – hệ thống agentic siêu việt với khả năng tự chạy script, gọi subagent trình duyệt, đọc ghi file và lập kế hoạch tự động – bạn sẽ có trong tay một bộ công cụ Vibe Coding vô cùng mạnh mẽ. Antigravity IDE có thể quản lý luồng công việc tổng thể, thực hiện các tác vụ phức tạp với sự tự chủ cao, trong khi Claude Code bổ trợ bằng cách:
+
 *   **Offload tác vụ nặng:** Sử dụng Claude Code Web để giải phóng tài nguyên cho Antigravity IDE.
 *   **Tương tác UI trực quan:** Tận dụng Preview Mode và "Select Elements" của Claude Code Desktop để tinh chỉnh giao diện một cách trực quan, một khía cạnh mà Antigravity có thể cần đến sự hỗ trợ của con người.
 *   **Phản hồi chính xác:** Sử dụng Diff Viewer để cung cấp phản hồi trực tiếp vào code, giúp AI hiểu rõ "vibe" điều chỉnh của bạn.

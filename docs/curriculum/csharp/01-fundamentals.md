@@ -8,6 +8,7 @@
 ## 🎯 Mục Tiêu Phần Này
 
 Sau khi hoàn thành, bạn sẽ:
+
 - Cài đặt và sử dụng Visual Studio / VS Code
 - Hiểu quy trình từ source code → executable
 - Viết chương trình C# cơ bản với biến, toán tử, điều kiện, vòng lặp
@@ -54,10 +55,12 @@ Machine Code (thực thi)
 
 ```
 .NET Framework (cũ):
+
   - Chỉ chạy trên Windows
   - Version cuối: 4.8 (không phát triển thêm)
 
 .NET (mới, trước gọi là .NET Core):
+
   - Cross-platform: Windows, macOS, Linux
   - .NET 5 → 6 → 7 → 8 → 9 (phiên bản mới mỗi năm)
   - Hiệu suất cao hơn, open-source
@@ -113,6 +116,7 @@ namespace MyApp
 ### 2.1 Khái niệm
 
 Biến là **ô nhớ được đặt tên** để lưu trữ dữ liệu. Mỗi biến có:
+
 - **Tên** (identifier)
 - **Kiểu dữ liệu** (type) — xác định loại dữ liệu được lưu
 - **Giá trị** (value)
@@ -223,6 +227,7 @@ int STUDENT_AGE;     // Đây là style C/C++, không phải C#
 ```
 
 **Quy ước Clean Code cho tên biến:**
+
 - Dùng **camelCase** cho biến cục bộ: `myVariable`
 - Tên phải **có ý nghĩa**: `customerName` thay vì `cn`
 - Tên phải **phản ánh mục đích** của biến
@@ -1304,11 +1309,13 @@ Watch window:  Thêm biểu thức tùy ý để theo dõi
 Hover:         Di chuột lên biến → xem giá trị
 
 Conditional Breakpoint:
+
   - Right-click breakpoint → Conditions
   - Nhập điều kiện: i == 50 → chỉ dừng khi i = 50
   - Rất hữu ích khi debug vòng lặp lớn!
 
 Hit Count:
+
   - Breakpoint chỉ active sau N lần chạy qua
 ```
 
@@ -1476,6 +1483,7 @@ Console.WriteLine($"a={pair.Item1}, b={pair.Item2}");
 ```
 
 **Khi nào dùng?**
+
 - Gộp nhanh nhiều giá trị trả về từ method.
 - Viết code ngắn gọn trong bài tập nhỏ.
 - Với domain phức tạp, vẫn nên ưu tiên tạo class/record rõ nghĩa.
@@ -1495,6 +1503,7 @@ int a = 5, b = 10;
 ```
 
 **BT2: FizzBuzz** — In từ 1 đến 100:
+
 - Chia hết cho 3: in "Fizz"
 - Chia hết cho 5: in "Buzz"  
 - Chia hết cho cả 3 và 5: in "FizzBuzz"
@@ -1525,11 +1534,13 @@ static void BubbleSort(int[] arr)
 ```
 
 **BT9: Number Guessing Game** — Máy random 1 số 1-100, người chơi đoán:
+
 - Sau mỗi lần đoán: "Cao hơn!" hoặc "Thấp hơn!"
 - Đếm số lần đoán
 - Hiển thị "Chúc mừng! Đoán đúng sau N lần"
 
 **BT10: Student Grade Calculator** — Nhập N sinh viên (tên, điểm), hiển thị:
+
 - Danh sách sorted theo điểm giảm dần
 - Điểm trung bình
 - Sinh viên điểm cao nhất/thấp nhất

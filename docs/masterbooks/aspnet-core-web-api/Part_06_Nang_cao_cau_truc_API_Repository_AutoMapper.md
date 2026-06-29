@@ -39,6 +39,7 @@ Trong môi trường API hiện đại, hiệu suất và khả năng phản h�
 
 **Cơ chế "Under the Hood":**
 Khi bạn gọi `await SomeAsyncMethod()`, C# sẽ:
+
 1.  Kiểm tra xem `SomeAsyncMethod()` đã hoàn thành chưa.
 2.  Nếu đã hoàn thành, nó sẽ tiếp tục thực thi ngay lập tức.
 3.  Nếu chưa hoàn thành, nó sẽ "bắt giữ" ngữ cảnh hiện tại (ví dụ: `SynchronizationContext` trong ứng dụng UI, nhưng trong ASP.NET Core Web API thường là `TaskScheduler.Default`).
@@ -227,6 +228,7 @@ public class RegionController : ControllerBase
 #### 1.5. Vibe Coding và Antigravity IDE: Tự động hóa Async Refactoring
 
 Với Antigravity IDE, việc chuyển đổi mã đồng bộ sang bất đồng bộ có thể trở nên mượt mà hơn rất nhiều.
+
 *   **Ý định (Vibe):** Bạn nhận ra một phương thức đang thực hiện I/O đồng bộ và muốn nó trở thành bất đồng bộ để cải thiện hiệu suất.
 *   **Antigravity IDE hỗ trợ:**
     *   **Phân tích mã:** Antigravity có thể quét mã của bạn, xác định các phương thức I/O đồng bộ (ví dụ: `ToList()`, `FirstOrDefault()`, `Add()`, `SaveChanges()`) và đề xuất các phiên bản bất đồng bộ.
@@ -291,6 +293,7 @@ graph TD
 ```
 
 Trong sơ đồ trên:
+
 *   `Controller` chỉ biết về `IRegionRepository`.
 *   `IRegionRepository` định nghĩa các phương thức chung.
 *   `SQLRegionRepository` và `InMemoryRegionRepository` là hai triển khai cụ thể, mỗi loại tương tác với một nguồn dữ liệu khác nhau.
@@ -332,6 +335,7 @@ namespace NzWalks.Repositories
 }
 ```
 **Giải thích:**
+
 *   Các phương thức trả về `Task<T>` để hỗ trợ lập trình bất đồng bộ.
 *   Sử dụng `Region?` (nullable reference type) để chỉ rõ rằng phương thức có thể trả về `null` nếu không tìm thấy thực thể, giúp mã an toàn hơn.
 
@@ -406,6 +410,7 @@ namespace NzWalks.Repositories
 }
 ```
 **Giải thích:**
+
 *   `SQLRegionRepository` triển khai `IRegionRepository`.
 *   Nó nhận `NzWalksDbContext` qua constructor injection, tuân thủ nguyên tắc Dependency Inversion.
 *   Tất cả các phương thức đều sử dụng các phiên bản `Async` của EF Core, đảm bảo hiệu suất.
@@ -421,6 +426,7 @@ builder.Services.AddScoped<IRegionRepository, SQLRegionRepository>();
 // ...
 ```
 **Cơ chế ngầm của Dependency Injection:**
+
 *   Khi ứng dụng khởi động, DI container (Service Provider) sẽ đọc các đăng ký trong `Program.cs`.
 *   Khi `RegionController` được tạo, DI container sẽ kiểm tra constructor của nó. Nó thấy `IRegionRepository` được yêu cầu.
 *   Dựa trên đăng ký `AddScoped<IRegionRepository, SQLRegionRepository>()`, container sẽ tạo một thể hiện của `SQLRegionRepository` và tiêm nó vào constructor của `RegionController`.
@@ -579,6 +585,7 @@ Trong phương thức `Update`, việc tạo một `new Region` từ `updateRegi
 #### 2.5.5. Minh họa khả năng thay đổi nguồn dữ liệu (In-Memory vs. SQL)
 
 Đây là minh chứng rõ ràng nhất cho lợi ích của Repository Pattern.
+
 1.  **Tạo `InMemoryRegionRepository`:**
 
     ```csharp
@@ -654,6 +661,7 @@ Chỉ với một thay đổi nhỏ trong `Program.cs`, ứng dụng của bạn
 #### 2.6. Vibe Coding và Antigravity IDE: Tạo và quản lý Repositories
 
 Antigravity IDE có thể là một trợ thủ đắc lực trong việc áp dụng Repository Pattern:
+
 *   **Ý định (Vibe):** "Tôi muốn triển khai Repository Pattern cho tất cả các Domain Model của mình."
 *   **Antigravity IDE hỗ trợ:**
     *   **Tự động tạo Interface và Class:** Dựa trên các Domain Model hiện có, Antigravity có thể tự động tạo `IRegionRepository` và `SQLRegionRepository` (hoặc `InMemoryRegionRepository`) với các phương thức CRUD bất đồng bộ cơ bản.
@@ -670,14 +678,17 @@ Như bạn đã thấy trong các ví dụ trước, việc ánh xạ thủ côn
 ### 3.1. Nhu cầu ánh xạ đối tượng trong API và vấn đề mã lặp lại (Boilerplate)
 
 Trong kiến trúc API hiện đại, chúng ta thường phân biệt rõ ràng giữa:
+
 *   **Domain Models:** Đại diện cho các thực thể nghiệp vụ cốt lõi của ứng dụng, thường ánh xạ trực tiếp với cấu trúc bảng trong cơ sở dữ liệu (ví dụ: `Region` trong Entity Framework Core).
 *   **Data Transfer Objects (DTOs):** Các đối tượng được sử dụng để truyền dữ liệu qua mạng (từ client đến API, hoặc từ API đến client). DTOs được thiết kế để phù hợp với yêu cầu của API và client, có thể khác biệt so với Domain Models (ví dụ: chỉ chứa một tập hợp con các thuộc tính, có các thuộc tính tổng hợp, hoặc có tên thuộc tính khác).
 
 Sự khác biệt này đòi hỏi chúng ta phải chuyển đổi dữ liệu giữa Domain Model và DTO ở lớp Controller hoặc Service Layer. Việc này bao gồm:
+
 *   Ánh xạ DTO nhận được từ yêu cầu HTTP (`AddRegionRequestDto`, `UpdateRegionRequestDto`) sang Domain Model (`Region`) để lưu vào cơ sở dữ liệu.
 *   Ánh xạ Domain Model (`Region`) nhận được từ cơ sở dữ liệu sang DTO (`RegionDto`) để trả về cho client.
 
 Mỗi khi có một thực thể mới hoặc một DTO mới, chúng ta phải viết lại logic ánh xạ thủ công, thường là một chuỗi các lệnh gán thuộc tính. Điều này dẫn đến:
+
 *   **Mã lặp lại (Boilerplate Code):** Nhiều dòng mã chỉ để sao chép dữ liệu.
 *   **Khó đọc và bảo trì:** Mã Controller bị che lấp bởi logic ánh xạ, làm giảm sự rõ ràng của logic nghiệp vụ.
 *   **Dễ gây lỗi:** Việc gán nhầm thuộc tính hoặc quên gán thuộc tính là điều dễ xảy ra, đặc biệt khi có nhiều thuộc tính.
@@ -689,6 +700,7 @@ AutoMapper là một thư viện ánh xạ đối tượng dựa trên cấu hì
 
 **Cách nó hoạt động (Under the Hood):**
 Khi bạn định nghĩa một ánh xạ (`CreateMap<Source, Destination>()`), AutoMapper không thực hiện ánh xạ ngay lập tức. Thay vào đó, nó xây dựng một biểu đồ ánh xạ (mapping plan). Lần đầu tiên bạn gọi `_mapper.Map<Destination>(source)`, AutoMapper sẽ:
+
 1.  Sử dụng reflection để kiểm tra các thuộc tính của `Source` và `Destination`.
 2.  Tạo một biểu thức LINQ (Expression Tree) hoặc một hàm ánh xạ được biên dịch (compiled delegate) để thực hiện việc sao chép dữ liệu.
 3.  Lưu trữ hàm này trong bộ nhớ đệm (cache) để các lần ánh xạ tiếp theo cho cùng một cặp kiểu sẽ cực kỳ nhanh.
@@ -756,6 +768,7 @@ namespace NzWalks.Mappings
 }
 ```
 **Giải thích:**
+
 *   `CreateMap<Source, Destination>()`: Định nghĩa một quy tắc ánh xạ từ kiểu `Source` sang kiểu `Destination`. AutoMapper sẽ cố gắng ánh xạ các thuộc tính có cùng tên và kiểu.
 *   `ReverseMap()`: Là một phương thức tiện lợi để tự động tạo quy tắc ánh xạ ngược lại (từ `Destination` sang `Source`), giả định rằng các thuộc tính có cùng tên và kiểu.
 *   `ForMember(dest => dest.PropertyName, opt => opt.MapFrom(src => src.OtherPropertyName))`: Được sử dụng để cấu hình ánh xạ cho một thuộc tính cụ thể khi có sự khác biệt về tên, kiểu dữ liệu, hoặc khi bạn muốn áp dụng logic tùy chỉnh (ví dụ: chuyển đổi kiểu, nối chuỗi, v.v.).
@@ -885,6 +898,7 @@ Với AutoMapper, mã trong Controller trở nên sạch sẽ, tập trung hơn 
 #### 3.5. Vibe Coding và Antigravity IDE: Tự động hóa ánh xạ đối tượng
 
 Antigravity IDE có thể biến việc cấu hình AutoMapper từ một nhiệm vụ thủ công thành một quy trình tự động, phù hợp với tư duy Vibe Coding:
+
 *   **Ý định (Vibe):** "Tôi có một Domain Model `Region` và các DTO `RegionDto`, `AddRegionRequestDto`, `UpdateRegionRequestDto`. Hãy tạo các quy tắc ánh xạ AutoMapper và tích hợp chúng."
 *   **Antigravity IDE hỗ trợ:**
     *   **Phân tích cấu trúc:** Antigravity có thể phân tích cấu trúc của các lớp Domain Model và DTO của bạn.

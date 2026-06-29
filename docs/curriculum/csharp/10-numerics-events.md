@@ -141,6 +141,7 @@ Subject (Publisher)  ←  Observer (Subscriber)
   thay đổi...          và phản ứng
 
 Ví dụ: YouTube Channel (Subject) → Subscribers (Observers)
+
 - Channel đăng video mới → TẤT CẢ subscribers nhận thông báo
 ```
 

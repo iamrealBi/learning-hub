@@ -31,6 +31,7 @@ Trình duyệt (Chrome) = **Bạn** ở hành tinh Trái Đất.
 Máy chủ (Server) = **Đầu bếp** ở hành tinh Mars.
 
 Hai bên nói chuyện bằng ngôn ngữ chung tên là **HTTP**:
+
 - **Request**: Bạn viết một tờ giấy ghi "Cho tôi trang chủ Google" rồi phóng ra vũ trụ.
 - **Response**: Đầu bếp nhận tờ giấy, nấu xong, đóng gói giao diện HTML rồi bắn ngược lại Trái Đất.
 
@@ -92,6 +93,7 @@ Chọn bản **LTS** (.NET 8.0) — Giống mua xe Toyota: Microsoft cam kết s
 
 ## 4.2. Visual Studio 2022 — Nhà bếp 5 sao
 Môi trường phát triển với gợi ý code, tô màu, debug trực quan:
+
 - Tải bản **Community** (miễn phí, đủ xài)
 - Chọn Workloads: ✅ **ASP.NET and web development**
 

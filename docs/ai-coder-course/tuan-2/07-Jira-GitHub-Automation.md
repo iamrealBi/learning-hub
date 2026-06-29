@@ -35,6 +35,7 @@
 ### Workflow tự động:
 ```bash
 claude "
+
 1. Đọc GitHub Issues cho repo BookWormHub
 2. Pick issue có label 'ai-ready' đầu tiên
 3. Tạo branch feature/issue-{number}
@@ -70,6 +71,7 @@ claude "
 ### Workflow:
 ```bash
 claude "
+
 1. Lấy tickets từ Jira sprint hiện tại, status = 'To Do'
 2. Pick ticket đầu tiên, chuyển sang 'In Progress'
 3. Đọc acceptance criteria trong ticket
@@ -96,6 +98,7 @@ jobs:
   ai-review:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v4
       
       - name: Get PR diff
@@ -107,6 +110,7 @@ jobs:
           claude --print "
             Review the following PR diff for BookWormHub.
             Check for:
+
             1. Service Layer Pattern compliance
             2. FluentValidation usage
             3. Missing unit tests

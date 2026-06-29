@@ -5,6 +5,7 @@
 Trong kỷ nguyên phát triển API hiện đại, việc bảo mật tài nguyên không chỉ là một yêu cầu mà còn là nền tảng của mọi hệ thống đáng tin cậy. Chương này sẽ tập trung vào cơ chế **Xác thực (Authentication)**, bước then chốt đầu tiên để đảm bảo rằng chỉ những người dùng hợp lệ mới có thể truy cập vào các dịch vụ và dữ liệu của bạn. Chúng ta sẽ cùng nhau xây dựng một hệ thống xác thực dựa trên JSON Web Tokens (JWT) cho RESTful Web API sử dụng ASP.NET Core và Entity Framework Core, đồng thời củng cố các kiến thức về Dependency Injection, Repository Pattern, Controllers và HTTP Verbs đã được giới thiệu trong khóa học.
 
 Mục tiêu cụ thể của chương này bao gồm:
+
 *   Nắm vững luồng hoạt động của cơ chế xác thực sử dụng JWT.
 *   Thiết lập và cấu hình JWT Authentication một cách bài bản trong ASP.NET Core Web API.
 *   Kiểm tra và xác minh hiệu quả của cơ chế xác thực đã triển khai.
@@ -42,6 +43,7 @@ Trước khi đi sâu vào chi tiết kỹ thuật, việc hiểu rõ các khái
 JWT là một mã thông báo (token) được sử dụng để xác thực người dùng sau khi họ đã đăng nhập thành công. Thay vì phải gửi lại thông tin đăng nhập trong mỗi yêu cầu, client chỉ cần gửi JWT. API sẽ sử dụng JWT này để xác minh danh tính người dùng mà không cần truy vấn lại cơ sở dữ liệu cho mỗi yêu cầu, giúp giảm tải cho server và cải thiện hiệu suất.
 
 **Ưu điểm của JWT:**
+
 *   **Không trạng thái (Stateless):** Server không cần lưu trữ thông tin session của người dùng. Mọi thông tin cần thiết đều nằm trong token, giúp API dễ dàng mở rộng (scalability).
 *   **Bảo mật:** Sử dụng chữ ký số để đảm bảo tính toàn vẹn và xác thực nguồn gốc.
 *   **Tự chứa (Self-contained):** Chứa đủ thông tin về người dùng (claims) mà không cần server phải thực hiện các truy vấn bổ sung.
@@ -383,6 +385,7 @@ Trong khóa học này, bạn đang trực tiếp sử dụng hệ thống Antig
 "Vibe Coding" là một phương pháp lập trình trực quan, có định hướng ý định, nơi lập trình viên truyền đạt "ý tưởng" hoặc "mục tiêu" của mình cho AI (Antigravity), và AI sẽ chủ động phân tích, lập kế hoạch, đề xuất, hoặc thậm chí tự động tạo và thực thi mã để đạt được mục tiêu đó. Nó không chỉ là tự động hoàn thành mã, mà là một quá trình cộng tác sâu sắc, nơi Antigravity hiểu "cảm nhận" (vibe) của bạn về giải pháp.
 
 Trong ngữ cảnh thiết lập JWT Authentication:
+
 *   Thay vì nhớ từng dòng cấu hình `TokenValidationParameters`, bạn có thể "vibe" cho Antigravity: "Tôi muốn thiết lập JWT Authentication với validation cho issuer, audience, lifetime và signing key."
 *   Antigravity sẽ tự động gợi ý, hoặc thậm chí tạo ra khối mã `AddJwtBearer` đầy đủ với các tham số cần thiết, lấy giá trị từ `appsettings.json`.
 

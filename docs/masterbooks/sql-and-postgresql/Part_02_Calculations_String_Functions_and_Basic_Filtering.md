@@ -155,6 +155,7 @@ FROM
 ```
 
 **Giải thích:**
+
 *   `name || ', ' || country`: Nối giá trị của cột `name`, một chuỗi ký tự cố định `', '` (dấu phẩy và khoảng trắng), và giá trị của cột `country`.
 *   **Đặc điểm với `NULL`:** Nếu bất kỳ toán hạng nào trong phép nối `||` là `NULL`, toàn bộ kết quả của phép nối sẽ là `NULL`.
     *   Ví dụ: `'Hello' || NULL || ' World'` sẽ cho kết quả `NULL`.
@@ -189,6 +190,7 @@ FROM
 ```
 
 **Giải thích:**
+
 *   Đối số đầu tiên `' '` là ký tự phân tách sẽ được chèn giữa các chuỗi còn lại.
 *   Hàm sẽ chỉ chèn dấu phân tách giữa các chuỗi *không phải* `NULL`. Nếu `middle_name` là `NULL`, nó sẽ nối `first_name` và `last_name` với một khoảng trắng mà không để lại khoảng trắng thừa.
 
@@ -235,6 +237,7 @@ FROM
 ```
 
 Trong ví dụ này:
+
 1.  `CONCAT_WS(', ', name, country)`: Nối tên và quốc gia với dấu phẩy và khoảng trắng (ví dụ: `Tokyo, Japan`).
 2.  `UPPER(...)`: Chuyển chuỗi kết quả thành chữ hoa (ví dụ: `TOKYO, JAPAN`).
 3.  `SUBSTRING(... FROM 1 FOR 10)`: Trích xuất 10 ký tự đầu tiên từ chuỗi chữ hoa (ví dụ: `TOKYO, JAP`).
@@ -372,6 +375,7 @@ Khi bạn cần tìm kiếm các chuỗi phù hợp với một mẫu nhất đ�
 *   `ILIKE`: So khớp mẫu chuỗi KHÔNG phân biệt chữ hoa/thường (đặc trưng của PostgreSQL, rất hữu ích).
 
 Các ký tự đại diện (wildcards) được sử dụng:
+
 *   `%`: Đại diện cho bất kỳ chuỗi ký tự nào, bao gồm cả chuỗi rỗng.
 *   `_`: Đại diện cho một ký tự đơn bất kỳ.
 

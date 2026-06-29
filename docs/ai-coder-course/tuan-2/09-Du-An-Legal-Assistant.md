@@ -34,6 +34,7 @@ Tạo web app giúp soạn thảo hợp đồng/thỏa thuận pháp lý bằng 
 
 ## 5. Kết Nối Với BookWormHub
 Kỹ thuật tương tự có thể áp dụng:
+
 - Template-based generation cho BookWormHub reports
 - PDF export cho book catalog
 - AI-assisted content moderation

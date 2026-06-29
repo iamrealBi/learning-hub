@@ -8,6 +8,7 @@
 
 ### Token là gì?
 **Token** là đơn vị dữ liệu nhỏ nhất mà LLM xử lý. Token **không phải lúc nào cũng là một từ hoàn chỉnh** — nó có thể là:
+
 - Một từ: `hello` → 1 token
 - Một phần từ: `tokenization` → `token` + `ization` (2 tokens)
 - Ký tự đặc biệt: `!`, `.` → mỗi ký tự 1 token
@@ -28,6 +29,7 @@ Vectors: [[0.12, -0.45, ...], [0.78, 0.23, ...], ...]
 
 ### Subword Tokenization (BPE)
 Hầu hết LLM hiện đại sử dụng **Byte-Pair Encoding (BPE)**:
+
 - Cân bằng kích thước từ vựng với hiệu quả
 - Xử lý được từ lạ, lỗi chính tả, thuật ngữ mới
 - Ví dụ: `"programming"` → `"program"` + `"ming"`
@@ -179,6 +181,7 @@ Các model hiện đại có khả năng **reasoning nội bộ** — sinh ra "t
 
 ### Bài 1: Đếm token
 Truy cập [OpenAI Tokenizer](https://platform.openai.com/tokenizer) và thử:
+
 - Nhập một đoạn code C# → đếm token
 - Nhập cùng nội dung bằng tiếng Việt → so sánh
 - Thử tối ưu prompt để giảm token

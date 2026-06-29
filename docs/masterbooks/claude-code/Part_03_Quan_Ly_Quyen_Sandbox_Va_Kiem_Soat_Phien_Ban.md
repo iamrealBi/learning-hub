@@ -139,6 +139,7 @@ Ngay cả với việc quản lý quyền chặt chẽ và môi trường sandbo
 ### 3.1. Tại Sao Hoàn Tác Là Không Thể Thiếu, Đặc Biệt Khi Làm Việc Với AI
 
 Trí tuệ nhân tạo, dù tiên tiến đến đâu, vẫn có thể mắc lỗi hoặc hiểu sai ý định của bạn. Một thay đổi do AI thực hiện có thể:
+
 *   **Giới thiệu lỗi mới:** Mã do AI tạo ra có thể chứa lỗi logic hoặc cú pháp.
 *   **Giải pháp kém hiệu quả/không tối ưu:** AI có thể đưa ra một giải pháp hoạt động, nhưng không tối ưu về hiệu suất, khả năng bảo trì, hoặc tuân thủ các tiêu chuẩn mã hóa của dự án.
 *   **Xóa hoặc thay đổi file quan trọng ngoài ý muốn:** Mặc dù được kiểm soát, AI vẫn có thể thực hiện các hành động xóa hoặc sửa đổi mà bạn không muốn giữ lại.

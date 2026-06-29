@@ -48,6 +48,7 @@ pgAdmin là một công cụ quản lý và phát triển mã nguồn mở dựa
 **pgAdmin và Antigravity IDE / Vibe Coding:**
 
 Trong bối cảnh Vibe Coding với Antigravity IDE, pgAdmin đóng vai trò là "bảng điều khiển trực quan" của bạn. Antigravity có thể tự động tạo ra các schema cơ sở dữ liệu, thực hiện di chuyển dữ liệu, hoặc chạy các truy vấn phức tạp. pgAdmin cho phép bạn:
+
 1.  **Xác nhận trực quan (Visual Confirmation)**: Nhanh chóng kiểm tra xem những thay đổi mà Antigravity đã thực hiện (ví dụ: tạo bảng, thêm cột) có đúng như mong đợi hay không.
 2.  **Gỡ lỗi và điều tra (Debugging & Introspection)**: Khi có vấn đề, bạn có thể sử dụng pgAdmin để xem dữ liệu, cấu trúc bảng, hoặc nhật ký lỗi để hiểu rõ hơn nguyên nhân, từ đó cung cấp phản hồi chính xác hơn cho Antigravity.
 3.  **Tương tác bổ sung**: Thực hiện các truy vấn thăm dò, nhập/xuất dữ liệu, hoặc quản lý người dùng mà Antigravity có thể chưa tự động hóa hoàn toàn.
@@ -216,6 +217,7 @@ Truy cập trang web chính thức của PostgreSQL: [https://www.postgresql.org
         > [!CAUTION]
         > **Bỏ chọn "Stack Builder"**. Stack Builder là một công cụ để cài đặt các extension và công cụ bổ sung, nhưng chúng ta không cần nó cho khóa học này. Việc bỏ chọn giúp giảm thiểu các thành phần không cần thiết.
         Nhấp "Next".
+
     *   **Data Directory (Thư mục dữ liệu)**: Giữ nguyên đường dẫn mặc định. Đây là nơi tất cả dữ liệu cơ sở dữ liệu của bạn sẽ được lưu trữ. Nhấp "Next".
     *   **Password (Mật khẩu)**: Đây là mật khẩu cho người dùng `postgres` (superuser) của cơ sở dữ liệu. **Đây là mật khẩu quan trọng nhất bạn cần nhớ**, vì nó cấp quyền truy cập quản trị viên vào máy chủ PostgreSQL. Hãy nhập một mật khẩu mạnh và ghi nhớ nó. Bạn sẽ cần mật khẩu này để kết nối với cơ sở dữ liệu sau này. Nhấp "Next".
     *   **Port (Cổng)**: Giữ nguyên cổng mặc định `5432`. Đây là cổng mà máy chủ PostgreSQL sẽ lắng nghe các kết nối. Nhấp "Next".
@@ -273,6 +275,7 @@ Sau khi hoàn tất quá trình cài đặt, bạn đã có một môi trường
 **Mối quan hệ giữa Ứng dụng và Cơ sở dữ liệu:**
 
 Trong thực tế phát triển, khi bạn xây dựng một ứng dụng, bạn sẽ liên kết nó với một cơ sở dữ liệu duy nhất. Ví dụ, một ứng dụng quản lý công việc (Todo App) sẽ có một cơ sở dữ liệu riêng biệt. Điều này giúp:
+
 *   **Cô lập dữ liệu**: Ngăn ngừa xung đột và trộn lẫn dữ liệu giữa các ứng dụng.
 *   **Quản lý dễ dàng**: Cho phép bạn sao lưu, khôi phục hoặc di chuyển dữ liệu của từng ứng dụng một cách độc lập.
 *   **Bảo mật**: Áp dụng các quyền truy cập cụ thể cho từng cơ sở dữ liệu.
@@ -297,6 +300,7 @@ Với một môi trường PostgreSQL và pgAdmin đã được thiết lập, b
 ### 1. Nền Tảng Ổn Định cho Antigravity IDE
 
 Antigravity IDE, với khả năng tự động hóa và lập kế hoạch nâng cao, hoạt động hiệu quả nhất trong một môi trường được xác định rõ ràng và ổn định.
+
 *   **Giảm thiểu "Environment Drift"**: Một cài đặt PostgreSQL cục bộ nhất quán giúp Antigravity tránh được các lỗi liên quan đến môi trường không đồng nhất. Các tác nhân AI sẽ không phải "đoán" cấu hình hoặc gặp phải các vấn đề về phiên bản, cổng, hoặc quyền truy cập.
 *   **Phát triển và thử nghiệm cục bộ nhanh chóng**: Antigravity có thể dễ dàng tạo và tương tác với các cơ sở dữ liệu thử nghiệm trên máy cục bộ của bạn, cho phép vòng lặp phát triển và thử nghiệm nhanh chóng mà không cần phụ thuộc vào tài nguyên đám mây hoặc môi trường từ xa. Điều này đặc biệt hữu ích khi Antigravity cần chạy các script ngầm, gọi subagent để kiểm tra kết quả, hoặc đọc/ghi file tạm thời.
 *   **Tự động hóa quản lý cơ sở dữ liệu**: Antigravity có thể được hướng dẫn để tự động:

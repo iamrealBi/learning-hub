@@ -160,6 +160,7 @@ Vấn đề:
 
 ```
 Quy tắc:
+
 1. Mỗi ô chỉ chứa 1 giá trị (atomic)
 2. Mỗi row là duy nhất (có PK)
 3. Không có repeating groups
@@ -185,6 +186,7 @@ CREATE TABLE student_courses (
 
 ```
 Quy tắc:
+
 1. Đã đạt 1NF
 2. Mọi non-key column phải phụ thuộc vào TOÀN BỘ PK
    (loại bỏ partial dependency)
@@ -213,6 +215,7 @@ CREATE TABLE enrollments (
 
 ```
 Quy tắc:
+
 1. Đã đạt 2NF
 2. Không có transitive dependency
    (non-key column KHÔNG phụ thuộc vào non-key column khác)
@@ -242,6 +245,7 @@ CREATE TABLE courses (
 
 ```
 Quy tắc:
+
 1. Đã đạt 3NF
 2. Mọi functional dependency phải có superkey bên trái
    (stricter 3NF)
@@ -378,12 +382,14 @@ Denormalization:
   ❌ Storage tăng
 
 Denormalize khi:
+
 1. Read >> Write (analytics, reporting)
 2. Performance là ưu tiên #1
 3. Data ít thay đổi
 4. Có caching layer
 
 Ví dụ thực tế:
+
 - Lưu total_amount trực tiếp trong orders (thay vì tính từ order_items)
 - Lưu product_name trong order_items (snapshot lúc mua)
 - Lưu comment_count trong posts (thay vì COUNT mỗi query)

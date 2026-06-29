@@ -135,6 +135,7 @@ GSD = Ralph Loop + Guard Rails + Human Checkpoints
 # Step 1: Plan
 claude "/plan Tôi cần thêm tính năng phân trang cho books.
 Requirements:
+
 - 10 items per page
 - Giữ search/filter hoạt động
 - Pagination UI ở dưới

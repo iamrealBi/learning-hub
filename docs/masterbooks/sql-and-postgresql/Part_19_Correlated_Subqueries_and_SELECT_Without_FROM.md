@@ -3,6 +3,7 @@
 Chào mừng bạn đến với Phần 19 của khóa học chuyên sâu về PostgreSQL. Trong chương này, chúng ta sẽ đi sâu vào hai kỹ thuật truy vấn nâng cao nhưng cực kỳ mạnh mẽ: Correlated Subquery (Truy vấn phụ tương quan) và cách sử dụng câu lệnh `SELECT` mà không cần mệnh đề `FROM`. Đây là những công cụ thiết yếu giúp bạn giải quyết các bài toán dữ liệu phức tạp, đôi khi là cách trực tiếp và hiệu quả nhất để đạt được kết quả mong muốn trong những tình huống đặc thù.
 
 Mục tiêu của phần này là trang bị cho bạn khả năng:
+
 *   Hiểu rõ cơ chế hoạt động, ưu nhược điểm và các trường hợp sử dụng tối ưu của Correlated Subquery.
 *   Nắm vững cách viết và triển khai Correlated Subquery trong cả mệnh đề `WHERE` và `SELECT`.
 *   Khám phá khi nào và tại sao `SELECT` không có mệnh đề `FROM` lại hữu ích, cùng với các ứng dụng thực tế.
@@ -22,6 +23,7 @@ Subquery có thể được đặt linh hoạt trong nhiều mệnh đề của 
 ### 2. Các Loại Subquery Phổ Biến
 
 Dựa trên số lượng giá trị trả về, subquery được phân loại như sau:
+
 *   **Scalar Subquery**: Trả về **một giá trị đơn lẻ** (một hàng, một cột). Đây là loại subquery phổ biến nhất trong các mệnh đề `SELECT` hoặc `WHERE` khi so sánh.
 *   **Row Subquery**: Trả về **một hàng duy nhất** với nhiều cột. Thường được sử dụng trong mệnh đề `WHERE` với các toán tử `IN`, `EXISTS` hoặc so sánh từng cặp giá trị.
 *   **Table Subquery**: Trả về **một bảng** (nhiều hàng, nhiều cột). Thường được sử dụng trong mệnh đề `FROM` như một bảng tạm thời.

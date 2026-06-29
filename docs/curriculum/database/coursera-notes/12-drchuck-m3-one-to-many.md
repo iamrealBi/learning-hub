@@ -63,6 +63,7 @@ Who Made Who       | AC/DC      | Who Made Who | Rock
 ↑ "Rock" lặp 4 lần!
 
 Vấn đề:
+
 1. Typo "Led Zeppelin" → phải sửa KHẮP NƠI
 2. 1 triệu records → strings chiếm KHỔNG LỒ disk space
 3. Sửa 1 chỗ quên sửa chỗ khác → data KHÔNG NHẤT QUÁN
@@ -129,6 +130,7 @@ Từ columns: Track, Artist, Album, Genre, Rating, Count, Length
 
 Legend:
   • = Primary Key (SERIAL, auto-increment)
+
   * = Logical Key (UNIQUE)
   ∘ = Foreign Key (INTEGER REFERENCES)
 ```
@@ -137,6 +139,7 @@ Legend:
 
 ```
 Genre có thể gắn vào:
+
 1. TRACK  → đổi genre 1 track KHÔNG ảnh hưởng track khác ✅
 2. ALBUM  → đổi genre album → TẤT CẢ tracks trong album đổi
 3. ARTIST → đổi genre artist → TẤT CẢ tracks của artist đổi

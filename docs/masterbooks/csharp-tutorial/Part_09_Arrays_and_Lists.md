@@ -326,6 +326,7 @@ Add(2), Add(3), Add(4):
 Stack: listRef --> Heap: List<int> Object { Count: 4, Capacity: 4, _items: [1, 2, 3, 4] }
 
 Add(5) (Capacity đã đầy, cần Resize):
+
 1. Tạo mảng mới: `new_items = new int[8]`
 2. Sao chép: `new_items = [1, 2, 3, 4, 0, 0, 0, 0]`
 3. Cập nhật tham chiếu: `_items` giờ trỏ đến `new_items`

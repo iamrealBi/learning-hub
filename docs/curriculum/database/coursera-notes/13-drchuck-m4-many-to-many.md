@@ -27,6 +27,7 @@ Ví dụ bài trước: 1 Track thuộc 1 Album
   track.album_id → album.id  ✅ OK
 
 Nhưng thực tế:
+
   - 1 track trên nhiều albums! (original + compilation + soundtrack)
   - 1 album có nhiều artists! (ft., collab, band members)
 
@@ -110,6 +111,7 @@ Cấu trúc:
 Role = data modeled AT THE CONNECTION
 
 Giải thích:
+
 - Jane KHÔNG phải teacher (globally)
 - Jane KHÔNG phải student (globally)
 - Jane là teacher TRONG Python course
@@ -366,6 +368,7 @@ Tại sao học tất cả những này?
 — Dr. Chuck
 
 Tiếp theo: Intermediate PostgreSQL
+
 - Aggregate functions (GROUP BY, HAVING)
 - Subqueries
 - Stored procedures

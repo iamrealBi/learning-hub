@@ -22,11 +22,13 @@
 
 ```
 Process (Tiến trình):
+
   - 1 ứng dụng đang chạy
   - Có bộ nhớ RIÊNG (isolated)
   - Ví dụ: Chrome, Visual Studio, mỗi cái là 1 process
 
 Thread (Luồng):
+
   - 1 đơn vị thực thi TRONG process
   - CHIA SẺ bộ nhớ với các thread khác trong cùng process
   - 1 process có thể có NHIỀU threads
@@ -36,16 +38,19 @@ Thread (Luồng):
 
 ```
 Concurrency (Đồng thời):
+
   - Nhiều tasks TIẾN TRIỂN cùng lúc
   - Có thể trên 1 CPU core (time-slicing)
   - Ví dụ: Bạn nấu ăn + giặt đồ → chuyển qua lại giữa 2 việc
 
 Parallelism (Song song):
+
   - Nhiều tasks THỰC SỰ chạy cùng lúc
   - Cần nhiều CPU cores
   - Ví dụ: 2 người nấu ăn + giặt đồ cùng lúc
 
 Asynchrony (Bất đồng bộ):
+
   - KHÔNG CHỜ task hoàn thành mới làm tiếp
   - Ví dụ: Gửi email → làm việc khác → email về → xử lý
 ```
@@ -426,6 +431,7 @@ async Task<List<Quote>> SearchQuotesAsync(string query)
 6. Code phức tạp hơn → khó bảo trì
 
 → Chỉ dùng khi THỰC SỰ cần:
+
   - I/O-bound: async/await (đơn giản)
   - CPU-bound: Task.Run (khi cần tận dụng nhiều cores)
 ```

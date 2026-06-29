@@ -120,6 +120,7 @@ Trong ASP.NET Core, thuộc tính `[ApiController]` trên Controller của bạn
 
 **Cơ chế hoạt động:**
 Khi một yêu cầu HTTP đến một action của Controller có `[ApiController]`:
+
 1.  ASP.NET Core Model Binding cố gắng ánh xạ dữ liệu từ Body/Query/Route vào các tham số của action (ví dụ: `[FromBody] AddRegionRequestDto addRegionRequestDto`).
 2.  Nếu bạn đã cấu hình FluentValidation như trên, trong quá trình Model Binding, FluentValidation sẽ được kích hoạt để chạy các validator tương ứng cho DTO (ví dụ: `AddRegionRequestValidator` cho `AddRegionRequestDto`).
 3.  Bất kỳ lỗi xác thực nào mà FluentValidation phát hiện sẽ được thêm vào `ModelState`.
@@ -470,6 +471,7 @@ namespace NZWalks.API.Models.DTOs
 Mặc dù FluentValidation *có thể* được mở rộng để thực hiện các kiểm tra truy vấn cơ sở dữ liệu bằng cách inject Repository vào Validator (sử dụng constructor injection), nhưng điều này thường làm tăng độ phức tạp, làm cho các validator trở nên nặng nề, khó kiểm thử độc lập (vì giờ đây chúng phụ thuộc vào DB), và có thể dẫn đến các vấn đề về hiệu suất nếu không được quản lý cẩn thận.
 
 **Cách tiếp cận được khuyến nghị là:**
+
 *   Giữ các kiểm tra dữ liệu cơ bản (định dạng, hiện diện, phạm vi) trong FluentValidation.
 *   Giữ các kiểm tra nghiệp vụ phức tạp (đặc biệt là những cái cần truy vấn DB hoặc phụ thuộc vào trạng thái ứng dụng) trong Controller hoặc Service Layer.
 

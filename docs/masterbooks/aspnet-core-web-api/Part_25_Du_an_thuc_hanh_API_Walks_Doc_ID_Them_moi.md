@@ -403,6 +403,7 @@ namespace NZWalks.API.Controllers
         }
         ```
         (Hãy thay thế các `Guid` mẫu bằng `Guid` thực tế từ cơ sở dữ liệu của bạn).
+
 4.  **Thực thi yêu cầu:** Nhấp vào nút "Execute".
 
 #### 2.4.2. Phân tích kết quả và xác nhận

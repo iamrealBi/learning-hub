@@ -156,6 +156,7 @@ options = ClaudeAgentOptions(
 # Agent kiểm tra output của chính nó
 response = await query(
     prompt="""
+
     1. Viết hàm CalculateAverageRating cho BookService
     2. SAU KHI viết xong, review lại code của bạn:
        - Có handle edge cases không?

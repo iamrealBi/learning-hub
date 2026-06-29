@@ -16,6 +16,7 @@ Một Azure Subscription là một đơn vị logic hóa các dịch vụ Azure,
 > Nếu bạn chưa có tài khoản Azure, bạn có thể đăng ký tài khoản miễn phí. Azure cung cấp bản dùng thử miễn phí với một số tín dụng (thường là 200 USD) và quyền truy cập miễn phí vào các dịch vụ phổ biến trong 12 tháng. Bạn sẽ cần cung cấp thông tin thẻ tín dụng để xác minh danh tính, nhưng sẽ không bị tính phí trừ khi bạn chủ động nâng cấp lên gói trả phí. Đây là một cơ hội tuyệt vời để khám phá Azure mà không tốn kém.
 
 **Các bước thực hiện:**
+
 1.  Truy cập [portal.azure.com](https://portal.azure.com/).
 2.  Đăng nhập bằng tài khoản Microsoft của bạn. Nếu chưa có, hãy tạo một tài khoản mới.
 3.  Tìm kiếm "Subscriptions" trong thanh tìm kiếm và chọn nó.
@@ -27,6 +28,7 @@ Một Azure Subscription là một đơn vị logic hóa các dịch vụ Azure,
 ### 1.2. Resource Group (Nhóm Tài nguyên): Tổ Chức Tài Nguyên Một Cách Hợp Lý
 
 Resource Group là một bộ sưu tập các tài nguyên Azure được nhóm lại với nhau một cách logic. Việc nhóm các tài nguyên liên quan (như App Service, SQL Database, Application Insights, v.v.) vào cùng một Resource Group mang lại nhiều lợi ích:
+
 *   **Quản lý tập trung:** Dễ dàng xem, giám sát và cấu hình tất cả các tài nguyên của một ứng dụng.
 *   **Vòng đời đồng bộ:** Khi bạn muốn xóa một ứng dụng, bạn chỉ cần xóa Resource Group, tất cả tài nguyên bên trong sẽ được gỡ bỏ.
 *   **Kiểm soát truy cập:** Áp dụng các chính sách Azure Role-Based Access Control (RBAC) cho toàn bộ nhóm.
@@ -35,6 +37,7 @@ Resource Group là một bộ sưu tập các tài nguyên Azure được nhóm 
 > Một quy ước đặt tên tốt cho Resource Group giúp dễ quản lý và nhận diện. Ví dụ: `RG-<TênỨngDụng>-<VịTrí>-<MôiTrường>-<SốPhiênBản>`. Đối với ứng dụng NZWalks trong môi trường phát triển ở vùng East US, chúng ta có thể đặt tên là `RG-NZWalks-EastUS-Dev-001`.
 
 **Các bước thực hiện:**
+
 1.  Từ trang chủ Azure Portal, tìm kiếm "Resource Groups" và chọn nó.
 2.  Nhấp vào nút "Create".
 3.  **Subscription:** Chọn Subscription của bạn.
@@ -52,6 +55,7 @@ Azure App Service là một dịch vụ Nền tảng dưới dạng Dịch vụ 
 ### 2.1. Tạo Azure App Service
 
 **Các bước thực hiện:**
+
 1.  Từ trang chủ Azure Portal, tìm kiếm "App Services" và chọn nó.
 2.  Nhấp vào nút "Create" -> "Web App".
 3.  **Basic Tab:**
@@ -89,6 +93,7 @@ Azure App Service cung cấp một hệ thống cấu hình mạnh mẽ, nơi b�
 Trước tiên, chúng ta cần tạo một máy chủ SQL Server logic trên Azure để chứa các cơ sở dữ liệu của chúng ta.
 
 **Các bước thực hiện:**
+
 1.  Từ trang chủ Azure Portal, tìm kiếm "SQL databases" và chọn nó.
 2.  Nhấp vào nút "Create".
 3.  **Basic Tab:**
@@ -114,6 +119,7 @@ Quá trình tạo SQL Server và cơ sở dữ liệu có thể mất một th�
 Theo mặc định, Azure SQL Server có tường lửa bảo vệ, ngăn chặn các kết nối từ bên ngoài để đảm bảo an ninh. Chúng ta cần cấu hình tường lửa để cho phép App Service của chúng ta và máy tính cục bộ của chúng ta (nếu bạn muốn truy cập bằng SQL Server Management Studio hoặc Azure Data Studio) kết nối.
 
 **Các bước thực hiện:**
+
 1.  Sau khi SQL Server được tạo, truy cập tài nguyên SQL Server đó (tìm kiếm "SQL servers" và chọn server của bạn).
 2.  Trong menu bên trái, chọn "Networking".
 3.  **Public network access:** Chọn "Selected networks". Điều này đảm bảo chỉ các kết nối được phép mới có thể truy cập.
@@ -134,6 +140,7 @@ Bây giờ chúng ta đã có các tài nguyên Azure cần thiết, chúng ta c
 Để Visual Studio có thể tương tác và triển khai lên Azure, bạn cần thêm tài khoản Azure của mình vào Visual Studio.
 
 **Các bước thực hiện:**
+
 1.  Mở Visual Studio.
 2.  Đi tới `File` > `Account Settings...`.
 3.  Trong cửa sổ "Account Settings", nhấp vào "Add an account..." và đăng nhập bằng tài khoản Microsoft mà bạn đã sử dụng để đăng ký Azure.
@@ -143,6 +150,7 @@ Bây giờ chúng ta đã có các tài nguyên Azure cần thiết, chúng ta c
 Hồ sơ xuất bản (`.pubxml`) là một tệp cấu hình chứa tất cả các cài đặt cần thiết để triển khai ứng dụng của bạn lên một đích cụ thể (trong trường hợp này là Azure App Service). Nó giúp tự động hóa quá trình triển khai và đảm bảo tính nhất quán.
 
 **Các bước thực hiện:**
+
 1.  Trong Solution Explorer của Visual Studio, nhấp chuột phải vào dự án Web API của bạn.
 2.  Chọn "Publish...".
 3.  Trong cửa sổ "Publish", chọn "Azure" làm mục tiêu, sau đó nhấp "Next".
@@ -164,6 +172,7 @@ Khi triển khai lên Azure, chúng ta *không nên* nhúng chuỗi kết nối 
 Khi bạn lưu chuỗi kết nối vào cài đặt App Service, Azure sẽ lưu trữ chúng một cách an toàn và inject chúng vào ứng dụng của bạn dưới dạng biến môi trường khi ứng dụng khởi động. ASP.NET Core, thông qua hệ thống cấu hình linh hoạt của nó, sẽ tự động đọc các biến môi trường này và ưu tiên chúng hơn các giá trị trong `appsettings.json`. Điều này đảm bảo rằng thông tin nhạy cảm không được lưu trữ trong mã nguồn hoặc gói triển khai, tăng cường bảo mật.
 
 **Các bước thực hiện:**
+
 1.  Sau khi tạo hồ sơ xuất bản, Visual Studio sẽ hiển thị trang "Publish" cho hồ sơ đó.
 2.  Cuộn xuống phần "Service Dependencies". Bạn sẽ thấy các `DbContext` của mình (ví dụ: `ApplicationDbContext` và `AuthDbContext`).
 3.  Đối với mỗi `DbContext`:
@@ -218,6 +227,7 @@ Sau khi cấu hình xong chuỗi kết nối và các thiết lập khác, chún
 **Cơ chế ngầm (Under the Hood):** Entity Framework Core Migrations là các tệp mã nguồn mô tả các thay đổi cấu trúc cơ sở dữ liệu. Chúng cần được "áp dụng" (apply) lên cơ sở dữ liệu để tạo hoặc cập nhật các bảng. Khi triển khai lên Azure, tiến trình này không tự động xảy ra trừ khi bạn cấu hình rõ ràng.
 
 **Giải pháp:** Áp dụng Migrations khi xuất bản.
+
 1.  Trong Visual Studio, truy cập lại trang "Publish" cho hồ sơ của bạn.
 2.  Trong phần "Service Dependencies", bên cạnh mỗi `DbContext` đã được cấu hình chuỗi kết nối, nhấp vào "Show all settings".
 3.  Đảm bảo rằng hộp kiểm "Apply this migration on publish" được chọn cho tất cả các `DbContext` của bạn.
@@ -232,6 +242,7 @@ Sau khi cấu hình xong chuỗi kết nối và các thiết lập khác, chún
 **Triệu chứng:** Ứng dụng gặp lỗi `DirectoryNotFoundException` hoặc `FileNotFoundException` khi cố gắng truy cập các tệp tĩnh (ví dụ: hình ảnh được tải lên trong thư mục `Images`) hoặc các thư mục không phải là mã nguồn. Điều này xảy ra vì các thư mục này có thể không được bao gồm trong gói triển khai mặc định.
 
 **Giải pháp:** Đảm bảo thư mục được bao gồm trong gói xuất bản.
+
 1.  Trong Solution Explorer, nhấp chuột phải vào thư mục cần thiết (ví dụ: thư mục `Images`).
 2.  Chọn "Properties".
 3.  Đảm bảo rằng thuộc tính "Build Action" của các tệp bên trong thư mục được đặt thành "Content" và "Copy to Output Directory" được đặt thành "Copy if newer" hoặc "Copy always".
@@ -244,6 +255,7 @@ Sau khi cấu hình xong chuỗi kết nối và các thiết lập khác, chún
     </ItemGroup>
     ```
     Dòng này đảm bảo rằng tất cả các tệp trong thư mục `Images` và các thư mục con của nó sẽ được sao chép vào thư mục xuất bản.
+
 5.  Nhấp "Publish" một lần nữa.
 
 #### 5.2.3. Vấn đề 3: Kiểm tra nhật ký lỗi nâng cao (Advanced Tools - Kudu và Application Insights)
@@ -251,12 +263,14 @@ Sau khi cấu hình xong chuỗi kết nối và các thiết lập khác, chún
 **Triệu chứng:** Lỗi `HTTP 500` chung chung mà không có thông tin chi tiết trên trình duyệt. Điều này cho thấy có một ngoại lệ chưa được xử lý trong ứng dụng của bạn.
 
 **Cơ chế ngầm (Under the Hood):** Azure App Service cung cấp các công cụ chẩn đoán mạnh mẽ để giúp bạn hiểu điều gì đang xảy ra bên trong ứng dụng của mình.
+
 *   **Kudu (Advanced Tools):** Là một cổng quản lý và gỡ lỗi cho App Service. Nó cung cấp quyền truy cập vào hệ thống tệp, nhật ký luồng (log stream), biến môi trường, và thậm chí là một bảng điều khiển dòng lệnh để chạy các lệnh trực tiếp trên máy chủ ứng dụng.
 *   **Application Insights:** Là một dịch vụ giám sát hiệu suất ứng dụng (APM) trong Azure Monitor. Nó thu thập dữ liệu telemetry từ ứng dụng của bạn (yêu cầu, ngoại lệ, phụ thuộc, nhật ký) và cung cấp các công cụ mạnh mẽ để phân tích, chẩn đoán và hình dung hiệu suất.
 
 **Giải pháp:** Sử dụng Kudu và Application Insights để gỡ lỗi.
 
 **Sử dụng Kudu:**
+
 1.  Trên Azure Portal, truy cập App Service của bạn.
 2.  Trong menu bên trái, tìm và chọn "Advanced Tools" (hoặc "Kudu").
 3.  Nhấp vào "Go" để mở trang Kudu.
@@ -268,6 +282,7 @@ Sau khi cấu hình xong chuỗi kết nối và các thiết lập khác, chún
 
 **Sử dụng Application Insights:**
 Nếu bạn đã cấu hình Application Insights (khuyến nghị cho mọi ứng dụng sản xuất):
+
 1.  Trên Azure Portal, truy cập tài nguyên Application Insights của bạn.
 2.  Kiểm tra mục "Failures" để xem các ngoại lệ đã xảy ra.
 3.  Sử dụng "Live Metrics Stream" để xem dữ liệu telemetry theo thời gian thực.
@@ -284,6 +299,7 @@ Nếu bạn đã cấu hình Application Insights (khuyến nghị cho mọi ứ
 ### 5.3. Khởi động lại App Service
 
 Sau khi áp dụng các thay đổi hoặc khắc phục lỗi (ví dụ: cấu hình chuỗi kết nối, áp dụng migrations), bạn nên khởi động lại App Service để đảm bảo các thay đổi có hiệu lực hoàn toàn và ứng dụng được tải lại với cấu hình mới.
+
 1.  Trên Azure Portal, truy cập App Service của bạn.
 2.  Trên trang "Overview", nhấp vào nút "Stop", sau đó nhấp vào nút "Start".
 
@@ -334,6 +350,7 @@ Giả sử ứng dụng của bạn đã được cấu hình để sử dụng 
 Bây giờ, với mã thông báo JWT đã có, bạn có thể truy cập các endpoint yêu cầu xác thực.
 
 **Ví dụ:**
+
 1.  **HTTP Verb:** `GET`
 2.  **Endpoint:** `https://<TênAppService>.azurewebsites.net/api/Regions`
 3.  **Request Headers:**

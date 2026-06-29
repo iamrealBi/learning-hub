@@ -3,6 +3,7 @@
 Trong quá trình xây dựng một RESTful Web API hoàn chỉnh, việc quản lý vòng đời của tài nguyên là trọng tâm. Sau khi đã thiết lập các thao tác tạo (Create) và đọc (Read) tài nguyên, chúng ta cần bổ sung khả năng sửa đổi (Update) và loại bỏ (Delete) chúng. Phần này sẽ đi sâu vào việc triển khai hai thao tác quan trọng này cho API Vùng (Regions) của chúng ta, sử dụng ASP.NET Core, Entity Framework Core, Repository Pattern và Dependency Injection.
 
 Mục tiêu chính của phần này là:
+
 *   Nắm vững nguyên tắc và thực hành triển khai thao tác xóa tài nguyên (`DELETE`) trong Repository và Controller.
 *   Nắm vững nguyên tắc và thực hành triển khai thao tác cập nhật tài nguyên (`PUT`) trong Repository và Controller.
 *   Hiểu rõ cách thiết kế Data Transfer Objects (DTOs) cho yêu cầu cập nhật để đảm bảo tính bảo mật và linh hoạt.
@@ -528,11 +529,13 @@ Sau khi hoàn thành việc triển khai và kiểm thử các chức năng xóa
     git add .
     ```
     Lệnh này sẽ thêm tất cả các tệp mới hoặc đã sửa đổi vào staging area, chuẩn bị cho việc commit.
+
 2.  **Tạo một commit với thông điệp rõ ràng:**
     ```bash
     git commit -m "feat(regions): Implement DELETE and PUT operations for Regions API including DTOs and validation"
     ```
     Thông điệp commit nên mô tả ngắn gọn và chính xác những thay đổi bạn đã thực hiện. Việc sử dụng tiền tố như `feat` (feature) giúp phân loại loại thay đổi.
+
 3.  **Đẩy các thay đổi đã commit lên repository từ xa:**
     ```bash
     git push

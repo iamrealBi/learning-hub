@@ -9,6 +9,7 @@ Ghi nhật ký là đôi mắt của nhà phát triển trong môi trường run
 Bên cạnh đó, không một ứng dụng nào hoàn hảo và ngoại lệ là điều khó tránh khỏi. Cách chúng ta xử lý các lỗi không mong muốn quyết định độ tin cậy và trải nghiệm người dùng của API. Thay vì phân tán logic xử lý lỗi khắp mã nguồn bằng các khối `try-catch` lặp lại, chúng ta sẽ xây dựng một cơ chế xử lý ngoại lệ toàn cục bằng Middleware tùy chỉnh. Phương pháp này không chỉ tinh gọn mã nguồn mà còn đảm bảo mọi lỗi đều được ghi lại một cách nhất quán và phản hồi về client theo một định dạng chuẩn, an toàn thông tin.
 
 Mục tiêu chính của chương này là trang bị cho bạn kiến thức và kỹ năng thực tiễn để:
+
 *   Nắm vững vai trò và lợi ích của ghi nhật ký cấu trúc trong phát triển API.
 *   Cấu hình và sử dụng Serilog để ghi nhật ký ra nhiều đích đến (sinks) khác nhau như console và tệp.
 *   Hiểu và áp dụng các cấp độ ghi nhật ký để kiểm soát luồng thông tin.
@@ -27,6 +28,7 @@ Ghi nhật ký là một công cụ chẩn đoán không thể thiếu, cung c�
 ### 1.1. Nền tảng ghi nhật ký trong .NET Core
 
 ASP.NET Core cung cấp một hệ thống ghi nhật ký tích hợp sẵn, linh hoạt và có khả năng mở rộng. Hệ thống này được xây dựng xung quanh các giao diện chính:
+
 *   `ILogger`: Giao diện chính để ghi nhật ký các thông báo.
 *   `ILogger<T>`: Một phiên bản cụ thể của `ILogger` được tham số hóa với kiểu `T`, thường là tên của lớp đang ghi nhật ký. Điều này giúp hệ thống ghi nhật ký biết được nguồn gốc của thông báo, hữu ích cho việc lọc và phân tích.
 *   `ILoggerFactory`: Dùng để tạo các thể hiện của `ILogger`.
@@ -148,6 +150,7 @@ app.Run();
 > **Tạo thư mục `Logs`:** Để Serilog có thể ghi nhật ký ra tệp, bạn nên tạo một thư mục có tên `Logs` (hoặc bất kỳ tên nào bạn cấu hình) ở thư mục gốc của dự án. Nếu thư mục không tồn tại, Serilog sẽ tự động tạo nó, nhưng việc tạo trước sẽ giúp bạn kiểm soát cấu trúc thư mục tốt hơn.
 
 **Giải thích cấu hình chi tiết:**
+
 *   `LoggerConfiguration()`: Khởi tạo đối tượng cấu hình Serilog.
 *   `.MinimumLevel.Information()`: Đặt ngưỡng ghi nhật ký. Chỉ các thông báo có mức độ `Information` trở lên (gồm `Information`, `Warning`, `Error`, `Critical`) mới được xử lý. Các cấp độ thấp hơn như `Trace` và `Debug` sẽ bị bỏ qua, giúp giảm thiểu lượng dữ liệu nhật ký không cần thiết trong môi trường production.
 *   `.WriteTo.Console()`: Đăng ký một sink để ghi nhật ký ra console. Serilog có một định dạng mặc định khá dễ đọc cho console.
@@ -270,6 +273,7 @@ namespace NZWalks.API.Controllers
 #### 1.4.3. Kiểm tra kết quả ghi nhật ký
 
 Khi bạn chạy ứng dụng và gọi các API, bạn sẽ thấy các thông báo nhật ký xuất hiện trong:
+
 *   **Cửa sổ Console** (trong Visual Studio, đây là cửa sổ Output hoặc cửa sổ Terminal nếu bạn chạy từ dòng lệnh).
 *   **Tệp văn bản** trong thư mục `Logs` mà bạn đã cấu hình.
 
@@ -281,6 +285,7 @@ Ghi nhật ký không chỉ là việc ném các chuỗi văn bản vào một t
 
 **Vibe Coding và Ghi nhật ký:**
 "Vibe Coding" khuyến khích nhà phát triển không chỉ viết code hoạt động mà còn code *thể hiện ý định* và *dễ hiểu*. Trong ngữ cảnh ghi nhật ký, điều này có nghĩa là:
+
 *   **Ghi nhật ký có ý nghĩa:** Mỗi thông báo log nên trả lời câu hỏi "Điều gì đang xảy ra ở đây?" và "Tại sao nó lại quan trọng?". Tránh các log chung chung không cung cấp ngữ cảnh.
 *   **Ghi nhật ký ngữ cảnh:** Sử dụng ghi nhật ký có cấu trúc để thêm các thuộc tính quan trọng (ví dụ: `UserId`, `RequestId`, `TransactionId`, `EndpointName`) vào mọi thông báo. Điều này giúp bạn tái tạo "câu chuyện" của một yêu cầu hoặc một sự kiện cụ thể qua nhiều log entry khác nhau.
 *   **Phân biệt cấp độ:** Sử dụng đúng cấp độ ghi nhật ký để phản ánh mức độ nghiêm trọng và tầm quan trọng của sự kiện. Điều này là cốt lõi để lọc hiệu quả.
@@ -343,6 +348,7 @@ Cách tiếp cận này, mặc dù hoạt động, nhưng mang lại nhiều nh�
 Xử lý ngoại lệ toàn cục giải quyết tất cả các vấn đề trên bằng cách tập trung logic xử lý lỗi vào một điểm duy nhất trong ứng dụng. Khi một ngoại lệ chưa được xử lý xảy ra ở bất kỳ đâu trong quá trình xử lý yêu cầu, nó sẽ được "bắt" bởi cơ chế toàn cục này.
 
 Các lợi ích chính bao gồm:
+
 *   **Tập trung logic:** Toàn bộ logic ghi nhật ký lỗi và tạo phản hồi lỗi nằm ở một vị trí duy nhất, dễ dàng quản lý.
 *   **Phản hồi nhất quán:** Đảm bảo rằng mọi phản hồi lỗi từ API đều tuân theo một định dạng chuẩn, giúp client dễ dàng xử lý và hiển thị thông báo.
 *   **Đơn giản hóa mã nguồn:** Các Controller trở nên gọn gàng hơn, chỉ tập trung vào logic nghiệp vụ mà không bị xen lẫn bởi các khối `try-catch` lặp đi lặp lại.
@@ -355,6 +361,7 @@ Trong ASP.NET Core, cách tốt nhất để triển khai xử lý ngoại lệ 
 ### 2.2. Middleware trong ASP.NET Core và Cơ chế hoạt động
 
 **Middleware** là một thành phần quan trọng trong kiến trúc ASP.NET Core. Nó là một phần mềm được sắp xếp trong một chuỗi xử lý yêu cầu HTTP (request pipeline). Mỗi middleware có thể:
+
 1.  Thực hiện logic trước khi chuyển yêu cầu cho middleware tiếp theo.
 2.  Chuyển yêu cầu cho middleware tiếp theo trong chuỗi bằng cách gọi `await _next(httpContext)`.
 3.  Thực hiện logic sau khi middleware tiếp theo (hoặc toàn bộ chuỗi) đã hoàn thành xử lý và trả về phản hồi.
@@ -467,6 +474,7 @@ namespace NZWalks.API.Models.DTO
 ```
 
 **Giải thích chi tiết mã nguồn Middleware:**
+
 *   `RequestDelegate _next`: Đây là một delegate đại diện cho middleware tiếp theo trong chuỗi xử lý yêu cầu. Khi `_next(httpContext)` được gọi, yêu cầu sẽ được chuyển đến middleware kế tiếp.
 *   `ILogger<ExceptionHandlerMiddleware> _logger`: Được inject thông qua DI để ghi lại các ngoại lệ xảy ra trong ứng dụng. Việc sử dụng `ILogger<ExceptionHandlerMiddleware>` giúp Serilog biết nguồn gốc của thông báo log.
 *   `InvokeAsync(HttpContext httpContext)`: Đây là phương thức bắt buộc mà mọi middleware phải triển khai.
@@ -570,6 +578,7 @@ namespace NZWalks.API.Controllers
 ```
 
 Khi bạn chạy ứng dụng và gọi endpoint `/api/Walks` (hoặc bất kỳ endpoint nào mà bạn đã thêm ngoại lệ), bạn sẽ thấy:
+
 *   **Phản hồi từ API:** Client sẽ nhận được một phản hồi HTTP `500 Internal Server Error` với một payload JSON có định dạng như `ErrorResponseDto` (chứa một `Id` duy nhất và thông báo lỗi chung chung, ví dụ: `{"id": "...", "message": "Đã xảy ra lỗi không mong muốn. Vui lòng thử lại sau."}`).
 *   **Nhật ký Server:** Trong cửa sổ console và tệp nhật ký, bạn sẽ thấy một thông báo `LogError` được tạo bởi `ExceptionHandlerMiddleware`, bao gồm `ErrorId` duy nhất, thông báo lỗi và stack trace đầy đủ của ngoại lệ.
 
@@ -581,6 +590,7 @@ Xử lý ngoại lệ không chỉ là việc bắt lỗi mà còn là việc th
 
 **Vibe Coding và Xử lý ngoại lệ:**
 Tư duy Vibe Coding trong xử lý ngoại lệ tập trung vào việc:
+
 *   **Dự đoán thất bại:** Trước khi viết code, hãy nghĩ về những gì có thể sai và cách hệ thống nên phản ứng. Điều này giúp bạn thiết kế các loại ngoại lệ tùy chỉnh (`CustomException`) hoặc mã lỗi cụ thể.
 *   **Thông báo lỗi rõ ràng (cho nhà phát triển):** Đảm bảo log lỗi cung cấp đủ ngữ cảnh và chi tiết để gỡ lỗi nhanh chóng.
 *   **Thông báo lỗi thân thiện (cho người dùng):** Phản hồi API nên hướng dẫn người dùng hoặc chỉ ra vấn đề một cách chung chung, không tiết lộ chi tiết kỹ thuật.
@@ -610,12 +620,14 @@ Bằng cách tận dụng Antigravity IDE, quá trình thiết kế và triển 
 Trong chương này, chúng ta đã đi sâu vào hai chủ đề quan trọng để xây dựng các RESTful Web API mạnh mẽ, dễ bảo trì và có khả năng phục hồi cao trong ASP.NET Core: **Ghi nhật ký** và **Xử lý ngoại lệ toàn cục**.
 
 Chúng ta đã bắt đầu với **Ghi nhật ký (Logging)**, hiểu rõ vai trò thiết yếu của nó trong việc theo dõi, gỡ lỗi và phân tích hành vi ứng dụng.
+
 *   Chúng ta đã khám phá nền tảng ghi nhật ký tích hợp của .NET Core với `ILogger` và `ILoggerFactory`, cùng với các cấp độ ghi nhật ký chuẩn (`Trace`, `Debug`, `Information`, `Warning`, `Error`, `Critical`).
 *   Tiếp theo, chúng ta đã tích hợp thư viện **Serilog** mạnh mẽ, nổi bật với khả năng ghi nhật ký có cấu trúc (structured logging), cho phép thu thập và phân tích dữ liệu log hiệu quả hơn. Chúng ta đã cài đặt các gói NuGet cần thiết (`Serilog`, `Serilog.AspNetCore`, `Serilog.Sinks.Console`, `Serilog.Sinks.File`) và cấu hình Serilog trong `Program.cs` để ghi nhật ký ra cả **Console** và **Tệp văn bản**, đồng thời kiểm soát mức ghi nhật ký tối thiểu bằng `MinimumLevel`.
 *   Chúng ta cũng đã học cách sử dụng **Dependency Injection** để inject `ILogger<T>` vào các Controller và ghi lại các sự kiện, thông tin, cảnh báo, và đặc biệt là ngoại lệ một cách chi tiết bằng các phương thức như `LogInformation`, `LogWarning`, `LogError`, tận dụng tối đa các thuộc tính có cấu trúc.
 *   Cuối cùng, chúng ta đã liên hệ việc tối ưu hóa ghi nhật ký với tư duy **Vibe Coding** và vai trò hỗ trợ của **Antigravity IDE** trong việc tự động tạo cấu hình, đề xuất nội dung log, đảm bảo cấu trúc và phân tích nhật ký.
 
 Phần thứ hai của chương tập trung vào **Xử lý ngoại lệ toàn cục (Global Exception Handling)**, một yếu tố then chốt để tạo ra các API ổn định với phản hồi lỗi nhất quán.
+
 *   Chúng ta đã phân tích nhược điểm của việc sử dụng các khối `try-catch` cục bộ rải rác trong mã nguồn, dẫn đến sự lặp lại mã, khó bảo trì và phản hồi không nhất quán.
 *   Để khắc phục, chúng ta đã học cách xây dựng một **Middleware tùy chỉnh** (`ExceptionHandlerMiddleware`) để tập trung toàn bộ logic xử lý ngoại lệ vào một vị trí duy nhất.
 *   Trong Middleware này, chúng ta đã ghi lại các ngoại lệ chi tiết bằng Serilog (bao gồm một `ErrorId` duy nhất để dễ dàng đối chiếu) và tạo ra một phản hồi lỗi **nhất quán và an toàn thông tin** cho client (sử dụng `ErrorResponseDto`), tránh rò rỉ chi tiết nhạy cảm.

@@ -177,6 +177,7 @@ Khi sử dụng Antigravity IDE với "Vibe Coding", bạn không cần phải g
 *   "Tôi muốn thêm khả năng lọc vào endpoint `GET /api/Walks`. Người dùng có thể lọc theo `Name` hoặc `Description` bằng cách truyền `filterOn` và `filterQuery` làm tham số truy vấn."
 
 Antigravity IDE sẽ:
+
 1.  Phân tích phương thức `GetAllWalks` hiện có.
 2.  Tự động thêm các tham số `[FromQuery] string? filterOn` và `[FromQuery] string? filterQuery` vào chữ ký phương thức.
 3.  Cập nhật lời gọi `walkRepository.GetAllAsync` để truyền các tham số mới.
@@ -468,6 +469,7 @@ Với Antigravity, bạn có thể mô tả:
 *   "Tiếp tục từ logic lọc, thêm logic sắp xếp. Nếu `sortBy` là 'Name', sắp xếp theo tên. Nếu là 'LengthInKm', sắp xếp theo độ dài. Sử dụng `isAscending` để xác định thứ tự."
 
 Antigravity sẽ:
+
 1.  Chèn khối `if (!string.IsNullOrWhiteSpace(sortBy))` sau khối lọc.
 2.  Tạo ra các mệnh đề `if (sortBy.Equals("Name", ...))` và `else if (sortBy.Equals("LengthInKm", ...))`.
 3.  Sử dụng toán tử ternary (`condition ? valueIfTrue : valueIfFalse`) để chọn giữa `OrderBy()` và `OrderByDescending()` một cách gọn gàng, tận dụng `IQueryable` để đảm bảo truy vấn SQL được tối ưu với mệnh đề `ORDER BY`.
@@ -546,6 +548,7 @@ Với Antigravity IDE, bạn có thể chỉ định:
 *   "Thêm khả năng phân trang vào endpoint `GET /api/Walks`. Cho phép người dùng chỉ định `pageNumber` (mặc định 1) và `pageSize` (mặc định 10). Đảm bảo `pageSize` không vượt quá 100 và `pageNumber` là số dương."
 
 Antigravity sẽ:
+
 1.  Thêm `[FromQuery] int pageNumber = 1` và `[FromQuery] int pageSize = 10` vào chữ ký phương thức.
 2.  Chèn logic kiểm tra và điều chỉnh giá trị `pageSize` và `pageNumber` để bảo vệ API.
 3.  Cập nhật lời gọi `walkRepository.GetAllAsync` để truyền các tham số phân trang.
@@ -676,6 +679,7 @@ Với Antigravity IDE, bạn có thể đơn giản hóa việc triển khai ph�
 *   **Mô tả ý định:** "Sau khi lọc và sắp xếp, áp dụng phân trang bằng cách sử dụng `pageNumber` và `pageSize`. Tính toán số lượng bản ghi cần bỏ qua và sử dụng `Skip()` và `Take()`."
 
 Antigravity sẽ:
+
 1.  Chèn khối logic phân trang sau khối sắp xếp.
 2.  Tự động tính toán `skipResults = (pageNumber - 1) * pageSize;`.
 3.  Áp dụng `walks = walks.Skip(skipResults).Take(pageSize);` một cách chính xác.

@@ -215,6 +215,7 @@ app.UseExceptionHandler(errorApp =>
 # 8. Content Negotiation — Khách muốn ăn kiểu gì?
 
 Khách gửi header `Accept` → Quán đóng gói đúng kiểu:
+
 - `Accept: application/json` → Đóng hộp JSON 📦
 - `Accept: application/xml` → Đóng hộp XML 📦
 

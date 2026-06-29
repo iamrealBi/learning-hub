@@ -309,6 +309,7 @@ Console.WriteLine($"Tiền tố: p = {p}, q = {q}"); // Output: Tiền tố: p =
 Khi có nhiều toán tử trong một biểu thức, C# tuân theo một bộ quy tắc về độ ưu tiên để xác định thứ tự thực hiện các phép toán. Ví dụ, phép nhân và chia có độ ưu tiên cao hơn phép cộng và trừ. Các toán tử có độ ưu tiên cao hơn sẽ được thực hiện trước.
 
 **Thứ tự ưu tiên cơ bản (từ cao đến thấp):**
+
 1.  Dấu ngoặc đơn `()`
 2.  Toán tử một ngôi (ví dụ: `++`, `--`, `!`, `-` (âm))
 3.  Nhân, Chia, Modulo (`*`, `/`, `%`)
@@ -509,6 +510,7 @@ Bình luận nhiều dòng bắt đầu bằng `/*` và kết thúc bằng `*/`.
 
 ```csharp
 /*
+
  * Đoạn mã này tính toán tổng chi phí của một đơn hàng
  * bao gồm giá sản phẩm, thuế và phí vận chuyển.
  * Đảm bảo các biến productPrice, taxRate và shippingCost

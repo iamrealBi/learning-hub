@@ -19,6 +19,7 @@
 
 ### 🔴 Khóa chính — Udemy Business:
 **[100 Days of Code™: The Complete Python Pro Bootcamp](https://ibmcsr.udemy.com/course/100-days-of-code/)**
+
 - Giảng viên: Dr. Angela Yu | ⭐ 4.7 | 57 giờ
 - **Tuần này học**: Days 30-40 (Error handling, APIs, JSON, Decorators)
   - Day 30-32: Errors, Exceptions, JSON
@@ -28,6 +29,7 @@
 
 ### 🟡 Bổ trợ — Udemy Business:
 **[FastAPI - The Complete Course 2026](https://ibmcsr.udemy.com/course/fastapi-the-complete-course/)**
+
 - ⭐ 4.6 | 21.5 giờ
 - **Tuần này xem**: Sections 1-3 (FastAPI basics, Pydantic, first endpoint)
 
@@ -238,6 +240,7 @@ weather_service/
 ```
 
 **Features:**
+
 1. `GET /weather/{city}` — Current weather
 2. `GET /forecast/{city}?days=5` — Forecast
 3. Pydantic response models

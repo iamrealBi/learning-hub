@@ -76,6 +76,7 @@ GROUP BY
 ### 1.2. Các Hàm Tổng Hợp (Aggregate Functions)
 
 Các hàm tổng hợp là xương sống của việc phân tích dữ liệu nhóm. Chúng nhận một tập hợp các giá trị (từ một nhóm) và trả về một giá trị duy nhất. Các hàm phổ biến bao gồm:
+
 *   `COUNT()`: Đếm số hàng hoặc số giá trị không NULL.
 *   `SUM()`: Tính tổng các giá trị số.
 *   `AVG()`: Tính giá trị trung bình.
@@ -129,6 +130,7 @@ Hãy cùng đi qua các ví dụ thực tế để củng cố cách sử dụng
 ### 3.1. Ví Dụ 1: Lọc Kết Hợp Hàng và Nhóm (WHERE và HAVING)
 
 **Bài toán:** Tìm ID của các bức ảnh và số lượng bình luận liên quan đến chúng, nhưng chỉ xem xét:
+
 1.  Các bình luận có `photo_id` nhỏ hơn 3.
 2.  Các bức ảnh có tổng số bình luận **lớn hơn 2**.
 
@@ -181,6 +183,7 @@ HAVING
 ```
 
 **Phân tích kết quả:**
+
 *   **Bước 1 (WHERE `photo_id < 3`):**
     *   `photo_id = 1`: 3 bình luận
     *   `photo_id = 2`: 2 bình luận
@@ -257,6 +260,7 @@ HAVING
 ```
 
 **Phân tích kết quả:**
+
 *   **User 1:** Có 23 bình luận, tất cả đều có `photo_id <= 50`. Số lượng bình luận (23) > 20. -> Được giữ lại.
 *   **User 4:** Có 22 bình luận, tất cả đều có `photo_id <= 50`. Số lượng bình luận (22) > 20. -> Được giữ lại.
 *   **User 5:** Có 15 bình luận, tất cả đều có `photo_id <= 50`. Số lượng bình luận (15) KHÔNG > 20. -> Bị loại bỏ bởi `HAVING`.
@@ -322,6 +326,7 @@ HAVING
 ```
 
 **Kết quả mong đợi:**
+
 *   **Apple:** Tổng doanh thu là 2,700,000 (đáp ứng điều kiện).
 *   **Samsung:** Tổng doanh thu là 4,590,000 (đáp ứng điều kiện).
 *   Các nhà sản xuất khác như Google, Sony, Xiaomi, Oppo không đạt ngưỡng 2,000,000 nên sẽ không xuất hiện trong kết quả.
@@ -340,6 +345,7 @@ Việc sử dụng `HAVING` một cách hiệu quả không chỉ là về cú p
 ### 4.1. Thứ Tự Lọc Hiệu Quả: `WHERE` Trước, `HAVING` Sau
 
 Nguyên tắc chung để tối ưu hóa hiệu suất truy vấn là "lọc càng sớm càng tốt".
+
 *   `WHERE` được thực thi trước `GROUP BY`. Bằng cách sử dụng `WHERE`, bạn có thể loại bỏ một lượng lớn các hàng không cần thiết *trước khi* chúng được gom nhóm. Điều này làm giảm đáng kể kích thước của tập dữ liệu mà `GROUP BY` phải xử lý, giúp tiết kiệm tài nguyên CPU và bộ nhớ.
 *   `HAVING` được thực thi sau `GROUP BY`. Nó hoạt động trên các nhóm đã được hình thành. Nếu bạn có thể di chuyển một điều kiện lọc nào đó từ `HAVING` sang `WHERE` mà không làm thay đổi logic của truy vấn (tức là điều kiện đó không sử dụng hàm tổng hợp), hãy làm như vậy.
 

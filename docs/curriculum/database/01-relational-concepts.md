@@ -22,10 +22,12 @@
 
 ```
 Data (Dữ liệu):
+
   - Các giá trị thô, chưa xử lý
   - Ví dụ: "25", "Nghĩa", "2026-02-22"
 
 Information (Thông tin):
+
   - Data đã được xử lý, có ý nghĩa
   - Ví dụ: "Nghĩa, 25 tuổi, đăng ký ngày 22/02/2026"
 
@@ -36,16 +38,19 @@ Data → Xử lý → Information → Phân tích → Knowledge → Hành độn
 
 ```
 Database (Cơ sở dữ liệu):
+
   - Tập hợp dữ liệu có tổ chức
   - Lưu trữ, truy xuất, và quản lý hiệu quả
   - Ví dụ: danh sách sinh viên, đơn hàng, sản phẩm
 
 DBMS (Database Management System):
+
   - Phần mềm quản lý database
   - Cung cấp interface để CRUD (Create, Read, Update, Delete)
   - Ví dụ: PostgreSQL, MySQL, SQL Server, Oracle, SQLite
 
 RDBMS (Relational DBMS):
+
   - DBMS dùng relational model (bảng, hàng, cột)
   - Dữ liệu liên kết qua keys
   - Truy vấn bằng SQL
@@ -304,6 +309,7 @@ ROLLBACK;  -- Huỷ tất cả → A và B giữ nguyên
 └────────────┘                    └─────────────────┘
 
 Clients:
+
   - psql (command line)
   - pgAdmin (GUI)
   - DBeaver (IDE)

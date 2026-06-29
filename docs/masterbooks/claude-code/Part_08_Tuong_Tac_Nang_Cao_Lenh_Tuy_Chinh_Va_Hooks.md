@@ -162,6 +162,7 @@ Nếu chế độ là 'best-practices', hãy tìm kiếm các cơ hội cải th
 Bạn có thể kết hợp các chế độ, ví dụ: 'bugs,security'.
 
 Đảm bảo rằng phản hồi của bạn bao gồm:
+
 - Danh sách các vấn đề được tìm thấy.
 - Mức độ ưu tiên của mỗi vấn đề.
 - Giải thích ngắn gọn về vấn đề.

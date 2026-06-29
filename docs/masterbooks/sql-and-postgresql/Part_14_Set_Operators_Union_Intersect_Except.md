@@ -9,6 +9,7 @@ Trong quản lý cơ sở dữ liệu, khả năng kết hợp, so sánh và tr�
 Trong toán học, lý thuyết tập hợp nghiên cứu về các tập hợp và các phép toán cơ bản như hợp (union), giao (intersection), và hiệu (difference). Trong SQL, các toán tử tập hợp cho phép chúng ta mở rộng các khái niệm này để thao tác với các tập kết quả (result sets) được trả về từ các câu lệnh `SELECT`.
 
 Mỗi câu lệnh `SELECT` trả về một tập hợp các hàng. Các toán tử tập hợp giúp chúng ta:
+
 *   **Kết hợp** các hàng từ nhiều truy vấn thành một tập kết quả duy nhất (`UNION`).
 *   **Tìm kiếm các hàng chung** giữa nhiều truy vấn (`INTERSECT`).
 *   **Xác định các hàng duy nhất** trong một truy vấn mà không xuất hiện trong truy vấn khác (`EXCEPT`).
@@ -21,6 +22,7 @@ Mỗi câu lệnh `SELECT` trả về một tập hợp các hàng. Các toán t
 ### 1.1. Vibe Coding và Toán Tử Tập Hợp trong Antigravity IDE
 
 Khi làm việc với các toán tử tập hợp, tư duy "Vibe Coding" rất hữu ích. Thay vì ngay lập tức nghĩ về cú pháp `UNION` hay `INTERSECT`, bạn hãy tập trung vào "ý định" của mình:
+
 *   "Tôi muốn một danh sách tổng hợp của A và B." (Vibe: `UNION`)
 *   "Tôi muốn tìm những gì A và B có chung." (Vibe: `INTERSECT`)
 *   "Tôi muốn biết những gì chỉ có trong A mà không có trong B." (Vibe: `EXCEPT`)
@@ -105,6 +107,7 @@ WHERE condition2;
 ### 3.2. Ví Dụ Thực Tế: Kết Hợp Danh Sách Sản Phẩm
 
 Giả sử chúng ta muốn tìm ra danh sách các sản phẩm từ hai tiêu chí khác nhau:
+
 1.  Bốn sản phẩm có giá cao nhất.
 2.  Bốn sản phẩm có tỷ lệ giá trên trọng lượng cao nhất (thường cho thấy sản phẩm nhỏ gọn, giá trị cao, hiệu quả vận chuyển tốt).
 
@@ -243,6 +246,7 @@ INTERSECT ALL
 ```
 
 Để minh họa rõ hơn về `MIN(m, n)`, hãy xem xét ví dụ sau (không dùng `LIMIT` để dễ hình dung):
+
 *   Truy vấn A trả về: `{1, 2, 2, 3}`
 *   Truy vấn B trả về: `{2, 2, 2, 4}`
 *   `A INTERSECT B` = `{2}` (loại bỏ trùng lặp)
@@ -254,6 +258,7 @@ INTERSECT ALL
 ### 4.4. Antigravity IDE và Phân Tích INTERSECT
 
 Khi bạn yêu cầu Antigravity IDE "tìm các sản phẩm chung giữa hai danh sách," nó không chỉ tạo ra truy vấn `INTERSECT` mà còn có thể:
+
 *   **Phân tích sự trùng lặp:** Nếu có khả năng xảy ra trùng lặp trong các truy vấn con, Antigravity có thể hỏi bạn có muốn giữ lại tất cả các bản sao (`INTERSECT ALL`) hay chỉ các giá trị duy nhất (`INTERSECT`), giúp bạn đưa ra quyết định dựa trên "vibe" chính xác hơn.
 *   **Kiểm tra dữ liệu:** Sử dụng các subagent, Antigravity có thể chạy truy vấn trên dữ liệu mẫu hoặc dữ liệu thực để hiển thị ngay lập tức kết quả của cả `INTERSECT` và `INTERSECT ALL`, giúp bạn trực quan hóa sự khác biệt của `MIN(m, n)` trong các tình huống cụ thể.
 
@@ -297,6 +302,7 @@ Kết quả sẽ là các hàng chỉ xuất hiện trong tập kết quả củ
 Một điểm cực kỳ quan trọng cần lưu ý với `EXCEPT` là **thứ tự của các truy vấn con có ảnh hưởng đến kết quả cuối cùng**. `A EXCEPT B` sẽ trả về các hàng có trong `A` nhưng không có trong `B`. Ngược lại, `B EXCEPT A` sẽ trả về các hàng có trong `B` nhưng không có trong `A`. Hai kết quả này thường là khác nhau.
 
 **Minh họa bằng tập hợp:**
+
 *   **Tập A:** `{1, 2, 3, 4}`
 *   **Tập B:** `{2, 4, 5, 6}`
 
@@ -324,6 +330,7 @@ EXCEPT ALL
 Tương tự như `INTERSECT ALL`, trong các trường hợp thông thường với `LIMIT` và `id` duy nhất, `EXCEPT ALL` có thể cho kết quả tương tự như `EXCEPT`. Tuy nhiên, việc hiểu rõ cách nó xử lý các bản sao là rất quan trọng cho các tình huống phức tạp hơn.
 
 Để minh họa `MAX(0, m - n)`:
+
 *   Truy vấn A trả về: `{1, 2, 2, 3}`
 *   Truy vấn B trả về: `{2, 2, 4}`
 *   `A EXCEPT B` = `{1, 3}`
@@ -335,6 +342,7 @@ Tương tự như `INTERSECT ALL`, trong các trường hợp thông thường v
 ### 5.5. Antigravity IDE và Quyết Định Thứ Tự Truy Vấn với EXCEPT
 
 Với `EXCEPT`, thứ tự là cực kỳ quan trọng. Antigravity IDE, thông qua khả năng lập kế hoạch và hiểu ngữ cảnh, có thể:
+
 *   **Gợi ý các trường hợp sử dụng:** Nếu bạn diễn đạt "vibe" muốn tìm sự khác biệt, Antigravity có thể hỏi bạn muốn tìm `A trừ B` hay `B trừ A`, và giải thích sự khác biệt tiềm năng.
 *   **Mô phỏng kết quả:** Trước khi bạn chạy truy vấn, Antigravity có thể hiển thị một bản xem trước hoặc mô tả kết quả của cả hai trường hợp `A EXCEPT B` và `B EXCEPT A`, giúp bạn chọn đúng ý định.
 *   **Phân tích tác động của `ALL`:** Tương tự như `UNION` và `INTERSECT`, Antigravity có thể giúp bạn hiểu khi nào nên sử dụng `EXCEPT ALL` bằng cách minh họa cách nó xử lý các bản sao.
@@ -346,6 +354,7 @@ Với `EXCEPT`, thứ tự là cực kỳ quan trọng. Antigravity IDE, thông 
 ### 6.1. Đề Bài 1: Kết Hợp Danh Sách Nhà Sản Xuất (UNION)
 
 Hãy viết hai truy vấn khác nhau và kết hợp chúng bằng `UNION`:
+
 1.  In ra tên nhà sản xuất (`manufacturer`) của tất cả các điện thoại có giá (`price`) dưới 170 đô la.
 2.  In ra tên của tất cả các nhà sản xuất đã tạo ra nhiều hơn hai điện thoại.
 
@@ -393,6 +402,7 @@ HAVING COUNT(*) > 2;
 ### 6.3. Đề Bài 2: Tìm Nhà Sản Xuất Chung và Duy Nhất (INTERSECT & EXCEPT)
 
 Sử dụng hai tập kết quả từ Đề Bài 1:
+
 *   **Tập A:** Nhà sản xuất điện thoại giá dưới 170 đô la.
 *   **Tập B:** Nhà sản xuất tạo ra nhiều hơn hai điện thoại.
 
@@ -432,6 +442,7 @@ EXCEPT
 ### 6.5. Tư Duy Antigravity IDE trong Thực Hành
 
 Khi giải quyết các bài tập này trong Antigravity IDE, bạn có thể trải nghiệm quy trình làm việc như sau:
+
 1.  **Vibe Coding:** Bạn có thể bắt đầu bằng cách mô tả ý tưởng của mình: "Tôi muốn xem các nhà sản xuất điện thoại giá rẻ VÀ các nhà sản xuất tạo ra nhiều mẫu điện thoại." Antigravity sẽ hiểu đây là một phép `UNION`.
 2.  **Khám phá dữ liệu:** Antigravity có thể đề xuất các cột phù hợp (`manufacturer`, `price`, `COUNT(*)`) và giúp bạn xây dựng các truy vấn con.
 3.  **Tối ưu hóa:** Khi bạn đã có truy vấn `UNION`, Antigravity có thể hỏi: "Bạn có quan tâm đến các nhà sản xuất trùng lặp không? Nếu không, `UNION ALL` có thể nhanh hơn."
@@ -450,6 +461,7 @@ Trong chương này, chúng ta đã khám phá các toán tử tập hợp mạn
 *   **`EXCEPT ALL`**: Trả về các hàng có trong truy vấn đầu tiên nhưng không có trong truy vấn thứ hai, bao gồm cả bản sao (số lần xuất hiện là `MAX(0, m - n)`).
 
 **Các quy tắc và lưu ý quan trọng cần ghi nhớ:**
+
 *   Tất cả các truy vấn con phải trả về cùng số lượng cột.
 *   Các cột tương ứng phải có kiểu dữ liệu tương thích, và PostgreSQL xử lý `NULL` như các giá trị bằng nhau khi so sánh hàng cho các toán tử tập hợp.
 *   Khi áp dụng `ORDER BY` hoặc `LIMIT` cho một truy vấn con trước khi kết hợp bằng toán tử tập hợp trong PostgreSQL, **bắt buộc phải bao quanh truy vấn con đó bằng dấu ngoặc đơn `()`**.

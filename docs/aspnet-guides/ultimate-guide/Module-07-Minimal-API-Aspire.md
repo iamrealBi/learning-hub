@@ -110,6 +110,7 @@ app.MapOrderEndpoints();
 Bạn có chuỗi 5 quán: API 1, API 2, PostgreSQL, Redis, Worker. Mỗi sáng phải tự mở cửa từng quán, kiểm tra từng cái → **MỆT!**
 
 **.NET Aspire** = thuê **Tổng quản** — ổng tự:
+
 - Mở cửa tất cả quán cùng lúc
 - Kiểm tra quán nào đang chạy, quán nào chết
 - Dashboard giám sát: logs, traces, metrics
@@ -145,6 +146,7 @@ builder.Build().Run(); // TỔNG QUẢN BẬT TẤT CẢ!
 ## 5.4. Aspire Dashboard
 
 Chạy AppHost → tự mở trang giám sát:
+
 - **Resources**: Quán nào chạy 🟢, quán nào chết 🔴
 - **Logs**: Nhật ký tất cả quán gom về 1 chỗ
 - **Traces**: Theo dõi 1 đơn hàng đi qua bao nhiêu quán

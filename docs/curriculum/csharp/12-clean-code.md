@@ -24,6 +24,7 @@ Code is read MORE than it is written.
 → Clean code = đầu tư cho tương lai.
 
 Tech Debt (Nợ kỹ thuật):
+
 - Code xấu = "vay nợ" — nhanh bây giờ, trả lãi mãi sau
 - Càng nhiều nợ → càng chậm phát triển
 - Fix bug → tạo bug mới → vòng xoáy

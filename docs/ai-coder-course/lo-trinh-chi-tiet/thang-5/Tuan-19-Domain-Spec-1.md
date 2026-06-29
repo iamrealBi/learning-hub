@@ -17,6 +17,7 @@ Chọn 1 domain phù hợp thị trường BD/HCM:
 
 ## Tuần 20: 🏆 Capstone Project (Project #10)
 Build domain-specific agent production-ready:
+
 - Full LangGraph architecture
 - MCP integration
 - Docker deployment

@@ -7,6 +7,7 @@ Trong thế giới của cơ sở dữ liệu quan hệ, việc tổ chức và 
 Với tư cách là một chuyên gia lập trình cấp Senior, việc nắm vững các ràng buộc khóa ngoại không chỉ giúp bạn thiết kế schema cơ sở dữ liệu vững chắc mà còn cho phép bạn dự đoán và kiểm soát hành vi của hệ thống khi dữ liệu được thêm, sửa, hoặc xóa. Chúng ta sẽ đặc biệt tập trung vào cú pháp và các tính năng của PostgreSQL, một hệ quản trị cơ sở dữ liệu mạnh mẽ và tuân thủ chuẩn SQL.
 
 **Mục tiêu của chương này:**
+
 *   Nắm vững định nghĩa và tầm quan trọng cốt lõi của khóa ngoại trong thiết kế CSDL.
 *   Thành thạo việc khai báo và quản lý các ràng buộc khóa ngoại trong PostgreSQL.
 *   Hiểu và áp dụng các chính sách hành động khi xóa dữ liệu (`ON DELETE`) để duy trì tính toàn vẹn.
@@ -24,6 +25,7 @@ Trong một hệ thống cơ sở dữ liệu quan hệ được thiết kế ch
 **Khóa ngoại (Foreign Key - FK)** là một cột (hoặc tập hợp các cột) trong một bảng (gọi là **bảng con** hoặc **bảng tham chiếu**) mà giá trị của nó phải tương ứng với giá trị của một cột khóa chính (hoặc khóa ứng cử viên) trong một bảng khác (gọi là **bảng cha** hoặc **bảng được tham chiếu**).
 
 **Vai trò cốt lõi của khóa ngoại:**
+
 *   **Đảm bảo tính toàn vẹn tham chiếu (Referential Integrity):** Đây là mục đích chính yếu. Khóa ngoại đảm bảo rằng mọi "tham chiếu" từ bảng con đến bảng cha đều hợp lệ. Nói cách khác, một bản ghi trong bảng con không thể trỏ đến một bản ghi không tồn tại trong bảng cha. Điều này ngăn chặn tình trạng dữ liệu "mồ côi" hoặc "lơ lửng", nơi một bản ghi con không có bản ghi cha tương ứng.
 *   **Thiết lập mối quan hệ giữa các bảng:** Khóa ngoại là cơ chế vật lý để biểu diễn các mối quan hệ logic như "một-nhiều" (ví dụ: một người dùng có thể đăng nhiều ảnh) hoặc "nhiều-nhiều" (thông qua một bảng trung gian).
 *   **Cơ sở cho các phép nối (JOIN):** Khi truy vấn dữ liệu, khóa ngoại cung cấp điểm nối tự nhiên và hiệu quả để kết hợp thông tin từ nhiều bảng liên quan.
@@ -115,6 +117,7 @@ Khóa ngoại không chỉ là một cơ chế ràng buộc; chúng còn là xư
 ### 2.1 Đảm bảo Tính Toàn Vẹn khi Chèn Dữ liệu (`INSERT`)
 
 Ràng buộc khóa ngoại hoạt động ngay lập tức khi bạn cố gắng chèn hoặc cập nhật dữ liệu.
+
 1.  **Chèn thành công (tham chiếu hợp lệ):**
     ```sql
     -- Chèn một ảnh với user_id hợp lệ (ví dụ: user_id 2 tồn tại)
@@ -168,6 +171,7 @@ INNER JOIN
 **Sử dụng bí danh (Alias):** Việc sử dụng bí danh như `p` cho `photos` và `u` cho `users` giúp truy vấn ngắn gọn hơn, dễ đọc hơn và tránh xung đột tên cột nếu cả hai bảng có cột trùng tên (ví dụ: cả `users` và `photos` đều có cột `id`).
 
 **Các loại `JOIN` khác:** Mặc dù `INNER JOIN` là đủ cho ví dụ này, PostgreSQL hỗ trợ các loại `JOIN` khác như `LEFT JOIN`, `RIGHT JOIN`, `FULL JOIN`, và `CROSS JOIN`. Mỗi loại có mục đích riêng để xử lý các trường hợp khi không có sự trùng khớp ở một trong các bảng:
+
 *   `LEFT JOIN`: Trả về tất cả các hàng từ bảng bên trái, và các hàng trùng khớp từ bảng bên phải (nếu không có trùng khớp, các cột của bảng bên phải sẽ là `NULL`).
 *   `RIGHT JOIN`: Tương tự như `LEFT JOIN`, nhưng ưu tiên bảng bên phải.
 *   `FULL JOIN`: Trả về tất cả các hàng khi có sự trùng khớp ở một trong hai bảng (nếu không có trùng khớp, các cột của bảng còn lại sẽ là `NULL`).
@@ -340,12 +344,14 @@ Khóa ngoại cho phép chúng ta xây dựng các mô hình dữ liệu phức 
 Hãy mở rộng ứng dụng chia sẻ ảnh bằng cách thêm chức năng bình luận. Một bình luận sẽ có mối quan hệ với cả một bức ảnh (nó bình luận về ảnh nào) và một người dùng (ai là người bình luận). Điều này đòi hỏi bảng `comments` phải có hai khóa ngoại.
 
 **Thiết kế bảng `comments`:**
+
 *   `id`: Khóa chính cho mỗi bình luận.
 *   `contents`: Nội dung văn bản của bình luận.
 *   `user_id`: Khóa ngoại tham chiếu đến người dùng đã tạo bình luận.
 *   `photo_id`: Khóa ngoại tham chiếu đến bức ảnh mà bình luận này dành cho.
 
 Để minh họa tính linh hoạt của `ON DELETE`, chúng ta sẽ thiết lập `ON DELETE CASCADE` cho cả hai khóa ngoại trong bảng `comments`. Điều này có nghĩa là:
+
 *   Nếu một người dùng bị xóa, tất cả bình luận của họ cũng sẽ bị xóa.
 *   Nếu một bức ảnh bị xóa, tất cả bình luận trên bức ảnh đó cũng sẽ bị xóa.
 

@@ -5,6 +5,7 @@ Trong kiến trúc RESTful Web API, việc trao đổi dữ liệu giữa ứng 
 Chương này đi sâu vào việc triển khai cơ chế xác thực dữ liệu đầu vào (Model Validations) cho các API mà chúng ta đã xây dựng trong dự án thực hành. Chúng ta sẽ khám phá tầm quan trọng của xác thực, các phương pháp triển khai trong ASP.NET Core, và cách thông báo lỗi một cách hiệu quả cho ứng dụng khách bằng mã trạng thái HTTP 400 Bad Request. Mặc dù chúng ta sẽ bắt đầu với phương pháp xác thực thủ công để hiểu rõ cơ chế cốt lõi, chương này cũng sẽ mở rộng kiến thức về các phương pháp tiêu chuẩn và mạnh mẽ hơn như Data Annotations và FluentValidation, giúp bạn xây dựng các API bền vững và dễ bảo trì trong thực tế.
 
 Mục tiêu chính của chương này là:
+
 *   Hiểu rõ tầm quan trọng và vai trò của xác thực dữ liệu đầu vào trong API.
 *   Nắm vững cơ chế `ModelState` và cách nó được sử dụng để thu thập và quản lý lỗi xác thực.
 *   Triển khai xác thực thủ công cho các Model Request của các Controller `Region`, `Walks` và `WalkDifficulty`.
@@ -69,11 +70,13 @@ ASP.NET Core cung cấp nhiều cách để triển khai xác thực dữ liệu
 Data Annotations là các thuộc tính (attributes) được đặt trực tiếp trên các thuộc tính của Model (thường là DTOs - Data Transfer Objects). Đây là cách đơn giản và phổ biến nhất để thêm xác thực cho các Model trong ASP.NET Core.
 
 **Ưu điểm:**
+
 *   **Đơn giản, dễ sử dụng:** Dễ dàng thêm các quy tắc xác thực cơ bản như `[Required]`, `[StringLength]`, `[Range]`, `[RegularExpression]`.
 *   **Gắn liền với Model:** Logic xác thực nằm ngay cạnh định nghĩa thuộc tính, dễ dàng nhìn thấy.
 *   **Tích hợp sẵn:** Hoạt động liền mạch với Model Binding và `[ApiController]`.
 
 **Nhược điểm:**
+
 *   **Hạn chế cho logic phức tạp:** Khó thực hiện các xác thực liên quan đến nhiều thuộc tính (`cross-property validation`) hoặc xác thực yêu cầu truy cập cơ sở dữ liệu/dịch vụ khác.
 *   **Tái sử dụng:** Khó tái sử dụng logic xác thực cho các Model khác nhau.
 *   **Gây "ô nhiễm" Model:** Đôi khi làm cho các DTO trở nên cồng kềnh với nhiều thuộc tính xác thực.
@@ -125,10 +128,12 @@ namespace NZWalks.API.Models.DTOs
 **Cơ chế ngầm:** Khi Model Binding hoàn tất và các Data Annotations đã được kiểm tra, ASP.NET Core sẽ gọi phương thức `Validate` của `IValidatableObject` nếu Model của bạn triển khai giao diện này.
 
 **Ưu điểm:**
+
 *   **Xác thực liên thuộc tính:** Dễ dàng so sánh hoặc kết hợp giá trị của nhiều thuộc tính để đưa ra quyết định xác thực.
 *   **Logic nghiệp vụ tùy chỉnh:** Cho phép viết logic xác thực phức tạp hơn bằng code C# thuần túy.
 
 **Nhược điểm:**
+
 *   **Vẫn nằm trong Model:** Logic xác thực vẫn nằm trong Model, có thể làm Model trở nên cồng kềnh nếu logic quá phức tạp.
 *   **Không hỗ trợ DI:** Không thể tiêm các dịch vụ (như Repository) trực tiếp vào phương thức `Validate` một cách dễ dàng, giới hạn khả năng xác thực dựa trên dữ liệu bên ngoài.
 
@@ -184,6 +189,7 @@ namespace NZWalks.API.Models.DTOs
 FluentValidation là một thư viện xác thực của bên thứ ba, cung cấp một cách tiếp cận mạnh mẽ và linh hoạt hơn nhiều so với Data Annotations và `IValidatableObject`. Nó cho phép bạn định nghĩa các quy tắc xác thực trong các lớp riêng biệt (Validator classes), tách biệt hoàn toàn logic xác thực khỏi Model.
 
 **Ưu điểm:**
+
 *   **Tách biệt logic:** Logic xác thực hoàn toàn tách rời khỏi Model, giúp Model sạch sẽ và dễ đọc hơn.
 *   **Linh hoạt và mạnh mẽ:** Cung cấp API fluent, dễ đọc để định nghĩa các quy tắc phức tạp, có điều kiện, hoặc liên thuộc tính.
 *   **Hỗ trợ Dependency Injection:** Các lớp Validator có thể nhận các dịch vụ thông qua DI (ví dụ: Repository để kiểm tra sự tồn tại trong DB), cho phép xác thực dựa trên dữ liệu bên ngoài hoặc trạng thái ứng dụng.
@@ -191,6 +197,7 @@ FluentValidation là một thư viện xác thực của bên thứ ba, cung c�
 *   **Tái sử dụng cao:** Có thể tạo các quy tắc xác thực chung và tái sử dụng chúng.
 
 **Nhược điểm:**
+
 *   **Thêm phụ thuộc:** Cần cài đặt gói NuGet và cấu hình thêm một chút trong `Program.cs`.
 *   **Độ phức tạp ban đầu:** Có thể cảm thấy phức tạp hơn Data Annotations cho các trường hợp đơn giản nhất.
 
@@ -254,10 +261,12 @@ namespace NZWalks.API.Validators
 Phương pháp này liên quan đến việc viết các câu lệnh `if-else` và gọi `ModelState.AddModelError()` trực tiếp trong Controller hoặc trong các phương thức trợ giúp riêng tư. Mặc dù không phải là phương pháp được khuyến nghị cho các dự án thực tế do tính lặp lại và khó bảo trì, nó cực kỳ hữu ích để **hiểu rõ cơ chế hoạt động của `ModelState` và cách ASP.NET Core xử lý lỗi xác thực**.
 
 **Ưu điểm:**
+
 *   **Kiểm soát hoàn toàn:** Bạn có toàn quyền kiểm soát từng quy tắc xác thực và cách lỗi được thêm vào `ModelState`.
 *   **Hiểu biết sâu sắc:** Giúp bạn hiểu rõ cách `ModelState` hoạt động, điều này rất quan trọng ngay cả khi bạn chuyển sang các phương pháp tự động hơn.
 
 **Nhược điểm:**
+
 *   **Lặp lại code (boilerplate):** Cần viết nhiều code lặp lại cho mỗi thuộc tính, mỗi Action Method.
 *   **Khó bảo trì:** Khi có nhiều quy tắc hoặc thay đổi yêu cầu, việc cập nhật nhiều vị trí có thể dễ gây lỗi.
 *   **Kết hợp chặt chẽ:** Logic xác thực bị gắn chặt vào Controller, khó tái sử dụng.

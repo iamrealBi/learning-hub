@@ -386,6 +386,7 @@ Chúng ta sẽ tạo một lớp Action Filter có tên `ValidateModelAttribute`
     ```
 
     **Giải thích chi tiết:**
+
     *   `ActionFilterAttribute`: Đây là lớp cơ sở để tạo Action Filter. Kế thừa từ nó cho phép lớp của chúng ta được sử dụng như một thuộc tính (`[ValidateModel]`).
     *   `OnActionExecuting(ActionExecutingContext context)`: Phương thức này là điểm mấu chốt. Nó được gọi **trước** khi action method mà filter được áp dụng lên đó được thực thi.
     *   `context.ModelState.IsValid`: Thuộc tính này cho phép chúng ta truy cập vào `ModelState` của request hiện tại để kiểm tra tính hợp lệ của dữ liệu đầu vào.

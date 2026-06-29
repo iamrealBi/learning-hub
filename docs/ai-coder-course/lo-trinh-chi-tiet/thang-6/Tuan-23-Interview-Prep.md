@@ -35,6 +35,7 @@
 Subject: AI Agent Developer — [Tên] — Portfolio: [GitHub Link]
 
 Highlights:
+
 - 10 AI agent projects deployed (GitHub portfolio)
 - LangGraph, CrewAI, MCP expertise
 - Production: Docker, FastAPI, LangSmith

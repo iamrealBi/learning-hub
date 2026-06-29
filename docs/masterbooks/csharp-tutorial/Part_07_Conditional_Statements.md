@@ -160,6 +160,7 @@ else
 
 **Antigravity IDE và Tái cấu trúc:**
 Một hệ thống như Antigravity IDE, với khả năng hiểu "Vibe Coding" và lập kế hoạch tự động, có thể đóng vai trò quan trọng trong việc này. Khi bạn viết mã có `if` lồng ghép sâu, Antigravity có thể:
+
 *   **Phát hiện "code smell":** Tự động cảnh báo về độ phức tạp của mã.
 *   **Đề xuất tái cấu trúc:** Gợi ý các cách để làm phẳng cấu trúc `if` (ví dụ: chuyển đổi thành toán tử logic, guard clauses, hoặc thậm chí `switch` biểu thức hiện đại).
 *   **Thực hiện tái cấu trúc tự động:** Với quyền hạn phù hợp, Antigravity có thể tự động áp dụng các mẫu tái cấu trúc đã học để cải thiện chất lượng mã của bạn, giúp bạn tập trung vào logic nghiệp vụ thay vì cấu trúc mã.
@@ -623,6 +624,7 @@ Việc chọn cấu trúc điều kiện phù hợp là một phần quan trọn
 
 **Antigravity IDE và Hỗ trợ lựa chọn:**
 Một hệ thống AI như Antigravity IDE không chỉ tuân theo các quy tắc này mà còn có thể hỗ trợ bạn trong việc đưa ra quyết định. Nó có thể:
+
 *   **Phân tích ngữ cảnh:** Dựa trên kiểu dữ liệu của biến, số lượng điều kiện, và độ phức tạp của logic, Antigravity có thể đề xuất cấu trúc điều kiện tối ưu.
 *   **Chuyển đổi mã:** Nếu bạn bắt đầu với một chuỗi `if-else if` dài, Antigravity có thể gợi ý và thậm chí tự động chuyển đổi nó thành một `switch-case` hoặc `switch` biểu thức gọn gàng hơn, giúp bạn "Vibe Coding" hiệu quả hơn với cấu trúc mã sạch.
 

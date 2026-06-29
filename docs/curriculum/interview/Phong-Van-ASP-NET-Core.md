@@ -81,6 +81,7 @@
 **Đáp án:** Kestrel là **web server nhẹ, cross-platform** được tích hợp sẵn trong ASP.NET Core. Nó xử lý HTTP request trực tiếp.
 
 **Trong production**, thường đặt Kestrel ĐẰNG SAU reverse proxy (IIS, Nginx) vì:
+
 - Nginx/IIS xử lý: SSL termination, load balancing, static files
 - Kestrel xử lý: logic ứng dụng C#
 
@@ -93,6 +94,7 @@ Client → Nginx (reverse proxy) → Kestrel → ASP.NET Core App
 ## Q3: File `Program.cs` trong .NET 6+ khác gì so với trước (.NET 5)?
 
 **Đáp án:**
+
 - **.NET 5 trở xuống**: Có `Startup.cs` (ConfigureServices + Configure) + `Program.cs` (CreateHostBuilder)
 - **.NET 6+**: **Minimal Hosting** — gộp tất cả vào 1 file `Program.cs`, bỏ `Startup.cs`
 
@@ -227,6 +229,7 @@ Request → Exception → HTTPS → Static → Routing → Auth → Auth → End
 ```
 
 **Thứ tự SỐNG CÒN (không đổi được!):**
+
 1. `UseExceptionHandler()` — bắt lỗi
 2. `UseHttpsRedirection()` — chuyển HTTPS
 3. `UseStaticFiles()` — file tĩnh
@@ -390,10 +393,12 @@ _db.SaveChanges();  // EF biết cần UPDATE
 **Đáp án:** **Tranh cãi lớn** trong cộng đồng!
 
 **Ủng hộ:**
+
 - Abstraction → dễ test (mock IRepository)
 - Tách biệt data access logic
 
 **Phản đối:**
+
 - DbContext **ĐÃ LÀ** Repository + Unit of Work
 - Thêm 1 lớp trung gian → code phức tạp hơn mà không thêm giá trị
 
@@ -427,6 +432,7 @@ DELETE /api/products/5     → Xóa
 ## Q20: `[ApiController]` có hiệu ứng gì?
 
 **Đáp án:** 4 hiệu ứng tự động:
+
 1. **Auto 400**: ModelState invalid → trả 400 tự động (không cần if !ModelState.IsValid)
 2. **Auto [FromBody]**: Complex type tự hiểu đọc từ body
 3. **Bắt buộc Attribute Routing**: Phải có `[Route]`
@@ -437,6 +443,7 @@ DELETE /api/products/5     → Xóa
 ## Q21: Phân biệt `Controller` vs `ControllerBase`?
 
 **Đáp án:**
+
 - `ControllerBase` = nhẹ, chỉ có `Ok()`, `NotFound()`, `BadRequest()` → cho **API**
 - `Controller` = kế thừa `ControllerBase` + thêm `View()`, `PartialView()`, `ViewBag` → cho **MVC**
 
@@ -472,6 +479,7 @@ DELETE /api/products/5     → Xóa
 ```
 
 **3 phần JWT:**
+
 - **Header**: `{"alg":"HS256","typ":"JWT"}` (Base64)
 - **Payload**: `{"sub":"user1","role":"Admin","exp":1234567}` (Base64)
 - **Signature**: `HMAC-SHA256(header.payload, secretKey)` (không decode được)
@@ -569,6 +577,7 @@ app.UseCors("AllowFrontend");
 ## Q29: "Ứng dụng bỗng chậm, bạn debug thế nào?"
 
 **Đáp án mẫu:**
+
 1. **Logging**: Kiểm tra log xem request nào chậm
 2. **Profiling**: Dùng MiniProfiler hoặc Application Insights
 3. **DB queries**: Bật EF Core logging → tìm N+1, slow query
@@ -601,6 +610,7 @@ app.UseCors("AllowFrontend");
 ## Q31: "Dự án đang dùng Stored Procedure, sếp bảo chuyển sang EF Core. Bạn xử lý thế nào?"
 
 **Đáp án mẫu:**
+
 1. **Không refactor hết 1 lần** — rủi ro cao
 2. Dùng **Database-First** scaffold existing tables
 3. SP phức tạp → giữ lại, gọi qua `_db.Database.ExecuteSqlRaw()`
@@ -613,6 +623,7 @@ app.UseCors("AllowFrontend");
 ## Q32: "Làm sao bảo vệ API khỏi tấn công?"
 
 **Đáp án:**
+
 1. **Input Validation**: `[Required]`, `[StringLength]`, custom validators
 2. **SQL Injection**: EF Core parameterized queries (tự động)
 3. **XSS**: Razor auto-encode (tránh `@Html.Raw`)

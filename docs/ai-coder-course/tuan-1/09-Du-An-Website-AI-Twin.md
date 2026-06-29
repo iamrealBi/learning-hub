@@ -64,6 +64,7 @@ Thông tin về bạn:
 ${myContext}
 
 Quy tắc:
+
 - Trả lời dựa trên thông tin có sẵn
 - Nếu không biết, nói "Tôi chưa có thông tin về vấn đề này"
 - Giữ tone chuyên nghiệp nhưng thân thiện
@@ -104,6 +105,7 @@ Sử dụng Cursor Agent Mode:
 
 ```
 Prompt 1: "Tạo personal website hiện đại với:
+
 - Hero section fullscreen với animation gradient
 - About section với timeline experience
 - Projects grid với hover effects
@@ -118,6 +120,7 @@ sử dụng system prompt từ file my-context.md.
 Thêm typing indicator và chat history."
 
 Prompt 3: "Polish UI:
+
 - Thêm smooth scroll
 - Animation trên scroll (Intersection Observer)
 - Glassmorphism effect cho chatbot
@@ -130,6 +133,7 @@ Prompt 3: "Polish UI:
 ## 5. Kết Nối Với SEAP Program
 
 Đây là cơ hội tuyệt vời để:
+
 - 📋 **Showcase BookWormHub** trong portfolio
 - 🤖 **Demo AI Digital Twin** cho team
 - 📝 **Chứng minh kỹ năng** Vibe Coding cho mentors

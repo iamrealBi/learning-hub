@@ -3,6 +3,7 @@
 Trong hành trình xây dựng RESTful Web API với ASP.NET Core và Entity Framework Core, việc quản lý cơ sở dữ liệu và mã nguồn một cách có hệ thống là yếu tố then chốt cho sự thành công và tính bền vững của dự án. Chương này sẽ đưa bạn đi sâu vào ba khía cạnh thiết yếu: quản lý lược đồ cơ sở dữ liệu thông qua EF Core Migrations, khởi tạo dữ liệu ban đầu (seeding) và kiểm soát phiên bản toàn bộ dự án bằng Git. Chúng ta sẽ không chỉ tìm hiểu cách thực hiện các tác vụ này mà còn khám phá cơ chế hoạt động ngầm và cách tích hợp các công cụ hiện đại, bao gồm cả tư duy "Vibe Coding" với sự hỗ trợ của Antigravity IDE.
 
 Mục tiêu chính của chương này là trang bị cho bạn năng lực để:
+
 *   **Quản lý Lược đồ Cơ sở dữ liệu:** Tạo, cập nhật và hoàn nguyên lược đồ cơ sở dữ liệu một cách có kiểm soát, đồng bộ với mô hình dữ liệu trong mã nguồn C#.
 *   **Khởi tạo Dữ liệu (Seeding):** Cung cấp dữ liệu mẫu hoặc dữ liệu cần thiết cho ứng dụng hoạt động, phục vụ cho mục đích phát triển, kiểm thử và triển khai.
 *   **Kiểm soát Phiên bản Mã nguồn:** Sử dụng Git để theo dõi lịch sử thay đổi, cộng tác hiệu quả và đảm bảo khả năng khôi phục mã nguồn.
@@ -17,12 +18,14 @@ Entity Framework Core (EF Core) Migrations là một tính năng mạnh mẽ cho
 
 **Tại sao cần Migrations?**
 Trong quá trình phát triển ứng dụng, mô hình dữ liệu (các lớp entity) thường xuyên thay đổi. Việc duy trì sự đồng bộ giữa mô hình dữ liệu trong mã nguồn C# và lược đồ cơ sở dữ liệu thực tế là một thách thức. Migrations giải quyết vấn đề này bằng cách:
+
 *   **Tự động hóa:** Tự động tạo các tập lệnh SQL cần thiết để tạo, sửa đổi hoặc xóa bảng, cột, khóa, chỉ mục, v.v., dựa trên sự khác biệt giữa mô hình hiện tại và mô hình đã được áp dụng.
 *   **Kiểm soát phiên bản:** Mỗi migration là một "bản vá" (patch) cho lược đồ cơ sở dữ liệu, có thể được áp dụng hoặc hoàn nguyên. Lịch sử các migration được lưu trữ, cho phép bạn dễ dàng theo dõi sự phát triển của lược đồ.
 *   **Cộng tác:** Giúp các thành viên trong nhóm làm việc trên cùng một cơ sở dữ liệu mà không lo xung đột lược đồ, vì mỗi thay đổi được gói gọn trong một migration riêng biệt.
 
 **Cơ chế hoạt động ngầm (Under the Hood):**
 Khi bạn tạo một migration, EF Core thực hiện các bước sau:
+
 1.  **So sánh Mô hình:** EF Core so sánh trạng thái hiện tại của `DbContext` (các `DbSet`, cấu hình `OnModelCreating`, Data Annotations) với một "snapshot" (ảnh chụp nhanh) của mô hình đã được áp dụng trong migration trước đó.
 2.  **Tạo Tệp Migration:** Dựa trên sự khác biệt, EF Core tạo ra một tệp C# trong thư mục `Migrations`. Tệp này chứa hai phương thức chính:
     *   `Up()`: Chứa các lệnh (ví dụ: `CreateTable`, `AddColumn`, `DropTable`) để áp dụng các thay đổi lược đồ lên cơ sở dữ liệu.
@@ -144,6 +147,7 @@ Khi `DbContext` và các lớp entity đã được định nghĩa, bước đ�
     *   Lệnh này sẽ quét `DbContext` của bạn, so sánh nó với trạng thái migration cuối cùng (hoặc trạng thái trống nếu là lần đầu tiên) và tạo các tệp migration cần thiết.
 
     Sau khi chạy lệnh, một thư mục `Migrations` sẽ được tạo trong dự án của bạn (nếu chưa có). Bên trong thư mục này, bạn sẽ thấy các tệp:
+
     *   `[Timestamp]_InitialMigration.cs`: Chứa các phương thức `Up()` và `Down()` với các lệnh SQL DDL (Data Definition Language) tương ứng.
     *   `[Timestamp]_InitialMigration.Designer.cs`: Chứa siêu dữ liệu về migration.
     *   `NewZealandWalksDbContextModelSnapshot.cs`: Một bản chụp nhanh của mô hình `DbContext` hiện tại, được EF Core sử dụng để so sánh trong các migration tiếp theo.
@@ -252,11 +256,13 @@ Sau khi cơ sở dữ liệu và các bảng đã được tạo thông qua migr
 ### 1. Mục đích và Các loại Dữ liệu Seeding
 
 **Mục đích của Seeding:**
+
 *   **Dữ liệu Tham chiếu/Cố định:** Cung cấp các giá trị cần thiết cho ứng dụng hoạt động (ví dụ: danh sách các vai trò người dùng, trạng thái đơn hàng, danh mục sản phẩm).
 *   **Dữ liệu Mẫu (Sample Data):** Tạo dữ liệu giả định để phát triển và kiểm thử giao diện người dùng, logic nghiệp vụ mà không cần nhập thủ công.
 *   **Dữ liệu Mặc định:** Thiết lập các cấu hình hoặc giá trị mặc định cho ứng dụng khi triển khai lần đầu.
 
 **Các loại Dữ liệu Seeding:**
+
 *   **Dữ liệu tĩnh, cố định:** Thường là các lookup table (bảng tra cứu) có giá trị ít thay đổi.
 *   **Dữ liệu phát triển/kiểm thử:** Dữ liệu có thể được tạo ngẫu nhiên hoặc có cấu trúc để mô phỏng dữ liệu thực.
 *   **Dữ liệu khởi tạo hệ thống:** Dữ liệu cần thiết để khởi chạy các chức năng cốt lõi của ứng dụng.
@@ -320,6 +326,7 @@ GO
 ```
 
 **Cách thực hiện:**
+
 1.  Lưu tập lệnh SQL này vào một tệp (ví dụ: `SeedData.sql`).
 2.  Mở SQL Server Management Studio (SSMS), Azure Data Studio hoặc một công cụ quản lý cơ sở dữ liệu tương tự.
 3.  Kết nối đến máy chủ SQL của bạn.
@@ -440,12 +447,14 @@ namespace NewZealandWalks.API.Data
 ```
 
 **Các bước thực hiện với `HasData()`:**
+
 1.  Thêm phương thức `HasData()` vào `OnModelCreating` của `DbContext` với dữ liệu bạn muốn seeding.
 2.  Sau khi thêm hoặc thay đổi dữ liệu seeding, bạn cần tạo một migration mới:
     ```bash
     Add-Migration SeedDataForRegionsAndDifficulties
     ```
     EF Core sẽ tạo một migration có chứa các lệnh `InsertData` (hoặc `UpdateData`) trong phương thức `Up()`.
+
 3.  Áp dụng migration này vào cơ sở dữ liệu:
     ```bash
     Update-Database
@@ -499,6 +508,7 @@ Visual Studio có tích hợp Git mạnh mẽ, giúp bạn quản lý mã nguồ
     ```
 3.  **Khởi tạo Kho lưu trữ Git (Repository):**
     Nếu dự án của bạn chưa được kiểm soát bởi Git, bạn có thể khởi tạo một kho lưu trữ mới:
+
     *   Trong Visual Studio, đi tới `Git` > `Create Git Repository`.
     *   Chọn `Local Only` (để tạo kho lưu trữ cục bộ) hoặc `GitHub` (để tạo và liên kết với kho lưu trữ GitHub mới).
 4.  **Mở cửa sổ Git Changes:**

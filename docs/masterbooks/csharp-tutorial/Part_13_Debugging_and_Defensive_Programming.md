@@ -120,6 +120,7 @@ Trong kỷ nguyên của Trí tuệ Nhân tạo, các công cụ AI đang cách 
 **Tư duy Agentic** trong Antigravity có nghĩa là hệ thống không chỉ trả lời câu hỏi mà còn có khả năng lập kế hoạch, thực hiện các hành động (chạy script ngầm, gọi subagent trình duyệt, đọc/ghi file), và tự động điều chỉnh chiến lược để đạt được mục tiêu.
 
 Trong gỡ lỗi, điều này có nghĩa là bạn có thể:
+
 *   **Mô tả triệu chứng:** Thay vì chỉ dán lỗi, bạn có thể mô tả "chương trình của tôi đang trả về kết quả sai khi x, y, z; tôi mong đợi a, b, c."
 *   **Cung cấp ngữ cảnh rộng:** Cho Antigravity biết về cấu trúc dự án, các thành phần liên quan, và các giả định của bạn.
 *   **Yêu cầu phân tích sâu:** "Hãy xem xét Call Stack này và cho tôi biết những phương thức nào có khả năng gây ra lỗi logic."

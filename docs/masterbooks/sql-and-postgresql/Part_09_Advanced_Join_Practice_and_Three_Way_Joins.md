@@ -18,10 +18,12 @@ Mục tiêu không chỉ là hiểu cú pháp mà còn là nắm vững tư duy 
 ### 1.1. Cơ Chế Hoạt Động Của JOIN (Under the Hood)
 
 Để hiểu rõ hơn về `JOIN`, hãy hình dung cơ chế ngầm định của nó:
+
 1.  **Sản phẩm Descartes (Cartesian Product):** Về lý thuyết, khi bạn `JOIN` hai bảng, hệ quản trị cơ sở dữ liệu (DBMS) có thể bắt đầu bằng cách tạo ra một "sản phẩm Descartes" (hay Cross Join) giữa hai bảng. Đây là một bảng tạm thời chứa tất cả các tổ hợp có thể có của các hàng từ hai bảng. Ví dụ, nếu bảng A có `m` hàng và bảng B có `n` hàng, sản phẩm Descartes sẽ có `m * n` hàng.
 2.  **Lọc Theo Điều Kiện `ON`:** Sau đó, DBMS áp dụng điều kiện được chỉ định trong mệnh đề `ON` để lọc các hàng từ sản phẩm Descartes này. Chỉ những hàng thỏa mãn điều kiện `ON` mới được giữ lại.
 
 Tuy nhiên, trong thực tế, các tối ưu hóa của PostgreSQL (và các DBMS hiện đại khác) thường không thực sự tạo ra sản phẩm Descartes khổng lồ này. Thay vào đó, chúng sử dụng các thuật toán hiệu quả hơn như:
+
 *   **Nested Loop Join:** Với mỗi hàng trong bảng "ngoài", nó sẽ quét (hoặc tìm kiếm bằng index) các hàng phù hợp trong bảng "trong".
 *   **Hash Join:** Xây dựng một bảng băm (hash table) từ bảng nhỏ hơn (hoặc một phần của bảng), sau đó quét bảng lớn hơn và tìm kiếm các khớp trong bảng băm.
 *   **Merge Join:** Yêu cầu cả hai bảng phải được sắp xếp theo cột `JOIN`. Sau đó, nó sẽ duyệt qua cả hai bảng song song để tìm các khớp.
@@ -162,6 +164,7 @@ Hãy xem xét một bài toán thực tế với hai bảng `authors` và `books
 **Yêu cầu:** Viết một truy vấn trả về tiêu đề của từng cuốn sách cùng với tên tác giả của cuốn sách đó. **Điều quan trọng là chúng ta muốn đảm bảo rằng tất cả các tác giả đều được đưa vào tập kết quả, ngay cả khi họ không có cuốn sách nào liên quan đến mình, VÀ tất cả các cuốn sách cũng phải được hiển thị, ngay cả khi chúng chưa có tác giả.**
 
 Quan sát dữ liệu:
+
 *   Tác giả 'J.K. Rowling' (id=3) hiện không có cuốn sách nào trong bảng `books`.
 *   Tác giả 'George Orwell' (id=4) cũng không có sách.
 *   Cuốn sách '1984' (id=4) có `author_id` là `NULL`, nghĩa là nó chưa được gán cho tác giả nào.
@@ -183,6 +186,7 @@ FULL OUTER JOIN -- Đảm bảo tất cả hàng từ cả hai bảng đều đ�
 ```
 
 **Giải thích:**
+
 *   `FROM authors a FULL OUTER JOIN books b ON a.id = b.author_id`: Mệnh đề này sẽ kết hợp tất cả các hàng từ bảng `authors` và `books`.
     *   Nếu có sự khớp giữa `a.id` và `b.author_id`, chúng sẽ được hiển thị cùng nhau.
     *   Nếu một tác giả không có sách (như J.K. Rowling, George Orwell), tên tác giả sẽ xuất hiện, và `book_title` sẽ là `NULL`.
@@ -270,6 +274,7 @@ Hãy xem xét một tình huống khác với các bảng `photos`, `comments`, 
 ### 3.3. Xây Dựng Truy Vấn
 
 Để giải quyết bài toán này, chúng ta cần thực hiện hai bước:
+
 1.  **Nối các bảng:** Kết hợp `comments` và `photos` dựa trên `photo_id`.
 2.  **Lọc kết quả:** Áp dụng điều kiện `WHERE` để chỉ giữ lại các hàng mà `user_id` của bình luận bằng `user_id` của ảnh.
 
@@ -286,6 +291,7 @@ WHERE
 ```
 
 **Giải thích:**
+
 *   `INNER JOIN photos p ON p.id = c.photo_id`: Bước này tạo ra một tập kết quả tạm thời chứa tất cả các bình luận được liên kết với ảnh tương ứng của chúng.
 *   `WHERE c.user_id = p.user_id`: Sau khi các bảng đã được nối, mệnh đề `WHERE` sẽ kiểm tra từng hàng trong tập tạm thời đó. Nó sẽ chỉ giữ lại những hàng mà `user_id` của bình luận (`c.user_id`) trùng khớp với `user_id` của ảnh (`p.user_id`). Đây chính là cách chúng ta xác định được "người tạo ảnh cũng là người tạo bình luận".
 
@@ -343,6 +349,7 @@ Hãy tiếp tục với bài toán từ mục 3.2. Hiện tại, chúng ta đã 
 ### 4.3. Phân Tích và Thiết Kế Truy Vấn
 
 Để lấy `username`, chúng ta cần truy cập bảng `users`. Mối quan hệ giữa các bảng là:
+
 *   `comments` liên kết với `photos` qua `photo_id`.
 *   `comments` liên kết với `users` qua `user_id` (người tạo bình luận).
 *   `photos` liên kết với `users` qua `user_id` (người tạo ảnh).
@@ -350,6 +357,7 @@ Hãy tiếp tục với bài toán từ mục 3.2. Hiện tại, chúng ta đã 
 Để đáp ứng yêu cầu "người tạo ảnh cũng là người tạo bình luận", chúng ta sẽ cần nối `comments` với `photos`, sau đó nối kết quả đó với `users`. Điều kiện `ON` cho lần nối thứ hai sẽ phải đảm bảo rằng `id` của người dùng trong bảng `users` khớp với *cả* `user_id` của bình luận *và* `user_id` của ảnh.
 
 **Luồng logic:**
+
 1.  Bắt đầu từ `comments`.
 2.  `INNER JOIN photos` trên `photo_id`.
 3.  `INNER JOIN users`. Điều kiện `ON` sẽ là:
@@ -375,6 +383,7 @@ INNER JOIN
 ```
 
 **Giải thích:**
+
 *   `SELECT p.url, c.content, u.username`: Chọn các cột cần thiết từ ba bảng.
 *   `FROM comments c`: Bắt đầu với bảng `comments`.
 *   `INNER JOIN photos p ON p.id = c.photo_id`: Nối `comments` với `photos` để liên kết bình luận với ảnh của nó.
@@ -416,6 +425,7 @@ Khi đối mặt với `N-Way Join`, đặc biệt là khi số lượng bảng 
                AND u.id = pc.photo_user_id;
     ```
     Antigravity có thể tự động chuyển đổi truy vấn `JOIN` dài thành dạng CTE để cải thiện khả năng đọc và bảo trì.
+
 *   **Kiểm tra từng bước:** Với Antigravity, bạn có thể chạy từng phần của `JOIN` (ví dụ, chỉ `comments JOIN photos`) để kiểm tra kết quả trung gian, đảm bảo rằng mỗi bước nối đều hoạt động như mong đợi trước khi thêm bảng tiếp theo. Điều này chính là tinh thần của Vibe Coding: xây dựng và xác nhận từng phần nhỏ.
 *   **Phát hiện mối quan hệ ẩn:** Antigravity có thể phân tích dữ liệu và gợi ý các mối quan hệ tiềm năng giữa các bảng mà bạn có thể chưa nghĩ đến, hoặc cảnh báo về các mối quan hệ không rõ ràng có thể dẫn đến kết quả sai.
 
@@ -487,6 +497,7 @@ INNER JOIN
 ```
 
 **Giải thích:**
+
 *   `SELECT b.title, a.name, r.rating`: Chọn các cột cần thiết từ ba bảng.
 *   `FROM reviews r`: Bắt đầu với bảng `reviews` vì nó là trung tâm của mối quan hệ (ai đánh giá sách nào).
 *   `INNER JOIN books b ON b.id = r.book_id`: Nối `reviews` với `books` để liên kết mỗi bài đánh giá với cuốn sách mà nó đánh giá.

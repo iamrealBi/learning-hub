@@ -24,6 +24,7 @@ Bạn → [Trạm soi hành lý] → [Trạm kiểm tra hộ chiếu] → [Trạ
 ```
 
 Mỗi trạm:
+
 1. **Kiểm tra** — xem bạn có ổn không
 2. **Cho qua** — gọi "Next!" đẩy bạn sang trạm sau
 3. Hoặc **chặn lại** — "Anh kia! Quay lại! Hộ chiếu hết hạn!"
@@ -160,6 +161,7 @@ await fs.CopyToAsync(Response.Body);
 
 ### View tìm ở đâu?
 Khi Tiếp Tân nói `return View()`, ASP.NET tìm file Trang Trí theo thứ tự:
+
 1. `/Views/{TênTiếpTân}/{TênNhiệmVụ}.cshtml` — kiếm phòng riêng trước
 2. `/Views/Shared/{TênNhiệmVụ}.cshtml` — không có thì kiếm phòng chung
 
@@ -184,6 +186,7 @@ Bạn nhận → cất vào ví cho lần sau
 ```
 
 **Nhược điểm thẻ giấy:**
+
 1. 🏋️ **Nặng túi**: Mỗi lần vào phải đưa TẤT CẢ thẻ, kể cả thẻ không liên quan
 2. 🔓 **Dễ giả mạo**: Bạn có thể tự sửa thẻ giấy (đổi "Normal" thành "VIP Gold")
 
@@ -300,6 +303,7 @@ Khi bạn muốn **kiểm tra something ở MỌI request** (ví dụ: kiểm tr
 ## 6.2. Quy tắc xây trạm gác
 
 Mỗi trạm phải có:
+
 - **Cổng vào**: Constructor nhận `RequestDelegate next` (biết trạm kế tiếp)
 - **Nhân viên trực**: Hàm `InvokeAsync` (chạy mỗi khách đi qua)
 

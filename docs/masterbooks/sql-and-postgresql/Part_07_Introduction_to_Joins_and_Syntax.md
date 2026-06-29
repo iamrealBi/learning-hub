@@ -3,6 +3,7 @@
 Trong thế giới của các hệ quản trị cơ sở dữ liệu quan hệ (RDBMS), việc tổ chức dữ liệu thành nhiều bảng riêng biệt là một nguyên tắc thiết yếu. Mỗi bảng được thiết kế để lưu trữ thông tin về một thực thể cụ thể, giúp tối ưu hóa việc lưu trữ, giảm thiểu dữ liệu trùng lặp (redundancy) và duy trì tính toàn vẹn dữ liệu thông qua các ràng buộc. Tuy nhiên, trong thực tế, các câu hỏi nghiệp vụ hiếm khi chỉ giới hạn trong một bảng duy nhất. Chúng ta thường xuyên cần tổng hợp thông tin từ nhiều thực thể khác nhau để có được một cái nhìn toàn diện.
 
 Ví dụ, bạn có thể muốn:
+
 *   Xem nội dung một bình luận cùng với tên của người đã viết bình luận đó.
 *   Hiển thị một bức ảnh kèm theo tất cả các bình luận liên quan đến nó.
 *   Liệt kê tất cả các cuốn sách của một tác giả cụ thể.
@@ -101,6 +102,7 @@ Khi bạn cần trả lời một câu hỏi mà thông tin liên quan nằm r�
 **Aggregations** là quá trình lấy một tập hợp các hàng và tính toán một giá trị duy nhất từ tập hợp đó. Các hàm tổng hợp (aggregate functions) như `COUNT()`, `SUM()`, `AVG()`, `MAX()`, `MIN()` thường được sử dụng để thực hiện các phép tính thống kê.
 
 **Ví dụ:**
+
 *   Đếm tổng số bình luận.
 *   Tính số lượng ảnh trung bình mỗi người dùng.
 *   Tìm bình luận dài nhất.
@@ -117,6 +119,7 @@ Khi bạn cần trả lời một câu hỏi mà thông tin liên quan nằm r�
 **Yêu cầu:** Với mỗi bình luận, chúng ta muốn hiển thị nội dung của bình luận đó và tên người dùng của người đã viết bình luận.
 
 **Phân tích (Vibe Coding Perspective):**
+
 1.  **Mục tiêu:** Hiển thị nội dung bình luận (`comments.content`) và tên người dùng (`users.username`).
 2.  **Các thực thể liên quan:** Bảng `comments` và bảng `users`.
 3.  **Mối quan hệ:** Một bình luận được viết bởi một người dùng. Khóa ngoại `comments.user_id` tham chiếu đến khóa chính `users.id`.
@@ -169,6 +172,7 @@ ON
 **Yêu cầu:** Với mỗi bình luận, chúng ta muốn hiển thị nội dung của bình luận đó và URL của bức ảnh mà bình luận đó được thêm vào.
 
 **Phân tích (Vibe Coding Perspective):**
+
 1.  **Mục tiêu:** Hiển thị nội dung bình luận (`comments.content`) và URL ảnh (`photos.url`).
 2.  **Các thực thể liên quan:** Bảng `comments` và bảng `photos`.
 3.  **Mối quan hệ:** Một bình luận được thêm vào một bức ảnh. Khóa ngoại `comments.photo_id` tham chiếu đến khóa chính `photos.id`.
@@ -210,6 +214,7 @@ Khả năng thực sự của JOIN thể hiện khi bạn cần kết nối nhi�
 **Yêu cầu:** Với mỗi bình luận, chúng ta muốn hiển thị nội dung, tên người dùng của người bình luận và URL của bức ảnh mà bình luận đó thuộc về.
 
 **Phân tích (Vibe Coding Perspective):**
+
 1.  **Mục tiêu:** `comments.content`, `users.username`, `photos.url`.
 2.  **Các thực thể liên quan:** `comments`, `users`, `photos`.
 3.  **Mối quan hệ:**
@@ -236,6 +241,7 @@ INNER JOIN
 **Giải thích Cơ chế Hoạt Động (Nối nhiều bảng):**
 
 Khi bạn nối ba bảng, cơ sở dữ liệu thực hiện các phép nối tuần tự.
+
 1.  Đầu tiên, nó nối `comments` với `users` dựa trên `users.id = comments.user_id`, tạo ra một tập kết quả tạm thời (gọi là `temp_result_1`). Tập này chứa các cột từ cả `comments` và `users`.
 2.  Sau đó, nó lấy `temp_result_1` và nối với bảng `photos` dựa trên `photos.id = temp_result_1.photo_id` (tức là `photos.id = comments.photo_id`), tạo ra `temp_result_2`.
 3.  Cuối cùng, từ `temp_result_2`, nó chọn các cột `comments.content`, `users.username`, và `photos.url`.
@@ -295,6 +301,7 @@ INSERT INTO books (title, author_id) VALUES
 ### 5.3. Giải Pháp Chi Tiết
 
 **Phân tích (Vibe Coding Perspective):**
+
 1.  **Mục tiêu:** Hiển thị `books.title` và `authors.name`.
 2.  **Các thực thể liên quan:** `books`, `authors`.
 3.  **Mối quan hệ:** `books.author_id` liên kết với `authors.id`.

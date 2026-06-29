@@ -3,6 +3,7 @@
 Trong thế giới quản lý cơ sở dữ liệu, việc thao tác với dữ liệu hiện có là một khía cạnh không thể thiếu và thường xuyên được thực hiện. Phần này sẽ đi sâu vào hai trong số các thao tác Ngôn ngữ Thao tác Dữ liệu (DML - Data Manipulation Language) quan trọng nhất: Cập nhật (UPDATE) và Xóa (DELETE) dữ liệu. Chúng ta sẽ khám phá cách thay đổi thông tin của các bản ghi đã tồn tại và loại bỏ các bản ghi không còn cần thiết, đồng thời tìm hiểu sâu về các cơ chế hoạt động, các phương pháp thực hành tốt nhất để đảm bảo tính toàn vẹn và an toàn của dữ liệu, đặc biệt trong môi trường PostgreSQL.
 
 Mục tiêu của phần này là trang bị cho bạn kiến thức và kỹ năng để:
+
 *   Hiểu rõ cú pháp, cơ chế và cách sử dụng câu lệnh `UPDATE` để thay đổi dữ liệu trong các bảng.
 *   Nắm vững cú pháp, cơ chế và cách sử dụng câu lệnh `DELETE` để loại bỏ các bản ghi khỏi bảng.
 *   Nhận thức sâu sắc về tầm quan trọng cốt lõi của mệnh đề `WHERE` trong cả hai câu lệnh để thực hiện các thao tác chính xác và an toàn.
@@ -16,6 +17,7 @@ Mục tiêu của phần này là trang bị cho bạn kiến thức và kỹ n�
 Ngôn ngữ Thao tác Dữ liệu (DML) là một tập hợp các câu lệnh SQL được thiết kế để quản lý và tương tác với dữ liệu bên trong các đối tượng cơ sở dữ liệu (như bảng, view). DML là trái tim của mọi ứng dụng tương tác với cơ sở dữ liệu, cho phép người dùng và hệ thống truy xuất, thêm, sửa đổi và loại bỏ thông tin.
 
 Các câu lệnh DML phổ biến bao gồm:
+
 *   `SELECT`: Dùng để truy vấn và lấy dữ liệu từ cơ sở dữ liệu. Đây là câu lệnh được sử dụng nhiều nhất.
 *   `INSERT`: Dùng để thêm các bản ghi (hàng) dữ liệu mới vào một bảng.
 *   `UPDATE`: Dùng để thay đổi dữ liệu hiện có của một hoặc nhiều bản ghi trong bảng.
@@ -55,6 +57,7 @@ WHERE dieu_kien;
 ### 2.2. Cơ chế hoạt động của UPDATE trong PostgreSQL
 
 Khi một câu lệnh `UPDATE` được thực thi, PostgreSQL không thực sự "sửa" dữ liệu tại chỗ. Thay vào đó, nó hoạt động theo nguyên tắc của **Multiversion Concurrency Control (MVCC)**:
+
 1.  **Đánh dấu hàng cũ là "đã xóa":** Hàng dữ liệu ban đầu không bị xóa vật lý ngay lập tức. Thay vào đó, nó được đánh dấu là "không còn hợp lệ" (dead tuple) đối với các giao dịch mới.
 2.  **Chèn hàng mới:** Một phiên bản mới của hàng được tạo ra, chứa các giá trị đã cập nhật. Phiên bản mới này được coi là hàng "hiện tại" (live tuple).
 3.  **Dọn dẹp:** Các hàng "đã xóa" (dead tuples) sẽ được dọn dẹp bởi quá trình `VACUUM` (tự động hoặc thủ công) sau này để giải phóng không gian lưu trữ và ngăn chặn sự phình to của bảng (table bloat).
@@ -298,6 +301,7 @@ WHERE dieu_kien;
 ### 3.2. Cơ chế hoạt động của DELETE trong PostgreSQL
 
 Cơ chế `DELETE` trong PostgreSQL cũng dựa trên MVCC, tương tự như `UPDATE`:
+
 1.  **Đánh dấu hàng là "đã xóa":** Các hàng được chọn để xóa không bị loại bỏ vật lý ngay lập tức. Thay vào đó, chúng được đánh dấu là "không còn hợp lệ" (dead tuple) và không thể truy cập được bởi các giao dịch mới.
 2.  **Dọn dẹp:** Giống như `UPDATE`, các hàng "đã xóa" này sẽ được dọn dẹp bởi quá trình `VACUUM` sau này để giải phóng không gian lưu trữ thực tế. Cho đến khi `VACUUM` chạy, không gian đĩa vật lý có thể chưa được giải phóng hoàn toàn.
 
@@ -550,6 +554,7 @@ Mệnh đề `RETURNING` cung cấp phản hồi tức thì, giúp bạn xác mi
 Trong môi trường sản xuất, hãy luôn tuân thủ nguyên tắc "quyền hạn tối thiểu cần thiết" (least privilege). Cấp cho người dùng hoặc ứng dụng chỉ những quyền DML (`SELECT`, `INSERT`, `UPDATE`, `DELETE`) mà họ thực sự cần.
 
 **Ví dụ:**
+
 *   Để cho phép một vai trò chỉ được đọc dữ liệu:
     ```sql
     GRANT SELECT ON cities TO readonly_user;

@@ -7,6 +7,7 @@ Trong quá trình làm việc với cơ sở dữ liệu, đặc biệt là vớ
 Truy vấn phụ trong mệnh đề `FROM` về cơ bản hoạt động như một "bảng dẫn xuất" (derived table) hoặc "view nội tuyến" (inline view) tạm thời. Nó tạo ra một tập hợp dữ liệu mới mà truy vấn bên ngoài có thể coi và tương tác như một bảng thông thường. Kỹ thuật này là một công cụ cực kỳ mạnh mẽ trong PostgreSQL, cho phép chúng ta chia nhỏ các truy vấn phức tạp thành các bước logic rõ ràng, dễ quản lý và đọc hiểu hơn, đặc biệt là trong các bài toán yêu cầu tổng hợp dữ liệu ở nhiều tầng.
 
 **Mục tiêu của Phần này:**
+
 *   Nắm vững khái niệm và cấu trúc của một truy vấn phụ khi được đặt trong mệnh đề `FROM`.
 *   Hiểu rõ các quy tắc cú pháp cốt lõi, đặc biệt là yêu cầu về bí danh (alias) bắt buộc trong PostgreSQL.
 *   Khám phá các loại cấu trúc dữ liệu mà một truy vấn phụ trong `FROM` có thể trả về.
@@ -89,6 +90,7 @@ INSERT INTO products (name, price, weight) VALUES
 ```
 
 **Phân tích bài toán:**
+
 1.  Chúng ta cần tạo ra một cột mới: `price / weight`.
 2.  Sau đó, chúng ta cần lọc dựa trên giá trị của cột mới đó.
 
@@ -106,6 +108,7 @@ WHERE p.price_weight_ratio > 5;
 ```
 
 **Giải thích:**
+
 *   Truy vấn phụ `(SELECT name, price / weight AS price_weight_ratio FROM products)` được thực thi trước. Nó tạo ra một tập hợp kết quả với hai cột: `name` và `price_weight_ratio`.
     *   Ví dụ kết quả của truy vấn phụ:
         | name           | price_weight_ratio |
@@ -116,6 +119,7 @@ WHERE p.price_weight_ratio > 5;
         | Desktop PC     | 150.00             |
         | Smartwatch     | 5000.00            |
         | Gaming Mouse   | 500.00             |
+
 *   Tập hợp kết quả này được đặt bí danh là `p`.
 *   Truy vấn bên ngoài `SELECT p.name, p.price_weight_ratio FROM p` coi `p` như một bảng thông thường.
 *   Mệnh đề `WHERE p.price_weight_ratio > 5` sau đó lọc các hàng từ "bảng" tạm thời `p` dựa trên cột `price_weight_ratio` đã được tính toán.
@@ -167,6 +171,7 @@ Sử dụng truy vấn phụ trong `FROM` là giải pháp lý tưởng cho vấ
 
 Hãy xem xét một bài toán thực tế: Bạn muốn tìm số đơn hàng trung bình mà mỗi người dùng đã tạo.
 Để giải quyết bài toán này, chúng ta cần hai bước tổng hợp riêng biệt:
+
 1.  Đếm tổng số đơn hàng của *mỗi người dùng riêng lẻ*. (Tổng hợp cấp độ 1)
 2.  Tính giá trị trung bình của *tất cả các số đếm đó*. (Tổng hợp cấp độ 2)
 
@@ -225,6 +230,7 @@ FROM (
 ) AS user_order_counts; -- Bí danh 'user_order_counts' là BẮT BUỘC
 ```
 **Giải thích:**
+
 *   Truy vấn phụ `(SELECT user_id, COUNT(*) AS order_count FROM orders GROUP BY user_id)` tạo ra một bảng tạm thời chứa `user_id` và `order_count` cho mỗi người dùng.
 *   Bảng tạm thời này được đặt bí danh là `user_order_counts`.
 *   Truy vấn bên ngoài `SELECT AVG(user_order_counts.order_count)` sau đó tính giá trị trung bình của cột `order_count` từ bảng dẫn xuất `user_order_counts`.
@@ -241,6 +247,7 @@ Tư duy đằng sau việc sử dụng truy vấn phụ trong `FROM` để giả
 "Vibe Coding" là một triết lý lập trình nhấn mạnh việc chia nhỏ các vấn đề lớn thành các phần nhỏ hơn, tự chứa, có mục đích rõ ràng và giao diện đầu vào/đầu ra được xác định tốt. Mỗi phần này có thể được phát triển, kiểm thử và bảo trì độc lập, sau đó được kết hợp lại để tạo thành một giải pháp tổng thể.
 
 Khi bạn sử dụng truy vấn phụ trong `FROM`, bạn đang áp dụng chính xác tư duy này:
+
 *   **Bước 1 (Subquery):** Bạn giải quyết một "sub-problem" (vấn đề con) cụ thể – ví dụ, "tính số đơn hàng của mỗi người dùng". Kết quả của subquery là "đầu ra" của sub-problem này, hoạt động như một "API" hoặc "interface" cho bước tiếp theo.
 *   **Bước 2 (Outer Query):** Bạn giải quyết "main problem" (vấn đề chính) bằng cách sử dụng "đầu ra" đã được chuẩn bị từ Bước 1.
 
@@ -254,6 +261,7 @@ Hãy hình dung Antigravity IDE là một hệ thống Agentic AI siêu việt, 
 
 **Áp dụng tư duy Vibe Coding vào Antigravity khi viết SQL:**
 Khi bạn đối mặt với một vấn đề phức tạp trong Antigravity IDE và cần viết SQL:
+
 *   **Phân tích vấn đề thành các "module" dữ liệu:** Hãy nghĩ xem bạn cần những tập dữ liệu trung gian nào để đạt được kết quả cuối cùng. Mỗi tập dữ liệu trung gian này có thể là một truy vấn phụ.
 *   **Định nghĩa "đầu ra" của mỗi module:** Mỗi truy vấn phụ cần trả về những cột nào để truy vấn bên ngoài có thể sử dụng?
 *   **Xây dựng từng "module" (subquery) một cách độc lập:** Viết và kiểm thử truy vấn phụ trước. Đảm bảo nó trả về dữ liệu chính xác.
@@ -267,6 +275,7 @@ Cách tiếp cận này không chỉ giúp bạn viết SQL hiệu quả và d�
 
 **Bài toán:**
 Bạn muốn tìm giá trung bình lớn nhất của điện thoại từ mỗi nhà sản xuất. Nói cách khác, bạn cần:
+
 1.  Tính giá trung bình của điện thoại cho từng nhà sản xuất riêng biệt.
 2.  Sau đó, tìm giá trị lớn nhất trong số các giá trung bình đó.
 
@@ -326,6 +335,7 @@ FROM (
 ) AS manufacturer_avg_prices; -- Bí danh 'manufacturer_avg_prices' là BẮT BUỘC
 ```
 **Giải thích:**
+
 *   Truy vấn phụ tính toán `avg_price` cho mỗi `manufacturer`.
 *   Kết quả của truy vấn phụ được đặt bí danh là `manufacturer_avg_prices`.
 *   Truy vấn bên ngoài `SELECT MAX(manufacturer_avg_prices.avg_price)` sau đó tìm giá trị lớn nhất từ cột `avg_price` của bảng tạm thời đó.
@@ -359,6 +369,7 @@ SELECT AVG(order_count) AS average_orders_per_user
 FROM user_order_counts;
 ```
 **Ưu điểm của CTE so với Subquery trong `FROM`:**
+
 *   **Khả năng đọc:** CTEs giúp cấu trúc truy vấn phức tạp thành các khối logic được đặt tên, cải thiện đáng kể khả năng đọc.
 *   **Tái sử dụng:** Một CTE có thể được tham chiếu nhiều lần trong cùng một truy vấn, tránh lặp lại mã.
 *   **Tối ưu hóa:** Trong nhiều trường hợp, trình tối ưu hóa của PostgreSQL có thể xử lý CTEs hiệu quả tương tự, hoặc thậm chí tốt hơn, so với các subquery lồng nhau sâu.

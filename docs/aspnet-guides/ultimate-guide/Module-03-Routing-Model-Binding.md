@@ -144,6 +144,7 @@ GET /Demo?items=Phở&items=Bún&items=Mì
 ## 2.6. `[ApiController]` — Phiên dịch viên VIP
 
 Khi Controller có `[ApiController]`, phiên dịch viên thông minh hơn:
+
 - Object → tự hiểu `[FromBody]` (đọc body JSON)
 - Đơn hàng sai → **tự động trả 400** (không cần viết `if (!ModelState.IsValid)`)
 

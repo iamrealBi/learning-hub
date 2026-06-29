@@ -20,16 +20,19 @@
 
 ### 🔴 Khóa chính — Udemy Business:
 **[Git & GitHub - The Practical Guide](https://ibmcsr.udemy.com/course/git-github-practical-guide/)**
+
 - Giảng viên: Academind (Maximilian Schwarzmüller) | ⭐ 4.6 | 10.5 giờ
 - **Tuần này học**: Sections 1-8 (Core Git + GitHub)
 
 ### 🟡 Coursera — Lý thuyết sâu + Chứng chỉ 🎓:
 **[Generative AI with Large Language Models](https://www.coursera.org/learn/generative-ai-with-llms)** (DeepLearning.AI + AWS)
+
 - 🥇 **PRIMARY cho LLM theory** — Andrew Ng, sâu nhất về transformer/inference
 - **Tuần này**: Week 1 — LLM fundamentals, tokens, inference
 - 🎓 Certificate LinkedIn-ready
 
 **[Prompt Engineering for ChatGPT](https://www.coursera.org/learn/prompt-engineering)** (Vanderbilt University)
+
 - 🥈 SUPPLEMENT — Prompt patterns academic-level
 - **Tuần này**: Modules 1-3
 
@@ -156,6 +159,7 @@ chatbot/
 ```
 
 **Features:**
+
 1. Chọn model (GPT-4o-mini / Claude Sonnet)
 2. Conversation memory (lưu history)
 3. System prompt customizable

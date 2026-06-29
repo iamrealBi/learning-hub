@@ -235,6 +235,7 @@ Visual Studio 2022 là một môi trường phát triển tích hợp (IDE) mạ
         dotnet --list-sdks
         ```
         Bạn sẽ thấy danh sách các phiên bản SDK đã cài đặt, bao gồm .NET 8 (ví dụ: `8.0.x`).
+
     *   Gõ lệnh sau và nhấn Enter:
         ```bash
         dotnet --list-runtimes

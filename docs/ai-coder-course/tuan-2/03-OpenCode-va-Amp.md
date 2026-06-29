@@ -74,10 +74,13 @@ Amp là agent của **Sourcegraph** — nổi tiếng với khả năng **hiểu
 ```
 1. Intent Parsing: Bạn mô tả mục tiêu
    ↓
+
 2. Planning: Amp tạo step-by-step plan → Review
    ↓
+
 3. Execution: Amp code, build, test, iterate
    ↓
+
 4. Review/Handoff: Xem kết quả, approve changes
 ```
 

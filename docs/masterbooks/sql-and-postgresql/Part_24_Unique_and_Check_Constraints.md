@@ -195,6 +195,7 @@ Ràng buộc `CHECK` cho phép bạn định nghĩa các quy tắc kiểm tra t�
 ### 2.1. Cơ Chế Hoạt Động Ngầm và Phạm Vi
 
 Ràng buộc `CHECK` hoạt động bằng cách đánh giá một biểu thức boolean đã định nghĩa cho *mỗi hàng* mà bạn đang cố gắng chèn hoặc cập nhật.
+
 *   **Chỉ kiểm tra hàng hiện tại:** Ràng buộc `CHECK` chỉ có thể hoạt động bằng cách kiểm tra các thuộc tính (cột) trên hàng mà bạn đang cố gắng chèn hoặc cập nhật.
 *   **Không hỗ trợ truy vấn phụ (Subquery):** Một hạn chế quan trọng của ràng buộc `CHECK` trong PostgreSQL là nó **không thể thực hiện các truy vấn phụ (subquery)** để kiểm tra giá trị của các hàng khác trong cùng bảng hoặc các bảng khác. Ví dụ, bạn không thể tạo một ràng buộc `CHECK` để đảm bảo `price` luôn lớn hơn giá trung bình của tất cả sản phẩm, vì điều đó yêu cầu truy vấn toàn bộ bảng. Đối với các quy tắc phức tạp hơn như vậy, bạn sẽ cần sử dụng trigger hoặc xác thực ở tầng ứng dụng.
 *   **Hiệu suất:** Đối với các biểu thức `CHECK` đơn giản, chi phí hiệu suất là rất nhỏ. PostgreSQL tối ưu hóa việc kiểm tra này để đảm bảo tốc độ.
@@ -427,6 +428,7 @@ Chiến lược tốt nhất là kết hợp cả hai phương pháp, phân tán
 **Ví dụ cụ thể về tư duy "Vibe Coding" với Antigravity:**
 
 Khi bạn yêu cầu Antigravity xây dựng một hệ thống thương mại điện tử:
+
 *   **Antigravity** sẽ tự động nhận ra rằng `email` của người dùng phải là duy nhất và không được `NULL` (`email VARCHAR(255) UNIQUE NOT NULL`) ở cấp CSDL. Đây là quy tắc cốt lõi.
 *   Nó cũng sẽ tạo ra một ràng buộc `CHECK (price > 0)` cho cột giá sản phẩm, vì giá âm là phi lý trong mọi trường hợp.
 *   Tuy nhiên, việc kiểm tra xem `username` có độ dài từ 4 đến 20 ký tự hay không, hoặc mật khẩu có chứa ít nhất một ký tự đặc biệt không, sẽ được Antigravity triển khai ở tầng ứng dụng (client-side và server-side). Tại sao? Bởi vì những quy tắc này có thể thay đổi để cải thiện trải nghiệm người dùng hoặc chính sách bảo mật mà không cần can thiệp vào schema CSDL.

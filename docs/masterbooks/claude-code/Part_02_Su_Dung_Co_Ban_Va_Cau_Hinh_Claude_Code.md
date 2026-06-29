@@ -26,6 +26,7 @@ Khi bạn ở trong giao diện Claude Code, bạn sẽ nhập các "prompt" (l�
 
 **Cơ chế hoạt động (Under the Hood):**
 Khi nhận một prompt, Claude Code không chỉ đơn thuần là phản hồi văn bản. Nó hoạt động như một "agent" (tác nhân) với một vòng lặp suy nghĩ và hành động:
+
 1.  **Phân tích ngữ cảnh (Perceive):** Claude Code sẽ quét thư mục dự án hiện tại, đọc các file quan trọng như `package.json`, `tsconfig.json`, `README.md`, hoặc các file mã nguồn liên quan để xây dựng một bức tranh tổng thể về dự án và ngữ cảnh của prompt. Nó sử dụng các công cụ nội bộ như `read` (đọc file) để thu thập thông tin này.
 2.  **Lập kế hoạch (Plan):** Dựa trên prompt và ngữ cảnh đã thu thập, AI sẽ lập một kế hoạch hành động. Kế hoạch này có thể bao gồm việc xác định các file cần chỉnh sửa, các lệnh shell cần thực thi (`bash`), hoặc các thông tin cần hỏi thêm.
 3.  **Thực thi (Act):** AI sẽ thực hiện các hành động trong kế hoạch, sử dụng các công cụ `read`, `write` (ghi file), `bash` (thực thi lệnh shell) để tương tác với hệ thống file và môi trường.
@@ -73,6 +74,7 @@ Bạn có thể nhập prompt vào Claude Code như sau:
 `replace the starting page of this Next.js project with a page that says "Hello World" centered in the middle of the screen`
 
 Claude Code sẽ thực hiện các bước sau:
+
 1.  **Phân tích ngữ cảnh:** Đọc `package.json` để xác định đây là dự án Next.js.
 2.  **Tìm kiếm file liên quan:** Tìm kiếm các file `page.tsx` hoặc `index.tsx` trong thư mục `pages` hoặc `app`.
 3.  **Đọc và hiểu:** Đọc nội dung file `pages/index.tsx` để hiểu cấu trúc hiện tại.
@@ -88,6 +90,7 @@ Claude Code sẽ thực hiện các bước sau:
 Khi Claude Code đề xuất thay đổi, nó sẽ hiển thị một công cụ so sánh mã (diff view) để bạn có thể xem rõ sự khác biệt giữa phiên bản gốc và phiên bản mới.
 
 **Ví dụ về Diff View:**
+
 *   **Bên trái (Original):** Mã nguồn trước khi Claude Code chỉnh sửa.
 *   **Bên phải (Proposed):** Mã nguồn sau khi Claude Code chỉnh sửa.
 
@@ -101,6 +104,7 @@ Bạn sẽ thấy các dòng bị xóa (thường là màu đỏ) và các dòng
 -
  export default function Home() {
    return (
+
 -    <main className="flex min-h-screen flex-col items-center justify-between p-24">
 -      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
 -        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
@@ -116,6 +120,7 @@ Bạn sẽ thấy các dòng bị xóa (thường là màu đỏ) và các dòng
 ```
 
 Bạn có các tùy chọn sau để phản hồi:
+
 *   **Accept (Chấp nhận):** Áp dụng các thay đổi.
 *   **Reject (Từ chối):** Hủy bỏ các thay đổi.
 *   **Continue in terminal (Tiếp tục trong terminal):** Trở lại terminal để chọn `yes` hoặc `yes, allow all edits during the session` (có, cho phép tất cả các chỉnh sửa trong phiên này). Lựa chọn thứ hai rất hữu ích để tránh phải xác nhận nhiều lần cho các tác vụ phức tạp.
@@ -130,6 +135,7 @@ Mặc dù Claude Code là một công cụ CLI, nó có khả năng tích hợp 
 #### a. Tiện ích mở rộng Visual Studio Code (VS Code Extension)
 
 Để có trải nghiệm tích hợp tốt nhất với VS Code, bạn cần cài đặt tiện ích mở rộng chính thức của Claude Code từ Anthropic. Sau khi cài đặt, bạn sẽ nhận được các lợi ích sau:
+
 *   **Diff View Trực Quan:** Thay vì xem diff trong terminal, VS Code sẽ mở một trình chỉnh sửa so sánh mã tích hợp, tương tự như khi bạn so sánh các commit Git. Điều này giúp bạn dễ dàng xem xét và phê duyệt các thay đổi với giao diện phong phú hơn.
 *   **Tương Tác Ngoài Terminal:** Bạn có thể tương tác với Claude Code trực tiếp từ thanh lệnh của VS Code (Command Palette). Gõ `Claude Code` và chọn `Focus Input` để mở một cửa sổ trò chuyện riêng biệt. Tại đây, bạn có thể nhập prompt, đính kèm file, hoặc thậm chí dán hình ảnh vào phiên làm việc.
 *   **Duyệt và Quản lý Phiên:** Cửa sổ này cũng cho phép bạn duyệt qua các cuộc trò chuyện trước đây, bắt đầu các phiên mới, và quản lý ngữ cảnh một cách trực quan hơn, cung cấp một "bảng điều khiển" cho các phiên AI của bạn.
@@ -142,11 +148,13 @@ Mặc dù Claude Code là một công cụ CLI, nó có khả năng tích hợp 
 Ngoài CLI và tích hợp IDE, Claude Code còn có sẵn dưới dạng ứng dụng desktop cho macOS và Windows. Ứng dụng này cung cấp một giao diện người dùng đồ họa (GUI) để tương tác với Claude Code.
 
 **Các Chế Độ trong Ứng Dụng Desktop:**
+
 *   **Chế độ Claude Code:** Đây là chế độ trọng tâm, cho phép bạn gửi và quản lý các tác vụ code, tương tự như CLI nhưng với giao diện đồ họa.
 *   **Chế độ Chat thông thường:** Giống như ChatGPT, chế độ này dành cho các cuộc trò chuyện chung không liên quan đến lập trình.
 *   **Claude Cowork:** Một công cụ trợ lý làm việc tổng quát khác của Anthropic.
 
 **Sử Dụng Ứng Dụng Desktop:**
+
 *   Bạn có thể bắt đầu các phiên code mới bằng cách nhấp vào "New Session".
 *   Chọn một thư mục làm việc (dự án) hiện có hoặc mở một dự án mới.
 *   Nhập prompt và gửi tác vụ đến Claude Code qua giao diện này.
@@ -199,6 +207,7 @@ Bạn có thể dễ dàng xem và thay đổi các cài đặt cấu hình tr�
 Khi bạn chạy `/config`, một menu cấu hình sẽ hiện ra, cho phép bạn duyệt qua các cài đặt hiện có và giá trị của chúng. Bạn có thể thay đổi các giá trị này một cách tương tác.
 
 **Ví dụ:** Thay đổi theme hoặc tắt chế độ "thinking mode".
+
 *   Chọn `theme` để thay đổi giao diện.
 *   Chọn `alwaysThinkingEnabled` và đặt thành `false` nếu bạn muốn Claude Code phản hồi nhanh hơn cho các tác vụ đơn giản, tiết kiệm token, nhưng có thể ít "suy nghĩ" sâu hơn.
 
@@ -211,6 +220,7 @@ Cấu hình toàn cục không chỉ là các cài đặt kỹ thuật; nó là 
 #### Danh sách các Cài Đặt Khả Dụng
 
 Claude Code có một danh sách dài các cài đặt có thể cấu hình, và danh sách này có thể thay đổi theo thời gian. Bạn nên tham khảo tài liệu chính thức của Anthropic để xem phiên bản cập nhật nhất của danh sách này. Các cài đặt thường bao gồm:
+
 *   `theme`: Giao diện (dark/light).
 *   `model`: Mô hình AI sử dụng (ví dụ: `claude-3-opus-20240229`).
 *   `defaultEditor`: Trình soạn thảo mặc định cho diff (ví dụ: `vscode`, `vim`).
@@ -223,6 +233,7 @@ Claude Code có một danh sách dài các cài đặt có thể cấu hình, v�
 Đây là một cài đặt cực kỳ quan trọng để đảm bảo an toàn và bảo mật cho dự án của bạn. Hệ thống quyền hạn của Claude Code cho phép bạn kiểm soát những gì AI có thể đọc, ghi hoặc thực thi trên hệ thống file của bạn.
 
 **Các công cụ chính và quyền hạn liên quan:**
+
 *   `read`: Cho phép Claude Code đọc các file.
 *   `write`: Cho phép Claude Code ghi vào các file.
 *   `bash`: Cho phép Claude Code thực thi các lệnh shell (bash).
@@ -274,6 +285,7 @@ Một trong những quy tắc quan trọng nhất là từ chối Claude Code đ
 
 **Antigravity IDE và Quản lý Quyền hạn (Agentic Safety):**
 Trong Antigravity IDE, quản lý quyền hạn được thực hiện ở một cấp độ tinh vi hơn. Thay vì chỉ là các quy tắc `deny` cứng nhắc, Antigravity sử dụng một hệ thống "Agentic Safety" dựa trên việc lập kế hoạch và phản ánh. Các agent của Antigravity có thể có quyền truy cập rộng hơn vào hệ thống file để thu thập ngữ cảnh, nhưng chúng được huấn luyện để *tự đánh giá rủi ro* của các hành động ghi hoặc thực thi.
+
 *   **Internal Guardrails:** Antigravity có các "guardrails" nội bộ, các mô hình phụ trách an toàn sẽ đánh giá mỗi bước trong kế hoạch của agent trước khi thực thi, đặc biệt là các hành động có khả năng phá hoại (`write`, `bash`).
 *   **Human-in-the-Loop at Strategy Level:** Thay vì phê duyệt từng diff, Antigravity có thể yêu cầu phê duyệt ở cấp độ "kế hoạch hành động" lớn hơn, hoặc trước khi thực hiện một "commit" cuối cùng vào kho mã nguồn. Điều này cho phép người dùng kiểm soát chiến lược mà không bị quá tải bởi các chi tiết nhỏ.
 *   **Sandboxing:** Đối với các tác vụ rủi ro cao, Antigravity có thể tự động chạy các agent trong môi trường sandbox (hộp cát) để cô lập các thay đổi và ngăn chặn tác động không mong muốn lên hệ thống chính.
@@ -289,6 +301,7 @@ Ngoài cấu hình toàn cục, bạn có thể tạo cấu hình cụ thể cho
 #### `settings.local.json`
 
 Để có tính linh hoạt cao hơn, bạn cũng có thể tạo file `settings.local.json` trong thư mục `.claude` của dự án:
+
 *   `your-project-folder/.claude/settings.local.json`
 *   **Mục đích:** File này được thiết kế để chứa các cài đặt cá nhân của bạn mà *không nên được kiểm tra vào hệ thống kiểm soát phiên bản (như Git)*. Điều này rất hữu ích khi làm việc trong một nhóm, cho phép mỗi thành viên có các tùy chỉnh riêng (ví dụ: mô hình AI ưa thích, theme cá nhân) mà không ảnh hưởng đến người khác hoặc kho mã nguồn chung. Bạn nên thêm `/.claude/settings.local.json` vào file `.gitignore` của dự án.
 *   **Ưu tiên:** Cài đặt trong `settings.local.json` sẽ ghi đè cả cài đặt toàn cục và cài đặt trong `settings.json` cấp độ dự án. Đây là cấp độ ưu tiên cao nhất.
@@ -318,6 +331,7 @@ Trong giao diện CLI của Claude Code, bạn có thể sử dụng các "lện
 Cửa sổ ngữ cảnh là "bộ nhớ" của AI cho một phiên làm việc cụ thể. Nó chứa tất cả các tương tác (prompt và phản hồi) trong phiên đó, cũng như các thông tin hệ thống mà AI cần để hoạt động. Kích thước của cửa sổ ngữ cảnh được giới hạn bởi số lượng token mà mô hình AI có thể xử lý.
 
 Khi bạn chạy lệnh `/context`, bạn sẽ thấy một phân tích chi tiết về việc sử dụng token:
+
 *   **System Prompt:** Một phần đáng kể token được dành cho prompt hệ thống do các kỹ sư của Anthropic thiết lập. Prompt này là "lời hướng dẫn" cấp cao nhất, định hướng hành vi cơ bản của Claude Code (ví dụ: "Bạn là một trợ lý lập trình, hãy giúp người dùng viết code, sửa lỗi, và trả lời các câu hỏi kỹ thuật"). Nó thiết lập "vibe" mặc định của AI.
 *   **System Tools:** Mô tả các công cụ nội bộ mà Claude Code có thể sử dụng (ví dụ: `read`, `write`, `bash`). Những mô tả này giúp AI biết khi nào nên sử dụng công cụ nào và cách sử dụng chúng. Mỗi mô tả công cụ cũng tiêu tốn token.
 *   **MCP Tools:** Nếu bạn đã cấu hình các máy chủ MCP (một tính năng nâng cao hơn để tích hợp các công cụ tùy chỉnh), một phần token cũng sẽ được dành cho mô tả các công cụ đó.
@@ -332,6 +346,7 @@ Context Window Usage:
   Free: 180000 (90%)
 
 Breakdown:
+
   - System Prompt: 10000 tokens (The core instructions for Claude Code)
   - System Tools: 9000 tokens (Descriptions of read, write, bash tools)
   - MCP Tools: 1000 tokens (if configured, descriptions of custom tools)
@@ -345,18 +360,21 @@ Breakdown:
 #### Bộ Đệm Tự Động Nén (Auto Compact Buffer)
 
 Khi một phiên làm việc trở nên dài và tiêu thụ nhiều token, Claude Code sẽ tự động "nén" (compact) ngữ cảnh để giữ cho nó nằm trong giới hạn của cửa sổ ngữ cảnh.
+
 *   **Cách hoạt động:** Claude Code sẽ tạo một bản tóm tắt các công việc đã được thực hiện và các công việc còn lại cần làm. Sau đó, nó sẽ loại bỏ (hoặc nén một cách mất mát) các phần ngữ cảnh cũ và chỉ giữ lại bản tóm tắt này, tiếp tục dựa trên đó.
 *   **Mục đích:** Đảm bảo rằng Claude Code không bị hết bộ nhớ và có thể tiếp tục làm việc trên các tác vụ dài mà không mất đi ngữ cảnh quan trọng, dù có thể mất đi một số chi tiết nhỏ.
 *   **Reserved Buffer:** Một phần của cửa sổ ngữ cảnh được "dành riêng" cho quá trình nén tự động. Phần này không thể được sử dụng cho các prompt thông thường của bạn mà là không gian làm việc nội bộ của AI để quản lý bộ nhớ.
 
 **Vibe Coding: Quản lý ngữ cảnh để duy trì "Vibe"**
 Quản lý ngữ cảnh là cốt lõi của Vibe Coding. Một "vibe" tốt cho AI là một ngữ cảnh rõ ràng, không bị nhiễu và tập trung vào nhiệm vụ hiện tại.
+
 *   **`/clear` là "Vibe Reset":** Khi AI bắt đầu lạc đề hoặc "quên" mục tiêu ban đầu, `/clear` giúp bạn thiết lập lại "vibe" từ đầu, đảm bảo AI tập trung vào nhiệm vụ mới mà không bị ảnh hưởng bởi các cuộc trò chuyện cũ.
 *   **Tạo Prompt Hiệu Quả:** Khi cửa sổ ngữ cảnh đầy, AI sẽ phải nén thông tin. Để duy trì "vibe" mong muốn, hãy đảm bảo các prompt của bạn luôn ngắn gọn, rõ ràng và truyền tải được ý định cốt lõi. Hãy coi nó như việc viết một bản tóm tắt điều hành cho AI.
 *   **Hiểu Giới Hạn:** Nhận thức về giới hạn token giúp bạn thiết kế các tác vụ phù hợp. Đối với các tác vụ rất dài, bạn có thể cần chia nhỏ chúng thành các phần nhỏ hơn, mỗi phần có một "vibe" riêng, và sử dụng `/clear` giữa các phần.
 
 **Antigravity IDE: Quản lý ngữ cảnh tiên tiến hơn**
 Antigravity IDE với kiến trúc multi-agent và hệ thống bộ nhớ bền vững (persistent memory) có khả năng quản lý ngữ cảnh vượt trội.
+
 *   **Persistent Project Memory:** Antigravity duy trì một "bộ nhớ dự án" dài hạn, không chỉ giới hạn trong một phiên chat. Điều này giúp nó "ghi nhớ" cấu trúc dự án, các quyết định thiết kế trước đó, và các vấn đề đã giải quyết qua nhiều phiên làm việc.
 *   **Multi-Agent Context:** Các sub-agent trong Antigravity có thể có cửa sổ ngữ cảnh riêng, chuyên biệt cho từng nhiệm vụ (ví dụ: một agent chuyên về UI, một agent chuyên về database). Một agent điều phối trung tâm tổng hợp thông tin từ các agent này, giảm thiểu sự cần thiết của auto-compaction mất mát ở cấp độ tổng thể.
 *   **Contextual Planning:** Antigravity sử dụng ngữ cảnh để lập kế hoạch phức tạp. Nó không chỉ tóm tắt các cuộc trò chuyện, mà còn phân tích các file đã chỉnh sửa, các lỗi đã gặp, và các mục tiêu chưa hoàn thành để xây dựng một "bản đồ tư duy" liên tục về dự án. Điều này giúp nó duy trì "vibe" của dự án qua thời gian dài.
@@ -364,6 +382,7 @@ Antigravity IDE với kiến trúc multi-agent và hệ thống bộ nhớ bền
 ### 3. Quản Lý Nhiều Phiên Song Song
 
 Bạn có thể chạy nhiều phiên Claude Code song song. Điều này có thể được thực hiện bằng cách mở nhiều cửa sổ terminal khác nhau và khởi động Claude Code trong mỗi cửa sổ.
+
 *   **Lợi ích:** Cho phép bạn làm việc trên các tác vụ khác nhau hoặc thử nghiệm các giải pháp khác nhau cho cùng một dự án mà không ảnh hưởng đến ngữ cảnh của các phiên khác. Ví dụ, một phiên có thể tập trung vào refactoring, trong khi phiên khác tập trung vào việc viết bài kiểm tra.
 *   **Lưu ý:** Nếu bạn đang làm việc trên cùng một dự án với nhiều phiên, hãy đảm bảo các tác vụ của AI không xung đột hoặc ghi đè lên nhau, đặc biệt là khi chỉnh sửa cùng một file. Sử dụng tính năng diff view và phê duyệt cẩn thận là rất quan trọng.
 
@@ -454,6 +473,7 @@ Vibe Coding không chỉ là việc đưa ra các hướng dẫn rõ ràng cho A
 
 **Vibe Coding trong Antigravity IDE:**
 Vibe Coding trở thành *cực kỳ quan trọng* và mạnh mẽ hơn nhiều khi làm việc với Antigravity IDE. Vì Antigravity là một hệ thống agentic tự động hóa cao, việc thiết lập "vibe" ban đầu một cách chính xác sẽ cho phép nó:
+
 *   **Tự Lập Kế Hoạch Sâu:** Antigravity sẽ sử dụng "vibe" để xây dựng một kế hoạch hành động chi tiết, bao gồm việc gọi các subagent, chạy các script ngầm, và thậm chí tự điều chỉnh mục tiêu phụ.
 *   **Thực Thi Tự Động Hóa Cao:** Với một "vibe" rõ ràng, Antigravity có thể thực thi toàn bộ chuỗi tác vụ mà không cần can thiệp liên tục của người dùng, từ việc đọc file, tìm kiếm trên trình duyệt, viết mã, chạy thử nghiệm, đến việc gửi pull request.
 *   **Phản Ánh và Tự Sửa Lỗi:** "Vibe" ban đầu cũng định hướng cách Antigravity tự phản ánh về kết quả. Nếu kết quả không khớp với "vibe" mong muốn (ví dụ: mã không hiệu suất cao, không tuân thủ phong cách), nó sẽ tự động lặp lại và sửa lỗi.

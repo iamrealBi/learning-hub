@@ -211,6 +211,7 @@ WHERE
     );
 ```
 **Giải thích:**
+
 *   Truy vấn con trả về các `department_id` có ít nhất một sản phẩm giá dưới 100.
 *   Truy vấn chính chọn các sản phẩm mà `department_id` của chúng *không* nằm trong danh sách do truy vấn con trả về. Điều này có nghĩa là chúng ta sẽ hiển thị các sản phẩm thuộc các phòng ban mà *tất cả* các sản phẩm trong phòng ban đó đều có giá từ 100 trở lên.
 
@@ -267,6 +268,7 @@ Hoặc, một giải pháp mạnh mẽ hơn là sử dụng `NOT EXISTS`, vì `N
 Tư duy "Vibe Coding" ở đây là khả năng bạn *dự đoán* được hành vi của `NOT IN` khi có `NULL`. Một lập trình viên có "vibe" tốt sẽ ngay lập tức nghĩ đến `NULL` khi thấy `NOT IN` và truy vấn con.
 
 Antigravity IDE, với khả năng Agentic AI của mình, có thể hỗ trợ điều này:
+
 *   **Cảnh báo `NULL`**: Khi bạn viết một truy vấn `NOT IN` với truy vấn con, Antigravity có thể tự động phân tích schema và dữ liệu mẫu (hoặc thực tế) để cảnh báo nếu truy vấn con có khả năng trả về `NULL` và đề xuất cách xử lý (`IS NOT NULL` hoặc chuyển sang `NOT EXISTS`).
 *   **Tạo dữ liệu kiểm thử**: Antigravity có thể tự động tạo dữ liệu mẫu bao gồm các trường hợp `NULL` để bạn kiểm tra và "vibe" cách `NOT IN` sẽ phản ứng, giúp bạn hiểu sâu hơn mà không cần tự tay chèn dữ liệu.
 *   **Đề xuất tối ưu hóa**: Nếu Antigravity nhận thấy một truy vấn `NOT IN` có thể được viết lại hiệu quả hơn bằng `NOT EXISTS` (đặc biệt khi truy vấn con rất lớn hoặc phức tạp), nó có thể đưa ra gợi ý.
@@ -295,6 +297,7 @@ Ví dụ, `price > ALL (SELECT price FROM products WHERE department = 'Industria
 ### 2. Cơ Chế Hoạt Động và Tương Đương với `MAX`/`MIN`
 
 Khi sử dụng `ALL` với toán tử so sánh:
+
 *   `expression > ALL (subquery)`: Điều này tương đương với `expression > MAX(subquery)`. Tức là, biểu thức phải lớn hơn giá trị lớn nhất trong tập hợp.
 *   `expression < ALL (subquery)`: Điều này tương đương với `expression < MIN(subquery)`. Tức là, biểu thức phải nhỏ hơn giá trị nhỏ nhất trong tập hợp.
 *   Các toán tử khác như `>= ALL`, `<= ALL`, `= ALL`, `<> ALL` cũng có các tương đương logic tương tự, nhưng ít phổ biến hơn hoặc có thể gây nhầm lẫn. Ví dụ, `= ALL` tương đương với `IN` nếu truy vấn con chỉ trả về một giá trị duy nhất, hoặc `FALSE` nếu trả về nhiều giá trị khác nhau.
@@ -331,6 +334,7 @@ WHERE
     );
 ```
 **Giải thích:**
+
 *   Truy vấn con trả về tất cả các mức giá của sản phẩm thuộc phòng ban 'Industrial' (ví dụ: `796.00, 5000.00`).
 *   Truy vấn chính sẽ chọn các sản phẩm mà `price` của chúng lớn hơn *tất cả* các mức giá được trả về bởi truy vấn con. Điều này tương đương với việc `price` phải lớn hơn mức giá *cao nhất* trong phòng ban 'Industrial' (tức là `5000.00`). Chỉ có sản phẩm có giá > 5000.00 mới được chọn.
 
@@ -353,6 +357,7 @@ WHERE
     );
 ```
 **Giải thích:**
+
 *   Truy vấn con sẽ trả về giá của 'Baby Monitor' (85.00), 'Baby Carrier' (110.00), 'Diapers' (25.00).
 *   `p.price < ALL (...)` tương đương `p.price < MIN(85.00, 110.00, 25.00)`, tức là `p.price < 25.00`.
 *   Sản phẩm 'Organic Apples' (5.00) và 'Milk' (3.50) sẽ được chọn.
@@ -362,6 +367,7 @@ WHERE
 Khi sử dụng `ALL`, khả năng "Vibe Coding" giúp bạn nhận ra rằng bạn đang so sánh với giá trị *cực trị* (min hoặc max) của tập hợp.
 
 Antigravity IDE có thể:
+
 *   **Gợi ý thay thế**: Nếu bạn viết `price > ALL (SELECT price FROM ...)` Antigravity có thể gợi ý rằng `price > (SELECT MAX(price) FROM ...)` có thể rõ ràng hơn hoặc trong một số trường hợp, tối ưu hơn.
 *   **Phân tích hiệu suất**: Antigravity có thể phân tích kế hoạch thực thi (execution plan) của cả hai dạng truy vấn (`ALL` và `MAX`) để chỉ ra sự khác biệt về hiệu suất, giúp bạn đưa ra quyết định tối ưu.
 *   **Trực quan hóa**: Antigravity có thể hiển thị trực quan tập hợp giá trị từ truy vấn con và giá trị cực trị để bạn dễ dàng "vibe" kết quả của `ALL`.
@@ -392,6 +398,7 @@ Ví dụ, `price > ANY (SELECT price FROM products WHERE department = 'Industria
 ### 2. Cơ Chế Hoạt Động và Tương Đương với `MIN`/`MAX`
 
 Tương tự như `ALL`, `ANY` cũng có các tương đương với hàm tổng hợp:
+
 *   `expression > ANY (subquery)`: Điều này tương đương với `expression > MIN(subquery)`. Tức là, biểu thức phải lớn hơn giá trị nhỏ nhất trong tập hợp.
 *   `expression < ANY (subquery)`: Điều này tương đương với `expression < MAX(subquery)`. Tức là, biểu thức phải nhỏ hơn giá trị lớn nhất trong tập hợp.
 *   `expression = ANY (subquery)`: Điều này hoàn toàn tương đương với `expression IN (subquery)`. Đây là trường hợp phổ biến nhất.
@@ -428,6 +435,7 @@ WHERE
     );
 ```
 **Giải thích:**
+
 *   Truy vấn con trả về tất cả các mức giá của sản phẩm thuộc phòng ban 'Industrial' (ví dụ: `796.00, 5000.00`).
 *   Truy vấn chính sẽ chọn các sản phẩm mà `price` của chúng lớn hơn *ít nhất một* trong các mức giá được trả về bởi truy vấn con. Điều này tương đương với việc `price` phải lớn hơn mức giá *thấp nhất* trong phòng ban 'Industrial' (tức là `796.00`). Các sản phẩm như 'Laptop Pro' (1200.00) và 'Industrial Robot Arm' (5000.00) sẽ được chọn.
 
@@ -451,6 +459,7 @@ WHERE
     );
 ```
 **Giải thích:**
+
 *   Truy vấn con trả về các `department_id` có ít nhất một sản phẩm giá dưới 100.
 *   Truy vấn chính chọn các sản phẩm mà `department_id` của chúng khớp với *bất kỳ* `department_id` nào trong danh sách đó.
 
@@ -459,6 +468,7 @@ WHERE
 Với `ANY` (hoặc `SOME`), "Vibe Coding" giúp bạn nhận ra rằng bạn đang so sánh với giá trị *ít nhất một* hoặc giá trị *cực tiểu* (min hoặc max) của tập hợp, tùy thuộc vào toán tử.
 
 Antigravity IDE có thể:
+
 *   **Đề xuất `IN`**: Khi bạn viết `expression = ANY (subquery)`, Antigravity có thể gợi ý chuyển sang `expression IN (subquery)` vì nó thường được coi là dễ đọc hơn và tương đương về mặt chức năng.
 *   **Kiểm tra tính hợp lệ**: Antigravity có thể đảm bảo rằng truy vấn con chỉ trả về một cột duy nhất, một yêu cầu bắt buộc cho `ANY`/`SOME`.
 
@@ -487,6 +497,7 @@ Truy vấn con trong `EXISTS` có thể trả về bất kỳ số lượng cộ
 ### 2. Cơ Chế Hoạt Động và Truy Vấn Con Tương Quan (Correlated Subquery)
 
 `EXISTS` hoạt động bằng cách thực thi truy vấn con cho *mỗi hàng* của truy vấn bên ngoài.
+
 *   Nếu truy vấn con tìm thấy ít nhất một hàng, `EXISTS` trả về `TRUE` cho hàng hiện tại của truy vấn bên ngoài.
 *   Nếu truy vấn con không tìm thấy hàng nào, `EXISTS` trả về `FALSE` cho hàng hiện tại của truy vấn bên ngoài.
 
@@ -507,6 +518,7 @@ Truy vấn con trong `EXISTS` có thể trả về bất kỳ số lượng cộ
 | **Hiệu suất**    | Thường hiệu quả hơn khi truy vấn con trả về một tập hợp **nhỏ** các giá trị duy nhất. | Thường hiệu quả hơn khi truy vấn con trả về một tập hợp **lớn** hoặc khi truy vấn con có các điều kiện `WHERE` phức tạp. `EXISTS` có thể dừng tìm kiếm ngay khi tìm thấy hàng đầu tiên trong truy vấn con. |
 
 **Khi nào nên dùng gì?**
+
 *   Sử dụng `IN` khi bạn có một danh sách giá trị cố định hoặc một truy vấn con trả về một danh sách giá trị nhỏ, rõ ràng.
 *   Sử dụng `EXISTS` khi bạn cần kiểm tra sự tồn tại của một mối quan hệ, đặc biệt với các truy vấn con tương quan, hoặc khi bạn muốn tránh các vấn đề về `NULL` với `NOT IN`. `EXISTS` thường là lựa chọn tốt hơn cho `NOT IN` khi có khả năng `NULL`.
 
@@ -527,6 +539,7 @@ WHERE
     );
 ```
 **Giải thích:**
+
 *   Đối với mỗi phòng ban (`d`) từ bảng `departments`, truy vấn con được thực thi.
 *   Truy vấn con kiểm tra xem có bất kỳ sản phẩm nào (`p`) có `department_id` khớp với `d.id` hay không.
 *   Nếu tìm thấy ít nhất một sản phẩm, `EXISTS` trả về `TRUE`, và tên phòng ban đó được đưa vào kết quả.
@@ -547,6 +560,7 @@ WHERE
     );
 ```
 **Giải thích:**
+
 *   Đối với mỗi khách hàng (`c`), truy vấn con kiểm tra xem có đơn hàng (`o`) nào của khách hàng đó hay không.
 *   Nếu có, tên và email khách hàng được chọn.
 
@@ -567,6 +581,7 @@ WHERE
     );
 ```
 **Giải thích:**
+
 *   `NOT EXISTS` trả về `TRUE` nếu truy vấn con không trả về hàng nào.
 *   Truy vấn này sẽ tìm các phòng ban mà không có bất kỳ sản phẩm nào liên kết với chúng.
 
@@ -575,6 +590,7 @@ WHERE
 "Vibe Coding" với `EXISTS` liên quan đến việc hiểu rằng bạn đang kiểm tra một *mối quan hệ tồn tại* thay vì so sánh giá trị cụ thể. Bạn cần "vibe" được rằng truy vấn con sẽ được thực thi cho từng hàng của truy vấn bên ngoài.
 
 Antigravity IDE, với khả năng lập kế hoạch và thực thi script ngầm, có thể là một công cụ cực kỳ mạnh mẽ:
+
 *   **Tối ưu hóa tự động**: Antigravity có thể phân tích truy vấn của bạn và đề xuất chuyển đổi giữa `IN` và `EXISTS` dựa trên phân tích dữ liệu và kế hoạch thực thi để đạt hiệu suất tốt nhất (ví dụ: chuyển `NOT IN` sang `NOT EXISTS` để tránh lỗi `NULL`).
 *   **Giải thích kế hoạch thực thi**: Antigravity có thể tự động chạy `EXPLAIN ANALYZE` cho truy vấn của bạn và trình bày kết quả một cách dễ hiểu, giúp bạn hình dung cách cơ sở dữ liệu xử lý truy vấn con tương quan.
 *   **Trình diễn luồng dữ liệu**: Một Antigravity cấp cao có thể thậm chí trực quan hóa luồng dữ liệu khi truy vấn con `EXISTS` được thực thi cho từng hàng của truy vấn bên ngoài, củng cố sự hiểu biết về cơ chế hoạt động.
@@ -600,6 +616,7 @@ Sử dụng bảng `phones` với các cột `id`, `name`, `manufacturer`, và `
     WHERE manufacturer = 'Samsung';
     ```
     *Vibe Check*: Truy vấn con này trả về một cột duy nhất `price`, hoàn hảo cho `ALL`.
+
 4.  **Kết hợp truy vấn con với truy vấn chính:**
 
     ```sql
@@ -633,6 +650,7 @@ WHERE
 ```
 
 **Giải thích kết quả:**
+
 *   Truy vấn con `SELECT price FROM phones WHERE manufacturer = 'Samsung'` sẽ trả về: `(999.00, 449.00, 1799.00)`.
 *   Giá trị `MAX` trong tập hợp này là `1799.00`.
 *   Điều kiện `price > ALL (...)` trở thành `price > 1799.00`.

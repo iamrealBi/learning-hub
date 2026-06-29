@@ -177,6 +177,7 @@ public IActionResult Login(LoginDto dto)
 ## 4.5. Hết hạn ngắn + Refresh Token
 
 Tại sao vé chỉ 15 phút? Nếu tên trộm chụp được vé → xài MÃMÃI → **NGUY**!
+
 - **JWT** (15 phút) → hết hạn → tên trộm vứt sọt rác
 - **Refresh Token** (dài hạn, lưu trong DB) → đổi JWT mới → dễ **khóa** khi nghi ngờ bị trộm
 
@@ -189,6 +190,7 @@ Tại sao vé chỉ 15 phút? Nếu tên trộm chụp được vé → xài MÃ
 Nếu lưu mật khẩu dạng text thuần (`Password = "123456"`) → DB rò rỉ → Hacker lấy mật khẩu → Đăng nhập Facebook, Ngân hàng của user → **BẠN CHỊU TRÁCH NHIỆM PHÁP LÝ!**
 
 **Identity** = Microsoft giao bạn cả **phòng nhân sự có sẵn**:
+
 - Tự tạo 7 bảng Security trong DB
 - Tự **băm** mật khẩu thành mã không ai giải ngược được
 - Quên mật khẩu, khóa tài khoản sai 5 lần, xác nhận email — TẤT CẢ CÓ SẴN

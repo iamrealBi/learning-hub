@@ -69,6 +69,7 @@ message = message.ToUpper();
 #### 1.1.3 Hậu quả của tính bất biến
 
 Đối với các thao tác chuỗi thường xuyên (ví dụ: trong một vòng lặp), việc tạo ra nhiều đối tượng chuỗi mới có thể gây ra gánh nặng đáng kể về hiệu suất và tăng áp lực lên Bộ thu gom rác. Điều này dẫn đến:
+
 *   **Tiêu tốn bộ nhớ:** Nhiều đối tượng tạm thời được tạo và sau đó bị loại bỏ.
 *   **Tiêu tốn CPU:** Thời gian xử lý bị lãng phí cho việc cấp phát bộ nhớ, sao chép dữ liệu, và thu gom rác.
 
@@ -290,6 +291,7 @@ else
 *   `ToString(string format)`: Cho phép bạn định dạng số thành chuỗi theo các quy tắc định dạng cụ thể (chuỗi định dạng chuẩn hoặc tùy chỉnh).
 
 Các chuỗi định dạng chuẩn phổ biến:
+
 *   `C` (Currency): Định dạng tiền tệ. Ví dụ: `1234.56.ToString("C")` -> "$1,234.56" (tùy thuộc vào văn hóa hệ thống). `C0` sẽ không có số thập phân và làm tròn.
 *   `D` (Decimal): Định dạng số thập phân. `D` theo sau bởi một số chỉ định số chữ số tối thiểu, thêm số 0 ở đầu nếu cần. Ví dụ: `5.ToString("D3")` -> "005".
 *   `E` (Exponential): Định dạng số mũ.
@@ -322,6 +324,7 @@ Console.WriteLine($"Phần trăm (P): {percentage.ToString("P")}"); // "75.00 %"
 Hãy cùng giải quyết một bài toán thực tế: tóm tắt một đoạn văn bản dài thành một đoạn ngắn hơn, nhưng đảm bảo không cắt ngang từ. Đây là một kỹ thuật phổ biến trên các blog hoặc trang tin tức.
 
 **Mục tiêu:**
+
 1.  Nếu văn bản đủ ngắn, hiển thị toàn bộ.
 2.  Nếu văn bản dài, cắt bớt thành độ dài tối đa cho phép, nhưng chỉ cắt ở ranh giới từ. Thêm dấu "..." ở cuối.
 
@@ -431,6 +434,7 @@ for (int i = 0; i < 1000; i++)
 // report = "Báo cáo doanh thu:\n - Dòng dữ liệu 0: Giá trị 0\n - Dòng dữ liệu 1: Giá trị 100\n ..."
 ```
 Trong ví dụ trên, mỗi lần thực hiện phép nối chuỗi (`+=`), .NET sẽ:
+
 1.  Cấp phát một vùng nhớ mới trên Heap đủ lớn để chứa chuỗi kết quả.
 2.  Sao chép nội dung của chuỗi `report` cũ vào vùng nhớ mới.
 3.  Sao chép nội dung của chuỗi mới được nối thêm vào vùng nhớ mới.
@@ -657,6 +661,7 @@ public class Program
 ```
 
 Trong ví dụ này:
+
 *   `Main()` chỉ chịu trách nhiệm lấy đầu vào và hiển thị kết quả (I/O).
 *   `ReverseString()` chịu trách nhiệm hoàn toàn về logic đảo ngược chuỗi (logic kinh doanh). Phương thức này có thể được gọi từ bất kỳ đâu cần đảo ngược một chuỗi mà không cần biết chuỗi đó đến từ đâu hay sẽ được sử dụng như thế nào.
 

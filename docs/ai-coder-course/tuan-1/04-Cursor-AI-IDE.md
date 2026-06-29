@@ -73,9 +73,11 @@ Bạn: Giải thích hàm IsValidISBN13 hoạt động như thế nào?
 
 AI: Hàm IsValidISBN13 kiểm tra tính hợp lệ của mã ISBN-13 
 bằng thuật toán checksum:
+
 1. Kiểm tra độ dài phải đúng 13 ký tự và toàn bộ là số
 2. Tính tổng: các vị trí chẵn (0,2,4...) nhân 1, 
    vị trí lẻ (1,3,5...) nhân 3
+
 3. Nếu tổng chia hết cho 10 → ISBN hợp lệ
 ```
 
@@ -86,6 +88,7 @@ Composer cho phép AI **tạo hoặc sửa nhiều file cùng lúc**:
 ```
 Prompt trong Composer:
 "Tạo HomeService với tính năng hiển thị thống kê:
+
  - Tổng số sách
  - Tổng số reviews
  - Rating trung bình toàn hệ thống
@@ -123,6 +126,7 @@ Prompt: "Thêm tính năng sắp xếp sách theo rating trung bình,
 năm xuất bản, và số lượng reviews. Cập nhật cả UI và tests."
 
 Agent Mode sẽ tự:
+
 1. Đọc BookService.cs, BookIndexViewModel.cs, Index.cshtml
 2. Thêm parameter sortBy vào GetBookListAsync
 3. Cập nhật ViewModel với SortBy options

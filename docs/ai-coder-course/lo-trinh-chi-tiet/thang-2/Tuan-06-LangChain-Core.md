@@ -10,23 +10,28 @@
 ### 🔴 Khóa chính — FREE (Tốt hơn Udemy cho LangChain):
 
 **1. [LangChain Academy: Introduction to LangGraph](https://academy.langchain.com/)** 🥇
+
 - ⭐⭐⭐⭐⭐ | FREE | Official source, LUÔN up-to-date
 - **Tại sao #1**: LangChain thay đổi syntax mỗi vài tuần → chỉ official academy đảm bảo đúng
 
 **2. [DeepLearning.AI: LangChain for LLM Application Development](https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/)** 🥇
+
 - ⭐⭐⭐⭐⭐ | FREE | Harrison Chase dạy trực tiếp
 - Models, Prompts, Chains, Output parsers
 
 **3. [LangChain Official Docs](https://python.langchain.com/docs/)** 🥇
+
 - Luôn up-to-date, có tutorials + how-to guides
 
 ### 🟡 Bổ trợ — Udemy (xem thêm project examples):
 **[LangChain- Agentic AI Engineering (Eden Marco)](https://ibmcsr.udemy.com/course/langchain/)** — ⭐ 4.6 | 19h
+
 - ⚠️ Tốt nhưng kiểm tra phiên bản LangChain → có thể outdated
 - Dùng xem thêm PROJECTS và real-world examples SAU KHI nắm vững core từ Academy
 
 ### 🟡 Bổ trợ — Coursera (chứng chỉ + graded assignments) 🎓:
 **[IBM RAG and Agentic AI Professional Certificate](https://www.coursera.org/professional-certificates/ibm-rag-agentic-ai)** 
+
 - Covers LangChain sections → làm song song tuần 6-12 để lấy certificate
 - Graded assignments giúp kiểm tra hiểu biết thật sự
 

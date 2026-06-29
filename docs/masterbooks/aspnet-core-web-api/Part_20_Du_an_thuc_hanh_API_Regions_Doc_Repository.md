@@ -389,6 +389,7 @@ namespace NZWalks.API.Controllers
 Bây giờ, khi bạn chạy ứng dụng và truy cập lại API `GET /api/Regions` thông qua Swagger UI, Postman hoặc trình duyệt, bạn sẽ thấy rằng dữ liệu trả về không còn là dữ liệu tĩnh nữa. Thay vào đó, API sẽ truy vấn cơ sở dữ liệu thông qua Repository và trả về danh sách các vùng mà bạn đã seed vào cơ sở dữ liệu trước đó.
 
 Điều này xác nhận rằng:
+
 *   Repository Pattern đã được triển khai thành công, tách biệt logic truy cập dữ liệu.
 *   Dependency Injection đã hoạt động đúng cách, cung cấp `RegionRepository` cho `RegionsController`.
 *   API của bạn hiện đang đọc dữ liệu trực tiếp từ cơ sở dữ liệu, chứng minh sự chuyển đổi từ mock data sang dữ liệu thực tế.
