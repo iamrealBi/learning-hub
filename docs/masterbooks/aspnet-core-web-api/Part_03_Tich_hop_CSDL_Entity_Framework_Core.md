@@ -60,6 +60,26 @@ Các mối quan hệ này là nền tảng để EF Core hiểu cách liên kế
 *   **`Walk` và `Difficulty` (One-to-Many):** Một `Difficulty` có thể liên kết với nhiều `Walk`, nhưng mỗi `Walk` chỉ có một `Difficulty` duy nhất.
 *   **`Walk` và `Region` (One-to-Many):** Một `Region` có thể chứa nhiều `Walk`, nhưng mỗi `Walk` chỉ thuộc về một `Region` duy nhất.
 
+
+```mermaid
+flowchart TB
+    subgraph CF["🔄 Code-First Migration Workflow"]
+        direction TB
+        A["📝 Định nghĩa\nDomain Models\n(C# Classes)"] --> B["⚙️ Tạo DbContext\n(Cấu hình kết nối)"]
+        B --> C["🔧 Add-Migration\n(Tạo migration file)"]
+        C --> D["📊 Update-Database\n(Áp dụng lên DB)"]
+        D --> E["🗄️ Database\nđược tạo/cập nhật"]
+    end
+    subgraph DF["🔄 Database-First (ngược lại)"]
+        direction TB
+        F["🗄️ Database có sẵn"] --> G["⚙️ Scaffold-DbContext"]
+        G --> H["📝 Models + DbContext\nđược tạo tự động"]
+    end
+    style CF fill:#e8f5e9,color:#000
+    style DF fill:#e3f2fd,color:#000
+```
+*Minh họa: Code-First vs Database-First. Khóa học này sử dụng Code-First — viết C# class trước, EF Core tạo database.*
+
 ## 2. Xây dựng Mô hình Miền (Domain Models) trong C#
 
 Sau khi đã định hình miền, bước tiếp theo là chuyển các định nghĩa này thành các lớp C# (thường gọi là Domain Models hoặc Entity Classes). Đây là lúc Antigravity IDE tỏa sáng với khả năng Vibe Coding và tự động tạo mã.

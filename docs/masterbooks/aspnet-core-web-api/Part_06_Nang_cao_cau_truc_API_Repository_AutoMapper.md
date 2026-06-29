@@ -238,6 +238,26 @@ Với Antigravity IDE, việc chuyển đổi mã đồng bộ sang bất đồn
 
 Điều này cho phép bạn duy trì "vibe" của mình, tập trung vào logic nghiệp vụ thay vì các chi tiết kỹ thuật lặp lại của việc refactor.
 
+
+```mermaid
+flowchart TB
+    subgraph NO_REPO["❌ Không dùng Repository"]
+        direction LR
+        c1["Controller"] -->|"Gọi trực tiếp"| d1["DbContext\n(EF Core)"]
+        d1 --> db1["Database"]
+    end
+    subgraph WITH_REPO["✅ Dùng Repository Pattern"]
+        direction LR
+        c2["Controller"] -->|"Gọi Interface"| r2["IRepository"]
+        r2 -->|"Implement"| i2["Repository\n(Concrete)"]
+        i2 -->|"Dùng"| d2["DbContext"]
+        d2 --> db2["Database"]
+    end
+    style NO_REPO fill:#ffebee,color:#000
+    style WITH_REPO fill:#e8f5e9,color:#000
+```
+*Repository Pattern tách biệt logic truy xuất dữ liệu khỏi Controller. Controller chỉ biết Interface, dễ test và thay đổi.*
+
 ## 2. Trừu tượng hóa lớp truy cập dữ liệu với Repository Pattern
 
 Khi ứng dụng phát triển, việc để Controller trực tiếp tương tác với `DbContext` sẽ dẫn đến một kiến trúc khó bảo trì và mở rộng. Repository Pattern là một giải pháp mạnh mẽ để tách biệt các mối quan tâm (Separation of Concerns) và nâng cao chất lượng mã.

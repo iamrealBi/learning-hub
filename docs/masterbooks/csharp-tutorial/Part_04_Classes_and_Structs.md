@@ -14,6 +14,54 @@ Hãy tưởng tượng bạn đang xây dựng một ứng dụng quản lý th�
 
 ---
 
+
+```mermaid
+flowchart TB
+    subgraph CLASS["🔵 Class (Kiểu Tham chiếu)"]
+        direction TB
+        c1["✅ Hỗ trợ kế thừa"]
+        c2["📦 Lưu trên Heap"]
+        c3["🔗 Gán = sao chép tham chiếu"]
+        c4["🗑️ GC thu gom bộ nhớ"]
+        c5["🏗️ Có Destructor/Finalizer"]
+    end
+    subgraph STRUCT["🟢 Struct (Kiểu Giá trị)"]
+        direction TB
+        s1["❌ Không kế thừa"]
+        s2["📚 Lưu trên Stack"]
+        s3["📋 Gán = sao chép toàn bộ giá trị"]
+        s4["⚡ Tự giải phóng khi ra scope"]
+        s5["🎯 Tối ưu cho dữ liệu nhỏ"]
+    end
+    style CLASS fill:#e3f2fd,color:#000
+    style STRUCT fill:#e8f5e9,color:#000
+```
+*So sánh tổng quan: Class là kiểu tham chiếu (Heap), Struct là kiểu giá trị (Stack). Chọn Class cho đối tượng phức tạp, Struct cho dữ liệu nhỏ và bất biến.*
+
+
+```mermaid
+flowchart TB
+    subgraph CLASS["🔵 Class (Kiểu Tham chiếu)"]
+        direction TB
+        c1["✅ Hỗ trợ kế thừa"]
+        c2["📦 Lưu trên Heap"]
+        c3["🔗 Gán = sao chép tham chiếu"]
+        c4["🗑️ GC thu gom bộ nhớ"]
+        c5["🏗️ Có Destructor/Finalizer"]
+    end
+    subgraph STRUCT["🟢 Struct (Kiểu Giá trị)"]
+        direction TB
+        s1["❌ Không kế thừa"]
+        s2["📚 Lưu trên Stack"]
+        s3["📋 Gán = sao chép toàn bộ giá trị"]
+        s4["⚡ Tự giải phóng khi ra scope"]
+        s5["🎯 Tối ưu cho dữ liệu nhỏ"]
+    end
+    style CLASS fill:#e3f2fd,color:#000
+    style STRUCT fill:#e8f5e9,color:#000
+```
+*So sánh tổng quan: Class là kiểu tham chiếu (Heap), Struct là kiểu giá trị (Stack). Chọn Class cho đối tượng phức tạp, Struct cho dữ liệu nhỏ và bất biến.*
+
 ## 2. Lớp (Classes) - Nền tảng của Lập trình Hướng đối tượng
 
 Trong C#, các lớp là trái tim của lập trình hướng đối tượng. Chúng cung cấp một cơ chế mạnh mẽ để mô tả các thực thể trong thế giới thực hoặc các khái niệm trừu tượng bằng cách kết hợp dữ liệu (trạng thái) và chức năng (hành vi) có liên quan chặt chẽ thành một đơn vị duy nhất.

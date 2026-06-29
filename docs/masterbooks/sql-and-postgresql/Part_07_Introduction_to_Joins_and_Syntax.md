@@ -87,6 +87,32 @@ INSERT INTO comments (content, user_id, photo_id) VALUES
 > [!NOTE]
 > Các khóa ngoại (Foreign Key) là nền tảng của các phép JOIN. Chúng không chỉ định nghĩa mối quan hệ giữa các bảng mà còn đảm bảo tính toàn vẹn tham chiếu (referential integrity). Khi bạn thực hiện JOIN, cơ sở dữ liệu sử dụng thông tin từ khóa ngoại để xác định cách các hàng từ các bảng khác nhau được liên kết một cách logic. Mệnh đề `ON DELETE CASCADE` đảm bảo rằng nếu một người dùng hoặc ảnh bị xóa, tất cả các bình luận liên quan cũng sẽ bị xóa tự động, giữ cho dữ liệu luôn nhất quán.
 
+
+```mermaid
+flowchart TB
+    subgraph IJ["🔵 INNER JOIN"]
+        direction TB
+        ij1["Chỉ lấy dòng\nKHỚP ở CẢ 2 bảng"]
+    end
+    subgraph LJ["🟢 LEFT JOIN"]
+        direction TB
+        lj1["Lấy TẤT CẢ từ bảng TRÁI\n+ dòng khớp từ bảng phải\n(NULL nếu không khớp)"]
+    end
+    subgraph RJ["🟡 RIGHT JOIN"]
+        direction TB
+        rj1["Lấy TẤT CẢ từ bảng PHẢI\n+ dòng khớp từ bảng trái\n(NULL nếu không khớp)"]
+    end
+    subgraph FJ["🔴 FULL OUTER JOIN"]
+        direction TB
+        fj1["Lấy TẤT CẢ từ CẢ 2 bảng\n(NULL cho dòng không khớp)"]
+    end
+    style IJ fill:#e3f2fd,color:#000
+    style LJ fill:#e8f5e9,color:#000
+    style RJ fill:#fff3e0,color:#000
+    style FJ fill:#fce4ec,color:#000
+```
+*Tóm tắt 4 loại JOIN. INNER = giao, LEFT = ưu tiên trái, RIGHT = ưu tiên phải, FULL = tất cả.*
+
 ## 2. Tổng Quan về JOIN và Aggregations: Hai Kỹ Thuật Đắc Lực
 
 Trước khi đi sâu vào cú pháp, hãy hiểu rõ vai trò của JOIN và cách nó khác biệt (và bổ trợ) cho Aggregations.

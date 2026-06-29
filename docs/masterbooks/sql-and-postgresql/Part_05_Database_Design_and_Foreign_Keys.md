@@ -19,6 +19,38 @@ Một ứng dụng thực tế, dù lớn hay nhỏ, thường phải quản lý
 
 Để giải quyết triệt để những vấn đề này, chúng ta cần thiết kế cơ sở dữ liệu với nhiều bảng, mỗi bảng tập trung vào một loại thực thể dữ liệu cụ thể (ví dụ: `users` cho người dùng, `photos` cho ảnh, `comments` cho bình luận). Sau đó, chúng ta sẽ thiết lập các mối quan hệ logic giữa các bảng này để liên kết dữ liệu một cách hiệu quả và đảm bảo tính toàn vẹn. Cách tiếp cận này giúp tối ưu hóa lưu trữ, tăng cường tính nhất quán dữ liệu và đơn giản hóa việc quản lý cũng như mở rộng ứng dụng trong tương lai.
 
+
+```mermaid
+erDiagram
+    CUSTOMERS ||--o{ ORDERS : "đặt hàng"
+    ORDERS ||--|{ ORDER_ITEMS : "chứa"
+    PRODUCTS ||--o{ ORDER_ITEMS : "có trong"
+    
+    CUSTOMERS {
+        int customer_id PK
+        string name
+        string email
+    }
+    ORDERS {
+        int order_id PK
+        int customer_id FK
+        date order_date
+        decimal total
+    }
+    ORDER_ITEMS {
+        int item_id PK
+        int order_id FK
+        int product_id FK
+        int quantity
+    }
+    PRODUCTS {
+        int product_id PK
+        string name
+        decimal price
+    }
+```
+*ER Diagram: Mối quan hệ 1-nhiều giữa Customers → Orders → Order_Items ← Products. FK (Foreign Key) là cầu nối giữa các bảng.*
+
 ## 2. Quy Trình Thiết Kế Cơ Sở Dữ Liệu Hiệu Quả
 
 Việc thiết kế cơ sở dữ liệu là một kỹ năng quan trọng, đòi hỏi sự kết hợp giữa tư duy phân tích và kinh nghiệm thực tế. Dưới đây là các bước và mẹo để bạn có thể tiếp cận quá trình này một cách hiệu quả, đặc biệt là khi tận dụng sức mạnh của các công cụ AI hiện đại như Antigravity IDE.

@@ -64,6 +64,30 @@ Hiểu rõ sự khác biệt giữa `401` và `403` là rất quan trọng để
 
 ---
 
+
+```mermaid
+sequenceDiagram
+    participant C as 🌐 Client
+    participant API as 🔐 Auth API
+    participant DB as 🗄️ Database
+    participant RES as 📋 Protected API
+
+    C->>API: POST /api/auth/login\n{email, password}
+    API->>DB: Kiểm tra credentials
+    DB-->>API: ✅ User hợp lệ
+    API-->>C: 🎫 JWT Token\n{token, expiry}
+    
+    Note over C: Lưu token vào localStorage/cookie
+    
+    C->>RES: GET /api/regions\nAuthorization: Bearer {token}
+    RES->>RES: Verify JWT Signature\n+ Check Claims/Roles
+    RES-->>C: 📦 200 OK + Data
+    
+    C->>RES: GET /api/admin\n(thiếu role Admin)
+    RES-->>C: 🚫 403 Forbidden
+```
+*Luồng JWT Authentication: Client đăng nhập → nhận Token → gửi Token trong mỗi request → Server verify.*
+
 ## 2. JSON Web Token (JWT): Tiêu Chuẩn Xác Thực Phi Trạng Thái
 
 Trong các ứng dụng web hiện đại, đặc biệt là RESTful API, **JSON Web Token (JWT)** là một lựa chọn phổ biến cho xác thực phi trạng thái (stateless authentication). JWT là một tiêu chuẩn mở (RFC 7519) định nghĩa một cách nhỏ gọn và khép kín để truyền thông tin an toàn giữa các bên dưới dạng một đối tượng JSON.

@@ -102,6 +102,25 @@ Giả sử bạn yêu cầu `Claude Code` lập kế hoạch triển khai cơ s�
 
 Khả năng lập kế hoạch chi tiết và chính xác này là nhờ vào việc cung cấp ngữ cảnh rõ ràng và các công cụ tìm kiếm tài liệu chuyên biệt như `Context7 MCP`, giúp `Claude Code` tiếp cận thông tin đáng tin cậy một cách hiệu quả.
 
+
+```mermaid
+flowchart TB
+    MAIN["🤖 Main Agent\n(Điều phối chính)"]
+    MAIN -->|"Task 1:\nViết code"| SUB1["🔧 Subagent 1\n(Code Writer)"]
+    MAIN -->|"Task 2:\nViết test"| SUB2["🧪 Subagent 2\n(Test Writer)"]
+    MAIN -->|"Task 3:\nReview code"| SUB3["🔍 Subagent 3\n(Code Reviewer)"]
+    SUB1 -->|"result"| MAIN
+    SUB2 -->|"result"| MAIN
+    SUB3 -->|"result"| MAIN
+    MAIN -->|"Tổng hợp\n& commit"| RESULT["✅ Kết quả cuối"]
+    style MAIN fill:#e3f2fd,color:#000
+    style SUB1 fill:#e8f5e9,color:#000
+    style SUB2 fill:#fff3e0,color:#000
+    style SUB3 fill:#f3e5f5,color:#000
+    style RESULT fill:#c8e6c9,color:#000
+```
+*Main Agent chia task cho các Subagent chạy song song, sau đó tổng hợp kết quả. Mỗi Subagent có context riêng.*
+
 ## 2. Khám Phá Kiến Trúc Subagent Trong Claude Code
 
 Khi `Claude Code` thực hiện các tác vụ phức tạp, nó thường không làm việc đơn lẻ mà sẽ tận dụng một mạng lưới các "Subagent" (tác nhân phụ). Đây là một tính năng cốt lõi giúp `Claude Code` hoạt động hiệu quả, thông minh và có khả năng mở rộng.

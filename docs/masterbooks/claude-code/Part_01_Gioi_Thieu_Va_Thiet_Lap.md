@@ -61,6 +61,44 @@ Bạn có thể đưa ra một "vibe" rất cao cấp (ví dụ: "Tạo một t�
 
 Bằng cách này, Antigravity IDE cho phép bạn duy trì tư duy "Vibe Coding" ở tầng giao tiếp với AI, trong khi hệ thống tự động thực hiện "Agentic Engineering" ở tầng thực thi. Điều này giúp bạn đạt được kết quả nhanh chóng với chất lượng cao, vì bạn đang giao tiếp ở mức độ trừu tượng cao nhất, và Antigravity đảm bảo các chi tiết kỹ thuật được xử lý một cách có hệ thống và chính xác, có thể tận dụng các công cụ như Claude Code để tối ưu hóa việc tạo mã.
 
+
+```mermaid
+flowchart TB
+    subgraph USER["👤 Developer"]
+        direction TB
+        u1["Terminal / IDE"]
+    end
+    subgraph CC["🤖 Claude Code (CLI Agent)"]
+        direction TB
+        cc1["Prompt Parser"]
+        cc2["Context Engine\n(CLAUDE.md, codebase)"]
+        cc3["Tool Executor\n(Read/Write/Run)"]
+        cc4["Subagent System"]
+    end
+    subgraph AI["☁️ Claude AI Model"]
+        direction TB
+        ai1["Reasoning + Code Gen"]
+    end
+    subgraph FS["💾 File System"]
+        direction TB
+        fs1["Source Code"]
+        fs2["CLAUDE.md / AGENTS.md"]
+        fs3["Git Repository"]
+    end
+    u1 <-->|"prompt/response"| cc1
+    cc1 --> cc2
+    cc2 <-->|"API calls"| ai1
+    cc2 --> cc3
+    cc3 <--> fs1
+    cc3 <--> fs3
+    cc4 -.->|"delegate tasks"| cc2
+    style USER fill:#e3f2fd,color:#000
+    style CC fill:#e8f5e9,color:#000
+    style AI fill:#f3e5f5,color:#000
+    style FS fill:#fff3e0,color:#000
+```
+*Kiến trúc Claude Code: Developer tương tác qua CLI → Context Engine đọc codebase + rules → gọi AI Model → thực thi tools (đọc/ghi/chạy code).*
+
 ## 2. Mục Tiêu Khóa Học và Lộ Trình Học Tập Chuyên Sâu
 
 Mục tiêu chính của khóa học này là cung cấp cho bạn một cái nhìn toàn diện và chuyên sâu về Claude Code, từ những khái niệm cơ bản đến các tính năng nâng cao. Chúng tôi sẽ trang bị cho bạn tất cả các công cụ và kiến thức cần thiết để tăng cường khả năng tạo ra mã chất lượng cao với sự hỗ trợ của AI, đặc biệt là thông qua phương pháp "Agentic Engineering".

@@ -41,6 +41,29 @@ REST (Representational State Transfer) là một kiểu kiến trúc (architectu
 
 **_._NET 8** là phiên bản mới nhất của nền tảng .NET, mang lại nhiều cải tiến đáng kể về hiệu suất, tính năng mới và là phiên bản hỗ trợ lâu dài (LTS - Long Term Support). Việc sử dụng .NET 8 đảm bảo bạn đang làm việc với công nghệ tiên tiến nhất, ổn định nhất và được hỗ trợ lâu dài từ Microsoft, giúp tối ưu hóa hiệu suất ứng dụng và quy trình phát triển.
 
+
+```mermaid
+flowchart LR
+    A["🌐 Client\n(Browser/Mobile)"] -->|"HTTP Request"| B["🔀 Routing\nMiddleware"]
+    B --> C["🛡️ Auth\nMiddleware"]
+    C --> D["📋 Controller\nAction Method"]
+    D --> E["🏗️ Service Layer\n(Business Logic)"]
+    E --> F["💾 Repository\n(Data Access)"]
+    F --> G["🗄️ Database\n(PostgreSQL)"]
+    G -->|"Data"| F
+    F -->|"Entity"| E
+    E -->|"DTO"| D
+    D -->|"HTTP Response\n(JSON)"| A
+    style A fill:#e3f2fd,color:#000
+    style B fill:#fff3e0,color:#000
+    style C fill:#fce4ec,color:#000
+    style D fill:#e8f5e9,color:#000
+    style E fill:#f3e5f5,color:#000
+    style F fill:#fff9c4,color:#000
+    style G fill:#e0f2f1,color:#000
+```
+*Kiến trúc tổng quan: Client gửi HTTP Request → Middleware xử lý → Controller → Service → Repository → Database, rồi trả response ngược lại.*
+
 ### 1.2.4 Các khái niệm cốt lõi sẽ khám phá
 
 Để xây dựng một Web API RESTful hiệu quả cho ứng dụng quản lý khu vực và tầng lớp xã hội ở New Zealand, chúng ta sẽ đi sâu vào các khái niệm kiến trúc và kỹ thuật sau:

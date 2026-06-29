@@ -12,6 +12,20 @@ Dữ liệu thô, dù phong phú đến đâu, thường không tự nó kể đ
 
 ---
 
+```mermaid
+flowchart LR
+    A["📋 Bảng gốc\n(nhiều dòng)"] -->|"GROUP BY\ncategory"| B["📊 Nhóm theo\ncategory"]
+    B -->|"COUNT(*)\nSUM(price)\nAVG(price)"| C["📈 Kết quả\ntổng hợp"]
+    
+    C -->|"HAVING\nCOUNT(*) > 5"| D["🔍 Lọc nhóm\n(chỉ nhóm lớn)"]
+    
+    style A fill:#e3f2fd,color:#000
+    style B fill:#fff3e0,color:#000
+    style C fill:#e8f5e9,color:#000
+    style D fill:#f3e5f5,color:#000
+```
+*Thứ tự thực hiện: FROM → WHERE (lọc dòng) → GROUP BY (nhóm) → Aggregate Functions → HAVING (lọc nhóm) → SELECT → ORDER BY.*
+
 ## II. Tổng Hợp Dữ Liệu (Aggregation): Nền Tảng của Phân Tích
 
 Tổng hợp dữ liệu là quá trình thu thập một tập hợp lớn các giá trị (thường từ một cột cụ thể) và chuyển đổi chúng thành một giá trị duy nhất mang tính tóm tắt. Mục tiêu là cung cấp một cái nhìn tổng thể về dữ liệu, thay vì hiển thị chi tiết từng bản ghi riêng lẻ. Các hàm tổng hợp (Aggregate Functions) là công cụ chính để thực hiện quá trình này.
